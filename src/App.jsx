@@ -20,7 +20,7 @@ export default function App() {
         <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
           Material UI Vite.js example
         </Typography>
-		<Link to="/test/1">Test 1</Link>
+		<Link to="/test/1">Test qsdfqsdf1</Link>
       </Box>
     </Container>
   );
