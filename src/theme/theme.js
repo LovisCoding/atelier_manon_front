@@ -1,6 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
+const textPrimary = "#333333";
 // Create a theme instance.
 const theme = createTheme({
 	cssVariables: true,
@@ -15,7 +16,7 @@ const theme = createTheme({
 			main: red.A400,
 		},
 		text: {
-			primary: '#FFF'
+			primary: textPrimary,
 		}
 	},
 	components: {
@@ -25,13 +26,12 @@ const theme = createTheme({
 					variants: [
 						{
 							// `dashed` is an example value, it can be any name.
-							props: { variant: 'dashed' },
+							props: { variant: 'navbar' },
 							style: {
 								textDecoration: "none", // Enlever le soulignement
-								color: "black", // Modifier la couleur
+								color: textPrimary, // Modifier la couleur
 								"&:hover": {
-									textDecoration: "underline", // Ajouter un soulignement au survol
-									color: "darkblue", // Changer la couleur au survol
+									color: "black", // Changer la couleur au survol
 								},
 							},
 						},
@@ -39,6 +39,23 @@ const theme = createTheme({
 
 				},
 			},
+		},
+		ListItemText: {
+			styleOverrides: {
+				root: {
+					variants: [
+						{
+						  props: { variant: "custom" }, // Nom de la variante
+						  style: {
+							" span": {
+							  fontWeight: 200,
+							  color: "blue", // Vous pouvez ajouter d'autres styles ici
+							},
+						  },
+						},
+					  ],
+				}
+			}
 		}
 	}
 
