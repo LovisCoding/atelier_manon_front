@@ -16,7 +16,7 @@ const Home = () => {
 			}}
 		>
 			<img
-				src="/src/assets/img/Home.png"
+				src="/src/assets/img/Home.webp"
 				alt="Background"
 				style={{
 					position: 'absolute',
