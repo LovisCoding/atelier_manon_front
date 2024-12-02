@@ -22,7 +22,7 @@ const Banner = () => {
   ];
 
   return (
-    <Box sx={{ width: '100%', backgroundColor: '#fff', padding: '20px 0', marginTop: '20px' }}> {/* Ajout d'une marge au-dessus */}
+    <Box sx={{ width: '100%', backgroundColor: '#fff', padding: '20px 0', marginTop: '20px' }}>
       <Grid container justifyContent="center" spacing={4}>
         {items.map((item, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
@@ -43,7 +43,7 @@ const Banner = () => {
                   marginBottom: '10px',
                 }}
               />
-              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+              <Typography variant="body1">
                 {item.text}
               </Typography>
             </Box>

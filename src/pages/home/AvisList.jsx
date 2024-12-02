@@ -4,7 +4,16 @@ import Avis from '../../components/Avis';
 
 const AvisList = ({ title, avisData }) => {
   return (
-    <Box sx={{ width: '100%', padding: '40px 0' }}>
+    <Box
+      sx={{
+        width: '100%',
+        padding: '40px', // Création d'un espace autour de l'ensemble du contenu
+        display: 'flex',
+        justifyContent: 'center', // Centrage horizontal
+        alignItems: 'center', // Centrage vertical
+        flexDirection: 'column',
+      }}
+    >
       <Typography
         variant="h4"
         sx={{
@@ -17,13 +26,21 @@ const AvisList = ({ title, avisData }) => {
       >
         {title}
       </Typography>
-      <Grid container spacing={4} justifyContent="center">
+
+      <Grid container spacing={4} justifyContent="center" alignItems="center">
         {avisData.map((avis, index) => (
-          <Grid item xs={12} sm={4} key={index}> {/* 4 colonnes par ligne sur petits écrans */}
+          <Grid item xs={12} sm={4} key={index}>
             <Avis
               rating={avis.rating}
               text={avis.text}
               author={avis.author}
+              sx={{
+                boxShadow: 'none', // Pas d'ombre
+                border: 'none', // Pas de bordure
+                padding: '20px',
+                backgroundColor: '#fff', // Fond blanc ou une autre couleur de fond si nécessaire
+                textAlign: 'center', // Centrer le texte dans l'avis
+              }}
             />
           </Grid>
         ))}

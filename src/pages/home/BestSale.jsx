@@ -1,21 +1,21 @@
 import React from 'react';
 import { Box, Grid, Stack, Typography, CardMedia, CardContent } from '@mui/material';
-import Banner from '../../components/Banner'; // Assurez-vous que le chemin est correct
+import Banner from '../../components/Banner';
 
 const BestSale = () => {
   return (
     <Stack>
-      {/* Section principale */}
       <Stack sx={{ height: '100vh' }}>
-        {/* Titre principal */}
         <Typography
           variant="sectionTitle"
           sx={{
-            fontSize: '3rem',
+            fontSize: '2.5rem',
             textAlign: 'center',
+            fontWeight: 'normal',
+            letterSpacing: '0.1em',
           }}
         >
-          Les bijoux les plus vendus
+          Bijoux les plus vendus
         </Typography>
 
         <Box sx={{ width: '80%', margin: '0 auto' }}>

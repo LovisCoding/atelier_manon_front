@@ -3,7 +3,18 @@ import { Box, Typography, Rating } from '@mui/material';
 
 const Avis = ({ rating, text, author }) => {
   return (
-    <Box sx={{ border: '1px solid #ddd', borderRadius: '8px', padding: '16px' }}>
+    <Box
+      sx={{
+        padding: '20px',
+        textAlign: 'center',
+        backgroundColor: '#fff',
+        boxShadow: 'none',
+        border: 'none',
+        borderRadius: '8px',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+    >
       <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
         {author}
       </Typography>
