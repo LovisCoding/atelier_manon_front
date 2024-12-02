@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-export function TextPresentation(title, description, image){
+export function TextPresentation({title, description, image}){
 
 	return (
 		<Box
