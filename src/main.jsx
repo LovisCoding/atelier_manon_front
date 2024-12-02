@@ -13,8 +13,9 @@ const root = createRoot(rootElement);
 root.render(
   <React.StrictMode>
 	<BrowserRouter>
-	<AppRoutes/>
+	
     <ThemeProvider theme={theme}>
+    <AppRoutes/>
       {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
     </ThemeProvider>

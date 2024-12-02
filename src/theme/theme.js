@@ -1,9 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
-// Create a theme instance.
 const theme = createTheme({
-  cssVariables: true,
   palette: {
     primary: {
       main: '#556cd6',
@@ -14,8 +12,82 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
+    customYellow: {
+      main: '#EEB828'
+    }
   },
-  
+  components: {
+    MuiTypography: {
+      variants: [
+        {
+          props: { variant: 'sectionTitle' },
+          style: {
+            color: 'orange',
+            textAlign: 'center',
+            marginTop: '40px',
+            marginBottom: '20px',
+          },
+        },
+        {
+          props: { variant: 'cardTitle' },
+          style: {
+            color: 'orange',
+            fontWeight: 'bold',
+            marginBottom: '8px',
+          },
+        },
+        {
+          props: { variant: 'cardPrice' },
+          style: {
+            fontWeight: 'bold',
+            fontSize: '1.1rem',
+          },
+        },
+      ],
+    },
+    MuiBox: {
+      variants: [
+        {
+          props: { variant: 'cardContainer' },
+          style: {
+            borderRadius: '10px',
+            overflow: 'hidden',
+            padding: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+          },
+        },
+      ],
+    },
+    MuiButton: {
+      variants : [
+        {
+          props: { variant: 'yellowButton' },
+          style: {
+            backgroundColor: '#EEB828',
+            border: '1px solid black',
+            color: 'black',
+            '&:hover' : {
+              boxShadow : '1px 2px 2px 1px rgba(0,0,0,0.2);'
+            }
+          }
+        }
+      ]
+    },
+    MuiTextField : {
+      variants : [
+        {
+          props : { variant: 'errorTextField' },
+          style: {
+            outlineColor : 'red'
+
+          }
+        }
+      ]
+    }
+  },
 });
 
 export default theme;
