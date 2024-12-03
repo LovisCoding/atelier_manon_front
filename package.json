@@ -12,6 +12,7 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "^6.1.9",
     "@mui/material": "latest",
+    "@tabler/icons-react": "^3.23.0",
     "axios": "^1.7.8",
     "react": "latest",
     "react-dom": "latest",
