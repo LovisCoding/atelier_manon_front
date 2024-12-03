@@ -1,80 +1,67 @@
-import React from 'react';
-import { Button, Stack, Box, IconButton } from '@mui/material';
+import React, { useRef } from 'react';
+import Presentation from './Presentation';
+import BestSale from './BestSale';
+import ManufacturingStep from './ManufacturingStep';
+import AvisList from './AvisList';
+import Navbar from '../../components/Navbar/Navbar';
+import { Box } from '@mui/material';
+
+const avisData = [
+  {
+    rating: 4,
+    text: "J'ai bien reçu les bracelets et je suis agréablement surpris du résultat ! Le côté artisanal est bien mis en avant. Je vous les recommande !",
+    author: "Kelyan",
+  },
+  {
+    rating: 5,
+    text: "La façon dont les colliers sont faits m'a donné envie d'en commander ! J'ai reçu mon collier la semaine dernière et je ne peux plus m'en passer !",
+    author: "Noa",
+  },
+  {
+    rating: 3,
+    text: "J'ai eu l'occasion de découvrir le travail de Manon sur un marché. J'ai sauté le pas en achetant un bracelet et la qualité est impressionnante !",
+    author: "Anouk",
+  },
+];
+
+const products = [
+  {
+    title: "Collier Kelyan",
+    price: "25",
+    image: "./src/assets/img/bracelet1.webp",
+  },
+  {
+    title: "Bracelet ?",
+    price: "10",
+    image: "./src/assets/img/bracelet2.webp",
+  },
+  {
+    title: "Bracelet ?",
+    price: "10",
+    image: "./src/assets/img/bracelet3.webp",
+  },
+];
 
 const Home = () => {
-	return (
-		<Box
-			sx={{
-				position: 'relative',
-				display: 'flex',
-				flexDirection: 'column',
-				justifyContent: 'center',
-				alignItems: 'center',
-				height: '100vh',
-				width: '100%',
-				backgroundColor: 'rgba(255, 255, 255, 0.5)',
-			}}
-		>
-			<img
-				src="/src/assets/img/Home.webp"
-				alt="Background"
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: '100%',
-					height: '100%',
-					objectFit: 'cover',
-					zIndex: -1,
-				}}
-			/>
+  const bestSaleRef = useRef(null);
 
-			<Stack
-				spacing={3}
-				alignItems="flex-start"
-				justifyContent="center"
-				sx={{
-					textAlign: 'center',
-					zIndex: 1,
-					width: '100%',
-					paddingLeft: '70px',
-				}}
-			>
-				<Box sx={{ display: 'flex', gap: '20px' }}>
-					<Button variant="home" size="large">
-						En savoir plus
-					</Button>
-					<Button variant="home" size="large">
-						Acheter
-					</Button>
-				</Box>
+  const scrollToBestSale = () => {
+    if (bestSaleRef.current) {
+      bestSaleRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-				<IconButton
-					sx={{
-						position: 'absolute',
-						bottom: 20,
-						left: '50%',
-						transform: 'translateX(-50%)',
-						zIndex: 1,
-					}}
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="30"
-						height="30"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="2"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<path d="M12 19l-7-7h14l-7 7z" />
-					</svg>
-				</IconButton>
-			</Stack>
-		</Box>
-	);
+  return (
+    <>
+      <Navbar />
+      <Presentation scrollToSection={scrollToBestSale} />
+      <Box ref={bestSaleRef}>
+        <BestSale products={products} />
+      </Box>
+      <ManufacturingStep />
+      <AvisList title="Vos avis comptent" avisData={avisData} />
+    </>
+  );
 };
 
 export default Home;
