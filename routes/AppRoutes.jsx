@@ -13,6 +13,7 @@ import About from '../src/pages/About';
 import Home from '../src/pages/home/Home';
 import NotFound from '../src/pages/NotFound';
 import Admin from '../src/pages/admin/Admin';
+import CGV from '../src/pages/CGV/CGV.jsx';
 
 const AppRoutes = () => {
 	return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
 			<Route path="/about" element={<About />} />
 			<Route path="/home" element={<Home />} />
 			<Route path="/admin" element={<Admin />} />
+			<Route path="/cgv" element={<CGV />} />
 
 			{/** Le laisser en dernier */}
 			<Route path="*" element={<NotFound />} />

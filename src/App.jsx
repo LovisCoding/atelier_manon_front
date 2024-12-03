@@ -6,6 +6,7 @@ import axios from 'axios';
 import Link from './components/Link';
 
 export default function App() {
+
 	axios.get(
 		'/api/test'
 	).then((response) => {

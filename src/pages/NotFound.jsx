@@ -1,5 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Link from "../components/Link";
+import Footer from "../components/Footer";
 
 export default function NotFound() {
 
@@ -14,6 +15,8 @@ export default function NotFound() {
 		</Stack>
 		<Link variant="home" sx={{ my: 6, border: '1px solid', padding: '8px 16px', borderRadius: '4px' }} href={'/'}>Retour</Link>
 		</Stack>
+
+		<Footer/>
 		</>
 	)
 }

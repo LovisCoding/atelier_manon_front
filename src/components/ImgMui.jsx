@@ -1,14 +1,17 @@
 import { Box } from "@mui/material";
 
-export default function ImgMui({sx, alt, src}) {
+function ImgMui({ sx, alt, src }) {
 
-return (
-	<Box
-  component="img"
-  sx={sx}
-  alt={alt}
-  src={src}
-/>
-)
+    return (
+        <Box
+            component="img"
+            sx={sx}
+            alt={alt}
+            src={src}
+        />
+    )
 
 }
+
+export default ImgMui;
+
