@@ -19,10 +19,7 @@ root.render(
       </ThemeProvider>
     </BrowserRouter>
 	<BrowserRouter>
-	
     <ThemeProvider theme={theme}>
-	<AppRoutes/>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
     </ThemeProvider>
 	</BrowserRouter>

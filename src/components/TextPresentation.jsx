@@ -20,7 +20,7 @@ export function TextPresentation({
 						sm: 3,
 						md: 5
 					}}
-					direction={reverse ? 'row-reverse' : 'row'} // Gère l'ordre des éléments
+					direction={reverse ? 'row-reverse' : 'row'}
 				>
 					<Grid2 item size={{
 						xs: 12,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Stack, Typography, CardMedia, CardContent } from '@mui/material';
+import { Box, Grid2, Stack, Typography, CardMedia, CardContent } from '@mui/material';
 import Banner from '../../components/Banner';
 
 const BestSale = ({ products }) => {
@@ -17,30 +17,30 @@ const BestSale = ({ products }) => {
         Bijoux les plus vendus
       </Typography>
 
-      <Box sx={{ width: '90%', margin: '0 auto' }}>
-        <Grid container spacing={4}>
+      <Box sx={{ width: '100%', margin: '0 auto' }}>
+        <Grid2 container spacing={4} justifyContent="center">
           {products.map((product, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Box variant="cardContainer" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Grid2 item xs={12} sm={6} md={4} key={index}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <CardMedia
                   component="img"
                   alt={product.title}
-                  height="300"
                   image={product.image}
-                  sx={{ width: '100%', objectFit: 'cover' }}
+                  sx={{ width: '365px', objectFit: 'cover' }}
                 />
                 <CardContent sx={{ textAlign: 'center' }}>
                   <Typography variant="cardTitle" sx={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '8px' }}>
                     {product.title}
-                  </Typography><br />
+                  </Typography>
+                  <br />
                   <Typography variant="cardPrice" sx={{ fontSize: '1rem', fontWeight: 'bold' }}>
                     {product.price} €
                   </Typography>
                 </CardContent>
               </Box>
-            </Grid>
+            </Grid2>
           ))}
-        </Grid>
+        </Grid2>
       </Box>
       <Banner />
     </Stack>
