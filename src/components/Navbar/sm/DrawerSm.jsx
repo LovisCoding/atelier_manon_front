@@ -58,8 +58,9 @@ import { useLocation } from "react-router";
 			{["Accueil", "Bijoux", "A propos", "FAQ", "Contact"].map(
 			  (text, index) => (
 				<Box key={text}>
-				  <ListItem>
-					<ListItemButton
+				  <ListItem sx={{paddingY: 0}}>
+					<ListItemButton 
+					sx={{paddingY: 0}}
 					  onClick={(e) => {
 						console.log('click');
 						
@@ -70,7 +71,7 @@ import { useLocation } from "react-router";
 					  {text === "Bijoux" ? (
 						<>
 						  <IconButton
-							sx={{ mr: 1 }} // Espace entre la flèche et le texte
+							sx={{ mr: 1, py: 0 }} // Espace entre la flèche et le texte
 							onClick={(e) => {
 							  e.stopPropagation();
 							  onClickDdl();
@@ -98,12 +99,12 @@ import { useLocation } from "react-router";
 				  {text === "Bijoux" && (
 					<Collapse in={openDdl} timeout="auto" unmountOnExit>
 					  <List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 10 }}>
+						<ListItemButton sx={{ pl: 10, py:0 }}>
 						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink('/bijoux' )}}  primary="Colliers" />
 						</ListItemButton>
 					  </List>
 					  <List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 10 }}>
+						<ListItemButton sx={{ pl: 10, py:0 }}>
 						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink('/bijoux')}} primary="Bracelets" />
 						</ListItemButton>
 					  </List>
