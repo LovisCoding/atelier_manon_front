@@ -25,7 +25,7 @@ const Presentation = ({ scrollToSection }) => {
         alignItems: 'center',
         height: '100vh',
         width: '100%',
-        backgroundImage: 'url(/src/assets/img/Home.webp)',
+        backgroundImage: 'url(/src/assets/img/home.webp)',
         backgroundPosition: `center ${scrollPosition * 0.1 - 100}px`,
         backgroundSize: 'cover',
         backgroundAttachment: 'fixed',
