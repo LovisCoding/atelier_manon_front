@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
 
-function Connection() {
+function ForgotPassword() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,10 +13,10 @@ function Connection() {
 
     const changeRoute = (route) => {
         window.location = route;
-    }
+    };
 
     return (
- 
+
         <Container maxWidth="xs" >
             <Box
                 sx={{
@@ -27,13 +27,13 @@ function Connection() {
                 }}
             >
                 <Typography color="customYellow" fontWeight="700" component="h1" variant="h5" >
-                    Connexion
+                    Réinitialisation de mot de passe
                 </Typography>
                 <Box
                     component="form"
                     onSubmit={handleSubmit}
                     noValidate
-                    sx={{ mt: 1 }}
+                    sx={{ mt: 1, width: '100%' }}
                 >
                     <TextField
                         margin="normal"
@@ -47,34 +47,27 @@ function Connection() {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Mot de passe"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <Typography onClick={e => changeRoute('/forgot-password')} sx={{ justifySelf: 'end', fontSize: '12px', textDecoration: 'underline', cursor: 'pointer' }} >Mot de passe oublié ?</Typography>
+                    <Box display="flex" gap={1} justifySelf='end' >
+                        <Typography sx={{ fontSize: '12px' }} >Pas encore inscrit ?</Typography>
+                        <Typography onClick={e => changeRoute('/register')} sx={{ textDecoration: 'underline', fontSize: '12px', cursor: 'pointer' }} >
+                            Inscrivez-vous</Typography>
+                    </Box>
                     <Button
                         type="submit"
                         fullWidth
                         variant="yellowButton"
                         sx={{ mt: 3, mb: 2 }}
-                    >Se connecter</Button>
-                    <Box display="flex" gap={1} Self='center' >
-                        <Typography sx={{ fontSize: '12px' }} >Pas encore inscrit ?</Typography>
-                        <Typography sx={{ textDecoration: 'underline', fontSize: '12px', cursor: 'pointer' }} onClick={e => changeRoute('/register')} >Inscrivez-vous</Typography>
-                    </Box>
+                        onClick={e=>changeRoute('/email-sent')}
+                    >Valider</Button>
+                    <Typography onClick={e => changeRoute('/login')} sx={{ justifySelf: 'center', fontSize: '12px', textDecoration: 'underline', cursor: 'pointer' }} >
+                        Annuler</Typography>
                 </Box>
             </Box>
         </Container>
 
     );
+
 }
 
-export default Connection;
+
+export default ForgotPassword;
