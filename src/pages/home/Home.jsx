@@ -4,6 +4,7 @@ import BestSale from './BestSale';
 import ManufacturingStep from './ManufacturingStep';
 import AvisList from './AvisList';
 import Navbar from '../../components/Navbar/Navbar';
+import { Box } from '@mui/material';
 
 const avisData = [
   {
@@ -52,11 +53,11 @@ const Home = () => {
 
   return (
     <>
-	<Navbar/>
+      <Navbar />
       <Presentation scrollToSection={scrollToBestSale} />
-      <div ref={bestSaleRef}>
+      <Box ref={bestSaleRef}>
         <BestSale products={products} />
-      </div>
+      </Box>
       <ManufacturingStep />
       <AvisList title="Vos avis comptent" avisData={avisData} />
     </>
