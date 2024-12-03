@@ -18,6 +18,7 @@ root.render(
 	<AppRoutes/>
       {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
+      <AppRoutes/>
     </ThemeProvider>
 	</BrowserRouter>
   </React.StrictMode>,
