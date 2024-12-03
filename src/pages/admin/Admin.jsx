@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Box } from '@mui/material'; // Importation de Box de MUI
 import SidebarMenu from '../../components/admin/SidebarMenu';
-import FoireAuxQuestions from '../../components/admin/FAQ'; // Assurez-vous que ce fichier existe
+import FoireAuxQuestions from '../../components/admin/FAQ';
 
 const Admin = () => {
   const [activeView, setActiveView] = useState('');
@@ -10,12 +11,12 @@ const Admin = () => {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
+    <Box style={{ display: 'flex' }}>
       <SidebarMenu onSidebarClick={handleSidebarClick} />
-      <div style={{ flex: 1, padding: '20px', backgroundColor: '#fff' }}>
+      <Box style={{ flex: 1, padding: '20px', backgroundColor: '#fff' }}>
         {activeView === 'faq' && <FoireAuxQuestions />}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
