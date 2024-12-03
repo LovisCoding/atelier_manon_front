@@ -9,13 +9,15 @@ function Footer() {
 
     const linkStyle = {
         color: 'black',
-        textDecorationColor: 'black'
+        textDecorationColor: 'black',
+        textDecoration:'underline',
+        cursor:'pointer'
     }
 
     return (
         <Stack
             container
-            width="100vw"
+            width="100%"
             columns={{ xs: 3, sm: 8, md: 12 }}
             sx={{ padding: "1rem", margin: 0, fontSize: '12px' }}
             bgcolor="#F8F8F8"
@@ -29,16 +31,16 @@ function Footer() {
                             <Stack padding="0rem 0 1rem 3rem" >EN SAVOIR PLUS</Stack>
                             <Stack display="flex" flexDirection="column" justifyContent="center" gap=".3rem" >
                                 <Grid2 container columns={{ xs: 2, sm: 8, md: 12 }} sx={{ padding: '0 3rem' }} >
-                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} margin="0 auto" ><Link sx={linkStyle} >Colliers</Link></Grid2>
-                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} margin="0 auto" ><Link sx={linkStyle} >FAQ</Link></Grid2>
+                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} margin="0 auto" ><Link sx={linkStyle} href="/" >Colliers</Link></Grid2>
+                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} margin="0 auto" ><Link sx={linkStyle} href="/" >FAQ</Link></Grid2>
                                 </Grid2>
                                 <Grid2 container columns={{ xs: 2, sm: 8, md: 12 }} sx={{ padding: '0 3rem' }} >
-                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} ><Link sx={linkStyle} >Bracelets</Link></Grid2>
-                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} ><Link sx={linkStyle} >Contact</Link></Grid2>
+                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} ><Link sx={linkStyle} href="/" >Bracelets</Link></Grid2>
+                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} ><Link sx={linkStyle} href="/" >Contact</Link></Grid2>
                                 </Grid2>
                                 <Grid2 container columns={{ xs: 2, sm: 8, md: 12 }} sx={{ padding: '0 3rem' }} >
-                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} ><Link sx={linkStyle} >A propos</Link></Grid2>
-                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} ><Link sx={linkStyle} >Blog</Link></Grid2>
+                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} ><Link sx={linkStyle} href="/" >A propos</Link></Grid2>
+                                    <Grid2 item size={{ xs: 1, sm: 4, md: 6 }} ><Link sx={linkStyle} href="/" >Blog</Link></Grid2>
                                 </Grid2>
                             </Stack>
                         </Stack>
@@ -54,8 +56,8 @@ function Footer() {
                 </Grid2>
             </Box>
             <Box display="flex" alignItems="end" justifyContent="center" gap="1rem" >
-                <Link sx={linkStyle} >CGV</Link>
-                <Link sx={linkStyle} >Mentions légales</Link>
+                <Link sx={linkStyle} href="/" >CGV</Link>
+                <Link sx={linkStyle} href="/" >Mentions légales</Link>
             </Box>
         </Stack>
     )
