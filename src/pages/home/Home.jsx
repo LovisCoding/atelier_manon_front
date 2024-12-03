@@ -22,6 +22,24 @@ const avisData = [
   },
 ];
 
+const products = [
+  {
+    title: "Collier Kelyan",
+    price: "25",
+    image: "./src/assets/img/bracelet1.png",
+  },
+  {
+    title: "Bracelet ?",
+    price: "10",
+    image: "./src/assets/img/bracelet2.png",
+  },
+  {
+    title: "Bracelet ?",
+    price: "10",
+    image: "./src/assets/img/bracelet3.png",
+  },
+];
+
 const Home = () => {
   const bestSaleRef = useRef(null);
 
@@ -35,7 +53,7 @@ const Home = () => {
     <div>
       <Presentation scrollToSection={scrollToBestSale} />
       <div ref={bestSaleRef}>
-        <BestSale />
+        <BestSale products={products} />
       </div>
       <ManufacturingStep />
       <AvisList title="Vos avis comptent" avisData={avisData} />
