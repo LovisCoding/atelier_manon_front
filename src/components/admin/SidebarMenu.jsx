@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt } from 'react-icons/fa';
 
-const SidebarMenu = () => {
+const SidebarMenu = ({ onSidebarClick }) => {
   const theme = useTheme();
 
   return (
@@ -50,7 +50,7 @@ const SidebarMenu = () => {
         {[
           { text: 'Produits', href: '#configurer-produit', icon: <FaBox /> },
           { text: 'Commandes', href: '#liste-des-commandes', icon: <FaShoppingCart /> },
-          { text: 'FAQ', href: '#faq', icon: <FaQuestionCircle /> },
+          { text: 'FAQ', href: '#faq', icon: <FaQuestionCircle />, view: 'faq' },
           { text: 'Accueil', href: '#configurer-accueil', icon: <FaHome /> },
           { text: 'Newsletters', href: '#commandes', icon: <FaNewspaper /> },
           { text: 'Réductions', href: '#articles-du-blog', icon: <FaPercent /> },
@@ -58,9 +58,8 @@ const SidebarMenu = () => {
         ].map((item) => (
           <ListItem
             button
-            component="a"
-            href={item.href}
             key={item.text}
+            onClick={() => onSidebarClick(item.view)}
             sx={{
               padding: '10px 16px',
             }}
