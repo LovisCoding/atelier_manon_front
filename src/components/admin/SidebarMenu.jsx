@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   List,
   ListItem,
@@ -7,98 +7,129 @@ import {
   Typography,
   Box,
   useTheme,
+  useMediaQuery,
+  IconButton
 } from '@mui/material';
 import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt } from 'react-icons/fa';
+import MenuIcon from '@mui/icons-material/Menu'; // Icone pour ouvrir le Drawer sur mobile
 
 const SidebarMenu = ({ onSidebarClick }) => {
   const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Vérifie si l'écran est petit
+  const [open, setOpen] = useState(false); // Etat pour contrôler l'ouverture du Drawer
+
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
   return (
-    <Drawer
-      variant="permanent"
-      anchor="left"
-      sx={{
-        width: 250,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          width: 250,
-          boxSizing: 'border-box',
-          backgroundColor: '#f4f4f4',
-        },
-      }}
-    >
-      <Box
-        sx={{
-          textAlign: 'center',
-          padding: 2,
-          borderBottom: '1px solid #ddd',
-        }}
-      >
-        <Typography
-          variant="h6"
+    <>
+      {isSmallScreen && (
+        <IconButton
+          onClick={toggleDrawer}
           sx={{
-            fontFamily: 'Lato, sans-serif',
-            color: '#333',
-            fontSize: '20px',
-            fontWeight: 'bold',
+            position: 'absolute',
+            top: 16,
+            left: 16,
+            zIndex: 1201, // Pour s'assurer que le bouton est au-dessus du contenu
+            backgroundColor: '#f4f4f4',
+            borderRadius: '50%',
+            padding: '8px',
           }}
         >
-          Tableau de bord
-        </Typography>
-      </Box>
-      <List>
-        {[
-          { text: 'Produits', href: '#configurer-produit', icon: <FaBox /> },
-          { text: 'Commandes', href: '#liste-des-commandes', icon: <FaShoppingCart /> },
-          { text: 'FAQ', href: '#faq', icon: <FaQuestionCircle />, view: 'faq' },
-          { text: 'Accueil', href: '#configurer-accueil', icon: <FaHome /> },
-          { text: 'Newsletters', href: '#commandes', icon: <FaNewspaper /> },
-          { text: 'Réductions', href: '#articles-du-blog', icon: <FaPercent /> },
-          { text: 'Évènements', href: '#evenements', icon: <FaCalendarAlt /> },
-        ].map((item) => (
-          <ListItem
-            button
-            key={item.text}
-            onClick={() => onSidebarClick(item.view)}
+          <MenuIcon />
+        </IconButton>
+      )}
+      
+      <Drawer
+        variant={isSmallScreen ? 'temporary' : 'permanent'} // Utilisation de 'temporary' pour les petits écrans
+        anchor="left"
+        open={open} // Se déclenche lorsque l'état `open` est vrai
+        onClose={toggleDrawer} // Ferme le Drawer lorsqu'on clique en dehors
+        sx={{
+          width: isSmallScreen ? '100%' : 250,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: isSmallScreen ? '100%' : 250,
+            boxSizing: 'border-box',
+            backgroundColor: '#f4f4f4',
+            paddingTop: '16px', // Espacement en haut pour les petits écrans
+          },
+        }}
+      >
+        <Box
+          sx={{
+            textAlign: 'center',
+            padding: 2,
+            borderBottom: '1px solid #ddd',
+          }}
+        >
+          <Typography
+            variant="h6"
             sx={{
-              padding: '10px 16px',
+              fontFamily: 'Lato, sans-serif',
+              color: '#333',
+              fontSize: '20px',
+              fontWeight: 'bold',
             }}
           >
-            <Box
+            Tableau de bord
+          </Typography>
+        </Box>
+        <List>
+          {[
+            { text: 'Produits', href: '#configurer-produit', icon: <FaBox /> },
+            { text: 'Commandes', href: '#liste-des-commandes', icon: <FaShoppingCart /> },
+            { text: 'FAQ', href: '#faq', icon: <FaQuestionCircle />, view: 'faq' },
+            { text: 'Accueil', href: '#configurer-accueil', icon: <FaHome /> },
+            { text: 'Newsletters', href: '#commandes', icon: <FaNewspaper /> },
+            { text: 'Réductions', href: '#articles-du-blog', icon: <FaPercent /> },
+            { text: 'Évènements', href: '#evenements', icon: <FaCalendarAlt /> },
+          ].map((item) => (
+            <ListItem
+              button
+              key={item.text}
+              onClick={() => onSidebarClick(item.view)}
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                width: '100%',
+                padding: '10px 16px',
               }}
             >
               <Box
                 sx={{
-                  color: '#333',
-                  fontSize: '20px',
-                  marginRight: '16px',
                   display: 'flex',
-                  justifyContent: 'center',
                   alignItems: 'center',
-                  width: '24px',
+                  width: '100%',
                 }}
               >
-                {item.icon}
-              </Box>
-              <ListItemText
-                primary={item.text}
-                primaryTypographyProps={{
-                  sx: {
+                <Box
+                  sx={{
                     color: '#333',
-                    fontFamily: 'Lato, sans-serif',
-                    fontWeight: '400',
-                  },
-                }}
-              />
-            </Box>
-          </ListItem>
-        ))}
-      </List>
-    </Drawer>
+                    fontSize: '20px',
+                    marginRight: '16px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '24px',
+                  }}
+                >
+                  {item.icon}
+                </Box>
+                <ListItemText
+                  primary={item.text}
+                  primaryTypographyProps={{
+                    sx: {
+                      color: '#333',
+                      fontFamily: 'Lato, sans-serif',
+                      fontWeight: '400',
+                    },
+                  }}
+                />
+              </Box>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 };
 
