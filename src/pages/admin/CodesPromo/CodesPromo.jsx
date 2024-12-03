@@ -1,44 +1,43 @@
 import {
-	Button, Container, Grid2, IconButton, InputLabel, Stack, Table, TableContainer, TextField, Typography,
+	Box,
+	Button, Container,
+	Paper,
+	Stack, Table,
 	TableBody,
 	TableCell,
 	TableContainer,
 	TableHead,
 	TableRow,
-	Paper,
+	Typography
 } from "@mui/material";
 import { useState } from "react";
-import { FaCheck } from "react-icons/fa";
-import SidebarMenu from "./SidebarMenu";
-import {
-
-} from "@mui/material";
+import SidebarMenu from "../SidebarMenu";
 
 export default function CodesPromo() {
 	const [promoTextfield, setPromoTextfied] = useState('')
 	const rows = [
-		{ id: 1, name: "John Doe", age: 25, occupation: "Developer" },
-		{ id: 2, name: "Jane Smith", age: 30, occupation: "Designer" },
-		{ id: 3, name: "Alice Johnson", age: 28, occupation: "Product Manager" },
+		{ id: 1, name: "NOEL_PROMO", use: 123 },
+		{ id: 2, name: "ETE_PROMO", use: 87 },
+		{ id: 3, name: "HIVER_PROMO", use: 15 },
 	];
 	const handleRowClick = (row) => {
 		alert(`You clicked on: ${row.name}`);
 	};
 	return (
-		<>
+		<Box display={'flex'}>
 			<SidebarMenu />
-			<Container maxWidth='lg' sx={{ mt: 5 }}>
+			<Stack  sx={{ mt: 5, width: '100%' }} >
 				<Stack direction='row' justifyContent={'space-around'}>
 					<Typography variant='h4'>Codes Promotion</Typography>
 					<Button variant='contained' color='primary'>Nouveau</Button>
 				</Stack>
+				<Box mx={15} mt={8}>
 				<TableContainer component={Paper}>
 					<Table>
 						<TableHead>
 							<TableRow>
-								<TableCell>Name</TableCell>
-								<TableCell>Age</TableCell>
-								<TableCell>Occupation</TableCell>
+								<TableCell>Nom du code promo</TableCell>
+								<TableCell>Nombre d'utilisation</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -50,14 +49,14 @@ export default function CodesPromo() {
 									onClick={() => handleRowClick(row)}
 								>
 									<TableCell>{row.name}</TableCell>
-									<TableCell>{row.age}</TableCell>
-									<TableCell>{row.occupation}</TableCell>
+									<TableCell>{row.use}</TableCell>
 								</TableRow>
 							))}
 						</TableBody>
 					</Table>
 				</TableContainer>
-			</Container>
-		</>
+				</Box>
+			</Stack>
+		</Box>
 	)
 }

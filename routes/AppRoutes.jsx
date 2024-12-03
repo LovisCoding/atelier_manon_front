@@ -13,8 +13,9 @@ import About from '../src/pages/About';
 import Home from '../src/pages/home/Home';
 import NotFound from '../src/pages/NotFound';
 import Admin from '../src/pages/admin/Admin';
-import CodesPromo from '../src/pages/admin/CodesPromo.jsx';
+import CodesPromo from '../src/pages/admin/CodesPromo/CodesPromo.jsx';
 import CGV from '../src/pages/CGV/CGV.jsx';
+import CodePromo from '../src/pages/admin/CodesPromo/CodePromo.jsx';
 
 const AppRoutes = () => {
 	return (
@@ -32,6 +33,7 @@ const AppRoutes = () => {
 			<Route path="/cgv" element={<CGV />} />
 
 			<Route path="/admin/codesPromo" element={<CodesPromo />} />
+			<Route path="/admin/codesPromo/:id" element={<CodePromo />} />
 			{/** Le laisser en dernier */}
 			<Route path="*" element={<NotFound />} />
 		</Routes>
