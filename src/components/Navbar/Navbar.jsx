@@ -3,7 +3,7 @@ import ImgMui from "../ImgMui"; // Vérifiez que ce composant fonctionne
 import Link from "../Link"; // Vérifiez si ce composant est bien défini
 import { FaSearch } from "react-icons/fa";
 import imgManon from "../../assets/img/logo_manon.webp"
-import MenuNavbar from "./md/dropDownMenu";
+import MenuNavbar from "./md/DropDownMenu";
 import { useLocation } from "react-router";
 import { IoMenu } from "react-icons/io5";
 import MenuMd from "./md/NavbarMd";
@@ -18,21 +18,14 @@ export default function Navbar() {
 	console.log(md);
 	
 	
-	const logoTitle = (
-		<Stack direction="row" spacing={2} alignItems="center">
-				<ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
-				<Typography variant="h6" sx={{ fontWeight: 200 }}>
-				  L'Atelier de Manon
-				</Typography>
-			  </Stack>
-	)
+	
 	return (
 		<>
 		  {md ? (
-			<NavbarMd logoTitle={logoTitle}/>
+			<NavbarMd />
 			
 		  ) : (
-			<NavbarSm logoTitle={logoTitle} />
+			<NavbarSm />
 		  )
 			}
 		</>

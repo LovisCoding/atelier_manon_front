@@ -8,6 +8,7 @@ const theme = createTheme({
 	palette: {
 		primary: {
 			main: '#556cd6',
+			dark: '#333333'
 		},
 		secondary: {
 			main: '#19857b',
@@ -17,6 +18,8 @@ const theme = createTheme({
 		},
 		text: {
 			primary: textPrimary,
+			white: "#ffffff",
+			secondary: 'rgba(241, 198, 83, 1)',
 		}
 	},
 	components: {

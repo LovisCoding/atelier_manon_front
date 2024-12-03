@@ -24,7 +24,7 @@ import { useLocation } from "react-router";
 	const setColorByLink= (index) => {
 		const tab = ['/home', '/bijoux', '/about', '/faq', '/contact']
 		if (location.pathname === tab[index]) {
-			return 'rgba(241, 198, 83, 1)'
+			return 'text.secondary'
 		}
 		return 'rgba(255,255,255,1)'
 	}

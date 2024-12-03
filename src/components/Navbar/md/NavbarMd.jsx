@@ -1,64 +1,88 @@
-import { IconButton, Stack} from "@mui/material";
-import Link from "../../Link"; // Vérifiez si ce composant est bien défini
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import {
+  AppBar,
+  Toolbar,
+  CssBaseline,
+  Stack,
+  IconButton,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { FaSearch } from "react-icons/fa";
-import MenuNavbar from "./dropDownMenu";
+import Link from "../../Link";
 import { useLocation } from "react-router";
+import ImgMui from "../../ImgMui";
+import imgManon from "../../../assets/img/logo_manon.webp";
+import DropDownMenu from "./DropDownMenu";
+import ElevationScroll from "../ElevationScroll";
 
-export default function NavbarMd({logoTitle}) {
-	const location = useLocation()
-	function equalPathSx(path) {
-		return location.pathname === path ? {fontWeight: 'bold'} : null
-	}
-	return (
-		<Stack
-			  sx={{
-				display: 'flex',
-				justifyContent: 'space-between',
-				py: 1,
-				pl: 3,
-				background: 'red',
-			  }}
-			  pr={1}
-			  direction={'row'}
-			>
-			  {/* Logo and title */}
-			  {logoTitle}
-			  {/* Navigation links */}
-			  <Stack direction="row" spacing={2} alignItems="center">
-				<Link
-				  variant="navbar"
-				  sx={equalPathSx('/')}
-				  to="/home"
-				>
-				  Accueil
-				</Link>
-				<MenuNavbar />
-				<Link
-				  variant="navbar"
-				  sx={equalPathSx('/about')}
-				  to="/about"
-				>
-				  À propos
-				</Link>
-				<Link
-				  variant="navbar"
-				  sx={equalPathSx('/faq')}
-				  to="/faq"
-				>
-				  FAQ
-				</Link>
-				<Link
-				  variant="navbar"
-				  sx={equalPathSx('/contact')}
-				  to="/contact"
-				>
-				  Contact
-				</Link>
-				<IconButton>
-				  <FaSearch />
-				</IconButton>
-			  </Stack>
-			</Stack>
-		  
-	)
+export default function NavbarMd() {
+  const location = useLocation();
+  const theme = useTheme();
+
+  const [navbarState, setNavbarState] = useState({
+    bgNavbar: "transparent",
+    textColor: "text.primary",
+    scrolled: false,
+  });
+
+  const { bgNavbar, textColor, scrolled } = navbarState;
+
+  const isSelectedMenu = location.pathname === "/bijoux";
+
+  const getLinkStyles = (path) =>
+    location.pathname === path
+      ? { fontWeight: "bold", color: scrolled ? "text.secondary" : "text.primary" }
+      : { color: textColor };
+
+  return (
+    <div style={{ height: "150vh" }}>
+      <CssBaseline />
+      <ElevationScroll setNavbarState={setNavbarState}>
+        <AppBar position="sticky" sx={{ backgroundColor: bgNavbar, transition: "background-color 0.3s" }}>
+          <Toolbar>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ py: 1, pl: 3, width: "100%" }}
+            >
+              {/* Logo and title */}
+              <Stack direction="row" spacing={2} alignItems="center">
+                <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+                <Typography variant="h6" sx={{ fontWeight: 200, color: textColor }}>
+                  L'Atelier de Manon
+                </Typography>
+              </Stack>
+
+              {/* Navigation links */}
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Link variant="navbar" sx={getLinkStyles("/home")} to="/home">
+                  Accueil
+                </Link>
+                <DropDownMenu textColor={getLinkStyles("/home")} selected={isSelectedMenu} scrolled={scrolled} />
+                <Link variant="navbar" sx={getLinkStyles("/about")} to="/about">
+                  À propos
+                </Link>
+                <Link variant="navbar" sx={getLinkStyles("/faq")} to="/faq">
+                  FAQ
+                </Link>
+                <Link variant="navbar" sx={getLinkStyles("/contact")} to="/contact">
+                  Contact
+                </Link>
+                <IconButton>
+                  <FaSearch color={scrolled ? theme.palette.text.white : theme.palette.text.primary} />
+                </IconButton>
+              </Stack>
+            </Stack>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+    </div>
+  );
 }
+
+NavbarMd.propTypes = {
+  logoTitle: PropTypes.node,
+};
