@@ -14,7 +14,6 @@ const Admin = () => {
       <SidebarMenu onSidebarClick={handleSidebarClick} />
       <div style={{ flex: 1, padding: '20px', backgroundColor: '#fff' }}>
         {activeView === 'faq' && <FoireAuxQuestions />}
-        {/* Ajoutez d'autres composants en fonction de la vue active */}
       </div>
     </div>
   );
