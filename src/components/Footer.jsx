@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Typography, Link, Grid2, Stack } from "@mui/material";
-
+import ImgMui from './ImgMui';
 const InstagramPNG = '../src/assets/img/instagram.webp';
 
-import ImgMui from './ImgMui';
+
 
 function Footer() {
 
@@ -15,7 +15,7 @@ function Footer() {
     return (
         <Stack
             container
-            width="100vw"
+            width="100%"
             columns={{ xs: 3, sm: 8, md: 12 }}
             sx={{ padding: "1rem", margin: 0, fontSize: '12px' }}
             bgcolor="#F8F8F8"
