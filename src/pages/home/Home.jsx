@@ -3,6 +3,7 @@ import Presentation from './Presentation';
 import BestSale from './BestSale';
 import ManufacturingStep from './ManufacturingStep';
 import AvisList from './AvisList';
+import Navbar from '../../components/Navbar/Navbar';
 
 const avisData = [
   {
@@ -50,14 +51,15 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <>
+	<Navbar/>
       <Presentation scrollToSection={scrollToBestSale} />
       <div ref={bestSaleRef}>
         <BestSale products={products} />
       </div>
       <ManufacturingStep />
       <AvisList title="Vos avis comptent" avisData={avisData} />
-    </div>
+    </>
   );
 };
 

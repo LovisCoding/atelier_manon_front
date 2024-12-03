@@ -37,8 +37,7 @@ export default function NavbarMd() {
       : { color: textColor };
 
   return (
-    <div style={{ height: "150vh" }}>
-      <CssBaseline />
+    <>
       <ElevationScroll setNavbarState={setNavbarState}>
         <AppBar position="sticky" sx={{ backgroundColor: bgNavbar, transition: "background-color 0.3s" }}>
           <Toolbar>
@@ -79,7 +78,7 @@ export default function NavbarMd() {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-    </div>
+    </>
   );
 }
 

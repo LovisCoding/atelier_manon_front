@@ -65,7 +65,7 @@ const [navbarState, setNavbarState] = useState({
 
       {/* Drawer */}
       <DrawerSm open={openDrawer} setOpen={toggleDrawer} />
-	  <div style={{ height: "150vh" }}></div>
+	  
     </>
   );
 }
