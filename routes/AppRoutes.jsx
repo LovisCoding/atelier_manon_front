@@ -12,6 +12,7 @@ import FAQ from '../src/pages/faq/Faq';
 import About from '../src/pages/About';
 import Home from '../src/pages/home/Home';
 import NotFound from '../src/pages/NotFound';
+import CodesPromo from '../src/pages/admin/CodesPromo.jsx';
 
 const AppRoutes = () => {
 	return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
 			<Route path="/about" element={<About />} />
 			<Route path="home" element={<Home />} />
 
+			<Route path="/admin/codesPromo" element={<CodesPromo />} />
 			{/** Le laisser en dernier */}
 			<Route path="*" element={<NotFound />} />
 		</Routes>
