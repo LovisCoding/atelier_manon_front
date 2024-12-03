@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Typography, Link, Grid2, Stack } from "@mui/material";
-
+import ImgMui from './ImgMui';
 const InstagramPNG = '../src/assets/img/instagram.webp';
 
-import ImgMui from './ImgMui';
+
 
 function Footer() {
 
