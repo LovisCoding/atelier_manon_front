@@ -14,6 +14,7 @@ import Home from '../src/pages/home/Home';
 
 import NotFound from '../src/pages/NotFound';
 import CGV from '../src/pages/CGV/CGV.jsx';
+import Cart from '../src/pages/Cart.jsx';
 
 const AppRoutes = () => {
 	return (
@@ -28,6 +29,7 @@ const AppRoutes = () => {
 			<Route path="/about" element={<About />} />
 			<Route path="home" element={<Home />} />
 			<Route path="/cgv" element={<CGV />} />
+			<Route path="/cart" element={<Cart />} />
 
 			{/** Le laisser en dernier */}
 			<Route path="*" element={<NotFound />} />

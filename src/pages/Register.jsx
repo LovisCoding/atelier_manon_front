@@ -45,6 +45,13 @@ function Register() {
     //     setIsSamePassword(password === confirmPassword);
     // }, [password, confirmPassword])
 
+    const placeholderStyle = {
+        "& input::placeholder": {
+            color: "blue", // Couleur du placeholder
+            fontWeight: "bold", // Style supplémentaire
+        }
+    }
+
     return (
 
         <Container maxWidth="sm" >
@@ -71,11 +78,11 @@ function Register() {
                         fullWidth
                         id="email"
                         label="Adresse e-mail"
-                        name="email"
                         autoComplete="email"
                         autoFocus
                         value={email}
                         onChange={e => setEmail(e.target.value)}
+                        sx={placeholderStyle}
                     />
                     <FormControl margin="normal" fullWidth variant="outlined" >
                         <InputLabel color="black" htmlFor="password">Mot de passe *</InputLabel>
@@ -88,7 +95,7 @@ function Register() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             error={!isSamePassword}
-                            
+                            sx={placeholderStyle}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -113,6 +120,7 @@ function Register() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             error={!isSamePassword}
+                            sx={placeholderStyle}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -131,50 +139,49 @@ function Register() {
                         margin="normal"
                         required
                         fullWidth
-                        name="firstname"
                         label="Prénom"
                         type="text"
                         id="firstname"
                         autoComplete="firstname"
                         value={firstname}
                         onChange={e => setFirstname(e.target.value)}
+                        sx={placeholderStyle}
                     />
                     <TextField
                         margin="normal"
                         required
                         fullWidth
-                        name="lastname"
                         label="Nom"
                         type="text"
                         id="lastname"
                         autoComplete="lastname"
                         value={lastname}
                         onChange={e => setLastname(e.target.value)}
+                        sx={placeholderStyle}
                     />
                     <Box display="flex" gap="1rem" >
                         <TextField
                             aria-colspan={2}
-                            sx={{ flex: '0 0 5rem' }}
                             margin="normal"
-                            name="addressNumber"
                             label="N°"
                             type="text"
                             id="addressNumber"
                             autoComplete="addressNumber"
                             value={addressNumber}
                             onChange={e => setAddressNumber(e.target.value)}
+                            sx={{ ...placeholderStyle, flex: '0 0 5rem' }}
                         />
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-                            name="address"
                             label="Rue / Voie / Lieu-Dit"
                             type="text"
                             id="addressStreet"
                             autoComplete="addressStreet"
                             value={addressStreet}
                             onChange={e => setAddressStreet(e.target.value)}
+                            sx={placeholderStyle}
                         />
 
                     </Box>
@@ -183,25 +190,24 @@ function Register() {
                             margin="normal"
                             required
                             fullWidth
-                            name="addressCity"
                             label="Ville"
                             type="text"
                             id="addressCity"
                             autoComplete="addressCity"
                             value={addressCity}
                             onChange={e => setAddressCity(e.target.value)}
+                            sx={placeholderStyle}
                         />
                         <TextField
                             margin="normal"
                             required
-                            sx={{ flex: '0 0 8rem' }}
-                            name="addressPostalCode"
                             label="Code Postal"
                             type="number"
                             id="addressPostalCode"
                             autoComplete="addressPostalCode"
                             value={addressPostalCode}
                             onChange={e => setAddressPostalCode(e.target.value)}
+                            sx={{ ...placeholderStyle, flex: '0 0 8rem' }}
                         />
                     </Box>
 

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Typography, Container } from "@mui/material";
+import { TextField, Button, Box, Typography, Container, useTheme } from "@mui/material";
 
 function Connection() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const theme = useTheme();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -15,8 +17,20 @@ function Connection() {
         window.location = route;
     }
 
+    const fieldStyle = {
+        "& .MuiOutlinedInput-root": {
+            color: theme.palette.customYellow.main, // Couleur par défaut
+            "&.Mui-focused fieldset": {
+                borderColor: theme.palette.customYellow.main,
+            },
+        },
+        "& .MuiInputLabel-root.Mui-focused": {
+            color: theme.palette.customYellow.main, // Couleur quand focus
+        }
+    }
+
     return (
- 
+
         <Container maxWidth="xs" >
             <Box
                 sx={{
@@ -46,6 +60,7 @@ function Connection() {
                         autoFocus
                         value={email}
                         onChange={e => setEmail(e.target.value)}
+                        sx={fieldStyle}
                     />
                     <TextField
                         margin="normal"
@@ -58,6 +73,7 @@ function Connection() {
                         autoComplete="current-password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                        sx={fieldStyle}
                     />
                     <Typography onClick={e => changeRoute('/forgot-password')} sx={{ justifySelf: 'end', fontSize: '12px', textDecoration: 'underline', cursor: 'pointer' }} >Mot de passe oublié ?</Typography>
                     <Button
