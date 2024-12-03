@@ -73,24 +73,7 @@ const theme = createTheme({
               boxShadow : '1px 2px 2px 1px rgba(0,0,0,0.2);'
             }
           }
-        }
-      ]
-    },
-    MuiTextField : {
-      variants : [
-        {
-          props : { variant: 'errorTextField' },
-          style: {
-            outlineColor : 'red'
-
-          }
-        }
-      ]
-    }
-  },
-  components: {
-    MuiButton: {
-      variants: [
+        },
         {
           props: { variant: 'home' },
           style: {
@@ -108,9 +91,20 @@ const theme = createTheme({
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
             },
           },
-        },
-      ],
+        }
+      ]
     },
+    MuiTextField : {
+      variants : [
+        {
+          props : { variant: 'errorTextField' },
+          style: {
+            outlineColor : 'red'
+
+          }
+        }
+      ]
+    }
   }
 });
 
