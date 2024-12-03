@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
-import { Box, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -50,9 +50,9 @@ export default function CodePromo() {
   ];
 
   return (
-    <Box display="flex">
+    <Box display="flex"	 maxWidth={'lg'} justifyContent={'space-between'} >
       <SidebarMenu />
-      <Stack spacing={3}>
+      <Stack spacing={3} mt={5}>
         <Typography variant="h4">Détail du code de promotion</Typography>
         <TextField
           onChange={(e) => setName(e.target.value)}
@@ -88,7 +88,7 @@ export default function CodePromo() {
             },
           }}
         />
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ maxHeight: 500 }}>
           <Table>
             <TableHead>
               <TableRow>
@@ -123,7 +123,9 @@ export default function CodePromo() {
             </TableBody>
           </Table>
         </TableContainer>
+		<Button variant='yellowButton'  >Enregistrer</Button>
       </Stack>
+	  
     </Box>
   );
 }
