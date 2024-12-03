@@ -14,20 +14,22 @@ import Home from '../src/pages/home/Home';
 import NotFound from '../src/pages/NotFound';
 
 const AppRoutes = () => {
-  return (
-    <Routes>
-        <Route path='/' element={<App />} />
-          <Route path="/test/:id" element={<Test />} />
-        <Route path="/login" element={<Connection />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/email-sent" element={<EmailSent />} />
-      <Route path="/faq" element={<FAQ />} />
-      <Route path="/about" element={<About />} />
-	<Route path="home" element={<Home />} />
-	<Route path="*" element={<NotFound />} />
-    </Routes>
-  );
+	return (
+		<Routes>
+			<Route path='/' element={<App />} />
+			<Route path="/test/:id" element={<Test />} />
+			<Route path="/login" element={<Connection />} />
+			<Route path="/register" element={<Register />} />
+			<Route path="/forgot-password" element={<ForgotPassword />} />
+			<Route path="/email-sent" element={<EmailSent />} />
+			<Route path="/faq" element={<FAQ />} />
+			<Route path="/about" element={<About />} />
+			<Route path="home" element={<Home />} />
+
+			{/** Le laisser en dernier */}
+			<Route path="*" element={<NotFound />} />
+		</Routes>
+	);
 };
 
 export default AppRoutes;

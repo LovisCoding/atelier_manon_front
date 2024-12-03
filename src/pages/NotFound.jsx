@@ -12,7 +12,7 @@ export default function NotFound() {
 			<Typography variant={'h1'}> 404</Typography>
 			<Typography variant="h6">Page non trouvée</Typography>
 		</Stack>
-		<Link variant="home" sx={{my:6}} to={'/'}>Retour</Link>
+		<Link variant="home" sx={{ my: 6, border: '1px solid', padding: '8px 16px', borderRadius: '4px' }} href={'/'}>Retour</Link>
 		</Stack>
 		</>
 	)
