@@ -20,9 +20,11 @@ const theme = createTheme({
       styleOverrides: {
         h1: {
           fontSize: '2.4rem',
+          fontWeight: '800',
           color: '#eeba39',
         },
         h2: {
+          fontSize: '2.2rem',
           color: '#eeba39',
         },
         h3: {

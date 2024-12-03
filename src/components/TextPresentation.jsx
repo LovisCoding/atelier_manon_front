@@ -1,34 +1,58 @@
-import { Box, Typography } from "@mui/material";
+import { Box, colors, Container, Grid2, Typography } from "@mui/material";
 
-export function TextPresentation({title, description, image}){
+export function TextPresentation({
+	title,
+	titleType,
+	description,
+	image,
+	reverse,
+	sx,
+}) {
+	titleType = titleType ?? 'h1';
+	reverse = reverse ?? false;
+	image = image ?? 'https://via.placeholder.com/800x400';
 
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				flexDirection: { xs: 'column', md: 'row' },
-				alignItems: 'center',
-				gap: '20px',
-				marginBottom: '40px',
-			}}
-		>
-			<Box // Image
-				sx={{
-					width: { xs: '100%', md: '40%' },
-					height: '200px',
-					backgroundColor: '#f4f4f4',
-					border: '1px dashed #ccc',
-				}}
-			></Box>
-			<Box sx={{ width: { xs: '100%', md: '60%' } }}>
-				<Typography>
-					{title}
-				</Typography>
-				<Typography>
-					{description}
-				</Typography>
-			</Box>
-		</Box>
-	)
+			<Box sx={sx}>
+				<Grid2
+					container
+					spacing={{
+						sm: 3,
+						md: 5
+					}}
+					direction={reverse ? 'row-reverse' : 'row'} // Gère l'ordre des éléments
+				>
+					<Grid2 item size={{
+						xs: 12,
+						md: 6
+					}}>
+						<Box
+							component="img"
+							src={image}
+							alt="Image"
+							sx={{
+								objectFit: 'contain',
+								objectPosition: 'top',
+								width: "100%",
+								height: "auto",
+							}}
+						/>
+					</Grid2>
 
+					<Grid2 item size={{
+						xs: 12,
+						md: 6
+					}}>
+						<Box>
+							<Typography variant={titleType} sx={{ width: "100%", margin: "1rem 0", color: colors.grey[800] }}>
+								{title}
+							</Typography>
+							<Typography sx={{ width: "100%", maxWidth: "35rem" }}>
+								{description}
+							</Typography>
+						</Box>
+					</Grid2>
+				</Grid2>
+			</Box>
+	);
 }
