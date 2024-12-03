@@ -71,7 +71,7 @@ const Presentation = ({ scrollToSection }) => {
             transform: 'translateX(-50%)',
             zIndex: 1,
           }}
-          onClick={scrollToSection} // Appel de la fonction pour défiler
+          onClick={scrollToSection}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

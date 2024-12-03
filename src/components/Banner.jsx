@@ -1,22 +1,22 @@
 import React from 'react';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid2, Typography } from '@mui/material';
 
 const Banner = () => {
   const items = [
     {
-      image: './src/assets/img/livraison.png',
+      image: './src/assets/img/livraison.webp',
       text: 'Livraison Gratuite',
     },
     {
-      image: './src/assets/img/fabrication.png',
+      image: './src/assets/img/fabrication.webp',
       text: 'Fabriqué en France',
     },
     {
-      image: './src/assets/img/materiaux.png',
+      image: './src/assets/img/materiaux.webp',
       text: 'Matériaux naturels',
     },
     {
-      image: './src/assets/img/main.png',
+      image: './src/assets/img/main.webp',
       text: 'Fabriqué à la main',
     },
   ];
@@ -24,9 +24,9 @@ const Banner = () => {
   return (
     <Box sx={{ backgroundColor: '#fff', marginTop: '20px' }}>
       <Container>
-        <Grid container justifyContent="center">
+        <Grid2 container justifyContent="center">
           {items.map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid2 item xs={12} sm={6} md={3} key={index}>
               <Box
                 sx={{
                   display: 'flex',
@@ -47,9 +47,9 @@ const Banner = () => {
                   {item.text}
                 </Typography>
               </Box>
-            </Grid>
+            </Grid2>
           ))}
-        </Grid>
+        </Grid2>
       </Container>
     </Box>
   );

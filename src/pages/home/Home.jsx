@@ -28,17 +28,17 @@ const products = [
   {
     title: "Collier Kelyan",
     price: "25",
-    image: "./src/assets/img/bracelet1.png",
+    image: "./src/assets/img/bracelet1.webp",
   },
   {
     title: "Bracelet ?",
     price: "10",
-    image: "./src/assets/img/bracelet2.png",
+    image: "./src/assets/img/bracelet2.webp",
   },
   {
     title: "Bracelet ?",
     price: "10",
-    image: "./src/assets/img/bracelet3.png",
+    image: "./src/assets/img/bracelet3.webp",
   },
 ];
 

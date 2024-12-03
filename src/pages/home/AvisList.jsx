@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material'; // Utilisation de Grid au lieu de Grid2
 import Avis from '../../components/Avis';
 
 const AvisList = ({ title, avisData }) => {
@@ -26,9 +26,15 @@ const AvisList = ({ title, avisData }) => {
         {title}
       </Typography>
 
-      <Grid container spacing={4} justifyContent="center" alignItems="center">
+      <Grid
+        container
+        spacing={4}
+        justifyContent="center"
+        alignItems="center"
+        sx={{ flexWrap: 'wrap' }}
+      >
         {avisData.map((avis, index) => (
-          <Grid item xs={12} sm={4} key={index}>
+          <Grid item xs={12} sm={4} md={4} key={index}>
             <Avis
               rating={avis.rating}
               text={avis.text}
