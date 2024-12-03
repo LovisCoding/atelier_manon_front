@@ -2,6 +2,12 @@ import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
 const theme = createTheme({
+  typography: {
+    fontFamily: '"Lato", sans-serif',
+    fontWeightLight: 300,
+    fontWeightRegular: 300,
+    fontWeightMedium: 300,
+  },
   palette: {
     primary: {
       main: '#556cd6',
@@ -19,7 +25,6 @@ const theme = createTheme({
         {
           props: { variant: 'home' },
           style: {
-            fontFamily: '"GREYCLIFF ARABIC CF", sans-serif',
             backgroundColor: '#ffffff',
             color: '#000',
             border: '2px solid #333',
@@ -30,7 +35,7 @@ const theme = createTheme({
             textTransform: 'none',
             transition: 'all 0.3s ease',
             '&:hover': {
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             },
           },
         },

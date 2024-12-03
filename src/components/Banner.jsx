@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 
 const Banner = () => {
   const items = [
@@ -22,34 +22,35 @@ const Banner = () => {
   ];
 
   return (
-    <Box sx={{ width: '100%', backgroundColor: '#fff', padding: '20px 0', marginTop: '20px' }}>
-      <Grid container justifyContent="center" spacing={4}>
-        {items.map((item, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-              }}
-            >
-              <img
-                src={item.image}
-                alt={item.text}
-                style={{
-                  width: '120px',
-                  height: '80px',
-                  marginBottom: '10px',
+    <Box sx={{ backgroundColor: '#fff', marginTop: '20px' }}>
+      <Container>
+        <Grid container justifyContent="center">
+          {items.map((item, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center',
                 }}
-              />
-              <Typography variant="body1">
-                {item.text}
-              </Typography>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
+              >
+                <img
+                  src={item.image}
+                  alt={item.text}
+                  style={{
+                    width: '150px',
+                    height: 'auto',
+                  }}
+                />
+                <Typography variant="body1">
+                  {item.text}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </Box>
   );
 };

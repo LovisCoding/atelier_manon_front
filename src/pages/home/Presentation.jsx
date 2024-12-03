@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Stack, Box, IconButton } from '@mui/material';
 
-const Presentation = () => {
+const Presentation = ({ scrollToSection }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const handleScroll = () => {
@@ -43,7 +43,6 @@ const Presentation = () => {
           zIndex: 0,
         }}
       />
-      
       <Stack
         spacing={3}
         alignItems="flex-start"
@@ -72,6 +71,7 @@ const Presentation = () => {
             transform: 'translateX(-50%)',
             zIndex: 1,
           }}
+          onClick={scrollToSection} // Appel de la fonction pour défiler
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
