@@ -7,20 +7,19 @@ const AvisList = ({ title, avisData }) => {
     <Box
       sx={{
         width: '100%',
-        padding: '40px', // Création d'un espace autour de l'ensemble du contenu
+        padding: '40px',
         display: 'flex',
-        justifyContent: 'center', // Centrage horizontal
-        alignItems: 'center', // Centrage vertical
+        justifyContent: 'center',
+        alignItems: 'center',
         flexDirection: 'column',
       }}
     >
       <Typography
         variant="h4"
         sx={{
-          fontSize: '2rem',
+          fontSize: '2.5rem',
           color: '#F3A800',
           marginBottom: '20px',
-          fontWeight: 'bold',
           textAlign: 'center',
         }}
       >
@@ -35,11 +34,11 @@ const AvisList = ({ title, avisData }) => {
               text={avis.text}
               author={avis.author}
               sx={{
-                boxShadow: 'none', // Pas d'ombre
-                border: 'none', // Pas de bordure
+                boxShadow: 'none',
+                border: 'none',
                 padding: '20px',
-                backgroundColor: '#fff', // Fond blanc ou une autre couleur de fond si nécessaire
-                textAlign: 'center', // Centrer le texte dans l'avis
+                backgroundColor: '#fff',
+                textAlign: 'center',
               }}
             />
           </Grid>

@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Presentation from './Presentation';
 import BestSale from './BestSale';
 import ManufacturingStep from './ManufacturingStep';
-import AvisList from './AvisList'; // Import du composant AvisList
+import AvisList from './AvisList';
 
 const avisData = [
   {
     rating: 4,
-    text: "Super produit, je suis très content de mon achat !",
-    author: "Alice",
+    text: "J'ai bien reçu les bracelets et je suis agréablement surpris du résultat ! Le côté artisanal est bien mis en avant. Je vous les recommande !",
+    author: "Kelyan",
   },
   {
     rating: 5,
-    text: "Qualité incroyable, je recommande vivement !",
-    author: "Bob",
+    text: "La façon dont les colliers sont faits m'a donné envie d'en commander ! J'ai reçu mon collier la semaine dernière et je ne peux plus m'en passer !",
+    author: "Noa",
   },
   {
     rating: 3,
-    text: "Bon produit mais un peu cher à mon goût.",
-    author: "Charlie",
+    text: "J'ai eu l'occasion de découvrir le travail de Manon sur un marché. J'ai sauté le pas en achetant un bracelet et la qualité est impressionnante !",
+    author: "Anouk",
   },
-  // Ajoutez d'autres avis ici
 ];
 
 const Home = () => {
+  const bestSaleRef = useRef(null);
+
+  const scrollToBestSale = () => {
+    if (bestSaleRef.current) {
+      bestSaleRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div>
-      <Presentation />
-      <BestSale />
+      <Presentation scrollToSection={scrollToBestSale} />
+      <div ref={bestSaleRef}>
+        <BestSale />
+      </div>
       <ManufacturingStep />
-      <AvisList title="Avis des clients" avisData={avisData} /> {/* Ajouter AvisList ici */}
+      <AvisList title="Vos avis comptent" avisData={avisData} />
     </div>
   );
 };

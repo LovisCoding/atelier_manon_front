@@ -11,7 +11,6 @@ const BestSale = () => {
           sx={{
             fontSize: '2.5rem',
             textAlign: 'center',
-            fontWeight: 'normal',
             letterSpacing: '0.1em',
           }}
         >

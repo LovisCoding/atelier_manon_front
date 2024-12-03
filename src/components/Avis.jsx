@@ -15,11 +15,32 @@ const Avis = ({ rating, text, author }) => {
         boxSizing: 'border-box',
       }}
     >
-      <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          fontWeight: 'bold',
+          marginBottom: '10px',
+          fontSize: '1rem',
+          textAlign: 'center',
+        }}
+      >
         {author}
       </Typography>
-      <Rating name="read-only" value={rating} readOnly precision={0.5} sx={{ marginBottom: '10px' }} />
-      <Typography variant="body1" sx={{ fontSize: '1rem', color: '#333' }}>
+      <Rating
+        name="read-only"
+        value={rating}
+        readOnly
+        precision={0.5}
+        sx={{ fontSize: '3.2rem', marginBottom: '10px' }}
+      />
+      <Typography
+        variant="body1"
+        sx={{
+          fontSize: '0.85rem',
+          color: '#333',
+          textAlign: 'left',
+        }}
+      >
         {text}
       </Typography>
     </Box>

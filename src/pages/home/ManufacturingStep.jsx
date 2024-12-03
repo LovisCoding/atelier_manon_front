@@ -9,7 +9,7 @@ const ManufacturingStep = () => {
           <img
             src="./src/assets/img/step.jpg"
             alt="Étape de la fabrication"
-            style={{ width: '70%' }}
+            style={{ width: '65%' }}
           />
         </Grid>
 
@@ -29,7 +29,7 @@ const ManufacturingStep = () => {
           fontSize: '2.5rem',
           color: '#F3A800',
           marginBottom: '20px',
-          letterSpacing: '2px' // Espacement entre les lettres
+          letterSpacing: '2px'
         }}
       >
         L'étape de la fabrication
