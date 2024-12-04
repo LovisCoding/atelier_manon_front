@@ -3,7 +3,7 @@ import { IoTimeOutline } from "react-icons/io5";
 import ProductDetails from "./ProductDetails";
 import ProductImages from "./ProductImages";
 
-export function Product(){
+export default function Product(){
 	return(
 		<Container sx={{
 			marginTop: '4rem'
