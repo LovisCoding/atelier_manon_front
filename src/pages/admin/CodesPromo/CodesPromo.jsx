@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import SidebarMenu from "../SidebarMenu";
 import Link from "../../../components/Link";
+import axios from "axios";
 
 export default function CodesPromo() {
 	const [promoTextfield, setPromoTextfied] = useState('')
@@ -21,9 +22,14 @@ export default function CodesPromo() {
 		{ id: 2, name: "ETE_PROMO", use: 87 },
 		{ id: 3, name: "HIVER_PROMO", use: 15 },
 	];
-	const handleRowClick = (row) => {
-		alert(`You clicked on: ${row.name}`);
-	};
+	axios.get(
+		'/api/codepromo/get-codespromo'
+	).then((response) => {
+		console.log(response.data);
+	}).catch((error) => {
+		console.error(error);
+	}
+	)
 	return (
 		<Box display={'flex'}>
 			<SidebarMenu />
