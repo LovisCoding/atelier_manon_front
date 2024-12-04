@@ -54,7 +54,9 @@ function Command() {
                 display="flex"
                 justifyContent="center"
                 padding="1rem 0"
-            >Récapitulatif de commande</Typography>
+                mt={3}
+                mb={2}
+            >Récapitulatif de la commande</Typography>
 
             <Grid2 container columns={{ xs: 2, sm: 8, md: 12 }} spacing={5} justifyContent="center" margin="0 1rem" >
                 <Grid2 item size={{ xs: 2, sm: 8, md: 8 }} >

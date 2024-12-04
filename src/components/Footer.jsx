@@ -19,14 +19,15 @@ function Footer() {
             container
             width="100%"
             columns={{ xs: 3, sm: 8, md: 12 }}
-            sx={{ padding: "1rem", margin: 0, fontSize: '12px' }}
+            sx={{ padding: "1rem", margin: 0, fontSize: '12px', marginTop:'auto' }}
             bgcolor="#F8F8F8"
             color="black"
             spacing={5}
+            
         >
             <Box >
                 <Grid2 container columns={{xs:2, sm:8, md:12}} spacing={3} paddingTop="1rem" >
-                    <Grid2 item size={{xs: 2, sm: 8, md: 5}} display="flex" direction="column" justifyContent="center" >
+                    <Grid2 item size={{xs: 2, sm: 8, md: 5}} display="flex" flexDirection="column" justifyContent="center" >
                         <Stack width="100%" >
                             <Stack padding="0rem 0 1rem 3rem" >EN SAVOIR PLUS</Stack>
                             <Stack display="flex" flexDirection="column" justifyContent="center" gap=".3rem" >

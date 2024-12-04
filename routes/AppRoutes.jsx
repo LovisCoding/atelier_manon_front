@@ -43,6 +43,7 @@ const AppRoutes = () => {
 				<Route path="/home" element={<Home />} />
 				<Route path="/cgv" element={<CGV />} />
 				<Route path="/cart" element={<Cart />} />
+				<Route path="/command/:id" element={<Command />} />
 				{/* Routes sans le Footer */}
 				<Route path="/admin" element={<Admin />} />
 				<Route path="/admin/faq" element={<FoireAuxQuestions />} />
