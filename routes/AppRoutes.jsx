@@ -26,6 +26,7 @@ import Footer from '../src/components/Footer.jsx';
 import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Articles from '../src/pages/admin/Articles/Articles.jsx';
 import Article from '../src/pages/admin/Articles/Article.jsx';
+import Product from '../src/pages/Product/Product.jsx';
 
 const AppRoutes = () => {
 	const location = useLocation();
@@ -48,6 +49,7 @@ const AppRoutes = () => {
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/command/:id" element={<Command />} />
 				<Route path="/contact" element={<Contact />} />
+        <Route path="/product/:id" element={<Product/>} />
 
 				{/* Routes sans le Footer */}
 				<Route path="/admin" element={<Admin />} />
