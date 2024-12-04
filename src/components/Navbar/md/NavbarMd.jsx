@@ -49,7 +49,9 @@ export default function NavbarMd() {
             >
               {/* Logo and title */}
               <Stack direction="row" spacing={2} alignItems="center">
+              <Link href="/home" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                 <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+              </Link>
                 <Typography variant="h6" sx={{ fontWeight: 200, color: textColor }}>
                   L'Atelier de Manon
                 </Typography>
