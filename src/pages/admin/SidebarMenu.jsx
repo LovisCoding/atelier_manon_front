@@ -16,7 +16,7 @@ import Link from '../../components/Link';
 
 const SidebarMenu = ({ children }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = () => {

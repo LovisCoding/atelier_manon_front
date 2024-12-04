@@ -23,6 +23,8 @@ import FoireAuxQuestions from '../src/pages/admin/FAQ/FAQS.jsx';
 import FAQDetails from '../src/pages/admin/FAQ/FAQ.jsx';
 import Footer from '../src/components/Footer.jsx';
 import Navbar from '../src/components/Navbar/Navbar.jsx';
+import Produits from '../src/pages/admin/Produits/Produits.jsx';
+import Produit from '../src/pages/admin/Produits/Produit.jsx';
 
 const AppRoutes = () => {
 	const location = useLocation();
@@ -49,6 +51,8 @@ const AppRoutes = () => {
 				<Route path="/admin/faq/:id" element={<FAQDetails />} />
 				<Route path="/admin/codesPromo" element={<CodesPromo />} />
 				<Route path="/admin/codesPromo/:id" element={<CodePromo />} />
+				<Route path="/admin/produits" element={<Produits />} />
+				<Route path="/admin/produits/:id" element={<Produit />} />	
 
 				{/* Page introuvable */}
 				<Route path="*" element={<NotFound />} />
