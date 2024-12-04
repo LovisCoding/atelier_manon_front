@@ -11,12 +11,12 @@ import {
   IconButton
 } from '@mui/material';
 import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt } from 'react-icons/fa';
-import MenuIcon from '@mui/icons-material/Menu'; // Icone pour ouvrir le Drawer sur mobile
+import MenuIcon from '@mui/icons-material/Menu';
 
 const SidebarMenu = ({ onSidebarClick }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Vérifie si l'écran est petit
-  const [open, setOpen] = useState(false); // Etat pour contrôler l'ouverture du Drawer
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const [open, setOpen] = useState(false);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -31,7 +31,7 @@ const SidebarMenu = ({ onSidebarClick }) => {
             position: 'absolute',
             top: 16,
             left: 16,
-            zIndex: 1201, // Pour s'assurer que le bouton est au-dessus du contenu
+            zIndex: 1201,
             backgroundColor: '#f4f4f4',
             borderRadius: '50%',
             padding: '8px',
@@ -42,10 +42,10 @@ const SidebarMenu = ({ onSidebarClick }) => {
       )}
       
       <Drawer
-        variant={isSmallScreen ? 'temporary' : 'permanent'} // Utilisation de 'temporary' pour les petits écrans
+        variant={isSmallScreen ? 'temporary' : 'permanent'}
         anchor="left"
-        open={open} // Se déclenche lorsque l'état `open` est vrai
-        onClose={toggleDrawer} // Ferme le Drawer lorsqu'on clique en dehors
+        open={open}
+        onClose={toggleDrawer}
         sx={{
           width: isSmallScreen ? '100%' : 250,
           flexShrink: 0,
@@ -53,7 +53,7 @@ const SidebarMenu = ({ onSidebarClick }) => {
             width: isSmallScreen ? '100%' : 250,
             boxSizing: 'border-box',
             backgroundColor: '#f4f4f4',
-            paddingTop: '16px', // Espacement en haut pour les petits écrans
+            paddingTop: '16px',
           },
         }}
       >
