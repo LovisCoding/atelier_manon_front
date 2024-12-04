@@ -44,6 +44,15 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        '#root': {
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }
+      }
+    },
     // Variants and styles for Typography
     MuiTypography: {
       variants: [

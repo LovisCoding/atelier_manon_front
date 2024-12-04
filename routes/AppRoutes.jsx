@@ -11,9 +11,11 @@ import EmailSent from '../src/pages/EmailSent.jsx';
 import FAQ from '../src/pages/faq/Faq';
 import About from '../src/pages/About';
 import Home from '../src/pages/home/Home';
+import Contact from '../src/pages/Contact.jsx';
 
 import NotFound from '../src/pages/NotFound';
 import Admin from '../src/pages/admin/Admin';
+import Orders from '../src/pages/admin/Order/Orders.jsx';
 import CodesPromo from '../src/pages/admin/CodesPromo/CodesPromo.jsx';
 import CGV from '../src/pages/CGV/CGV.jsx';
 import CodePromo from '../src/pages/admin/CodesPromo/CodePromo.jsx';
@@ -25,6 +27,11 @@ import Footer from '../src/components/Footer.jsx';
 import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Produits from '../src/pages/admin/Produits/Produits.jsx';
 import Produit from '../src/pages/admin/Produits/Produit.jsx';
+import Articles from '../src/pages/admin/Articles/Articles.jsx';
+import Article from '../src/pages/admin/Articles/Article.jsx';
+import Product from '../src/pages/Product/Product.jsx';
+import OrderDetails from '../src/pages/admin/Order/OrderDetail.jsx';
+import Newsletter from '../src/pages/admin/Newsletter/Newsletter.jsx';
 
 const AppRoutes = () => {
 	const location = useLocation();
@@ -45,14 +52,21 @@ const AppRoutes = () => {
 				<Route path="/home" element={<Home />} />
 				<Route path="/cgv" element={<CGV />} />
 				<Route path="/cart" element={<Cart />} />
+				<Route path="/command/:id" element={<Command />} />
+				<Route path="/contact" element={<Contact />} />
+				<Route path="/product/:id" element={<Product/>} />
+				<Route path="/admin/orders" element={<Orders />} />
+				<Route path="/admin/order/:id" element={<OrderDetails />} />
 				{/* Routes sans le Footer */}
 				<Route path="/admin" element={<Admin />} />
 				<Route path="/admin/faq" element={<FoireAuxQuestions />} />
 				<Route path="/admin/faq/:id" element={<FAQDetails />} />
 				<Route path="/admin/codesPromo" element={<CodesPromo />} />
 				<Route path="/admin/codesPromo/:id" element={<CodePromo />} />
-				<Route path="/admin/produits" element={<Produits />} />
-				<Route path="/admin/produits/:id" element={<Produit />} />	
+				<Route path="/admin/faq" element={<FoireAuxQuestions />} />
+				<Route path="/admin/blog" element={<Articles />} />
+				<Route path="/admin/blog/:id" element={<Article />} />
+				<Route path="/admin/newsletter" element={<Newsletter />} />
 
 				{/* Page introuvable */}
 				<Route path="*" element={<NotFound />} />

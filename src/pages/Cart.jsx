@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Button, Card, CardContent, Grid2, TableFooter, TextField, TextareaAutosize, Checkbox, } from "@mui/material";
-import { Delete, Add, Remove, Close } from "@mui/icons-material";
 import ImgMui from "../components/ImgMui";
-
+import { MdAdd as Add, MdDelete as Delete , MdRemove as Remove, MdClose as Close } from "react-icons/md";
 
 import { useTheme } from "@mui/material/styles";
 
@@ -83,13 +82,14 @@ function Cart() {
     }
 
     return (
-        <Box>
+        <Box mb={3} >
             <Typography
                 fontWeight="bold"
                 variant="h4"
                 display="flex"
                 justifyContent="center"
                 padding="1rem 0"
+                
             >Mon panier</Typography>
 
             <Grid2 container columns={{ xs: 2, sm: 8, md: 12 }} spacing={5} justifyContent="center" margin="0 1rem" >
