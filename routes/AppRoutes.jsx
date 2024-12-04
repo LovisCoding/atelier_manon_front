@@ -13,6 +13,7 @@ import About from '../src/pages/About';
 import Home from '../src/pages/home/Home';
 
 import NotFound from '../src/pages/NotFound';
+import Admin from '../src/pages/admin/Admin';
 import CGV from '../src/pages/CGV/CGV.jsx';
 import Cart from '../src/pages/Cart.jsx';
 
@@ -27,7 +28,8 @@ const AppRoutes = () => {
 			<Route path="/email-sent" element={<EmailSent />} />
 			<Route path="/faq" element={<FAQ />} />
 			<Route path="/about" element={<About />} />
-			<Route path="home" element={<Home />} />
+			<Route path="/home" element={<Home />} />
+			<Route path="/admin" element={<Admin />} />
 			<Route path="/cgv" element={<CGV />} />
 			<Route path="/cart" element={<Cart />} />
 

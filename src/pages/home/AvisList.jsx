@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material'; // Utilisation de Grid au lieu de Grid2
+import { Box, Typography, Grid } from '@mui/material';
 import Avis from '../../components/Avis';
 
 const AvisList = ({ title, avisData }) => {
