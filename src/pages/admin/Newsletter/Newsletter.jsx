@@ -78,7 +78,7 @@ export default function Newsletter() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                justifyContent: "flex-start",  // Alignement en haut
+                justifyContent: "flex-start",
                 marginLeft: 20,
               }}
             >
@@ -107,7 +107,7 @@ export default function Newsletter() {
                   sx={{ marginBottom: 2 }}
                 />
 
-                <Button variant="contained" color="primary" onClick={handleSave} sx={{ alignSelf: "center" }}>
+                <Button variant="contained" color="primary" onClick={handleSave} sx={{ alignSelf: "center", fontWeight: "bold" }}>
                   Envoyer
                 </Button>
               </Stack>
