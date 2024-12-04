@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Table, MenuItem, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Button, Card, CardContent, stepButtonClasses, Grid2, Stack, TableFooter, TextField, TextareaAutosize, Checkbox, } from "@mui/material";
+import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Button, Card, CardContent, Grid2, TableFooter, TextField, TextareaAutosize, Checkbox, } from "@mui/material";
 import { Delete, Add, Remove, Close } from "@mui/icons-material";
 import ImgMui from "../components/ImgMui";
 
@@ -14,49 +14,19 @@ import { useTheme } from "@mui/material/styles";
 function Cart() {
 
     const [commentary, setCommentary] = useState('');
-    const [promoCode, setPromoCode] = useState('');
     const [isGift, setIsGift] = useState(false);
+    const [giftCommentary, setGiftCommentary] = useState('');
     const [promoCodes, setPromoCodes] = useState([]);
 
     const theme = useTheme();
 
-    const [cartProducts, setCartProducts] = useState([
-        {
-            id: 1,
-            titre: "Produit A",
-            description: "Ceci est la description génialegénialegénialegénialegénialegénialegénialegénialegéniale du Produit A",
-            gravure: "Gravure 1",
-            variante: "Variante Z",
-            prix: 200.5,
-            quantite: 1
-        }, {
-            id: 2,
-            titre: "Produit B",
-            description: "Ceci est la description géniale du Produit B",
-            gravure: "Gravure 2",
-            variante: "Variante Y",
-            prix: 35,
-            quantite: 2
-        },
-        {
-            id: 3,
-            titre: "Produit C",
-            description: "Ceci est la description géniale du Produit C",
-            gravure: "Gravure 3",
-            variante: "Variante X",
-            prix: 15,
-            quantite: 1
-        }
-    ]);
+    const [cartProducts, setCartProducts] = useState([]);
 
-    // Fonction pour calculer le total
     const calculateTotal = () => {
         return cartProducts.reduce((acc, product) => acc + product.prix * product.quantite, 0);
     }
 
-    // Fonction pour modifier la quantité
     const updateQuantity = (id, increment) => {
-        console.log("donova")
         setCartProducts((prev) =>
             prev.map((product) =>
                 product.id === id
@@ -66,14 +36,19 @@ function Cart() {
         );
     };
 
-    // Fonction pour supprimer un produit
     const removeItem = (id) => {
         setCartProducts((prev) => prev.filter((product) => product.id !== id));
     };
 
     const handleConfirmCommand = () => {
-        console.log("command confirmed:", cartProducts);
-
+        console.log("command confirmed:");
+        console.log("products:",cartProducts);
+        console.log("isCadeau:",isGift);
+        console.log("cadeauCommentary:",giftCommentary);
+        console.log("total:",calculateTotal());
+        console.log("promoCodes:",promoCodes);
+        console.log("comentary:",commentary);
+        
     }
 
     return (
@@ -144,9 +119,9 @@ function Cart() {
                             />
 
 
-                            <PromoCodeInput promoCodes={promoCodes} setPromoCodes={setPromoCodes} />
+                            <PromoCodeSection promoCodes={promoCodes} setPromoCodes={setPromoCodes} />
 
-                            <Box display="flex" alignItems="center"  >
+                            <Box display="flex" alignItems="center" >
                                 <Box
                                     width="27rem"
                                     ml={0}
@@ -156,7 +131,7 @@ function Cart() {
                                     onClick={e => setIsGift(!isGift)}
                                     sx={{ cursor: 'pointer' }}
                                 >
-                                    <Checkbox checked={isGift} />
+                                    <Checkbox color="customYellow" checked={isGift} />
                                     <Typography>Votre commande est un cadeau</Typography>
                                 </Box>
 
@@ -175,8 +150,8 @@ function Cart() {
                                         fontWeight: 'normal'
                                     }}
                                     placeholder="Ajoutez un mot pour le destinataire"
-                                    value={commentary}
-                                    onChange={e => setCommentary(e.target.value)}
+                                    value={giftCommentary}
+                                    onChange={e => setGiftCommentary(e.target.value)}
 
                                 />
 
@@ -190,12 +165,10 @@ function Cart() {
                                 fontSize={18}
                             >Dû total : <span style={{ fontWeight: 'bold' }} >{calculateTotal()} €</span></Typography>
 
-
                             <Button
                                 variant="yellowButton"
-                                fullWidth
                                 disabled={cartProducts.length === 0}
-                                onClick={e => handleConfirmCommand}
+                                onClick={e => handleConfirmCommand()}
                             >Passer commande</Button>
                         </CardContent>
                     </Card>
@@ -221,8 +194,8 @@ const CartItem = ({ product, removeItem, updateQuantity }) => {
                             <Typography fontSize={14} color="grey" >{product.description}</Typography>
                         </Box>
                         <Box display="flex" gap={5} >
-                            <Typography fontSize={16} ><span style={{ fontWeight: '500' }} >Gravure :</span> {product.gravure}</Typography>
-                            <Typography fontSize={16} ><span style={{ fontWeight: '500' }} >Variante :</span> {product.variante}</Typography>
+                            { product.gravure !== "" && <Typography fontSize={16} ><span style={{ fontWeight: '500' }} >Gravure :</span> {product.gravure}</Typography>}
+                            { product.variante !== "" && <Typography fontSize={16} ><span style={{ fontWeight: '500' }} >Variante :</span> {product.variante}</Typography>}
                         </Box>
                     </Box>
                 </Box>
@@ -251,11 +224,8 @@ const CartItem = ({ product, removeItem, updateQuantity }) => {
 
 
 
-const PromoCodeInput = ({ promoCodes, setPromoCodes }) => {
+const PromoCodeSection = ({ promoCodes, setPromoCodes }) => {
     const [inputValue, setInputValue] = useState("");
-
-    const theme = useTheme();
-
 
     const handleAddPromoCode = (e) => {
         if (e.key === "Enter" && inputValue.trim()) {
@@ -278,8 +248,7 @@ const PromoCodeInput = ({ promoCodes, setPromoCodes }) => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleAddPromoCode}
-                variant="outlined"
-                sx={{ outlineColor: theme.palette.customYellow.main }}
+                color="customYellow"
                 fullWidth
             />
 
@@ -317,6 +286,7 @@ const PromoCodeInput = ({ promoCodes, setPromoCodes }) => {
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
+                                sx={{cursor:'pointer'}}
                             ><Close color="error" /></Box>
                         </Box>
                     ))}
@@ -328,5 +298,3 @@ const PromoCodeInput = ({ promoCodes, setPromoCodes }) => {
 
 
 export default Cart;
-
-

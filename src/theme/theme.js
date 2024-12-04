@@ -150,6 +150,12 @@ const theme = createTheme({
             outlineColor: 'red',
           },
         },
+        {
+          props : { variant: 'customYellowTextField' },
+          style : {
+            outlineColor: 'yellow'
+          }
+        }
       ],
     },
     // Styles for Accordion
