@@ -53,7 +53,6 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
       <Presentation scrollToSection={scrollToBestSale} />
       <Box ref={bestSaleRef}>
         <BestSale products={products} />
