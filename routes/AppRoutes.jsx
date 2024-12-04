@@ -15,6 +15,7 @@ import Contact from '../src/pages/Contact.jsx';
 
 import NotFound from '../src/pages/NotFound';
 import Admin from '../src/pages/admin/Admin';
+import Orders from '../src/pages/admin/Order/Orders.jsx';
 import CodesPromo from '../src/pages/admin/CodesPromo/CodesPromo.jsx';
 import CGV from '../src/pages/CGV/CGV.jsx';
 import CodePromo from '../src/pages/admin/CodesPromo/CodePromo.jsx';
@@ -27,6 +28,7 @@ import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Articles from '../src/pages/admin/Articles/Articles.jsx';
 import Article from '../src/pages/admin/Articles/Article.jsx';
 import Product from '../src/pages/Product/Product.jsx';
+import OrderDetails from '../src/pages/admin/Order/OrderDetail.jsx';
 
 const AppRoutes = () => {
 	const location = useLocation();
@@ -49,8 +51,9 @@ const AppRoutes = () => {
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/command/:id" element={<Command />} />
 				<Route path="/contact" element={<Contact />} />
-        <Route path="/product/:id" element={<Product/>} />
-
+				<Route path="/product/:id" element={<Product/>} />
+				<Route path="/admin/orders" element={<Orders />} />
+				<Route path="/admin/order/:id" element={<OrderDetails />} />
 				{/* Routes sans le Footer */}
 				<Route path="/admin" element={<Admin />} />
 				<Route path="/admin/faq" element={<FoireAuxQuestions />} />
