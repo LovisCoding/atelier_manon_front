@@ -29,6 +29,7 @@ import Articles from '../src/pages/admin/Articles/Articles.jsx';
 import Article from '../src/pages/admin/Articles/Article.jsx';
 import Product from '../src/pages/Product/Product.jsx';
 import OrderDetails from '../src/pages/admin/Order/OrderDetail.jsx';
+import Newsletter from '../src/pages/admin/Newsletter/Newsletter.jsx';
 
 const AppRoutes = () => {
 	const location = useLocation();
@@ -63,6 +64,7 @@ const AppRoutes = () => {
 				<Route path="/admin/faq" element={<FoireAuxQuestions />} />
 				<Route path="/admin/blog" element={<Articles />} />
 				<Route path="/admin/blog/:id" element={<Article />} />
+				<Route path="/admin/newsletter" element={<Newsletter />} />
 
 				{/* Page introuvable */}
 				<Route path="*" element={<NotFound />} />
