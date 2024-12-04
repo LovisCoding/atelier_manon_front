@@ -67,6 +67,8 @@ const AppRoutes = () => {
 				<Route path="/admin/blog" element={<Articles />} />
 				<Route path="/admin/blog/:id" element={<Article />} />
 				<Route path="/admin/newsletter" element={<Newsletter />} />
+				<Route path="/admin/products" element={<Produits />} />
+				<Route path="/admin/products/:id" element={<Produit />} />
 
 				{/* Page introuvable */}
 				<Route path="*" element={<NotFound />} />
