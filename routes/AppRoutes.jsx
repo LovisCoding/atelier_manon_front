@@ -11,6 +11,7 @@ import EmailSent from '../src/pages/EmailSent.jsx';
 import FAQ from '../src/pages/faq/Faq';
 import About from '../src/pages/About';
 import Home from '../src/pages/home/Home';
+import Contact from '../src/pages/Contact.jsx';
 
 import NotFound from '../src/pages/NotFound';
 import Admin from '../src/pages/admin/Admin';
@@ -44,6 +45,8 @@ const AppRoutes = () => {
 				<Route path="/cgv" element={<CGV />} />
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/command/:id" element={<Command />} />
+				<Route path="/contact" element={<Contact />} />
+
 				{/* Routes sans le Footer */}
 				<Route path="/admin" element={<Admin />} />
 				<Route path="/admin/faq" element={<FoireAuxQuestions />} />
