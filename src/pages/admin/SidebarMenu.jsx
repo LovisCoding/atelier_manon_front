@@ -12,8 +12,9 @@ import {
 } from '@mui/material';
 import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt } from 'react-icons/fa';
 import MenuIcon from '@mui/icons-material/Menu';
+import Link from '../../components/Link';
 
-const SidebarMenu = ({ onSidebarClick }) => {
+const SidebarMenu = ({ children }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [open, setOpen] = useState(false);
@@ -23,7 +24,7 @@ const SidebarMenu = ({ onSidebarClick }) => {
   };
 
   return (
-    <>
+    <Box display='flex'>
       {isSmallScreen && (
         <IconButton
           onClick={toggleDrawer}
@@ -78,21 +79,22 @@ const SidebarMenu = ({ onSidebarClick }) => {
         </Box>
         <List>
           {[
-            { text: 'Produits', href: '#configurer-produit', icon: <FaBox /> },
-            { text: 'Commandes', href: '#liste-des-commandes', icon: <FaShoppingCart /> },
-            { text: 'FAQ', href: '#faq', icon: <FaQuestionCircle />, view: 'faq' },
-            { text: 'Accueil', href: '#configurer-accueil', icon: <FaHome /> },
-            { text: 'Newsletters', href: '#commandes', icon: <FaNewspaper /> },
-            { text: 'Réductions', href: '#articles-du-blog', icon: <FaPercent /> },
-            { text: 'Évènements', href: '#evenements', icon: <FaCalendarAlt /> },
+            { text: 'Produits', href: '/admin/produits', icon: <FaBox /> },
+            { text: 'Commandes', href: '/admin/commandes', icon: <FaShoppingCart /> },
+            { text: 'FAQ', href: '/admin/faq', icon: <FaQuestionCircle />, view: 'faq' },
+            { text: 'Accueil', href: '/admin/accueil', icon: <FaHome /> },
+            { text: 'Newsletters', href: '/admin/newsletter', icon: <FaNewspaper /> },
+            { text: 'Réductions', href: '/admin/codesPromo', icon: <FaPercent /> },
+            { text: 'Évènements', href: '/admin/evenements', icon: <FaCalendarAlt /> },
           ].map((item) => (
             <ListItem
               button
+			  component={Link}
               key={item.text}
-              onClick={() => onSidebarClick(item.view)}
               sx={{
                 padding: '10px 16px',
               }}
+			  href={item.href}
             >
               <Box
                 sx={{
@@ -129,7 +131,8 @@ const SidebarMenu = ({ onSidebarClick }) => {
           ))}
         </List>
       </Drawer>
-    </>
+	  {children}
+    </Box>
   );
 };
 

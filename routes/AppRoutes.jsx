@@ -18,6 +18,7 @@ import CodesPromo from '../src/pages/admin/CodesPromo/CodesPromo.jsx';
 import CGV from '../src/pages/CGV/CGV.jsx';
 import CodePromo from '../src/pages/admin/CodesPromo/CodePromo.jsx';
 import Cart from '../src/pages/Cart.jsx';
+import FoireAuxQuestions from '../src/pages/admin/FAQ.jsx';
 
 const AppRoutes = () => {
 	return (
@@ -35,6 +36,7 @@ const AppRoutes = () => {
 			<Route path="/cgv" element={<CGV />} />
 			<Route path="/cart" element={<Cart />} />
 
+			<Route path="/admin/faq" element={<FoireAuxQuestions />} />
 			<Route path="/admin/codesPromo" element={<CodesPromo />} />
 			<Route path="/admin/codesPromo/:id" element={<CodePromo />} />
 			{/** Le laisser en dernier */}
