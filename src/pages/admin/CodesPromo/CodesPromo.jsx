@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import SidebarMenu from "../SidebarMenu";
+import Link from "../../../components/Link";
 
 export default function CodesPromo() {
 	const [promoTextfield, setPromoTextfied] = useState('')
@@ -29,7 +30,7 @@ export default function CodesPromo() {
 			<Stack  sx={{ mt: 5, width: '100%' }} >
 				<Stack direction='row' justifyContent={'space-around'}>
 					<Typography variant='h4'>Codes Promotion</Typography>
-					<Button variant='contained' color='primary'>Nouveau</Button>
+					<Button  LinkComponent={Link} href={"/admin/codesPromo/-1"} variant='contained' color='secondary'>Nouveau</Button>
 				</Stack>
 				<Box mx={15} mt={8}>
 				<TableContainer component={Paper}>
@@ -46,7 +47,8 @@ export default function CodesPromo() {
 									key={row.id}
 									hover
 									style={{ cursor: "pointer" }}
-									onClick={() => handleRowClick(row)}
+									component={Link}
+									href={'/admin/codesPromo/' + row.id}
 								>
 									<TableCell>{row.name}</TableCell>
 									<TableCell>{row.use}</TableCell>

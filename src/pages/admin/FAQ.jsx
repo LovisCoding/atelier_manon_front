@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, FormControlLabel, Box, Typography, Grid, TextField } from '@mui/material';
+import SidebarMenu from './SidebarMenu';
 
 const FoireAuxQuestions = () => {
   const [faqList, setFaqList] = useState([
@@ -53,6 +54,7 @@ const FoireAuxQuestions = () => {
   };
 
   return (
+	<SidebarMenu>
     <Box sx={{ padding: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
         <Typography variant="h4" sx={{ textAlign: 'center', width: '100%' }}>Foire aux questions</Typography>
@@ -121,6 +123,7 @@ const FoireAuxQuestions = () => {
         </Grid>
       </Grid>
     </Box>
+	</SidebarMenu>
   );
 };
 
