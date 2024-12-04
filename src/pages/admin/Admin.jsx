@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SidebarMenu from '../../components/admin/SidebarMenu';
-import FoireAuxQuestions from '../../components/admin/FAQ'; // Assurez-vous que ce fichier existe
+import SidebarMenu from './SidebarMenu';
+import FoireAuxQuestions from './FAQ'; // Assurez-vous que ce fichier existe
 
 const Admin = () => {
   const [activeView, setActiveView] = useState('');
