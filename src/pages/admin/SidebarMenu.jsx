@@ -10,7 +10,7 @@ import {
   useMediaQuery,
   IconButton
 } from '@mui/material';
-import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt } from 'react-icons/fa';
+import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog } from 'react-icons/fa';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from '../../components/Link';
 
@@ -86,6 +86,7 @@ const SidebarMenu = ({ children }) => {
             { text: 'Newsletters', href: '/admin/newsletter', icon: <FaNewspaper /> },
             { text: 'Réductions', href: '/admin/codesPromo', icon: <FaPercent /> },
             { text: 'Évènements', href: '/admin/evenements', icon: <FaCalendarAlt /> },
+            { text: 'Blog', href: '/admin/blog', icon: <FaBlog /> },
           ].map((item) => (
             <ListItem
               button
