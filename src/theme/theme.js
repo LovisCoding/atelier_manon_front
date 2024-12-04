@@ -138,8 +138,8 @@ const theme = createTheme({
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             },
           },
-        },
-      ],
+        }
+      ]
     },
     // Variants and styles for TextField
     MuiTextField: {
@@ -150,6 +150,12 @@ const theme = createTheme({
             outlineColor: 'red',
           },
         },
+        {
+          props : { variant: 'customYellowTextField' },
+          style : {
+            outlineColor: 'yellow'
+          }
+        }
       ],
     },
     // Styles for Accordion

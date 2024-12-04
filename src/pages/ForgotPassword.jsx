@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Typography, Container } from "@mui/material";
+import { TextField, Button, Box, Typography, Container, useTheme } from "@mui/material";
 
 function ForgotPassword() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const theme = useTheme();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -14,6 +16,18 @@ function ForgotPassword() {
     const changeRoute = (route) => {
         window.location = route;
     };
+
+    const fieldStyle = {
+        "& .MuiOutlinedInput-root": {
+            color: theme.palette.customYellow.main, // Couleur par défaut
+            "&.Mui-focused fieldset": {
+                borderColor: theme.palette.customYellow.main,
+            },
+        },
+        "& .MuiInputLabel-root.Mui-focused": {
+            color: theme.palette.customYellow.main, // Couleur quand focus
+        }
+    }
 
     return (
 
@@ -46,6 +60,7 @@ function ForgotPassword() {
                         autoFocus
                         value={email}
                         onChange={e => setEmail(e.target.value)}
+                        sx={fieldStyle}
                     />
                     <Box display="flex" gap={1} justifySelf='end' >
                         <Typography sx={{ fontSize: '12px' }} >Pas encore inscrit ?</Typography>
