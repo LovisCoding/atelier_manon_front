@@ -1,78 +1,60 @@
-import React, { useState } from 'react';
-import { Box, Typography, Paper, Stack, TextField, Button } from '@mui/material';
-import SidebarMenu from '../SidebarMenu';
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router";
+import SidebarMenu from "../SidebarMenu";
+import {
+    Box,
+    Button,
+    Stack,
+    TextField,
+    Typography
+} from "@mui/material";
+import { useState } from "react";
 
-const FAQDetails = () => {
-  const { id } = useParams();
+export default function FAQDetails() {
+    const { id } = useParams();
 
-  const faqList = [
-    { id: 1, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' },
-    { id: 2, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' },
-    { id: 3, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' },
-    { id: 4, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' },
-    { id: 5, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' }
-  ];
+    const [faq, setFaq] = useState({
+        question: '',
+        answer: ''
+    });
 
-  // Recherche de la FAQ par ID, si non trouvée initialise avec des valeurs vides
-  const faq = faqList.find((item) => item.id === parseInt(id));
-  const initialFAQ = faq || { question: '', answer: '' };
+    const handleChange = (field, value) => {
+        setFaq((prev) => ({ ...prev, [field]: value }));
+    };
 
-  const [editedFAQ, setEditedFAQ] = useState({ ...initialFAQ });
+    const handleSave = () => {
+        alert(`FAQ sauvegardée:\nID: ${id}\nQuestion: ${faq.question}\nRéponse: ${faq.answer}`);
+    };
 
-  const handleChange = (field, value) => {
-    setEditedFAQ(prevState => ({
-      ...prevState,
-      [field]: value
-    }));
-  };
+    return (
+        <Box display="flex">
+            <SidebarMenu />
+            <Stack spacing={3} mt={5} width="100%" mx={15}>
+                <Typography variant="h4">{id === "-1" ? "Nouvelle FAQ" : "Détail de la FAQ"}</Typography>
 
-  const handleSave = () => {
-    // Handle save logic (e.g., API call to save the edited FAQ)
-    console.log("Saved:", editedFAQ);
-  };
+                <TextField
+                    label="Question"
+                    variant="outlined"
+                    fullWidth
+                    value={faq.question}
+                    onChange={(e) => handleChange('question', e.target.value)}
+                    inputProps={{ style: { color: 'black' } }}
+                />
 
-  const handleDelete = () => {
-    // Handle delete logic (e.g., API call to delete the FAQ)
-    console.log("Deleted FAQ with id:", editedFAQ.id);
-  };
+                <TextField
+                    label="Réponse"
+                    variant="outlined"
+                    fullWidth
+                    multiline
+                    rows={4}
+                    value={faq.answer}
+                    onChange={(e) => handleChange('answer', e.target.value)}
+                    inputProps={{ style: { color: 'black' } }}
+                />
 
-  return (
-    <Box display="flex">
-      <SidebarMenu />
-      <Box sx={{ padding: 5, flexGrow: 1 }}>
-        <Paper elevation={3} sx={{ padding: 5, position: 'relative' }}>
-          <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
-            <Button variant="contained" color="primary" onClick={handleSave} sx={{ fontWeight: 'bold', marginRight: 1 }}>Enregistrer</Button>
-            <Button variant="contained" color="error" onClick={handleDelete} sx={{ fontWeight: 'bold' }}>Supprimer</Button>
-          </Box>
-
-          <Stack spacing={3}>
-            <Typography variant="h6" color="textSecondary">
-              Question :
-            </Typography>
-            <TextField
-              variant="outlined"
-              fullWidth
-              value={editedFAQ.question}
-              onChange={(e) => handleChange('question', e.target.value)}
-            />
-            <Typography variant="h6" color="textSecondary">
-              Réponse :
-            </Typography>
-            <TextField
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={4}
-              value={editedFAQ.answer}
-              onChange={(e) => handleChange('answer', e.target.value)}
-            />
-          </Stack>
-        </Paper>
-      </Box>
-    </Box>
-  );
-};
-
-export default FAQDetails;
+                <Button variant="contained" color="primary" onClick={handleSave}>
+                    Enregistrer
+                </Button>
+            </Stack>
+        </Box>
+    );
+}
