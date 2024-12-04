@@ -24,7 +24,7 @@ const Banner = () => {
   return (
     <Box sx={{ backgroundColor: '#fff', marginTop: '20px' }}>
       <Container>
-        <Grid2 container justifyContent="center">
+        <Grid2 container justifyContent="center" spacing={4}>
           {items.map((item, index) => (
             <Grid2 item xs={12} sm={6} md={3} key={index}>
               <Box
@@ -39,7 +39,7 @@ const Banner = () => {
                   src={item.image}
                   alt={item.text}
                   style={{
-                    width: '150px',
+                    width: '170px',
                     height: 'auto',
                   }}
                 />

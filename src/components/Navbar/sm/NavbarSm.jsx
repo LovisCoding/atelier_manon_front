@@ -7,6 +7,7 @@ import ImgMui from "../../ImgMui";
 import imgManon from "../../../assets/img/logo_manon.webp";
 import DrawerSm from "./DrawerSm";
 import ElevationScroll from "../ElevationScroll";
+import Link from "../../Link";
 
 export default function NavbarSm() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -49,7 +50,9 @@ const [navbarState, setNavbarState] = useState({
               <IoMenu color={color}/>
             </IconButton>
             <Stack direction="row" spacing={2} alignItems="center">
-              <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+              <Link href="/home" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+              </Link>
               <Typography variant="h6" sx={{ fontWeight: 200, color }}>
                 L'Atelier de Manon
               </Typography>

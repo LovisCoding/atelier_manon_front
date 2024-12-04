@@ -10,9 +10,7 @@ const Admin = () => {
 
   return (
     <Box style={{ display: 'flex' }}>
-      <SidebarMenu >
-		<FoireAuxQuestions />
-		</SidebarMenu>
+       <FoireAuxQuestions />
     </Box>
   );
 };
