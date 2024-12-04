@@ -83,13 +83,14 @@ function Cart() {
     }
 
     return (
-        <Box>
+        <Box mb={3} >
             <Typography
                 fontWeight="bold"
                 variant="h4"
                 display="flex"
                 justifyContent="center"
                 padding="1rem 0"
+                
             >Mon panier</Typography>
 
             <Grid2 container columns={{ xs: 2, sm: 8, md: 12 }} spacing={5} justifyContent="center" margin="0 1rem" >

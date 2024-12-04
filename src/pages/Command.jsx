@@ -47,7 +47,7 @@ function Command() {
     const totalDue = total * 0.8;
 
     return (
-        <Box>
+        <Box mb={3} >
             <Typography
                 fontWeight="bold"
                 variant="h4"
