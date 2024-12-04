@@ -23,7 +23,7 @@ const Presentation = ({ scrollToSection }) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        height: 'calc(100vh - 64px)', // Retire 64px de la hauteur totale
         width: '100%',
         backgroundImage: 'url(/src/assets/img/home.webp)',
         backgroundPosition: `center ${scrollPosition * 0.1 - 100}px`,

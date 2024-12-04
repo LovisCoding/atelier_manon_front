@@ -57,17 +57,17 @@ export default function NavbarMd() {
 
               {/* Navigation links */}
               <Stack direction="row" spacing={2} alignItems="center">
-                <Link variant="navbar" sx={getLinkStyles("/home")} to="/home">
+                <Link variant="navbar" sx={getLinkStyles("/home")} href="/home">
                   Accueil
                 </Link>
                 <DropDownMenu textColor={getLinkStyles("/home")} selected={isSelectedMenu} scrolled={scrolled} />
-                <Link variant="navbar" sx={getLinkStyles("/about")} to="/about">
+                <Link variant="navbar" sx={getLinkStyles("/about")} href="/about">
                   À propos
                 </Link>
-                <Link variant="navbar" sx={getLinkStyles("/faq")} to="/faq">
+                <Link variant="navbar" sx={getLinkStyles("/faq")} href="/faq">
                   FAQ
                 </Link>
-                <Link variant="navbar" sx={getLinkStyles("/contact")} to="/contact">
+                <Link variant="navbar" sx={getLinkStyles("/contact")} href="/contact">
                   Contact
                 </Link>
                 <IconButton>

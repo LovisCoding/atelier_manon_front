@@ -56,7 +56,7 @@ function Footer() {
                 </Grid2>
             </Box>
             <Box display="flex" alignItems="end" justifyContent="center" gap="1rem" >
-                <Link sx={linkStyle} href="/" >CGV</Link>
+                <Link sx={linkStyle} href="/cgv" >CGV</Link>
                 <Link sx={linkStyle} href="/" >Mentions légales</Link>
             </Box>
         </Stack>

@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import SidebarMenu from '../../components/admin/SidebarMenu';
-import FoireAuxQuestions from '../../components/admin/FAQ'; // Assurez-vous que ce fichier existe
+import SidebarMenu from './SidebarMenu'; 
+import { Box } from '@mui/material';
+import FoireAuxQuestions from './FAQ/FAQS';
+
 
 const Admin = () => {
-  const [activeView, setActiveView] = useState('');
 
-  const handleSidebarClick = (view) => {
-    setActiveView(view);
-  };
+
 
   return (
-    <div style={{ display: 'flex' }}>
-      <SidebarMenu onSidebarClick={handleSidebarClick} />
-      <div style={{ flex: 1, padding: '20px', backgroundColor: '#fff' }}>
-        {activeView === 'faq' && <FoireAuxQuestions />}
-        {/* Ajoutez d'autres composants en fonction de la vue active */}
-      </div>
-    </div>
+    <Box style={{ display: 'flex' }}>
+      <SidebarMenu >
+		<FoireAuxQuestions />
+		</SidebarMenu>
+    </Box>
   );
 };
 
