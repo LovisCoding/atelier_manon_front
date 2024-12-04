@@ -6,6 +6,7 @@ import ImgMui from "../components/ImgMui";
 
 import { useTheme } from "@mui/material/styles";
 
+import TestImg from '../assets/img/bracelet1.webp';
 
 // titre, détails, prix, quantité, total
 // description, gravure/variante
@@ -20,7 +21,37 @@ function Cart() {
 
     const theme = useTheme();
 
-    const [cartProducts, setCartProducts] = useState([]);
+    const [cartProducts, setCartProducts] = useState([
+        {
+            id: 1,
+            titre: "Produit A",
+            description: "Ceci est la description génialegénialegénialegénialegénialegénialegénialegénialegéniale du Produit A",
+            gravure: "Gravure 1",
+            variante: "Variante Z",
+            prix: 200.5,
+            quantite: 1,
+            urlImg: TestImg
+        }, {
+            id: 2,
+            titre: "Produit B",
+            description: "Ceci est la description géniale du Produit B",
+            gravure: "Gravure 2",
+            variante: "Variante Y",
+            prix: 35,
+            quantite: 2,
+            urlImg: TestImg
+        },
+        {
+            id: 3,
+            titre: "Produit C",
+            description: "Ceci est la description géniale du Produit C",
+            gravure: "Gravure 3",
+            variante: "Variante X",
+            prix: 15,
+            quantite: 1,
+            urlImg: TestImg
+        }
+    ]);
 
     const calculateTotal = () => {
         return cartProducts.reduce((acc, product) => acc + product.prix * product.quantite, 0);
@@ -179,7 +210,7 @@ function Cart() {
     );
 }
 
-import TestImg from '../assets/img/bracelet1.webp';
+
 
 const CartItem = ({ product, removeItem, updateQuantity }) => {
 
@@ -187,7 +218,7 @@ const CartItem = ({ product, removeItem, updateQuantity }) => {
         <TableRow key={product.id}>
             <TableCell width="auto" >
                 <Box display="flex" width="auto" alignItems="center" gap={2} padding="0" >
-                    <ImgMui alt="" src={TestImg} sx={{ height: '70px', width: 'auto', borderRadius: '5px' }} />
+                    <ImgMui alt="" src={product.urlImg} sx={{ height: '70px', width: 'auto', borderRadius: '5px' }} />
                     <Box fullWidth>
                         <Box fullWidth >
                             <Typography fontSize={18} >{product.titre}</Typography>

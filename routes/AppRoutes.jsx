@@ -16,6 +16,7 @@ import NotFound from '../src/pages/NotFound';
 import Admin from '../src/pages/admin/Admin';
 import CGV from '../src/pages/CGV/CGV.jsx';
 import Cart from '../src/pages/Cart.jsx';
+import Command from '../src/pages/Command.jsx';
 
 const AppRoutes = () => {
 	return (
@@ -32,6 +33,7 @@ const AppRoutes = () => {
 			<Route path="/admin" element={<Admin />} />
 			<Route path="/cgv" element={<CGV />} />
 			<Route path="/cart" element={<Cart />} />
+			<Route path="/command/:id" element={<Command />} />
 
 			{/** Le laisser en dernier */}
 			<Route path="*" element={<NotFound />} />
