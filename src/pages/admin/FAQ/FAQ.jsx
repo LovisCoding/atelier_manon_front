@@ -64,8 +64,7 @@ export default function FAQDetails() {
             const response = await deleteQuestion(id);
 
             if (response) {
-                alert("FAQ supprimée avec succès");
-                navigate("/faq");
+                navigate("/admin/faq");
             } else {
                 alert("Erreur lors de la suppression de la FAQ");
             }

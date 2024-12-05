@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Box, Typography, Link, Grid2 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SidebarMenu from '../SidebarMenu';
-import { getQuestions } from "/src/services/FAQService"; // Assure-toi que ce service existe
+import { getQuestions } from "/src/services/FAQService";
 
 const FoireAuxQuestions = () => {
   const navigate = useNavigate();
@@ -10,9 +10,9 @@ const FoireAuxQuestions = () => {
 
   useEffect(() => {
     const fetchFaqs = async () => {
-      const data = await getQuestions(); // Appel API pour récupérer les FAQ
+      const data = await getQuestions();
       if (data) {
-        setFaqList(data); // Mettre à jour l'état avec les données récupérées
+        setFaqList(data);
       }
       console.log(data);
     };
@@ -20,9 +20,9 @@ const FoireAuxQuestions = () => {
   }, []);
 
   const handleNewFaq = () => {
-    // Logique pour créer une nouvelle FAQ
+
     const newFaq = {
-      id: faqList.length + 1, 
+      id: -1, 
       question: '', 
       answer: '' 
     };
