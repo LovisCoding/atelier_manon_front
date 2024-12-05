@@ -8,6 +8,12 @@ export const getBestSellers = async () => {
     if (data.data) return data.data
     return null;
 }
+export const getAllProduits = async () => {
+    const data = await axios
+        .get('/api/produit/get-all-produits')
+    if (data.data) return data.data
+    return null;
+}
 
 export const getProductImage = (imgName) => {
     return import.meta.env.VITE_API_URL+'img/'+imgName;

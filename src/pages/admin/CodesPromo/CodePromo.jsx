@@ -1,7 +1,7 @@
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,15 +10,19 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
+import { getOneCodePromo } from "../../../services/CodesPromoService";
+import { getAllProduits } from "../../../services/ProductService";
+import axios from "axios";
 
 export default function CodePromo() {
-  const { id } = useParams();
-
+	const {id} = useParams();
+	
   const [name, setName] = useState('');
   const [value, setValue] = useState('');
-  const [selectValue, setSelectValue] = useState('option1');
+  const [selectValue, setSelectValue] = useState('E');
   const [selectedRows, setSelectedRows] = useState([]); // Liste des lignes sélectionnées
   const [selectAll, setSelectAll] = useState(false); // Checkbox global
+  const [exist, setExist] = useState(false);
 
   const handleSelectChange = (event) => {
     setSelectValue(event.target.value);
@@ -36,18 +40,29 @@ export default function CodePromo() {
     if (selectAll) {
       setSelectedRows([]); // Si tout est sélectionné, on désélectionne tout
     } else {
-      setSelectedRows(rows.map((row) => row.id)); // Sélectionner toutes les lignes
+      setSelectedRows(rows.map((row) => row.idProd)); // Sélectionner toutes les lignes
     }
     setSelectAll(!selectAll); // Inverser l'état de la checkbox globale
   };
 
-  const rows = [
-    { id: 1, name: 'Cupcake', calories: 305, image: 'https://placehold.co/50x50' },
-    { id: 2, name: 'Donut', calories: 452, image: 'https://placehold.co/50x50' },
-    { id: 3, name: 'Eclair', calories: 262, image: 'https://placehold.co/50x50' },
-    { id: 4, name: 'Frozen yoghurt', calories: 159, image: 'https://placehold.co/50x50' },
-    { id: 5, name: 'Gingerbread', calories: 356, image: 'https://placehold.co/50x50' },
-  ];
+  const [rows, setRows] = useState([
+    { idProd: 1, libProd: 'Cupcake', calories: 305, image: 'https://placehold.co/50x50' },
+    { idProd: 2, libProd: 'Donut', calories: 452, image: 'https://placehold.co/50x50' },
+    { idProd: 3, libProd: 'Eclair', calories: 262, image: 'https://placehold.co/50x50' },
+    { idProd: 4, libProd: 'Frozen yoghurt', calories: 159, image: 'https://placehold.co/50x50' },
+    { idProd: 5, libProd: 'Gingerbread', calories: 356, image: 'https://placehold.co/50x50' },
+  ]);
+
+  useEffect(() => {	
+	getOneCodePromo(id).then((data) => {
+		setName(data.code);
+		setValue(data.reduc)
+    setSelectValue(data.type);
+  });
+  getAllProduits().then((data) => {
+		console.log(data[0].tabPhoto);
+	});
+	  }, [id]);
 
   return (
     <Box display="flex"	  justifyContent={'center'} >
@@ -60,6 +75,7 @@ export default function CodePromo() {
           label="Nom du code promo"
           variant="outlined"
 		  size="small"
+		  disabled={!exist}
         />
         <TextField
           label="Entrez la valeur du code promo"
@@ -67,7 +83,7 @@ export default function CodePromo() {
           fullWidth
           value={value}
           onChange={(e) => setValue(e.target.value)}
-		  
+		  disabled={!exist}
 		  sx={{pr:0}}
           slotProps={{
             input: {
@@ -79,9 +95,10 @@ export default function CodePromo() {
                     displayEmpty
                     sx={{ minWidth: 80 }}
 					size={'small'}
+					disabled={!exist}
                   >
-                    <MenuItem value="option1">€</MenuItem>
-                    <MenuItem value="option2">%</MenuItem>
+                    <MenuItem value="E">€</MenuItem>
+                    <MenuItem value="P">%</MenuItem>
                   </Select>
                 </InputAdornment>
               ),
@@ -106,24 +123,24 @@ export default function CodePromo() {
             </TableHead>
             <TableBody>
               {rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow key={row.idProd}>
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedRows.includes(row.id)}
-                      onChange={() => handleRowSelect(row.id)}
-                      inputProps={{ 'aria-labelledby': `checkbox-${row.id}` }}
+                      checked={selectedRows.includes(row.idProd)}
+                      onChange={() => handleRowSelect(row.idProd)}
+                      inputProps={{ 'aria-labelledby': `checkbox-${row.idProd}` }}
                     />
                   </TableCell>
                   <TableCell>
-                    <img src={row.image} alt={row.name} width="50" height="50" />
+                    <img src={row.image} alt={row.libProd} width="50" height="50" />
                   </TableCell>
-                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.libProd}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-		<Button variant='yellowButton'  >Enregistrer</Button>
+		<Button variant='yellowButton'>Enregistrer</Button>
       </Stack>
 	  
     </Box>
