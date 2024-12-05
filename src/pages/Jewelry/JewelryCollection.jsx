@@ -71,7 +71,7 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
             justifyContent: 'center',
           }}
         >
-          {['Tout voir', 'Colliers', 'Bracelets', collectionName].map((label, index) => (
+          {['Tout voir', 'Colliers', 'Bracelets'].map((label, index) => (
             <Button
               key={index}
               variant="contained"
