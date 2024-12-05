@@ -7,6 +7,7 @@ import theme from './theme/theme';
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from '../routes/AppRoutes';
 
+
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 

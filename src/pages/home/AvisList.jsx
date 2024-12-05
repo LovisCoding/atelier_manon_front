@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid2 } from '@mui/material';
 import Avis from '../../components/Avis';
 
 const AvisList = ({ title, avisData }) => {
@@ -26,7 +26,7 @@ const AvisList = ({ title, avisData }) => {
         {title}
       </Typography>
 
-      <Grid
+      <Grid2
         container
         spacing={4}
         justifyContent="center"
@@ -34,11 +34,11 @@ const AvisList = ({ title, avisData }) => {
         sx={{ flexWrap: 'wrap' }}
       >
         {avisData.map((avis, index) => (
-          <Grid item xs={12} sm={4} md={4} key={index}>
+          <Grid2 item xs={12} sm={4} md={4} key={index}>
             <Avis
-              rating={avis.rating}
-              text={avis.text}
-              author={avis.author}
+              rating={avis.note}
+              text={avis.contenu}
+              author={avis.author} // TODO: ? n'existe pas dans avis ?
               sx={{
                 boxShadow: 'none',
                 border: 'none',
@@ -47,9 +47,9 @@ const AvisList = ({ title, avisData }) => {
                 textAlign: 'center',
               }}
             />
-          </Grid>
+          </Grid2>
         ))}
-      </Grid>
+      </Grid2>
     </Box>
   );
 };
