@@ -31,6 +31,7 @@ const Article = React.lazy(() => import('../src/pages/admin/Articles/Article.jsx
 const Product = React.lazy(() => import('../src/pages/Product/Product.jsx'));
 const OrderDetails = React.lazy(() => import('../src/pages/admin/Order/OrderDetail.jsx'));
 const Newsletter = React.lazy(() => import('../src/pages/admin/Newsletter/Newsletter.jsx'));
+const Profil = React.lazy(() => import("../src/pages/Profil.jsx"));
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -55,6 +56,7 @@ const AppRoutes = () => {
                     <Route path="/command/:id" element={<Command />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/product/:id" element={<Product />} />
+					<Route path="/profil/" element={<Profil />} />
                     <Route path="/admin/orders" element={<Orders />} />
                     <Route path="/admin/order/:id" element={<OrderDetails />} />
                     {/* Routes sans le Footer */}
