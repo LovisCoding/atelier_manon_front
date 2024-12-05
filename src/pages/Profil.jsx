@@ -1,7 +1,46 @@
 import { Button, TextField, Typography, Stack, Container, FormControl } from "@mui/material";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 export default function Profil() {
+
+	const [userDetails, setUserDetails] = useState({
+		"email": "",
+		"firstname": "",
+		"lastname": ""
+	});
+	const [orders, setOrders] = useState([]);
+
+	useEffect(() => {
+		let getOrders = [
+			{
+				"id": "1",
+				"amount": "1",
+				"state": "En cours",
+				"delivery": "13 novembre 2024"
+			},
+			{
+				"id": "2",
+				"amount": "1",
+				"state": "En cours",
+				"delivery": "13 novembre 2024"
+			},
+			{
+				"id": "3",
+				"amount": "1",
+				"state": "En cours",
+				"delivery": "13 novembre 2024"
+			}
+		]
+		let getUserDetails = {
+			"email": "matt.bernouy@orange.fr",
+			"firstname": "Matthias",
+			"lastname": "Bernouy"
+		}
+		setUserDetails(getUserDetails);
+		setOrders(getOrders);
+	}, [])
+
 	return (
 		<Container sx={{
 			marginBottom: "2rem",
@@ -14,18 +53,18 @@ export default function Profil() {
 				<FormControl>
 					<Stack spacing={3}>
 						<Stack direction="row">
-							<TextField fullWidth id="outlined-basic" label="firstname" variant="outlined" defaultValue={"Matthias"} />
+							<TextField fullWidth id="outlined-basic" label="firstname" variant="outlined" defaultValue={userDetails.firstname} />
 							<Button>OK</Button>
 						</Stack>
 
 						<Stack direction="row">
-							<TextField fullWidth id="outlined-basic" label="lastname" variant="outlined" defaultValue={"Bernouy"} />
+							<TextField fullWidth id="outlined-basic" label="lastname" variant="outlined" defaultValue={userDetails.lastname} />
 							<Button>OK</Button>
 						</Stack>
 
-						<Stack direction="row">
-							<TextField fullWidth id="outlined-basic" label="email" variant="outlined" defaultValue={"matt.bernouy@orange.fr"} />
-							<Button>OK</Button>
+						<Stack spacing={1}>
+							<Typography variant="h5">Email</Typography>
+							<Typography>{userDetails.email}</Typography>
 						</Stack>
 					</Stack>
 				</FormControl>
@@ -33,35 +72,17 @@ export default function Profil() {
 
 				<Typography variant="h2">Vos commandes</Typography>
 				<Stack>
-
-					<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
-						<Typography>#4</Typography>
-						<Typography variant="h5">54,85 €</Typography>
-						<Typography>En cours</Typography>
-						<Typography>23 novembre 2024</Typography>
-						<Link to={"/order/1"}><Typography>voir plus</Typography></Link>
-					</Stack>
-					<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
-						<Typography>#3</Typography>
-						<Typography variant="h5">54,85 €</Typography>
-						<Typography>En cours</Typography>
-						<Typography>23 novembre 2024</Typography>
-						<Link to={"/order/1"}><Typography>voir plus</Typography></Link>
-					</Stack>
-					<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
-						<Typography>#2</Typography>
-						<Typography variant="h5">54,85 €</Typography>
-						<Typography>En cours</Typography>
-						<Typography>23 novembre 2024</Typography>
-						<Link to={"/order/1"}><Typography>voir plus</Typography></Link>
-					</Stack>
-					<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
-						<Typography>#1</Typography>
-						<Typography variant="h5">54,85 €</Typography>
-						<Typography>En cours</Typography>
-						<Typography>23 novembre 2024</Typography>
-						<Link to={"/order/1"}><Typography>voir plus</Typography></Link>
-					</Stack>
+					{
+						orders.map((order) => (
+							<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
+								<Typography>#{order.id}</Typography>
+								<Typography>{order.amount} €</Typography>
+								<Typography>{order.state}</Typography>
+								<Typography>{order.date}</Typography>
+								<Link to={`/order/${order.id}`}><Typography>voir plus</Typography></Link>
+							</Stack>
+						))
+					}
 				</Stack>
 
 				<Stack direction={"row"} spacing={3}>
