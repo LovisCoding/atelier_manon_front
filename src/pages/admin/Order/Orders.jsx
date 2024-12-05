@@ -1,44 +1,25 @@
 import { Box, TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Stack, Typography, Button } from "@mui/material";
 import SidebarMenu from "../SidebarMenu";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { getOrders } from "../../../services/OrderService";
 
 export default function Orders() {
+
+  const [orders, setOrders] = useState([]);
+
   const navigate = useNavigate();
 
   const handleClickRow = (to) => {
     navigate(to);
   };
 
-  const rows = [
-    {
-      id: 1,
-      client: "Matthias Bernouy",
-      amount: 25.37,
-      state: "En cours",
-      date: "16 novembre 2024",
-    },
-    {
-      id: 2,
-      client: "Jean Dupont",
-      amount: 54.99,
-      state: "Livrée",
-      date: "12 novembre 2024",
-    },
-    {
-      id: 3,
-      client: "Marie Curie",
-      amount: 75.5,
-      state: "Annulée",
-      date: "10 novembre 2024",
-    },
-    {
-      id: 4,
-      client: "Albert Einstein",
-      amount: 12.34,
-      state: "En attente",
-      date: "15 novembre 2024",
-    },
-  ];
+  useEffect(() => {
+    getOrders()
+      .then((data) => {
+        setOrders(data);
+      })
+  }, [])
 
   return (
     <Box display="flex">
@@ -58,7 +39,7 @@ export default function Orders() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {orders.map((row) => (
                 <TableRow
                   key={row.id}
                   onClick={() => handleClickRow(`/admin/order/${row.id}`)}
