@@ -27,7 +27,7 @@ function Command() {
 
         };
         exec();
-    }, [])
+    }, []);
 
 
     return (
@@ -71,9 +71,9 @@ function Command() {
 
                     <Card>
                         <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} >
-
+{/* delai */}
                             {address &&
-                            <Box>
+                            <Box> 
                                 <Typography >Votre commande sera livrée à &nbsp;&nbsp;<span style={{fontWeight:'500'}} >{address}</span> dans un délai estimé de {5} jours ouvrés.</Typography>
                             </Box>}
 

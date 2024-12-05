@@ -29,7 +29,9 @@ import {
 
 import { useTheme } from "@mui/material/styles";
 
-import { addCommande, addProductPanier, getCartProducts, reduceProductPanier, deleteProductPanier } from "../services/CartService";
+import { addProductPanier, getCartProducts, reduceProductPanier, deleteProductPanier } from "../services/CartService";
+
+import { addCommande } from "../services/CommandService";
 
 // titre, détails, prix, quantité, total
 // description, gravure/variante
@@ -89,9 +91,12 @@ function Cart() {
     deleteProductPanier(cartProducts.find((product) => product.idProd+product.variante+product.gravure+product.idCli === idProd+variante+gravure+idCli));
   };
 
+  // TODO: idCli dans Context
   const handleConfirmCommand = async () => {
-    const commandId = await addCommande(cartProducts[0].idCli, commentary, isGift, giftCommentary);
+    console.log("confirmCommand");
+    const commandId = await addCommande(cartProducts[0].idCli, commentary, isGift, giftCommentary, promoCodes);
     if (!commandId) return; // TODO: handle error
+    console.log("coucou")
     window.location = '/command/'+commandId;
   }
 
