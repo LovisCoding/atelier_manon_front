@@ -1,0 +1,29 @@
+
+import axios from 'axios';
+
+
+export const getProduitsByPromo = async (code) => {
+    const data = await axios
+        .get('/api/admin/promoproduit/get-produits-promo', {
+            params: { code }
+        })
+    if (data.data) return data.data
+    return null;
+}
+
+export const addProduitToPromo = async (idProd, code) => {
+	const data = await axios
+		.post('/api/admin/promoproduit/add-promoproduit', { idProd, code })
+	if (data.data) return data.data
+	return null;
+}
+
+export const DeleteProduitFromPromo = async (idProd, code) => {
+	console.log(idProd, code);
+	
+	const data = await axios.delete('/api/admin/promoproduit/delete-promoproduit', {
+        data: { idProd, code }
+    });
+	if (data.data) return data.data
+	return null;
+}

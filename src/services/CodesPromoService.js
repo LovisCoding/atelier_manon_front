@@ -25,4 +25,13 @@ export const getOneCodePromo = async (code) => {
 	return null;
 }
 
+export const CreatePromo = async (obj) => {
+    const data = await axios
+        .post('/api/codepromo/add-codepromo', {
+            ...obj
+        })
+    if (data.data) return data.data
+    return null;
+}
+
 

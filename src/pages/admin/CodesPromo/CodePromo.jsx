@@ -10,139 +10,190 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import { getOneCodePromo } from "../../../services/CodesPromoService";
-import { getAllProduits } from "../../../services/ProductService";
+import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoService";
+import { getAllProduits, getProductImage } from "../../../services/ProductService";
 import axios from "axios";
+import { addProduitToPromo, DeleteProduitFromPromo, getProduitsByPromo } from "../../../services/PromoProduit";
+import Snackbar from "@mui/material/Snackbar";
 
 export default function CodePromo() {
-	const {id} = useParams();
+	const { id } = useParams();
+
+	const [name, setName] = useState('');
+	const [value, setValue] = useState('');
+	const [selectValue, setSelectValue] = useState('E');
+	const [selectedRows, setSelectedRows] = useState([]); // Liste des lignes sélectionnées
+	const [selectAll, setSelectAll] = useState(false); // Checkbox global
+	const [exist, setExist] = useState(false);
+
+	const [message, setMessage] = useState('');
+	const [snOpenValue, setSnOpenValue] = useState(false);
 	
-  const [name, setName] = useState('');
-  const [value, setValue] = useState('');
-  const [selectValue, setSelectValue] = useState('E');
-  const [selectedRows, setSelectedRows] = useState([]); // Liste des lignes sélectionnées
-  const [selectAll, setSelectAll] = useState(false); // Checkbox global
-  const [exist, setExist] = useState(false);
+	const handleSelectChange = (event) => {
+		setSelectValue(event.target.value);
+	};
 
-  const handleSelectChange = (event) => {
-    setSelectValue(event.target.value);
-  };
+	const handleRowSelect = (idRow) => {
 
-  const handleRowSelect = (id) => {
-    setSelectedRows((prevSelected) =>
-      prevSelected.includes(id)
-        ? prevSelected.filter((rowId) => rowId !== id) // Désélectionner la ligne
-        : [...prevSelected, id] // Sélectionner la ligne
-    );
-  };
 
-  const handleSelectAll = () => {
-    if (selectAll) {
-      setSelectedRows([]); // Si tout est sélectionné, on désélectionne tout
-    } else {
-      setSelectedRows(rows.map((row) => row.idProd)); // Sélectionner toutes les lignes
-    }
-    setSelectAll(!selectAll); // Inverser l'état de la checkbox globale
-  };
+		setSelectedRows((prevSelected) => {
+			setSelectAll(prevSelected.length === rows.length - 1);
 
-  const [rows, setRows] = useState([
-    { idProd: 1, libProd: 'Cupcake', calories: 305, image: 'https://placehold.co/50x50' },
-    { idProd: 2, libProd: 'Donut', calories: 452, image: 'https://placehold.co/50x50' },
-    { idProd: 3, libProd: 'Eclair', calories: 262, image: 'https://placehold.co/50x50' },
-    { idProd: 4, libProd: 'Frozen yoghurt', calories: 159, image: 'https://placehold.co/50x50' },
-    { idProd: 5, libProd: 'Gingerbread', calories: 356, image: 'https://placehold.co/50x50' },
-  ]);
+			if (prevSelected.includes(idRow)) { 
+				DeleteProduitFromPromo(idRow,id)
+				return prevSelected.filter((id) => id !== idRow)
+			}
+			else { 
+				addProduitToPromo(idRow, id)
+				return [...prevSelected, idRow]
+			
+			}
+			
+		});
+	};
 
-  useEffect(() => {	
-	getOneCodePromo(id).then((data) => {
-		setName(data.code);
-		setValue(data.reduc)
-    setSelectValue(data.type);
-  });
-  getAllProduits().then((data) => {
-		console.log(data[0].tabPhoto);
-	});
-	  }, [id]);
+	const handleSelectAll = () => {
+		if (selectAll) {
+			selectedRows.forEach((idRow) => {
+				DeleteProduitFromPromo(idRow,id)
+			});
+			setSelectedRows([]); // Si tout est sélectionné, on désélectionne tout
+		} else {
+			rows.forEach((row) => {
+				addProduitToPromo(row.idProd, id)
+			});
+			setSelectedRows(rows.map((row) => row.idProd)); // Sélectionner toutes les lignes
+		}
+		setSelectAll(!selectAll); // Inverser l'état de la checkbox globale
+		
+	};
 
-  return (
-    <Box display="flex"	  justifyContent={'center'} >
-      <SidebarMenu />
-      <Stack spacing={3} mt={5}>
-        <Typography variant="h4">Détail du code de promotion</Typography>
-        <TextField
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          label="Nom du code promo"
-          variant="outlined"
-		  size="small"
-		  disabled={!exist}
-        />
-        <TextField
-          label="Entrez la valeur du code promo"
-          variant="outlined"
-          fullWidth
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-		  disabled={!exist}
-		  sx={{pr:0}}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Select
-                    value={selectValue}
-                    onChange={handleSelectChange}
-                    displayEmpty
-                    sx={{ minWidth: 80 }}
-					size={'small'}
-					disabled={!exist}
-                  >
-                    <MenuItem value="E">€</MenuItem>
-                    <MenuItem value="P">%</MenuItem>
-                  </Select>
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
-        <TableContainer component={Paper} sx={{ maxHeight: 500 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectAll}
-                    onChange={handleSelectAll}
-                    inputProps={{ 'aria-label': 'select all desserts' }}
-                  />
-                </TableCell>
-                <TableCell></TableCell>
-                <TableCell>Produits</TableCell>
-                
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.idProd}>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedRows.includes(row.idProd)}
-                      onChange={() => handleRowSelect(row.idProd)}
-                      inputProps={{ 'aria-labelledby': `checkbox-${row.idProd}` }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <img src={row.image} alt={row.libProd} width="50" height="50" />
-                  </TableCell>
-                  <TableCell>{row.libProd}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-		<Button variant='yellowButton'>Enregistrer</Button>
-      </Stack>
-	  
-    </Box>
-  );
+	const [rows, setRows] = useState([]);
+
+	useEffect(() => {
+		getOneCodePromo(id).then((data) => {
+			setName(data.code);
+			setValue(data.reduc)
+			setSelectValue(data.type);
+			setExist(true);
+		});
+		getAllProduits().then((data) => {
+			const tmpData = [...data]
+			tmpData.forEach((row) => {
+				row.image = getProductImage(row.photo);
+			})
+			
+			setRows(data);
+		});
+		getProduitsByPromo(id).then((data) => {
+			setSelectedRows(data.map((row) => row.idProd));
+		}
+		);
+	}, [id]);
+
+	const handleCreate = () => {
+		if (name == '' || value == '') {
+			setMessage('Veuillez remplir tous les champs');	
+			return setSnOpenValue(true);
+		}
+		const obj = {
+			code: name,
+			reduc: parseFloat(value) ,
+			type: selectValue,	
+		}
+		try {
+			CreatePromo(obj)
+		}
+		catch (err) {
+			console.error("Une erreur est survenue : " + err)
+		}
+		
+		
+	}
+
+	return (
+		<Box display="flex" justifyContent={'center'} >
+			<SidebarMenu />
+			<Stack spacing={3} mt={5}>
+				<Typography variant="h4">Détail du code de promotion</Typography>
+				<TextField
+					onChange={(e) => setName(e.target.value)}
+					value={name}
+					label="Nom du code promo"
+					variant="outlined"
+					size="small"
+					disabled={exist}
+				/>
+				<TextField
+					label="Entrez la valeur du code promo"
+					variant="outlined"
+					fullWidth
+					value={value}
+					onChange={(e) => setValue(e.target.value)}
+					disabled={exist}
+					sx={{ pr: 0 }}
+					slotProps={{
+						input: {
+							endAdornment: (
+								<InputAdornment position="end">
+									<Select
+										value={selectValue}
+										onChange={handleSelectChange}
+										displayEmpty
+										sx={{ minWidth: 80 }}
+										size={'small'}
+										disabled={exist}
+									>
+										<MenuItem value="E">€</MenuItem>
+										<MenuItem value="P">%</MenuItem>
+									</Select>
+								</InputAdornment>
+							),
+						},
+					}}
+				/>
+				{
+					id != -1 ?
+					<TableContainer component={Paper} sx={{ maxHeight: 500 }}>
+					<Table >
+						<TableHead>
+							<TableRow>
+								<TableCell padding="checkbox">
+									<Checkbox
+										checked={selectAll}
+										onChange={handleSelectAll}
+										inputProps={{ 'aria-label': 'select all desserts' }}
+									/>
+								</TableCell>
+								<TableCell></TableCell>
+								<TableCell>Produits</TableCell>
+
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{rows.map((row) => (
+								<TableRow key={row.idProd}>
+									<TableCell padding="checkbox">
+										<Checkbox
+											checked={selectedRows.includes(row.idProd)}
+											onChange={() => handleRowSelect(row.idProd)}
+											inputProps={{ 'aria-labelledby': `checkbox-${row.idProd}` }}
+										/>
+									</TableCell>
+									<TableCell>
+										<img src={row.image} alt={row.libProd} width="50" height="50" />
+									</TableCell>
+									<TableCell>{row.libProd}</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer> : ''
+				}
+				
+				{id == -1 ? <Button variant='yellowButton' onClick={handleCreate} >Enregistrer</Button> : ''}
+			</Stack>
+			<Snackbar open={snOpenValue} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={() => setSnOpenValue(false)} message={message} />
+		</Box>
+	);
 }
