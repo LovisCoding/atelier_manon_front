@@ -18,6 +18,9 @@ const Cart = React.lazy(() => import('../src/pages/Cart.jsx'));
 const Command = React.lazy(() => import('../src/pages/Command.jsx'));
 const Product = React.lazy(() => import('../src/pages/Product/Product.jsx'));
 const CGV = React.lazy(() => import('../src/pages/CGV/CGV.jsx'));
+const Jewelry = React.lazy(() => import('../src/pages/Jewelry/Jewelry.jsx'));
+const Necklaces = React.lazy(() => import('../src/pages/Jewelry/Necklaces.jsx'));
+const Bangles = React.lazy(() => import('../src/pages/Jewelry/Bangles.jsx'));
 
 // Lazy loading pour la partie administration
 const Admin = React.lazy(() => import('../src/pages/admin/Admin'));
@@ -57,6 +60,9 @@ const AppRoutes = () => {
                     <Route path="/command/:id" element={<Command />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/product/:id" element={<Product />} />
+                    <Route path="/jewelry" element={<Jewelry />} />
+                    <Route path="/jewelry/necklaces" element={<Necklaces />} />
+                    <Route path="/jewelry/bangles" element={<Bangles />} />
 
                     {/* Routes administratives sans footer */}
                     <Route path="/admin" element={<Admin />} />
