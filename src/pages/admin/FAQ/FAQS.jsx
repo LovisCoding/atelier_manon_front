@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
-import { Button, Box, Typography, Grid, Link } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Button, Box, Typography, Link, Grid2 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SidebarMenu from '../SidebarMenu';
+import { getQuestions } from "/src/services/FAQService"; // Assure-toi que ce service existe
 
 const FoireAuxQuestions = () => {
   const navigate = useNavigate();
-  const [faqList, setFaqList] = useState([
-    { id: 1, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' },
-    { id: 2, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' },
-    { id: 3, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' },
-    { id: 4, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' },
-    { id: 5, question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis ?', answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque dignissim felis' }
-  ]);
+  const [faqList, setFaqList] = useState([]);
+
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      const data = await getQuestions(); // Appel API pour récupérer les FAQ
+      if (data) {
+        setFaqList(data); // Mettre à jour l'état avec les données récupérées
+      }
+      console.log(data);
+    };
+    fetchFaqs();
+  }, []);
 
   const handleNewFaq = () => {
+    // Logique pour créer une nouvelle FAQ
     const newFaq = {
       id: faqList.length + 1, 
       question: '', 
       answer: '' 
     };
-
     setFaqList([...faqList, newFaq]);
     navigate(`/admin/faq/${newFaq.id}`);
   };
@@ -29,9 +35,9 @@ const FoireAuxQuestions = () => {
   };
 
   return (
-    <Box display="flex">
+    <Box display="flex" sx={{ width: '100%' }}>
       <SidebarMenu />
-      <Box sx={{ padding: 3, flexGrow: 1 }}>
+      <Box sx={{ padding: 3, flexGrow: 1, width: '100%' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
           <Typography variant="h4" sx={{ textAlign: 'center', width: '100%' }}>Foire aux questions</Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '200px' }}>
@@ -39,31 +45,30 @@ const FoireAuxQuestions = () => {
           </Box>
         </Box>
 
-        <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-          <Grid item xs={12}>
-            <Typography variant="h6" align="center" marginBottom="5rem">Questions et Réponses</Typography>
+        <Grid2 container spacing={2} sx={{ justifyContent: 'center', alignItems: 'flex-start', width: '100%', marginTop: 10 }}>
+          <Grid2 item xs={12}>
             {faqList.map((faq) => (
-              <React.Fragment key={faq.id}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2, paddingX: 2 }}>
+              <React.Fragment key={faq.idQuestion}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2, paddingX: 2, width: '100%' }}>
                   <Link
-                    onClick={() => handleRedirect(faq.id)}
-                    sx={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
+                    onClick={() => handleRedirect(faq.idQuestion)}
+                    sx={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit', width: '38vw' }}
                   >
-                    {faq.question}
+                    {faq.contenu}
                   </Link>
                   <Typography
                     variant="body1"
-                    onClick={() => handleRedirect(faq.id)}
-                    sx={{ cursor: 'pointer' }}
+                    onClick={() => handleRedirect(faq.idQuestion)}
+                    sx={{ cursor: 'pointer', width: '38vw' }}
                   >
-                    {faq.answer}
+                    {faq.reponse}
                   </Typography>
                 </Box>
                 <Box sx={{ borderBottom: '1px solid #ccc', marginBottom: 2 }} />
               </React.Fragment>
             ))}
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Box>
     </Box>
   );
