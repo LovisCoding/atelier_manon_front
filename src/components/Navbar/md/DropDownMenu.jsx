@@ -31,18 +31,18 @@ export default function DropDownMenu({ scrolled, selected }) {
     <Stack direction="row" spacing={2} alignItems="center">
       <Stack direction={'row'}>
         <Link to="/jewelry" style={{ textDecoration: 'none' }}>
-          <Button sx={{ 
+          <Button sx={{
             background: 'transparent', 
             color: color(), 
             fontSize: '1rem', 
             textTransform: 'none', 
             fontWeight: selected ? 'bold' : '400', 
             paddingRight: 0 
-          }} onClick={handleClick}>
+          }}>
             Bijoux
           </Button>
         </Link>
-        <Button sx={{minWidth: '0px', color, padding: 0}}>
+        <Button sx={{minWidth: '0px', color, padding: 0}} onClick={handleClick}>
           <FaAngleDown />
         </Button>
       </Stack>
