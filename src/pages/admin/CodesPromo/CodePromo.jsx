@@ -50,7 +50,7 @@ export default function CodePromo() {
   ];
 
   return (
-    <Box display="flex"	 maxWidth={'lg'} justifyContent={'space-between'} >
+    <Box display="flex"	  justifyContent={'center'} >
       <SidebarMenu />
       <Stack spacing={3} mt={5}>
         <Typography variant="h4">Détail du code de promotion</Typography>
