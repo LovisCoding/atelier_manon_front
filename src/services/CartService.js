@@ -25,7 +25,8 @@ export const addProductPanier = async (product) => {
             }, { headers: { 'Content-Type':'application/json' } });
         console.log("Response :",data.data)
     } catch (err) {
-        console.error("Une erreur est survenue : "+err)
+        console.error("Une erreur est survenue : "+err);
+        return null;
     }
 }
 
@@ -40,7 +41,8 @@ export const reduceProductPanier = async (product) => {
             }, { headers: { 'Content-Type':'application/json' } });
         console.log("Response :",data.data)
     } catch (err) {
-        console.error("Une erreur est survenue : "+err)
+        console.error("Une erreur est survenue : "+err);
+        return null;
     }
 }
 
@@ -55,7 +57,7 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary) => 
             }, { headers: { 'Content-Type':'application/json' } });
         return data.data;
     } catch (err) {
-        console.error("Une erreur est survenue : "+err)
+        console.error("Une erreur est survenue : "+err);
         return null;
     }
 }
