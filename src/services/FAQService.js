@@ -39,8 +39,8 @@ export const updateQuestion = async (question) => {
 
 export const deleteQuestion = async (id) => {
     try {
-        const response = await axios.delete(`/api/question/delete-question`, {
-            data: { idQuestion: id }, // Utilisation du champ 'data' dans le DELETE pour passer les paramètres
+        const response = await axios.delete(`/api/admin/question/delete-question`, {
+            data: { idQuestion: id },
             headers: { 'Content-Type': 'application/json' }
         });
 
