@@ -6,6 +6,7 @@ import App from './App';
 import theme from './theme/theme';
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from '../routes/AppRoutes';
+import AuthContextProvider from './utils/AuthContext.jsx';
 
 
 const rootElement = document.getElementById('root');
@@ -15,10 +16,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AppRoutes/>
+        <AuthContextProvider>
+          <CssBaseline />
+          <AppRoutes/>
+        </AuthContextProvider>
       </ThemeProvider>
     </BrowserRouter>
-
   </React.StrictMode>,
 );
