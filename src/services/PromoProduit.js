@@ -27,3 +27,18 @@ export const DeleteProduitFromPromo = async (idProd, code) => {
 	if (data.data) return data.data
 	return null;
 }
+
+export const addProduitsToPromo = async (tabProd, code) => {
+	const data = await axios
+		.post('/api/admin/promoproduit/add-promoproduits', { tabProd, code })
+	if (data.data) return data.data
+	return null;
+}
+
+export const deleteProduitsFromPromo = async (tabProd, code) => {
+	const data = await axios.delete('/api/admin/promoproduit/delete-promoproduits', {
+		data: { tabProd, code }
+	});
+	if (data.data) return data.data
+	return null;
+}

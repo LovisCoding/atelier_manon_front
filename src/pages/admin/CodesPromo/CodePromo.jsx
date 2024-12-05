@@ -13,7 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoService";
 import { getAllProduits, getProductImage } from "../../../services/ProductService";
 import axios from "axios";
-import { addProduitToPromo, DeleteProduitFromPromo, getProduitsByPromo } from "../../../services/PromoProduit";
+import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduit";
 import Snackbar from "@mui/material/Snackbar";
 
 export default function CodePromo() {
@@ -54,14 +54,10 @@ export default function CodePromo() {
 
 	const handleSelectAll = () => {
 		if (selectAll) {
-			selectedRows.forEach((idRow) => {
-				DeleteProduitFromPromo(idRow,id)
-			});
+			deleteProduitsFromPromo(rows.map((row) => row.idProd), id)
 			setSelectedRows([]); // Si tout est sélectionné, on désélectionne tout
 		} else {
-			rows.forEach((row) => {
-				addProduitToPromo(row.idProd, id)
-			});
+			addProduitsToPromo(rows.map((row) => row.idProd), id)
 			setSelectedRows(rows.map((row) => row.idProd)); // Sélectionner toutes les lignes
 		}
 		setSelectAll(!selectAll); // Inverser l'état de la checkbox globale
