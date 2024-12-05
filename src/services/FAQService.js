@@ -1,10 +1,11 @@
 
+
 import axios from 'axios';
 
 
-export const getAllAvis = async () => {
+export const getQuestions = async () => {
     const data = await axios
-        .get('/api/avis/get-all-avis')
+        .get('/api/question/get-questions')
     if (data.data) return data.data
     return null;
 }
