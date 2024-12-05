@@ -25,6 +25,10 @@ export default function FAQDetails() {
         alert(`FAQ sauvegardée:\nID: ${id}\nQuestion: ${faq.question}\nRéponse: ${faq.answer}`);
     };
 
+    const handleDelete = () => {
+        alert(`FAQ supprimée:\nID: ${id}`);
+    };
+
     return (
         <Box display="flex">
             <SidebarMenu />
@@ -51,9 +55,16 @@ export default function FAQDetails() {
                     inputProps={{ style: { color: 'black' } }}
                 />
 
-                <Button variant="contained" color="primary" onClick={handleSave}>
-                    Enregistrer
-                </Button>
+                <Stack direction="row" spacing={2}>
+                    <Button variant="contained" color="primary" onClick={handleSave} sx={{ fontWeight: 'bold' }}>
+                        Enregistrer
+                    </Button>
+                    {id !== "-1" && (
+                        <Button variant="contained" color="error" onClick={handleDelete} sx={{ fontWeight: 'bold' }}>
+                            Supprimer
+                        </Button>
+                    )}
+                </Stack>
             </Stack>
         </Box>
     );
