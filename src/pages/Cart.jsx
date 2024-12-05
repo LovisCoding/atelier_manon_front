@@ -29,7 +29,7 @@ import {
 
 import { useTheme } from "@mui/material/styles";
 
-import { getCartProducts } from "../services/CartService";
+import { addCommande, addProductPanier, getCartProducts, reduceProductPanier } from "../services/CartService";
 
 // titre, détails, prix, quantité, total
 // description, gravure/variante
@@ -87,8 +87,10 @@ function Cart() {
     );
   };
 
-  const handleConfirmCommand = () => {
-    console.log("confirmCommand");
+  const handleConfirmCommand = async () => {
+    const commandId = await addCommande(cartProducts[0].idCli, commentary, isGift, giftCommentary);
+    if (!commandId) return; // TODO: handle error
+    window.location = '/command/'+commandId;
   }
 
   return (
@@ -308,11 +310,11 @@ const CartItem = ({ product, removeItem, updateQuantity }) => {
 
       <TableCell align="right">{product.produit.prix} €</TableCell>
       <TableCell align="center">
-        <IconButton onClick={() => updateQuantity(product.idProd, -1)}>
+        <IconButton onClick={() => {updateQuantity(product.idProd, -1); reduceProductPanier(product)}}>
           <Remove />
         </IconButton>
         {product.qa}
-        <IconButton onClick={() => updateQuantity(product.idProd, 1)}>
+        <IconButton onClick={() => {updateQuantity(product.idProd, 1); addProductPanier(product)}}>
           <Add />
         </IconButton>
       </TableCell>
