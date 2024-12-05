@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import JewelryCollection from './JewelryCollection';
-
-const necklaceData = [
-  { id: 1, image: '/src/assets/img/collier1.webp', title: 'Collier 1', price: '25€' },
-  { id: 2, image: '/src/assets/img/collier2.webp', title: 'Collier 2', price: '30€' },
-  { id: 3, image: '/src/assets/img/collier3.webp', title: 'Collier 3', price: '22€' },
-];
+import { getProducts } from '../../services/ProductService';
 
 const Necklaces = () => {
+  const [necklaceData, setNecklaceData] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const params = {
+        search: '',
+        category: 1,
+        priceInf: null,
+        priceSup: null,
+        nbDisplay: 10,
+        page: 1,
+      };
+
+      const products = await getProducts(params);
+
+      if (products && products.produits) {
+        const formattedData = products.produits.map((product) => ({
+          id: product.idProd,
+          image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}`,
+          title: product.libProd,
+          price: `${product.prix}€`,
+        }));
+
+        setNecklaceData(formattedData);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <JewelryCollection
       collectionData={necklaceData}
