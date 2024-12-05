@@ -29,6 +29,7 @@ import Articles from '../src/pages/admin/Articles/Articles.jsx';
 import Article from '../src/pages/admin/Articles/Article.jsx';
 import Product from '../src/pages/Product/Product.jsx';
 import OrderDetails from '../src/pages/admin/Order/OrderDetail.jsx';
+import Profil from '../src/pages/Profil.jsx';
 
 const AppRoutes = () => {
 	const location = useLocation();
@@ -37,6 +38,7 @@ const AppRoutes = () => {
 			{/* Navbar and Footer for routes outside /admin */}
 			{(!location.pathname.includes('/admin')) ? <Navbar /> : null}
 			<Routes>
+
 				{/* Routes avec le Footer */}
 				<Route path="/" element={<App />} />
 				<Route path="/test/:id" element={<Test />} />
@@ -46,23 +48,24 @@ const AppRoutes = () => {
 				<Route path="/email-sent" element={<EmailSent />} />
 				<Route path="/faq" element={<FAQ />} />
 				<Route path="/about" element={<About />} />
+				<Route path="/profil" element={<Profil />} />
 				<Route path="/home" element={<Home />} />
 				<Route path="/cgv" element={<CGV />} />
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/command/:id" element={<Command />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/product/:id" element={<Product/>} />
-				<Route path="/admin/orders" element={<Orders />} />
-				<Route path="/admin/order/:id" element={<OrderDetails />} />
+
 				{/* Routes sans le Footer */}
 				<Route path="/admin" element={<Admin />} />
 				<Route path="/admin/faq" element={<FoireAuxQuestions />} />
 				<Route path="/admin/faq/:id" element={<FAQDetails />} />
 				<Route path="/admin/codesPromo" element={<CodesPromo />} />
 				<Route path="/admin/codesPromo/:id" element={<CodePromo />} />
-				<Route path="/admin/faq" element={<FoireAuxQuestions />} />
 				<Route path="/admin/blog" element={<Articles />} />
 				<Route path="/admin/blog/:id" element={<Article />} />
+				<Route path="/admin/orders" element={<Orders />} />
+				<Route path="/admin/order/:id" element={<OrderDetails />} />
 
 				{/* Page introuvable */}
 				<Route path="*" element={<NotFound />} />
