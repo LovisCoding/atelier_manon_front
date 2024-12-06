@@ -10,9 +10,9 @@ export const getAllAvis = async () => {
 }
 
 export const getAvisBySession = async () => {
-    return "Avis Temporaire, modifier getAvis dans AvisService";
-    const data = await axios
+    const res = await axios
         .get('api/avis/getAvisBySession');
-    if (data.status == 200) return data.data;
+    console.log(res);
+    if (res.status == 200) return res.data;
     return "";
 }

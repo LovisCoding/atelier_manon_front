@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { getAvisBySession } from "../services/AvisService";
 import { getOrdersProfil } from "../services/OrderService";
+import { getProfilCurrentSession } from "../services/AccountService";
+import { useAuth } from "../utils/AuthContext";
 
 export default function Profil() {
 
@@ -10,13 +12,13 @@ export default function Profil() {
 	const [orders, setOrders] = useState([]);
 	const [avis, setAvis] = useState("");
 
+	const authContext = useAuth();
+
 	useEffect(() => {
-		let getUserDetails = {
-			"email": "matt.bernouy@orange.fr",
-			"firstname": "Matthias",
-			"lastname": "Bernouy",
-		}
-		setUserDetails(getUserDetails);
+		auth
+		getProfilCurrentSession().then((data) => {
+			setUserDetails(data);
+		})
 		getOrdersProfil().then((data) => {
 			setOrders(data);
 		})
@@ -53,7 +55,7 @@ export default function Profil() {
 						</Stack>
 						<Stack spacing={1}>
 							<Typography variant="h5">Avis</Typography>
-							<Typography>{avis}</Typography>
+							<Typography>{ avis || "Aucun avis pour le moment" }</Typography>
 						</Stack>
 					</Stack>
 				</FormControl>
