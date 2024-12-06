@@ -1,9 +1,9 @@
 
 import axios from "axios";
 
-export const getCartProducts = async (idUser) => {
+export const getCartProducts = async () => {
     const data = await axios
-        .get('/api/client/panier/get-panier-client', {params: {idCli:idUser}});
+        .get('/api/client/panier/get-panier-client');
     if (!data.data) return null;
     data.data.forEach(prod => {
         prod.idProd = parseInt(prod.idProd);
@@ -12,7 +12,7 @@ export const getCartProducts = async (idUser) => {
         prod.produit.prix = parseFloat(prod.produit.prix);
     });
     return data.data;
-}
+};
 
 export const addProductPanier = async (product) => {
     try {
@@ -28,7 +28,7 @@ export const addProductPanier = async (product) => {
         console.error("Une erreur est survenue : "+err);
         return null;
     }
-}
+};
 
 export const reduceProductPanier = async (product) => {
     try {
@@ -44,7 +44,7 @@ export const reduceProductPanier = async (product) => {
         console.error("Une erreur est survenue : "+err);
         return null;
     }
-}
+};
 
 export const deleteProductPanier = async (product) => {
     try {
@@ -62,7 +62,8 @@ export const deleteProductPanier = async (product) => {
     } catch (err) {
       console.error("Une erreur est survenue : ", err);
     }
-  };
+
+};
 
 export const addCommande = async (idCli, commentary, isGift, giftCommentary) => {
     try {
@@ -79,85 +80,5 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary) => 
         return null;
     }
 }
-
-
-[
-    {
-      "idProd": 1,
-      "idCli": 2,
-      "gravure": "Love",
-      "variante": "Taille M",
-      "qa": 1,
-      "produit": {
-        "idProd": "1",
-        "libProd": "Kelyan",
-        "descriptionProd": "",
-        "prix": 15,
-        "estGravable": true,
-        "tabPhoto": [
-          "CollierKelyan1.webp"
-        ],
-        "tempsRea": "2",
-        "idCateg": "1"
-      }
-    },
-    {
-      "idProd": 3,
-      "idCli": 2,
-      "gravure": "gravure",
-      "variante": "variante2",
-      "qa": 2,
-      "produit": {
-        "idProd": "3",
-        "libProd": "Sandrine",
-        "descriptionProd": "Tous les éléments sont personnalisables : couleur des pierres, du métal, et la taille",
-        "prix": 8,
-        "estGravable": true,
-        "tabPhoto": [
-          "BraceletSandrine1.webp"
-        ],
-        "tempsRea": "3",
-        "idCateg": "2"
-      }
-    },
-    {
-      "idProd": 2,
-      "idCli": 2,
-      "gravure": "",
-      "variante": "",
-      "qa": 80,
-      "produit": {
-        "idProd": "2",
-        "libProd": "Yvan",
-        "descriptionProd": "Tous les éléments sont personnalisables : couleur des pierres, du métal, la taille, et le pendentif",
-        "prix": 23,
-        "estGravable": true,
-        "tabPhoto": [
-          "CollierYvan1.webp"
-        ],
-        "tempsRea": "4",
-        "idCateg": "1"
-      }
-    },
-    {
-      "idProd": 2,
-      "idCli": 2,
-      "gravure": "gravure",
-      "variante": "variante2",
-      "qa": 47,
-      "produit": {
-        "idProd": "2",
-        "libProd": "Yvan",
-        "descriptionProd": "Tous les éléments sont personnalisables : couleur des pierres, du métal, la taille, et le pendentif",
-        "prix": 23,
-        "estGravable": true,
-        "tabPhoto": [
-          "CollierYvan1.webp"
-        ],
-        "tempsRea": "4",
-        "idCateg": "1"
-      }
-    }
-]
 
 
