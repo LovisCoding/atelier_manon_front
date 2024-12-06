@@ -1,28 +1,45 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
-  const [isLogged, setIsLogged] = useState(false);
+
+  const [details, setDetails] = useState(null);
+
+  const getProfil = () => {
+    axios.post("/api/client/account/get-compte")
+      .then((res) => {
+        if ( res.status == 200 ){
+          let data = res.data;
+          setDetails({
+            firstname: data.preCli,
+            lastname: data.nomCli,
+            email: data.email
+          })
+        }
+      })
+  }
 
   const login = (email, password) => {
-    // fetch
+    axios.post("/api/account/login", {
+      email,
+      mdp: password
+    }).then((res) => {
+      if (res.status == 200) { getProfil() }
+    })
   };
 
   const logout = () => {
-    // fetch
+    axios.post("/api/account/logout");
   };
 
   useEffect(() => {
-    const checkAuth = () => {
-        
-    };
-
-    checkAuth();
+    getProfil();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLogged, login }}>
+    <AuthContext.Provider value={{ details, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
