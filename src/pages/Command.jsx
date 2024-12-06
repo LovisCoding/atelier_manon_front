@@ -1,50 +1,47 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Card, CardContent, Grid2, TextareaAutosize } from "@mui/material";
 
 import ImgMui from "../components/ImgMui";
+
+import { getProductImage } from "../services/ProductService";
 
 function Command() {
 
     const { id } = useParams();
     const theme = useTheme();
 
-    const isGift = true;
-    const giftCommentary = "Tiens donova un cadeau de ton amoureux";
-    const promoCodes = ["MASTU20", "JOYCA10"];
-    const commentary = "Il faut livrer à la gardienne";
+    const [data, setData] = useState(undefined);
+    const [address, setAddress] = useState("");
+    const [products, setProducts] = useState([]);
 
-    const cartProducts = [{
-        id: 1,
-        titre: "Produit A",
-        description: "Ceci est la description génialegénialegénialegénialegénialegénialegénialegéniale du Produit A",
-        gravure: "Gravure 1",
-        variante: "Variante Z",
-        prix: 200.5,
-        quantite: 1,
-        urlImg: TestImg
-    }, {
-        id: 2,
-        titre: "Produit B",
-        description: "Ceci est la description géniale du Produit B",
-        gravure: "Gravure 2",
-        variante: "Variante Y",
-        prix: 35,
-        quantite: 2,
-        urlImg: TestImg
-    }, {
-        id: 3,
-        titre: "Produit C",
-        description: "Ceci est la description géniale du Produit C",
-        gravure: "Gravure 3",
-        variante: "Variante X",
-        prix: 15,
-        quantite: 1,
-        urlImg: TestImg
-    }];
+    // TODO : add + data to request response
 
-    const total = cartProducts.reduce((acc, product) => acc + product.prix * product.quantite, 0);
-    const totalDue = total * 0.8;
+    useEffect (() => {
+        const exec = async () => {
+            const data = await getCommand(id);
+            if (!data) return;
+            setData(data);
+            console.log(data)
+            const addr = data.adresse
+                                .split(',').map(part => part.replace(/"/g, '').trim())
+                                .join(', ');
+            setAddress(addr);
+        };
+        exec();
+    }, []);
+
+
+    useEffect(() => {
+        const exec = async () => {
+            const data = await getCommandProducts(id);
+            if (!data) return
+            setProducts(data);
+            console.log(products)
+        };
+        exec();
+    }, []);
+
 
     return (
         <Box mb={3} >
@@ -58,7 +55,7 @@ function Command() {
                 mb={2}
             >Récapitulatif de la commande</Typography>
 
-            <Grid2 container columns={{ xs: 2, sm: 8, md: 12 }} spacing={5} justifyContent="center" margin="0 1rem" >
+            {data && <Grid2 container columns={{ xs: 2, sm: 8, md: 12 }} spacing={5} justifyContent="center" margin="0 1rem" >
                 <Grid2 item size={{ xs: 2, sm: 8, md: 8 }} >
 
                     <TableContainer component={Paper} >
@@ -73,7 +70,7 @@ function Command() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {cartProducts.map((product) =>
+                                {products && products.map((product) =>
                                     <CartItem product={product} />
                                 )}
                             </TableBody>
@@ -88,11 +85,17 @@ function Command() {
                     <Card>
                         <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} >
 
-                            {commentary !== "" && <Box display="flex" flexDirection="column" gap={1} >
+                            {address &&
+                            <Box>
+                                <Typography >Votre commande sera livrée à <span style={{fontWeight:'600'}} >{address}</span> dans un délai estimé de {5} jours (ouvrés).</Typography>
+                            </Box>}
+
+                            {data.comm && data.comm !== "" &&
+                            <Box display="flex" flexDirection="column" gap={1} >
                                 <Typography>Commentaire de la commande</Typography>
 
                                 <TextareaAutosize
-                                    value={commentary}
+                                    value={data.comm}
                                     readOnly
                                     placeholder="Ajoutez un mot pour le destinataire"
                                     style={{
@@ -110,11 +113,11 @@ function Command() {
                             </Box>}
 
 
-                            {promoCodes.length > 0 &&
+                            {data.codesPromo && data.codesPromo.length > 0 &&
                                 <Box display="flex" flexDirection="column" gap={1} >
                                     <Typography >Codes promo :</Typography>
                                     <Box display="flex" gap={2} >
-                                        {promoCodes.map((code) =>
+                                        {data.codesPromo.map((code) =>
                                             <Box
                                                 sx={{
                                                     p: ".2rem .5rem",
@@ -132,12 +135,12 @@ function Command() {
                                 </Box>}
 
 
-                            {isGift &&
+                            {data.carte &&
                                 <Box display="flex" flexDirection="column" gap={1} >
                                     <Typography>Votre message pour le destinataire </Typography>
 
                                     <TextareaAutosize
-                                        value={giftCommentary}
+                                        value={data.carte}
                                         readOnly
                                         placeholder="Ajoutez un mot pour le destinataire"
                                         style={{
@@ -158,14 +161,14 @@ function Command() {
                             <Box display="flex" flexDirection="column" alignItems="end" mr={3} mt={2} >
                                 <Typography
                                     fontSize={18}
-                                >Total : <span style={{ fontWeight: 'bold' }} >{total} €</span></Typography>
+                                >Total : <span style={{ fontWeight: 'bold' }} >{data.prixTotal} €</span></Typography>
                                 <Typography
-                                >Réductions appliquées : <span style={{ fontWeight: 'bold' }} >{Math.round((total - totalDue) * 100) / 100} €</span></Typography>
+                                >Réductions appliquées : <span style={{ fontWeight: 'bold' }} >{Math.round((data.prixTotal - data.prixTotalReduc) * 100) / 100} €</span></Typography>
                                 <Typography
                                     variant="body1"
                                     gutterBottom
                                     fontSize={22}
-                                >Dû total : <span style={{ fontWeight: 'bold' }} >{totalDue} €</span></Typography>
+                                >Dû total : <span style={{ fontWeight: 'bold' }} >{data.prixTotalReduc} €</span></Typography>
 
                             </Box>
 
@@ -173,32 +176,32 @@ function Command() {
                     </Card>
 
                 </Grid2>
-            </Grid2>
+            </Grid2>}
         </Box >
     )
 
 
 }
 
-import TestImg from '../assets/img/bracelet1.webp';
 import { useTheme } from "@emotion/react";
 import { useParams } from "react-router";
+import { getCommand, getCommandProducts } from "../services/CommandService";
 
 const CartItem = ({ product }) => {
 
     return (
-        <TableRow key={product.id}>
+        <TableRow key={product.idPod}>
             <TableCell >
                 <Box display="flex" alignItems="center" gap={2} padding="0" >
-                    <ImgMui alt="" src={TestImg} sx={{ height: '70px', width: 'auto', borderRadius: '5px' }} />
+                    <ImgMui alt="" src={getProductImage(product.photo)} sx={{ height: '70px', width: 'auto', borderRadius: '5px' }} />
                     <Box fullWidth >
                         <Box fullWidth >
-                            <Typography fontSize={18} >{product.titre}</Typography>
+                            <Typography fontSize={18} >{product.produit.libProd}</Typography>
                             <Typography
                                 fontSize={14}
                                 color="grey"
                                 sx={{ overflowWrap: 'anywhere' }}
-                            >{product.description}</Typography>
+                            >{product.produit.descriptionProd}</Typography>
                         </Box>
                         <Box display="flex" gap={5} >
                             {product.gravure !== "" && <Typography fontSize={16} ><span style={{ fontWeight: '500' }} >Gravure :</span> {product.gravure}</Typography>}
@@ -208,9 +211,9 @@ const CartItem = ({ product }) => {
                 </Box>
             </TableCell>
 
-            <TableCell align="right" >{product.prix} €</TableCell>
-            <TableCell align="center" >{product.quantite}</TableCell>
-            <TableCell align="right" >{product.prix * product.quantite} €</TableCell>
+            <TableCell align="right" >{product.produit.prix} €</TableCell>
+            <TableCell align="center" >{product.qa}</TableCell>
+            <TableCell align="right" >{product.produit.prix * product.qa} €</TableCell>
         </TableRow>
     )
 

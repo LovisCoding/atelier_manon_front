@@ -70,4 +70,3 @@ const FAQItem = ({ item, key }) => {
 };
 
 export default FAQ;
-    
