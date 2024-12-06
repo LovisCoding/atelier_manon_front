@@ -1,29 +1,30 @@
 import { useParams } from "react-router";
-import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-import { getArticles } from "/src/services/ArticleService"; // Assurez-vous d'importer la méthode
+import SidebarMenu from "../SidebarMenu";
+import { getArticleById } from "/src/services/ArticleService";
 
 export default function Article() {
-    const { id } = useParams(); // Récupérer l'ID depuis l'URL
+    const { id } = useParams();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    console.log(id);
 
     useEffect(() => {
         const fetchArticle = async () => {
-            const articles = await getArticles();
-            console.log(id);
-            const article = articles.find((article) => article.idArticle === parseInt(id));
-            console.log(article);
+            const article = await getArticleById(id);
 
             if (article) {
                 setTitle(article.titreArticle);
                 setDescription(article.contenu);
                 setDate(article.dateArticle);
+            } else {
+                setError(true);
             }
-            setLoading(false); // Fin du chargement
+            setLoading(false);
         };
 
         fetchArticle();
@@ -39,6 +40,19 @@ export default function Article() {
                 <SidebarMenu />
                 <Stack spacing={3} mt={5} width="100%" mx={15}>
                     <Typography variant="h4">Chargement de l'article...</Typography>
+                </Stack>
+            </Box>
+        );
+    }
+
+    if (error) {
+        return (
+            <Box display="flex">
+                <SidebarMenu />
+                <Stack spacing={3} mt={5} width="100%" mx={15}>
+                    <Typography variant="h4" color="error">
+                        Erreur : Article introuvable.
+                    </Typography>
                 </Stack>
             </Box>
         );
