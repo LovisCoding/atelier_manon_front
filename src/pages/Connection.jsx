@@ -26,6 +26,8 @@ function Connection() {
         if (!emailRegex.test(email)) {
             setErrorMessage("Veuillez entrer une adresse email correcte.");
             setIsErrorDisplayed(true);
+            setEmail("");
+            setPassword("");
             return;
         }
         const exec = async () => {
@@ -33,6 +35,8 @@ function Connection() {
             if (!response) {
                 setErrorMessage("Mot de passe ou email incorrect.");
                 setIsErrorDisplayed(true);
+                setEmail("");
+                setPassword("");
                 return;
             }
             navigate('/');
