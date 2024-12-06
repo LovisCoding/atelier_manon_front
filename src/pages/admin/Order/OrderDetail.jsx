@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Typography, Stack, Paper, IconButton, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { Box, Button, Typography, Stack } from "@mui/material";
 import { MdCalendarToday } from "react-icons/md";
 import { FaEuroSign } from "react-icons/fa";
 import SidebarMenu from "../SidebarMenu";
@@ -10,6 +10,7 @@ import { FiGift } from "react-icons/fi";
 import { CiStickyNote } from "react-icons/ci";
 import { TbTruckDelivery } from "react-icons/tb";
 import { GrStatusGoodSmall } from "react-icons/gr";
+import { getOrderAdminDetail } from "../../../services/CommandService";
 
 
 const orderDetailTmp = {
@@ -65,8 +66,13 @@ export default function OrderDetails() {
 function OrderDetailsContent() {
 
   const [orderDetails, setOrderDetails] = useState(orderDetailTmp);
+  const { id } = useParams();
 
   useEffect(() => {
+    getOrderAdminDetail(id)
+      .then((data) => {
+        if (data != null) setOrderDetails(data);
+      })
   }, [])
 
   return (
@@ -133,9 +139,9 @@ function Actions() {
           Supprimer
         </Button>
       </Stack>
-      <Button variant="outlined" color="secondary">
+      {/* <Button variant="outlined" color="secondary">
         Envoyer un lien de paiement
-      </Button>
+      </Button> */}
     </Stack>
   )
 }
