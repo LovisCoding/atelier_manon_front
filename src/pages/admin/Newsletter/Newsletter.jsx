@@ -2,15 +2,34 @@ import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { postNewsletter } from "/src/services/NewsletterService";
 
 export default function Newsletter() {
     const { id } = useParams();
 
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState(null);
 
-    const handleSave = () => {
-        alert(`Penser à faire l'envoi de la newsletter avec le sujet : ${subject}`);
+    const handleSave = async () => {
+        setLoading(true);
+        setMessage(null);
+        try {
+            const data = { subject, content: description }; // Correspondance avec l'API
+            const response = await postNewsletter(data);
+            if (response) {
+                setMessage("Newsletter envoyée avec succès !");
+                setSubject(''); // Réinitialise l'objet
+                setDescription(''); // Réinitialise la description
+            } else {
+                setMessage("Une erreur est survenue lors de l'envoi.");
+            }
+        } catch (error) {
+            setMessage("Erreur : " + error.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -21,7 +40,7 @@ export default function Newsletter() {
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "flex-start", // Alignement en haut
+                    alignItems: "flex-start",
                     padding: 2,
                 }}
             >
@@ -34,7 +53,7 @@ export default function Newsletter() {
                         borderRadius: 2,
                         display: "flex",
                         flexDirection: "column",
-                        marginTop: 2, // Ajoute un léger espace en haut
+                        marginTop: 2,
                     }}
                 >
                     <Typography variant="h4" mb={2} fontWeight="bold" textAlign="center">
@@ -60,10 +79,21 @@ export default function Newsletter() {
                             onChange={(e) => setDescription(e.target.value)}
                         />
 
+                        {message && (
+                            <Typography
+                                variant="body1"
+                                color={message.includes("succès") ? "green" : "red"}
+                                textAlign="center"
+                            >
+                                {message}
+                            </Typography>
+                        )}
+
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={handleSave}
+                            disabled={loading || !subject || !description}
                             sx={{
                                 fontWeight: "bold",
                                 alignSelf: "center",
@@ -71,7 +101,7 @@ export default function Newsletter() {
                                 paddingY: 1,
                             }}
                         >
-                            Envoyer
+                            {loading ? "Envoi en cours..." : "Envoyer"}
                         </Button>
                     </Stack>
                 </Box>
