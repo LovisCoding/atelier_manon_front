@@ -1,30 +1,51 @@
-import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton, TextField, Button } from "@mui/material";
+import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton, TextField, Button, Alert } from "@mui/material";
 import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
-import { getAllMateriau, getAllFils, getAllPierres } from "/src/services/PersonalizationService";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import { addMatProd, getAllMateriau, getAllFils, getAllPierres, deleteMatProd, deleteFilProd, deletePierreProd } from "/src/services/PersonalizationService";
 
-const DataTable = ({ data, setData, title, keyField, valueField, descriptionField = null }) => {
+const DataTable = ({ data, setData, title, keyField, valueField, descriptionField = null, addFunction = null, deleteFunction = null }) => {
   const [newValue, setNewValue] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const [error, setError] = useState(null);  // State to handle errors
+  const [successMessage, setSuccessMessage] = useState(null); // State to handle success
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     if (newValue.trim()) {
       const newItem = {
-        [keyField]: new Date().getTime(),
         [valueField]: newValue,
         ...(descriptionField && { [descriptionField]: newDescription }),
       };
-      setData((prevData) => [...prevData, newItem]);
-      setNewValue("");
-      setNewDescription("");
+
+      try {
+        const addedItem = addFunction ? await addFunction(newItem) : newItem;
+
+        if (addedItem) {
+          setData((prevData) => [...prevData, { ...addedItem, [keyField]: addedItem[keyField] || new Date().getTime() }]);
+          setSuccessMessage(`${title} ajouté avec succès !`);
+        } else {
+          setError(`Erreur lors de l'ajout du ${title}`);
+        }
+        setNewValue("");
+        setNewDescription("");
+      } catch (error) {
+        setError(`Erreur lors de l'ajout du ${title}`);
+      }
     }
   };
 
-  const handleDelete = (id) => {
-    setData((prevData) => prevData.filter((item) => item[keyField] !== id));
+  const handleDelete = async (id) => {
+    try {
+      if (deleteFunction) {
+        await deleteFunction(id);
+        setData((prevData) => prevData.filter((item) => item[keyField] !== id));
+        setSuccessMessage(`${title} supprimé avec succès !`);
+      }
+    } catch (error) {
+      setError(`Erreur lors de la suppression du ${title}`);
+    }
   };
 
   return (
@@ -34,6 +55,9 @@ const DataTable = ({ data, setData, title, keyField, valueField, descriptionFiel
       </AccordionSummary>
       <AccordionDetails>
         <Box sx={{ maxHeight: "400px", overflow: "auto" }}>
+          {error && <Alert severity="error">{error}</Alert>} 
+          {successMessage && <Alert severity="success">{successMessage}</Alert>} 
+          
           <TextField
             label={`Ajouter un ${title.toLowerCase()}`}
             variant="outlined"
@@ -70,7 +94,7 @@ const DataTable = ({ data, setData, title, keyField, valueField, descriptionFiel
                     <TableCell sx={{ fontWeight: "bold", padding: "16px", width: "100%" }}>
                       {item[valueField]}
                       {descriptionField && (
-                        <Typography variant="body2">
+                        <Typography variant="body2" color="textSecondary">
                           {item[descriptionField]}
                         </Typography>
                       )}
@@ -129,8 +153,10 @@ export default function Personalization() {
           data={materials}
           setData={setMaterials}
           title="Matériau"
-          keyField="id"
+          keyField="libMateriau"
           valueField="libMateriau"
+          addFunction={addMatProd}
+          deleteFunction={deleteMatProd}
         />
 
         <DataTable
@@ -139,6 +165,7 @@ export default function Personalization() {
           title="Fil"
           keyField="id"
           valueField="libCouleur"
+          deleteFunction={deleteFilProd}
         />
 
         <DataTable
@@ -148,6 +175,7 @@ export default function Personalization() {
           keyField="id"
           valueField="libPierre"
           descriptionField="descriptionPierre"
+          deleteFunction={deletePierreProd}
         />
       </Stack>
     </Box>
