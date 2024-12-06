@@ -1,12 +1,13 @@
 
 import { useTheme } from "@emotion/react";
-import { Box, Card, Typography, TextField, TextareaAutosize, Button } from "@mui/material";
+import { Box, Card, Typography, TextField, TextareaAutosize, Button, Snackbar, Alert } from "@mui/material";
 
 import { useState } from "react";
 
+import { addNewsLetter } from "../services/ContactService";
+
 function Contact() {
 
-    // TODO
     const isConnected = true;
 
     const [email, setEmail] = useState("");
@@ -20,8 +21,8 @@ function Contact() {
         console.log('contact clicked');
     }
 
-    const handleNewsletter = (email) => {
-        console.log('newsletter add clicked:',email)
+    const handleNewsletter = async (email) => {
+        await addNewsLetter(email);
     }
 
     return (
@@ -111,22 +112,22 @@ function Contact() {
                     </Box>
                 </Card>
             </Box>
-        {isConnected &&
-            <Box maxWidth="60rem" >
-                <Card sx={{ padding: '1rem 2rem' }} >
-                    <Box display="flex" flexDirection="column" gap={2} >
-                        <Typography
-                            variant="h4"
-                            color={theme.palette.text.primary}
-                        >Inscris toi à la newsletter !</Typography>
-                        <Typography
-                            variant="h6"
-                            color={theme.palette.text.primary}
-                        >Abonne-toi pour recevoir en avant-première les nouveautés, des offres exclusives et des conseils pour sublimer vos bijoux personnalisés. Merci de faire partie de l'aventure artisanale !</Typography>
-                        <NewsletterInput newsletterHandler={handleNewsletter} />
-                    </Box>
-                </Card>
-            </Box>}
+            {isConnected &&
+                <Box maxWidth="60rem" >
+                    <Card sx={{ padding: '1rem 2rem' }} >
+                        <Box display="flex" flexDirection="column" gap={2} >
+                            <Typography
+                                variant="h4"
+                                color={theme.palette.text.primary}
+                            >Inscris toi à la newsletter !</Typography>
+                            <Typography
+                                variant="h6"
+                                color={theme.palette.text.primary}
+                            >Abonne-toi pour recevoir en avant-première les nouveautés, des offres exclusives et des conseils pour sublimer vos bijoux personnalisés. Merci de faire partie de l'aventure artisanale !</Typography>
+                            <NewsletterInput newsletterHandler={handleNewsletter} />
+                        </Box>
+                    </Card>
+                </Box>}
         </Box>
     )
 }
@@ -140,63 +141,92 @@ const ContactLabel = ({ textContent, required }) => {
     )
 }
 
-const NewsletterInput = ({newsletterHandler}) => {
+const NewsletterInput = ({ newsletterHandler }) => {
 
     const theme = useTheme();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const [email, setEmail] = useState('');
 
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
     const handler = () => {
-        if (!emailRegex.test(email)) return;
+        if (!emailRegex.test(email)) {
+            setSnackbarMessage("L'adresse e-mail n'est pas valide");
+            setSnackbarOpen(true);
+            return;
+        }
         newsletterHandler(email);
+        setEmail('');
     }
 
-    return (
-        <Box
-            display="flex"
-            alignItems="center"
-            border="1px solid"
-            borderColor={theme.palette.customYellow.main}
-            borderRadius="4px"
-            overflow="hidden"
-            padding="0"
-            height="3rem"
-            mb={3}
-        >
-            <TextField
-                placeholder="Votre adresse mail"
-                variant="outlined"
-                fullWidth
-                sx={{
-                    border: 'none',
-                    fontWeight: 'bold',
-                    color: 'customYellow',
-                    padding: 0,
-                    margin: '0 .5rem',
-                    "& fieldset": { border: "none" },
-                    "& input" : { padding: 0}
-                }}
-                value={email}
-                onChange={e=>setEmail(e.target.value)}
-            />
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') return;
+        setSnackbarOpen(false);
+    };
 
-            <Button
-                variant="contained"
-                sx={{
-                    backgroundColor: theme.palette.customYellow.main,
-                    color: "white",
-                    fontWeight: "bold",
-                    borderRadius: 0,
-                    height: '100%',
-                    textTransform: "none",
-                    "&:hover": { bgcolor: theme.palette.customYellow.main }
-                }}
-                onClick={handler}
+    return (
+        <>
+            <Box
+                display="flex"
+                alignItems="center"
+                border="1px solid"
+                borderColor={theme.palette.customYellow.main}
+                borderRadius="4px"
+                overflow="hidden"
+                padding="0"
+                height="3rem"
+                mb={3}
             >
-                Envoyer
-            </Button>
-        </Box>
+                <TextField
+                    placeholder="Votre adresse mail"
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                        border: 'none',
+                        fontWeight: 'bold',
+                        color: 'customYellow',
+                        padding: 0,
+                        margin: '0 .5rem',
+                        "& fieldset": { border: "none" },
+                        "& input": { padding: 0 }
+                    }}
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                />
+
+                <Button
+                    variant="contained"
+                    sx={{
+                        backgroundColor: theme.palette.customYellow.main,
+                        color: "white",
+                        fontWeight: "bold",
+                        borderRadius: 0,
+                        height: '100%',
+                        textTransform: "none",
+                        "&:hover": { bgcolor: theme.palette.customYellow.main }
+                    }}
+                    onClick={handler}
+                >
+                    Envoyer
+                </Button>
+            </Box>
+
+            {/* Snackbar pour afficher les messages */}
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            >
+                <Alert onClose={handleSnackbarClose} severity="error" sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
+        </>
+
+
     );
 
 }

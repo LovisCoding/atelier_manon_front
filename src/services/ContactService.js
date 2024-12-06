@@ -1,0 +1,14 @@
+import axios from "axios";
+
+export const addNewsLetter = async (email) => {
+    try {
+        const data = await axios
+            .post('/api/client/account/add-newsletter' , {
+                mail : email
+            }, { headers: { 'Content-Type':'application/json' } });
+        console.log("Response :",data.data)
+    } catch (err) {
+        console.error("Une erreur est survenue : "+err);
+        return null;
+    }
+}
