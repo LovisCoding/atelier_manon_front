@@ -8,5 +8,5 @@ export const register = async (firstname, lastname, email, password, adresse) =>
 		"mdp": password,
 		"adresse": adresse
 	 });
-	return res.status == 201;
+	return res.status == 200;
 }
