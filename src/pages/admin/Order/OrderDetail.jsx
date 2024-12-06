@@ -9,20 +9,22 @@ import theme from "../../../theme/theme";
 import { FiGift } from "react-icons/fi";
 import { CiStickyNote } from "react-icons/ci";
 import { TbTruckDelivery } from "react-icons/tb";
+import { GrStatusGoodSmall } from "react-icons/gr";
 
 
 const orderDetailTmp = {
   "amount": "34,00 €",
-  "date_creation": "15 novembre 2024",
-  "delivery": null,
+  "creation_date": "15 novembre 2024",
+  "delivery": "12 novembre 2024",
   "gift": true,
   "note": "Note de la commande",
   "commentary": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga doloremque repellat eligendi eum accusamus, culpa libero tempora vero suscipit quos veritatis ducimus, corporis quas atque, consectetur perspiciatis architecto nisi amet.",
   "state": "En cours",
   "client": {
-    "firstname": "MAtthias",
+    "firstname": "Matthias",
     "lastname": "Bernouy",
-    "email": "matt.bernouy@orange.fr"
+    "email": "matt.bernouy@orange.fr",
+    "address": "17b chemin du fond du val"
   },
   "products": [
     {
@@ -30,7 +32,7 @@ const orderDetailTmp = {
       "title": "Titre du produit",
       "qty": 6,
       "price": 5.50,
-      "image": "image1.jpg",
+      "image": "bracelet1.webp",
       "gravure": "Florian",
       "fil": "...",
       "materiaux": "...",
@@ -39,9 +41,9 @@ const orderDetailTmp = {
     {
       "id": "2",
       "title": "Titre du produit",
-      "qty": 6,
-      "price": 5.50,
-      "image": "image1.jpg",
+      "qty": 3,
+      "price": 4,
+      "image": "bracelet1.webp",
       "gravure": "Florian",
       "fil": "...",
       "materiaux": "...",
@@ -51,12 +53,6 @@ const orderDetailTmp = {
 }
 
 export default function OrderDetails() {
-
-  const [orderDetails, setOrderDetails] = useState(null);
-
-  useEffect(() => {
-
-  }, [])
 
   return (
     <Box display={"flex"}>
@@ -68,49 +64,58 @@ export default function OrderDetails() {
 
 function OrderDetailsContent() {
 
+  const [orderDetails, setOrderDetails] = useState(orderDetailTmp);
+
+  useEffect(() => {
+  }, [])
+
   return (
     <Stack spacing={4} p={4}>
       <Typography variant="h4" fontWeight="bold">
         Détail de la commande
       </Typography>
 
-      <Stack direction="row" spacing={2} alignItems="center">
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <FaEuroSign />
-          <Typography>34,00</Typography>
-        </Stack>
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <MdCalendarToday />
-          <Typography>25 novembre 2024</Typography>
-        </Stack>
-      </Stack>
 
       <Stack spacing={2}>
 
-
-
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <FaEuroSign />
+          <Typography>{orderDetails.amount}</Typography>
+        </Stack>
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <MdCalendarToday />
+          <Typography>{orderDetails.creation_date}</Typography>
+        </Stack>
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <CiStickyNote />
-          <Typography>Note de la commande</Typography>
+          <Typography>{orderDetails.note}</Typography>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <TbTruckDelivery />
-          <Typography>livraison le 25 novembre 2024</Typography>
+          <Typography>livraison le {orderDetails.delivery}</Typography>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
-          <FiGift />
-          <Typography>est cadeau</Typography>
+          <GrStatusGoodSmall />
+          <Typography>en cours</Typography>
         </Stack>
+        {
+          orderDetails.gift &&
+          <Stack direction={"row"} spacing={1} alignItems={"center"}>
+            <FiGift />
+            <Typography>est cadeau</Typography>
+          </Stack>
+        }
+
 
       </Stack>
 
       <Stack maxWidth={"30rem"} spacing={2}>
         <Typography variant="h4">Commentaire</Typography>
-        <Typography variant="body1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum fugit qui eveniet ducimus quasi rem excepturi dolore, magni iste, consequatur necessitatibus ab repellat et non dolor? Suscipit dignissimos quod sint.</Typography>
+        <Typography variant="body1">{orderDetails.commentary}</Typography>
       </Stack>
 
-      <ClientDetail />
-      <ProductsDetail />
+      <ClientDetail client={orderDetails.client} />
+      <ProductsDetail products={orderDetails.products} />
       <Actions />
 
     </Stack>
@@ -135,11 +140,7 @@ function Actions() {
   )
 }
 
-function ProductsDetail() {
-
-  const products = [
-    "", "", ""
-  ]
+function ProductsDetail({ products }) {
 
   return (
     <>
@@ -162,28 +163,28 @@ function ProductsDetail() {
               height: "4rem",
               width: "4rem",
               objectFit: "cover"
-            }} component={"img"} src="https://via.placeholder.com/200x400">
+            }} component={"img"} src={`/api/img/${product.image}`}>
             </Box>
 
             <Stack spacing={1}>
               <Stack>
                 <Stack direction={"row"} spacing={1}>
-                  <Typography color={theme.palette.grey[900]} variant="h6">5x</Typography>
-                  <Typography color={theme.palette.grey[900]} variant="h6">Nom du produit 1</Typography>
+                  <Typography color={theme.palette.grey[900]} variant="h6">{product.qty}x</Typography>
+                  <Typography color={theme.palette.grey[900]} variant="h6">{product.title}</Typography>
                 </Stack>
                 <Stack color={theme.palette.grey[600]} direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={1}>
-                  <Typography variant="body2">10x Howlite</Typography>
+                  <Typography variant="body2">{product.pierre}</Typography>
                   <GoDotFill size={6} />
-                  <Typography variant="body2">5x séparateur</Typography>
+                  <Typography variant="body2">{product.materiaux}</Typography>
                   <GoDotFill size={6} />
-                  <Typography variant="body2">fil doré</Typography>
+                  <Typography variant="body2">{product.fil}</Typography>
                   <GoDotFill size={6} />
-                  <Typography variant="body2">gravure: Florian</Typography>
+                  <Typography variant="body2">gravure: {product.gravure}</Typography>
                 </Stack>
               </Stack>
               <Stack direction={"row"} spacing={1}>
-                <Typography variant="body1">30,00 €</Typography>
-                <Typography variant="body2">(6€ unitaire)</Typography>
+                <Typography variant="body1">{product.price * product.qty} €</Typography>
+                <Typography variant="body2">({product.price}€ unitaire)</Typography>
               </Stack>
             </Stack>
 
@@ -195,7 +196,7 @@ function ProductsDetail() {
   )
 }
 
-function ClientDetail() {
+function ClientDetail({ client }) {
   return (
     <>
       <Stack spacing={1}>
@@ -208,9 +209,9 @@ function ClientDetail() {
         }} direction={"row"} spacing={3}>
           <CiUser size={64} />
           <Stack maxWidth={"20rem"}>
-            <Typography variant="h6">Matthias Bernouy</Typography>
-            <Typography variant="body2">matthias.bernouy@orange.fr</Typography>
-            <Typography>18b chemin du fond du val, 76930 octeville-sur-mer</Typography>
+            <Typography variant="h6">{client.firstname} {client.lastname}</Typography>
+            <Typography variant="body2">{client.email}</Typography>
+            <Typography>{client.address}</Typography>
           </Stack>
         </Stack>
       </Stack>

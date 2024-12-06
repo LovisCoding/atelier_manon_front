@@ -8,4 +8,10 @@ export const getCommand = async (idCommand) => {
 }
 
 
+export const getOrderAdminDetail = async (orderId) => {
+    const data = await axios.get('/api/client/commande/get-commande', {params:{idCommande:orderId}});
+    if (!data.data) return null;
+    return data.data
+}
+
 
