@@ -21,13 +21,19 @@ export default function AuthContextProvider({ children }) {
       })
   }
 
-  const login = (email, password) => {
-    axios.post("/api/account/login", {
-      email,
-      mdp: password
-    }).then((res) => {
-      if (res.status == 200) { getProfil() }
-    })
+  const login = async (email, password) => {
+    try {
+      let res = await axios.post("/api/account/login", {
+        email,
+        mdp: password
+      })
+      if (res.status === 200) { getProfil(); return true; }
+      console.log("c'est pas normal")
+
+    } catch (err) {
+      console.error("Une erreur est survenue:",err)
+      return false;
+    }
   };
 
   const logout = () => {
