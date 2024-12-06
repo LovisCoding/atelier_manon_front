@@ -1,44 +1,28 @@
 import { Button, TextField, Typography, Stack, Container, FormControl } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { getAvisBySession } from "../services/AvisService";
+import { getOrdersProfil } from "../services/OrderService";
 
 export default function Profil() {
 
-	const [userDetails, setUserDetails] = useState({
-		"email": "",
-		"firstname": "",
-		"lastname": ""
-	});
+	const [userDetails, setUserDetails] = useState();
 	const [orders, setOrders] = useState([]);
+	const [avis, setAvis] = useState("");
 
 	useEffect(() => {
-		let getOrders = [
-			{
-				"id": "1",
-				"amount": "1",
-				"state": "En cours",
-				"delivery": "13 novembre 2024"
-			},
-			{
-				"id": "2",
-				"amount": "1",
-				"state": "En cours",
-				"delivery": "13 novembre 2024"
-			},
-			{
-				"id": "3",
-				"amount": "1",
-				"state": "En cours",
-				"delivery": "13 novembre 2024"
-			}
-		]
 		let getUserDetails = {
 			"email": "matt.bernouy@orange.fr",
 			"firstname": "Matthias",
-			"lastname": "Bernouy"
+			"lastname": "Bernouy",
 		}
 		setUserDetails(getUserDetails);
-		setOrders(getOrders);
+		getOrdersProfil().then((data) => {
+			setOrders(data);
+		})
+		getAvisBySession().then((data) => {
+			setAvis(data);
+		})
 	}, [])
 
 	return (
@@ -52,19 +36,24 @@ export default function Profil() {
 
 				<FormControl>
 					<Stack spacing={3}>
+						
 						<Stack direction="row">
-							<TextField fullWidth id="outlined-basic" label="firstname" variant="outlined" defaultValue={userDetails.firstname} />
+							{ userDetails && <TextField fullWidth id="outlined-basic" label="firstname" variant="outlined" defaultValue={userDetails.firstname} /> }
 							<Button>OK</Button>
 						</Stack>
 
 						<Stack direction="row">
-							<TextField fullWidth id="outlined-basic" label="lastname" variant="outlined" defaultValue={userDetails.lastname} />
+							{ userDetails && <TextField fullWidth id="outlined-basic" label="lastname" variant="outlined" defaultValue={userDetails.lastname} /> }
 							<Button>OK</Button>
 						</Stack>
 
 						<Stack spacing={1}>
 							<Typography variant="h5">Email</Typography>
-							<Typography>{userDetails.email}</Typography>
+							<Typography>{userDetails && userDetails.email}</Typography>
+						</Stack>
+						<Stack spacing={1}>
+							<Typography variant="h5">Avis</Typography>
+							<Typography>{avis}</Typography>
 						</Stack>
 					</Stack>
 				</FormControl>
