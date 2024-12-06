@@ -21,6 +21,9 @@ export default function ConfirmAccount(){
 				setMsg(res.data);
 			}
 		})
+		.catch(() => {
+			setMsg("Une erreur est survenue")
+		})
 	}, [])
 
 	return(
