@@ -8,7 +8,7 @@ export default function AuthContextProvider({ children }) {
   const [details, setDetails] = useState(null);
 
   const getProfil = () => {
-    axios.post("/api/client/account/get-compte")
+    axios.get("/api/client/account/get-compte")
       .then((res) => {
         if ( res.status == 200 ){
           let data = res.data;
