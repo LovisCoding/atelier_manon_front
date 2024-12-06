@@ -54,10 +54,14 @@ export default function CodePromo() {
 
 	const handleSelectAll = () => {
 		if (selectAll) {
-			deleteProduitsFromPromo(rows.map((row) => row.idProd), id)
+			//delete only the products that are already in the promo
+			deleteProduitsFromPromo(rows.filter((row) => selectedRows.includes(row.idProd)).map((row) => row.idProd), id)
+			
+			//deleteProduitsFromPromo(rows.map((row) => row.idProd), id)
 			setSelectedRows([]); // Si tout est sélectionné, on désélectionne tout
 		} else {
-			addProduitsToPromo(rows.map((row) => row.idProd), id)
+			// add only the products that are not already in the promo
+			addProduitsToPromo(rows.filter((row) => !selectedRows.includes(row.idProd)).map((row) => row.idProd), id)
 			setSelectedRows(rows.map((row) => row.idProd)); // Sélectionner toutes les lignes
 		}
 		setSelectAll(!selectAll); // Inverser l'état de la checkbox globale
