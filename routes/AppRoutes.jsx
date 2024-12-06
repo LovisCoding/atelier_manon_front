@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, Routes, useLocation } from 'react-router';
 import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Footer from '../src/components/Footer.jsx';
+import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
 
 // Lazy loading des pages
 const Test = React.lazy(() => import('../src/pages/Test/Test'));
@@ -36,6 +37,7 @@ const Articles = React.lazy(() => import('../src/pages/admin/Articles/Articles.j
 const Article = React.lazy(() => import('../src/pages/admin/Articles/Article.jsx'));
 const Newsletter = React.lazy(() => import('../src/pages/admin/Newsletter/Newsletter.jsx'));
 const Profil = React.lazy(() => import("../src/pages/Profil.jsx"));
+const Personalization = React.lazy(() => import("../src/pages/admin/Personalization/Personalization.jsx"));
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -54,6 +56,7 @@ const AppRoutes = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/email-sent" element={<EmailSent />} />
+                    <Route path="email/confirmAccount/:token" element={<ConfirmAccount />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/cgv" element={<CGV />} />
@@ -79,6 +82,7 @@ const AppRoutes = () => {
                     <Route path="/admin/blog" element={<Articles />} />
                     <Route path="/admin/blog/:id" element={<Article />} />
                     <Route path="/admin/newsletter" element={<Newsletter />} />
+                    <Route path="/admin/personalization" element={<Personalization />} />
 
                     {/* Route de fallback */}
                     <Route path="*" element={<NotFound />} />

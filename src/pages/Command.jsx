@@ -4,6 +4,8 @@ import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead
 
 import ImgMui from "../components/ImgMui";
 
+import { getProductImage } from "../services/ProductService";
+
 function Command() {
 
     const { id } = useParams();
@@ -12,6 +14,7 @@ function Command() {
 
     const [data, setData] = useState(undefined);
     const [address, setAddress] = useState("");
+    const [products, setProducts] = useState([]);
 
     useEffect (() => {
         const exec = async () => {
@@ -64,7 +67,7 @@ function Command() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {data.products && data.products.map((product) =>
+                                {products && products.map((product) =>
                                     <CartItem product={product} />
                                 )}
                             </TableBody>
@@ -80,8 +83,8 @@ function Command() {
                         <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} >
 {/* delai */}
                             {address &&
-                            <Box> 
-                                <Typography >Votre commande sera livrée à &nbsp;&nbsp;<span style={{fontWeight:'500'}} >{address}</span> dans un délai estimé de {5} jours ouvrés.</Typography>
+                            <Box>
+                                <Typography >Votre commande sera livrée à <span style={{fontWeight:'600'}} >{address}</span> dans un délai estimé de {5} jours (ouvrés).</Typography>
                             </Box>}
 
                             {data.comm && data.comm !== "" &&
@@ -177,7 +180,6 @@ function Command() {
 
 }
 
-import TestImg from '../assets/img/bracelet1.webp';
 import { useTheme } from "@emotion/react";
 import { useNavigate, useParams } from "react-router";
 import { getCommand, getCommandProducts } from "../services/CommandService";
@@ -185,18 +187,18 @@ import { getCommand, getCommandProducts } from "../services/CommandService";
 const CartItem = ({ product }) => {
 
     return (
-        <TableRow key={product.id}>
+        <TableRow key={product.idPod}>
             <TableCell >
                 <Box display="flex" alignItems="center" gap={2} padding="0" >
-                    <ImgMui alt="" src={TestImg} sx={{ height: '70px', width: 'auto', borderRadius: '5px' }} />
+                    <ImgMui alt="" src={getProductImage(product.photo)} sx={{ height: '70px', width: 'auto', borderRadius: '5px' }} />
                     <Box fullWidth >
                         <Box fullWidth >
-                            <Typography fontSize={18} >{product.titre}</Typography>
+                            <Typography fontSize={18} >{product.produit.libProd}</Typography>
                             <Typography
                                 fontSize={14}
                                 color="grey"
                                 sx={{ overflowWrap: 'anywhere' }}
-                            >{product.description}</Typography>
+                            >{product.produit.descriptionProd}</Typography>
                         </Box>
                         <Box display="flex" gap={5} >
                             {product.gravure !== "" && <Typography fontSize={16} ><span style={{ fontWeight: '500' }} >Gravure :</span> {product.gravure}</Typography>}
@@ -206,9 +208,9 @@ const CartItem = ({ product }) => {
                 </Box>
             </TableCell>
 
-            <TableCell align="right" >{product.prix} €</TableCell>
-            <TableCell align="center" >{product.quantite}</TableCell>
-            <TableCell align="right" >{product.prix * product.quantite} €</TableCell>
+            <TableCell align="right" >{product.produit.prix} €</TableCell>
+            <TableCell align="center" >{product.qa}</TableCell>
+            <TableCell align="right" >{product.produit.prix * product.qa} €</TableCell>
         </TableRow>
     )
 

@@ -69,6 +69,7 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary) => 
     try {
         const data = await axios
             .post('/api/client/commande/add-commande' , {
+                idCli : idCli,
                 comm : commentary ,
                 estCadeau : isGift,
                 carte : giftCommentary
@@ -79,4 +80,5 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary) => 
         return null;
     }
 }
+
 

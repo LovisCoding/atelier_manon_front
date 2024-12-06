@@ -3,6 +3,8 @@ import { TextField, InputLabel, InputAdornment, IconButton, Button, Box, Typogra
 
 import VisibilityOn from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from "react-router";
+import { register } from "../services/UserService";
 
 
 // email, mdp, nomCli, prenomCli, adresse
@@ -10,6 +12,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 function Register() {
 
     const {register} = useAuth();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,7 +32,6 @@ function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
         if (password !== confirmPassword) {
             setIsSamePassword(false);
             return;

@@ -6,10 +6,6 @@ export default function Navbar() {
 	
 	const theme = useTheme();
 	const md = useMediaQuery(theme.breakpoints.up('md'));
-
-	console.log(md);
-	
-	
 	
 	return (
 		<>
@@ -21,6 +17,5 @@ export default function Navbar() {
 		  )
 			}
 		</>
-	  );
-	  
+	);
 }
