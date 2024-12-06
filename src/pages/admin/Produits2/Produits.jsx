@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
-import { Box, Button, InputAdornment, MenuItem, Stack, Typography } from "@mui/material";
+import { Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,10 +9,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Checkbox from '@mui/material/Checkbox';
 import Link from "../../../components/Link";
 import { getAllProduits, getProductImage } from "../../../services/ProductService";
 
 export default function Produits() {
+  
+
+  const [name, setName] = useState('');
+  const [value, setValue] = useState('');
+  const [selectValue, setSelectValue] = useState('option1');
+  const [selectedRows, setSelectedRows] = useState([]); // Liste des lignes sélectionnées
+  const [selectAll, setSelectAll] = useState(false); // Checkbox global
+
  
 
   const [rows, setRows] = useState([

@@ -74,4 +74,28 @@ export const addProductToPanier = async (product) => {
     }
 }
 
+export const deleteProduct = async (idProd) => {
+    try {
+		const data = await axios
+			.delete('/api/admin/produit/delete-produit' , {
+				data: { idProd }
+			});
+		console.log("Response :",data.data)
+	} catch (err) {
+		console.error("Une erreur est survenue : "+err)
+	}
+};
 
+
+
+export const updateProduct = async (product) => {
+	try {
+		const data = await axios
+			.post('/api/produit/update-produit' , {
+				...product
+			}, { headers: { 'Content-Type':'application/json' } });
+		console.log("Response :",data.data)
+	} catch (err) {
+		console.error("Une erreur est survenue : "+err)
+	}
+}
