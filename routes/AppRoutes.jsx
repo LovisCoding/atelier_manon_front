@@ -36,6 +36,7 @@ const Articles = React.lazy(() => import('../src/pages/admin/Articles/Articles.j
 const Article = React.lazy(() => import('../src/pages/admin/Articles/Article.jsx'));
 const Newsletter = React.lazy(() => import('../src/pages/admin/Newsletter/Newsletter.jsx'));
 const Profil = React.lazy(() => import("../src/pages/Profil.jsx"));
+const Personalization = React.lazy(() => import("../src/pages/admin/Personalization/Personalization.jsx"));
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -79,6 +80,7 @@ const AppRoutes = () => {
                     <Route path="/admin/blog" element={<Articles />} />
                     <Route path="/admin/blog/:id" element={<Article />} />
                     <Route path="/admin/newsletter" element={<Newsletter />} />
+                    <Route path="/admin/personalization" element={<Personalization />} />
 
                     {/* Route de fallback */}
                     <Route path="*" element={<NotFound />} />
