@@ -30,6 +30,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 
 import { addCommande, addProductPanier, getCartProducts, reduceProductPanier, deleteProductPanier } from "../services/CartService";
+import { useNavigate } from "react-router";
 
 // titre, détails, prix, quantité, total
 // description, gravure/variante
@@ -43,6 +44,8 @@ function Cart() {
   const [isGift, setIsGift] = useState(false);
   const [giftCommentary, setGiftCommentary] = useState("");
   const [total, setTotal] = useState(0.0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const exec = async () => {
@@ -92,7 +95,7 @@ function Cart() {
   const handleConfirmCommand = async () => {
     const commandId = await addCommande(cartProducts[0].idCli, commentary, isGift, giftCommentary);
     if (!commandId) return; // TODO: handle error
-    window.location = '/command/'+commandId;
+    navigate('/command/'+commandId);
   }
 
   return (

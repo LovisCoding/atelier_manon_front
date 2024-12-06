@@ -56,7 +56,7 @@ function Contact() {
                         </Box>
 
                         <Box>
-                            <ContactLabel textContent="Votre nom" />
+                            <ContactLabel textContent="Votre nom" required />
                             <TextField
                                 margin="dense"
                                 fullWidth
