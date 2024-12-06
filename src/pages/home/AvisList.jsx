@@ -38,7 +38,7 @@ const AvisList = ({ title, avisData }) => {
             <Avis
               rating={avis.note}
               text={avis.contenu}
-              author={avis.author} // TODO: ? n'existe pas dans avis ?
+              author={avis.compte.preCli + " " + avis.compte.nomCli}
               sx={{
                 boxShadow: 'none',
                 border: 'none',
