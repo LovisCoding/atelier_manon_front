@@ -38,7 +38,6 @@ function Connection() {
             navigate('/');
         }
         exec();
-        console.log(email, ":", password);
     };
 
     const changeRoute = (route) => {
