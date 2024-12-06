@@ -2,20 +2,6 @@ import { Box, Button, Grid2, Stack } from "@mui/material";
 import { useState } from "react";
 
 export default function ProductImages({ images }) {
-  images = images || [
-    "https://via.placeholder.com/800x400",
-    "https://via.placeholder.com/799x400",
-    "https://via.placeholder.com/798x400",
-    "https://via.placeholder.com/797x400",
-	"https://via.placeholder.com/797x400",
-	"https://via.placeholder.com/797x400",
-	"https://via.placeholder.com/797x400",
-	"https://via.placeholder.com/797x400",
-	"https://via.placeholder.com/797x400",
-	"https://via.placeholder.com/797x400",
-	"https://via.placeholder.com/797x400",
-	"https://via.placeholder.com/797x400",
-  ];
   const [stateImages, setStateImages] = useState(images);
 
   const putToFirst = (index) => {
