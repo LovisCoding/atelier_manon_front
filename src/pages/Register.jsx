@@ -9,6 +9,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function Register() {
 
+    const {register} = useAuth();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,8 +34,11 @@ function Register() {
             setIsSamePassword(false);
             return;
         }
-        // fetch register
-        // changeRoute('/email-sent');
+        register(firstname, lastname, email, password, [addressNumber, addressStreet, addressCity, addressPostalCode])
+            .then((res) => {
+                if (res) navigate("/email-sent");
+                else console.log("Faux");
+            })
     };
 
     const changeRoute = (route) => {

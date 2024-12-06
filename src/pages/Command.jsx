@@ -8,23 +8,30 @@ function Command() {
 
     const { id } = useParams();
     const theme = useTheme();
+    const navigate = useNavigate();
 
     const [data, setData] = useState(undefined);
     const [address, setAddress] = useState("");
 
-    // TODO : add + data to request response
-
     useEffect (() => {
         const exec = async () => {
             const data = await getCommand(id);
-            if (data) {
-                setData(data);
-                const addr = '"456 User Lane","User City",20002'
-                                    .split(',').map(part => part.replace(/"/g, '').trim())
-                                    .join(', ');
-                setAddress(addr);
-            }
+            if (data.status === 404) navigate('/cart');
+            if (!data) return;
+            setData(data);
+            const addr = data.adresse
+                                .split(',').map(part => part.replace(/"/g, '').trim())
+                                .join(', ');
+            setAddress(addr);
+        };
+        exec();
+    }, []);
 
+    useEffect(() => {
+        const exec = async () => {
+            const data = await getCommandProducts(id);
+            if (!data) return
+            setProducts(data);
         };
         exec();
     }, []);
@@ -172,8 +179,8 @@ function Command() {
 
 import TestImg from '../assets/img/bracelet1.webp';
 import { useTheme } from "@emotion/react";
-import { useParams } from "react-router";
-import { getCommand } from "../services/CommandService";
+import { useNavigate, useParams } from "react-router";
+import { getCommand, getCommandProducts } from "../services/CommandService";
 
 const CartItem = ({ product }) => {
 

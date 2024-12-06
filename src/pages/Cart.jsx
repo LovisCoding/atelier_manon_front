@@ -29,16 +29,16 @@ import {
 
 import { useTheme } from "@mui/material/styles";
 
-import { addProductPanier, getCartProducts, reduceProductPanier, deleteProductPanier } from "../services/CartService";
-
-import { addCommande } from "../services/CommandService";
+import { addCommande, addProductPanier, getCartProducts, reduceProductPanier, deleteProductPanier } from "../services/CartService";
+import { useNavigate } from "react-router";
+import { useAuth } from "../utils/AuthContext";
 
 // titre, détails, prix, quantité, total
 // description, gravure/variante
 // isCadeau, commentaire sur la commande, address (préremplie par adresse du compte)
 
 function Cart() {
-  const idUser = 2;
+  const {details} = useAuth();
   const [cartProducts, setCartProducts] = useState([]);
   const [commentary, setCommentary] = useState("");
   const [promoCodes, setPromoCodes] = useState([]);
@@ -48,10 +48,9 @@ function Cart() {
 
   useEffect(() => {
     const exec = async () => {
-      const data = await getCartProducts(idUser);
+      const data = await getCartProducts();
       if (!data) return;
       setCartProducts(data);
-      console.log("data:",data);
     };
     exec();
   }, []);
@@ -93,8 +92,7 @@ function Cart() {
 
   // TODO: idCli dans Context
   const handleConfirmCommand = async () => {
-    console.log("confirmCommand");
-    const commandId = await addCommande(cartProducts[0].idCli, commentary, isGift, giftCommentary, promoCodes);
+    const commandId = await addCommande(commentary, isGift, giftCommentary);
     if (!commandId) return; // TODO: handle error
     console.log("coucou")
     window.location = '/command/'+commandId;
