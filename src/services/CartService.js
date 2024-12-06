@@ -69,7 +69,7 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary) => 
         const data = await axios
             .post('/api/client/commande/add-commande' , {
                 idCli : idCli,
-                comm : commentary,
+                comm : commentary ,
                 estCadeau : isGift,
                 carte : giftCommentary
             }, { headers: { 'Content-Type':'application/json' } });
