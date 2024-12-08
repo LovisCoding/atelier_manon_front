@@ -16,7 +16,7 @@ export default function Orders() {
   };
 
   useEffect(() => {
-    if (auth.)
+    if ( auth.details == null ) navigate("/login");
     getOrdersForAdmin()
       .then((data) => {
         if (data != null) setOrders(data);
