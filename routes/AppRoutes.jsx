@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, Routes, useLocation } from 'react-router';
 import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Footer from '../src/components/Footer.jsx';
+import Loader from '../src/components/Loader.jsx';
 import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
 
 // Lazy loading des pages
@@ -47,10 +48,13 @@ const AppRoutes = () => {
 
     return (
         <>
+            {/* Render Navbar only if not on an admin route */}
             {!isAdminRoute && <Navbar />}
-            <Suspense fallback={<div>Loading...</div>}>
+
+            {/* Suspense fallback replaced with Loader */}
+            <Suspense fallback={<Loader message="Loading content..." />}>
                 <Routes>
-                    {/* Routes publiques avec footer */}
+                    {/* Public Routes with Footer */}
                     <Route path="/" element={<Home />} />
                     <Route path="/test/:id" element={<Test />} />
                     <Route path="/login" element={<Connection />} />
@@ -70,7 +74,7 @@ const AppRoutes = () => {
                     <Route path="/jewelry/bangles" element={<Bangles />} />
                     <Route path="/profil/" element={<Profil />} />
 
-                    {/* Routes administratives sans footer */}
+                    {/* Admin Routes without Footer */}
                     <Route path="/admin" element={<Admin />} />
                     <Route path="/admin/orders" element={<Orders />} />
                     <Route path="/admin/order/:id" element={<OrderDetails />} />
@@ -86,10 +90,12 @@ const AppRoutes = () => {
                     <Route path="/admin/personalization" element={<Personalization />} />
                     <Route path="/admin/accueil" element={<Accueil />} />
 
-                    {/* Route de fallback */}
+                    {/* Fallback Route */}
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Suspense>
+
+            {/* Render Footer only if not on an admin route */}
             {!isAdminRoute && <Footer />}
         </>
     );
