@@ -1,6 +1,6 @@
 import { Button, TextField, Typography, Stack, Container, FormControl } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { getAvisBySession } from "../services/AvisService";
 import { getOrdersProfil } from "../services/OrderService";
 import { getProfilCurrentSession } from "../services/AccountService";
@@ -12,10 +12,18 @@ export default function Profil() {
 	const [orders, setOrders] = useState([]);
 	const [avis, setAvis] = useState("");
 
-	const authContext = useAuth();
+	const auth = useAuth();
+	const navigate = useNavigate();
+
+	const disconnect = () => {
+		document.cookie = `ci_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+	}
 
 	useEffect(() => {
-		auth
+		if ( auth.details == null ) {
+			navigate("/login");
+			return;
+		}
 		getProfilCurrentSession().then((data) => {
 			setUserDetails(data);
 		})
@@ -41,12 +49,12 @@ export default function Profil() {
 						
 						<Stack direction="row">
 							{ userDetails && <TextField fullWidth id="outlined-basic" label="firstname" variant="outlined" defaultValue={userDetails.firstname} /> }
-							<Button>OK</Button>
+							{/* <Button>OK</Button> */}
 						</Stack>
 
 						<Stack direction="row">
 							{ userDetails && <TextField fullWidth id="outlined-basic" label="lastname" variant="outlined" defaultValue={userDetails.lastname} /> }
-							<Button>OK</Button>
+							{/* <Button>OK</Button> */}
 						</Stack>
 
 						<Stack spacing={1}>
@@ -55,7 +63,7 @@ export default function Profil() {
 						</Stack>
 						<Stack spacing={1}>
 							<Typography variant="h5">Avis</Typography>
-							<Typography>{ avis || "Aucun avis pour le moment" }</Typography>
+							<Typography>{ avis || "Aucun avis pour le moment" }</Typography>
 						</Stack>
 					</Stack>
 				</FormControl>
@@ -63,6 +71,7 @@ export default function Profil() {
 
 				<Typography variant="h2">Vos commandes</Typography>
 				<Stack>
+					{ orders.length == 0 && <Typography>Votre compte ne possède aucune commande</Typography> }
 					{
 						orders.map((order) => (
 							<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
@@ -77,21 +86,13 @@ export default function Profil() {
 				</Stack>
 
 				<Stack direction={"row"} spacing={3}>
-					<Button fullWidth variant="outlined" color="danger">Supprimer le compte</Button>
-					<Button fullWidth variant="outlined" color="secondary">Déconnexion</Button>
+					{/* <Button fullWidth variant="outlined" color="danger">Supprimer le compte</Button> */}
+					<Button type="button" onClick={disconnect()} fullWidth variant="outlined" color="secondary">Déconnexion</Button>
 				</Stack>
 
 
 			</Stack>
 		</Container>
 
-	)
-}
-
-
-
-function OrderLine() {
-	return (
-		<Typography>Commande 4</Typography>
 	)
 }
