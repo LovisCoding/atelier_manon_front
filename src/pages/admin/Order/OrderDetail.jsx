@@ -11,7 +11,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService";
 import { getCompte } from "../../../services/UserService";
-import { useParams } from "react-router";
+import { Link, useLocation, useParams } from "react-router";
 
 export default function OrderDetails() {
 
@@ -30,17 +30,23 @@ function OrderDetailsContent() {
   const [client, setClient] = useState(null);
   const [total, setTotal] = useState();
   const { id } = useParams();
+  const [error, setError] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     getOrderAdminDetail(id)
       .then((data) => {
         if (data != null) {
           setOrderDetails(data);
+        } else {
+          console.log("Hello World");
+          setError("Une erreur est survenue lors du chargment du détail de la commande")
         }
       })
     getProduitsCommande(id)
       .then((data) => {
         if (data != null) setProducts(data);
+        else setError("Une erreur est survenue lors du chargment du détail de la commande")
       })
   }, [])
 
@@ -61,13 +67,19 @@ function OrderDetailsContent() {
     getCompte()
       .then((data) => {
         if ( data != null ) setClient(data);
+        else setError("Une erreur est survenue lors du chargment du détail de la commande")
       })
   }, [orderDetails])
 
   if ( !orderDetails || !products || !client ) {
     return (
       <Stack padding={5}>
-        <Typography variant="h1">Chargement des détails de la commande...</Typography>
+        {
+          error ? <>
+            <Typography mb={5} variant="h2">{error}</Typography>
+            <Typography><Link to="/admin/orders">Revenir à la liste des commandes</Link></Typography>
+          </> : <Typography variant="h1">Chargement des détails de la commande...</Typography>
+        }
       </Stack>
     );
   }

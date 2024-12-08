@@ -12,7 +12,10 @@ export const register = async (firstname, lastname, email, password, adresse) =>
 }
 
 export const getCompte = async (idCli) => {
-	let res = await axios.get("/api/admin/account/get-compte-admin", { idCli });
-	if (res.status !== 200) return null;
-	return res.data;
+	try {
+		let res = await axios.get("/api/admin/account/get-compte-admin", { idCli });
+        return data.data;
+      } catch (error) {
+        return null;
+      }
 }
