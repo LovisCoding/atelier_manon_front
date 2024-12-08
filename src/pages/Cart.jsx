@@ -29,7 +29,8 @@ import {
 
 import { useTheme } from "@mui/material/styles";
 
-import { addCommande, addProductPanier, getCartProducts, reduceProductPanier } from "../services/CartService";
+import { addCommande, addProductPanier, getCartProducts, reduceProductPanier, deleteProductPanier } from "../services/CartService";
+import { useNavigate } from "react-router";
 
 // titre, détails, prix, quantité, total
 // description, gravure/variante
@@ -44,11 +45,14 @@ function Cart() {
   const [giftCommentary, setGiftCommentary] = useState("");
   const [total, setTotal] = useState(0.0);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const exec = async () => {
       const data = await getCartProducts(idUser);
       if (!data) return;
       setCartProducts(data);
+      console.log("data:",data);
     };
     exec();
   }, []);
@@ -71,26 +75,27 @@ function Cart() {
     );
   };
 
-  const updateQuantity = (id, increment) => {
+  const updateQuantity = (idProd,variante,gravure,idCli,increment) => {
     setCartProducts((prev) =>
       prev.map((product) =>
-        product.idProd === id
+        product.idProd+product.variante+product.gravure+product.idCli === idProd+variante+gravure+idCli
           ? { ...product, qa: Math.max(1, product.qa + increment) }
           : product
       )
     );
   };
 
-  const removeItem = (idProd) => {
+  const removeItem = (idProd,variante,gravure,idCli) => {
     setCartProducts((prev) =>
-      prev.filter((product) => product.idProd !== idProd)
+      prev.filter((product) => product.idProd+product.variante+product.gravure+product.idCli !== idProd+variante+gravure+idCli)
     );
+    deleteProductPanier(cartProducts.find((product) => product.idProd+product.variante+product.gravure+product.idCli === idProd+variante+gravure+idCli));
   };
 
   const handleConfirmCommand = async () => {
     const commandId = await addCommande(cartProducts[0].idCli, commentary, isGift, giftCommentary);
     if (!commandId) return; // TODO: handle error
-    window.location = '/command/'+commandId;
+    navigate('/command/'+commandId);
   }
 
   return (
@@ -310,17 +315,17 @@ const CartItem = ({ product, removeItem, updateQuantity }) => {
 
       <TableCell align="right">{product.produit.prix} €</TableCell>
       <TableCell align="center">
-        <IconButton onClick={() => {updateQuantity(product.idProd, -1); reduceProductPanier(product)}}>
+        <IconButton onClick={() => {updateQuantity(product.idProd,product.variante,product.gravure,product.idCli,-1); reduceProductPanier(product)}}>
           <Remove />
         </IconButton>
         {product.qa}
-        <IconButton onClick={() => {updateQuantity(product.idProd, 1); addProductPanier(product)}}>
+        <IconButton onClick={() => {updateQuantity(product.idProd,product.variante,product.gravure,product.idCli,1); addProductPanier(product)}}>
           <Add />
         </IconButton>
       </TableCell>
       <TableCell align="right">{Math.round(product.produit.prix * product.qa*100)/100} €</TableCell>
       <TableCell align="center">
-        <IconButton onClick={() => removeItem(product.idProd)}>
+        <IconButton onClick={() => removeItem(product.idProd,product.variante,product.gravure,product.idCli)}>
           <Delete color="error" />
         </IconButton>
       </TableCell>

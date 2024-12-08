@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Box, Typography, Container } from "@mui/material";
+import { useNavigate } from "react-router";
 
 function EmailSent() {
 
+    const navigate = useNavigate();
+
     const changeRoute = (route) => {
-        window.location = route;
+        navigate(route);
     }
 
     return (

@@ -1,27 +1,34 @@
-import {
-    Box,
-    Button,
-    Container,
-    Paper,
-    Stack,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Typography
-} from "@mui/material";
-import { useState } from "react";
+import { Box, Button, Container, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
 import Link from "../../../components/Link";
+import { getArticles } from "/src/services/ArticleService"; // Assurez-vous d'importer la méthode
 
 export default function Articles() {
-    const rows = [
-        { id: 1, title: "Article 1", description: "Description de l'article 1", date: "2024-12-01" },
-        { id: 2, title: "Article 2", description: "Description de l'article 2", date: "2024-12-02" },
-        { id: 3, title: "Article 3", description: "Description de l'article 3", date: "2024-12-03" },
-    ];
+    const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchArticles = async () => {
+            const data = await getArticles();
+            if (data) {
+                setArticles(data);
+            }
+            setLoading(false);
+        };
+        fetchArticles();
+    }, []);
+
+    if (loading) {
+        return (
+            <Box display={'flex'}>
+                <SidebarMenu />
+                <Stack sx={{ mt: 5, width: '100%' }}>
+                    <Typography variant='h4'>Chargement des articles...</Typography>
+                </Stack>
+            </Box>
+        );
+    }
 
     return (
         <Box display={'flex'}>
@@ -44,17 +51,17 @@ export default function Articles() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((row) => (
+                                {articles.map((article) => (
                                     <TableRow
-                                        key={row.id}
+                                        key={article.idArticle}
                                         hover
                                         style={{ cursor: "pointer" }}
                                         component={Link}
-                                        href={'/admin/blog/' + row.id}
+                                        href={`/admin/blog/${article.idArticle}`}
                                     >
-                                        <TableCell>{row.title}</TableCell>
-                                        <TableCell>{row.description}</TableCell>
-                                        <TableCell>{row.date}</TableCell>
+                                        <TableCell>{article.titreArticle}</TableCell>
+                                        <TableCell>{article.contenu}</TableCell>
+                                        <TableCell>{article.dateArticle}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
