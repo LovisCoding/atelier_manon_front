@@ -31,7 +31,6 @@ function OrderDetailsContent() {
   const [total, setTotal] = useState();
   const { id } = useParams();
   const [error, setError] = useState(null);
-  const location = useLocation();
 
   useEffect(() => {
     getOrderAdminDetail(id)
