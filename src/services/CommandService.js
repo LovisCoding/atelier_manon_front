@@ -8,4 +8,8 @@ export const getCommand = async (idCommand) => {
 }
 
 
-
+export const getOrdersForAdmin = async () => {
+    const data = await axios.get('/api/admin/commande/get-commandes');
+    if (!data.data) return null;
+    return data.data
+}
