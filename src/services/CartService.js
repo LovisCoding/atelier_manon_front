@@ -46,12 +46,30 @@ export const reduceProductPanier = async (product) => {
     }
 }
 
+export const deleteProductPanier = async (product) => {
+    try {
+      const response = await axios
+            .delete('/api/client/panier/delete-product-panier', {
+                headers: { 'Content-Type': 'application/json' },
+                data: {
+                    idProd: product.idProd,
+                    idCli: product.idCli,
+                    gravure: product.gravure,
+                    variante: product.variante
+                }
+            });
+      console.log("Response :", response.data);
+    } catch (err) {
+      console.error("Une erreur est survenue : ", err);
+    }
+  };
+
 export const addCommande = async (idCli, commentary, isGift, giftCommentary) => {
     try {
         const data = await axios
             .post('/api/client/commande/add-commande' , {
                 idCli : idCli,
-                comm : commentary,
+                comm : commentary ,
                 estCadeau : isGift,
                 carte : giftCommentary
             }, { headers: { 'Content-Type':'application/json' } });
@@ -61,5 +79,7 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary) => 
         return null;
     }
 }
+
+
 
 

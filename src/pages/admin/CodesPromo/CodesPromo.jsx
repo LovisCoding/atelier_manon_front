@@ -10,26 +10,22 @@ import {
 	TableRow,
 	Typography
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SidebarMenu from "../SidebarMenu";
 import Link from "../../../components/Link";
 import axios from "axios";
+import { getAllCodesPromoWithUse } from "../../../services/CodesPromoService";
 
 export default function CodesPromo() {
-	const [promoTextfield, setPromoTextfied] = useState('')
-	const rows = [
-		{ id: 1, name: "NOEL_PROMO", use: 123 },
-		{ id: 2, name: "ETE_PROMO", use: 87 },
-		{ id: 3, name: "HIVER_PROMO", use: 15 },
-	];
-	axios.get(
-		'/api/codepromo/get-codespromo'
-	).then((response) => {
-		console.log(response.data);
-	}).catch((error) => {
-		console.error(error);
-	}
-	)
+	const [rows, setRows] = useState([]);
+	
+	
+	useEffect(() => {
+		getAllCodesPromoWithUse().then((data) => {
+			
+			setRows(data);
+		});
+	}, []);
 	return (
 		<Box display={'flex'}>
 			<SidebarMenu />
@@ -50,13 +46,13 @@ export default function CodesPromo() {
 						<TableBody>
 							{rows.map((row) => (
 								<TableRow
-									key={row.id}
+									key={row.code}
 									hover
 									style={{ cursor: "pointer" }}
 									component={Link}
-									href={'/admin/codesPromo/' + row.id}
+									href={'/admin/codesPromo/' + row.code}
 								>
-									<TableCell>{row.name}</TableCell>
+									<TableCell>{row.code}</TableCell>
 									<TableCell>{row.use}</TableCell>
 								</TableRow>
 							))}

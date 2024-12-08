@@ -1,20 +1,51 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Typography, Container, useTheme } from "@mui/material";
+import { TextField, Button, Box, Typography, Container, useTheme, Snackbar, Alert } from "@mui/material";
+import { useNavigate } from "react-router";
+import { useAuth } from "../utils/AuthContext";
 
 function Connection() {
 
+    const {login} = useAuth();
+    const theme = useTheme();
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
 
-    const theme = useTheme();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(email, ":", password);
+        if (!email || !password) {
+            setErrorMessage("Veuillez renseigner un email et un mot de passe.");
+            setIsErrorDisplayed(true);
+            return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setErrorMessage("Veuillez entrer une adresse email correcte.");
+            setIsErrorDisplayed(true);
+            setEmail("");
+            setPassword("");
+            return;
+        }
+        const exec = async () => {
+            const response = await login(email, password);
+            if (!response) {
+                setErrorMessage("Mot de passe ou email incorrect.");
+                setIsErrorDisplayed(true);
+                setEmail("");
+                setPassword("");
+                return;
+            }
+            navigate('/');
+        }
+        exec();
     };
 
     const changeRoute = (route) => {
-        window.location = route;
+        navigate(route);
     }
 
     const fieldStyle = {
@@ -29,6 +60,8 @@ function Connection() {
         }
     }
 
+    const handleClose = () => setIsErrorDisplayed(false)
+
     return (
 
         <Container maxWidth="xs" >
@@ -40,6 +73,16 @@ function Connection() {
                     alignItems: "center",
                 }}
             >
+                <Snackbar
+                    open={isErrorDisplayed}
+                    autoHideDuration={3000}
+                    onClose={handleClose}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                    <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+                        {errorMessage}
+                    </Alert>
+                </Snackbar>
                 <Typography color="customYellow" fontWeight="700" component="h1" variant="h5" >
                     Connexion
                 </Typography>

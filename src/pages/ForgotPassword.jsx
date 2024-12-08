@@ -1,21 +1,43 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Typography, Container, useTheme } from "@mui/material";
+import { TextField, Button, Box, Typography, Container, useTheme, Alert, Snackbar } from "@mui/material";
+import { useNavigate } from "react-router";
+import { forgotPassword } from "../services/ConnectionService";
 
 function ForgotPassword() {
 
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [isErrorDisplayed, setIsErrorDisplayed] = useState(true);
+    const [errorMessage, setErrorMessage] = useState("Erreur survenue");
 
     const theme = useTheme();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(email, ":", password);
+        if (!email) {
+            setErrorMessage("Veuillez renseigner une adresse email valide.");
+            setIsErrorDisplayed(true);
+            return;
+        }
+        const exec = async () => {
+            const data = await forgotPassword(email);
+            if (!data) return;
+            if (data.status === 404) {
+                setErrorMessage("L'adresse renseignée n'est associée à aucun compte.");
+                setIsErrorDisplayed(true);
+                return;
+            }
+            changeRoute('/email-sent');
+        }
+        exec();
     };
 
     const changeRoute = (route) => {
-        window.location = route;
+        navigate(route);
     };
+
+    const handleClose = () => setIsErrorDisplayed(false);
 
     const fieldStyle = {
         "& .MuiOutlinedInput-root": {
@@ -40,6 +62,16 @@ function ForgotPassword() {
                     alignItems: "center",
                 }}
             >
+                <Snackbar
+                    open={isErrorDisplayed}
+                    autoHideDuration={3000}
+                    onClose={handleClose}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                    <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+                        {errorMessage}
+                    </Alert>
+                </Snackbar>
                 <Typography color="customYellow" fontWeight="700" component="h1" variant="h5" >
                     Réinitialisation de mot de passe
                 </Typography>
@@ -72,7 +104,6 @@ function ForgotPassword() {
                         fullWidth
                         variant="yellowButton"
                         sx={{ mt: 3, mb: 2 }}
-                        onClick={e=>changeRoute('/email-sent')}
                     >Valider</Button>
                     <Typography onClick={e => changeRoute('/login')} sx={{ justifySelf: 'center', fontSize: '12px', textDecoration: 'underline', cursor: 'pointer' }} >
                         Annuler</Typography>

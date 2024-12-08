@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, Routes, useLocation } from 'react-router';
 import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Footer from '../src/components/Footer.jsx';
+import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
 
 // Lazy loading des pages
 const Test = React.lazy(() => import('../src/pages/Test/Test'));
@@ -54,6 +55,7 @@ const AppRoutes = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/email-sent" element={<EmailSent />} />
+                    <Route path="email/confirmAccount/:token" element={<ConfirmAccount />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/cgv" element={<CGV />} />
