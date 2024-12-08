@@ -8,7 +8,6 @@ export const getCommand = async (idCommand) => {
     return data.data
 }
 
-
 export const getOrderAdminDetail = async (orderId) => {
     const data = await axios.get('/api/client/commande/get-commande', {params:{idCommande:orderId}});
     if (!data.data) return null;
@@ -22,3 +21,8 @@ export const getCommandProducts = async (idCommand) => {
     return data.data;
 }
 
+export const getProduitsCommande = async (idCommand) => {
+    const data = await axios.get("/api/client/commandeproduit/get-produits-commande", { params: { idCommande: idCommand } } );
+    if ( data.status !== 200 ) return null;
+    return data.data;
+}
