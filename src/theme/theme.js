@@ -27,6 +27,7 @@ const theme = createTheme({
     primary: {
       main: '#556cd6',
       dark: '#333333',
+      error: '#f44336',
     },
     secondary: {
       main: '#19857b',

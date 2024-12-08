@@ -1,6 +1,6 @@
-import { useLocation, useParams } from "react-router";
+import { useNavigate, useParams} from "react-router";
 import SidebarMenu from "../SidebarMenu";
-import { Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import {Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography, useTheme} from "@mui/material";
 import { useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoService";
+import {CreatePromo, DeleteCodePromo, getOneCodePromo} from "../../../services/CodesPromoService";
 import { getAllProduits, getProductImage } from "../../../services/ProductService";
 import axios from "axios";
 import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduit";
@@ -18,6 +18,8 @@ import Snackbar from "@mui/material/Snackbar";
 
 export default function CodePromo() {
 	const { id } = useParams();
+	const theme = useTheme()
+	const navigate = useNavigate();
 
 	const [name, setName] = useState('');
 	const [value, setValue] = useState('');
@@ -111,6 +113,16 @@ export default function CodePromo() {
 		
 	}
 
+	const handleDelete = () => {
+		try {
+			DeleteCodePromo(id)
+			navigate('/admin/codesPromo')
+		}
+		catch (err) {
+			console.error("Une erreur est survenue : " + err)
+		}
+
+	}
 	return (
 		<Box display="flex" justifyContent={'center'} >
 			<SidebarMenu />
@@ -192,6 +204,7 @@ export default function CodePromo() {
 				}
 				
 				{id == -1 ? <Button variant='yellowButton' onClick={handleCreate} >Enregistrer</Button> : ''}
+				{id != -1 ? <Button sx={{background: theme.palette.primary.error, color: theme.palette.text.white}} onClick={handleDelete} >Supprimer</Button> : ''}
 			</Stack>
 			<Snackbar open={snOpenValue} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={() => setSnOpenValue(false)} message={message} />
 		</Box>
