@@ -126,13 +126,13 @@ function OrderDetailsContent() {
 
       <ClientDetail client={client} />
       <ProductsDetail products={products} />
-      <Actions setOrderDetails={setOrderDetails} />
+      <Actions setOrderDetails={setOrderDetails} orderDetails={orderDetails} />
 
     </Stack>
   );
 }
 
-function Actions({ setOrderDetails }) {
+function Actions({ setOrderDetails, orderDetails }) {
   const { id } = useParams();
 
   const changeState = async (state) => {
@@ -153,9 +153,14 @@ function Actions({ setOrderDetails }) {
 
   return (
     <Stack spacing={3}>
-      <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">
-        Terminer la commande
-      </Button>
+      {
+        ( orderDetails.etat === "pas commencée" || orderDetails.etat === "en cours" ) &&
+        <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">
+          { orderDetails.etat === "pas commencée" &&  "Démmarer la commande" }
+          { orderDetails.etat === "en cours" &&  "Terminer la commande" }
+        </Button>
+      }
+
       <Button onClick={() => changeState("annulée")} fullWidth variant="outlined" color="error">
         Annuler la commande
       </Button>
