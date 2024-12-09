@@ -24,6 +24,7 @@ const Jewelry = () => {
           image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}`,
           title: product.libProd,
           price: `${product.prix}€`,
+          idCateg: product.idCateg
         }));
 
         setJewelryData(formattedData);
