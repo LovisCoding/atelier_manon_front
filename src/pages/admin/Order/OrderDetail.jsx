@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react"; 
 import { Box, Button, Typography, Stack } from "@mui/material"; 
-import { MdCalendarToday, FaEuroSign, FiGift, CiStickyNote, TbTruckDelivery, GrStatusGoodSmall, CiUser } from "react-icons/all"; 
 import SidebarMenu from "../SidebarMenu"; 
 import theme from "../../../theme/theme"; 
 import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService"; 
 import { getCompte } from "../../../services/UserService"; 
 import { Link, useParams } from "react-router";
+import { FaEuroSign } from "react-icons/fa";
+import { MdCalendarToday } from "react-icons/md";
+import { CiStickyNote, CiUser } from "react-icons/ci";
+import { TbTruckDelivery } from "react-icons/tb";
+import { GrStatusGoodSmall } from "react-icons/gr";
+import { FiGift } from "react-icons/fi";
+import { updateState } from "../../../services/OrderService";
 
 export default function OrderDetails() {
 
@@ -25,6 +31,7 @@ function OrderDetailsContent() {
   const [total, setTotal] = useState();
   const { id } = useParams();
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     getOrderAdminDetail(id)
@@ -32,32 +39,23 @@ function OrderDetailsContent() {
         if (data != null) {
           setOrderDetails(data);
         } else {
-          console.log("Hello World");
-          setError("Une erreur est survenue lors du chargment du détail de la commande")
+          setError("Une erreur est survenue lors du chargement du détail de la commande")
         }
       })
     getProduitsCommande(id)
       .then((data) => {
-        if (data != null) setProducts(data);
-        else setError("Une erreur est survenue lors du chargment du détail de la commande")
+        if (data != null) {
+          setProducts(data)
+          console.log(data);
+        }
+        else setError("Une erreur est survenue lors du chargement du détail de la commande")
       })
   }, [])
-
-  useEffect(() => {
-    if (Array.isArray(products) && products.length > 0) {
-      let total = 0;
-      products.forEach((product) => {
-        total += product.qa * product.prix;
-      });
-      setTotal(total);
-    } else {
-      setTotal(0);
-    }
-  }, [products]);
   
 
   useEffect(() => {
-    getCompte()
+    if ( !orderDetails ) return;
+    getCompte(orderDetails.idCli)
       .then((data) => {
         if ( data != null ) setClient(data);
         else setError("Une erreur est survenue lors du chargment du détail du client")
@@ -87,7 +85,7 @@ function OrderDetailsContent() {
 
         <Stack direction="row" alignItems="center" spacing={1}>
           <FaEuroSign />
-          <Typography>{total}</Typography>
+          <Typography>{orderDetails.prixTotal}</Typography>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={1}>
           <MdCalendarToday />
@@ -130,19 +128,19 @@ function OrderDetailsContent() {
 }
 
 function Actions() {
+
+  const changeState = (state) => {
+    updateState(id, )
+  }
+
   return (
     <Stack spacing={3}>
-      <Stack direction="row" spacing={3}>
-        <Button fullWidth variant="yellowButton">
-          Changer l'état
-        </Button>
-{/*         <Button fullWidth variant="contained" color="error">
-          Supprimer
-        </Button> */}
-      </Stack>
-      {/* <Button variant="outlined" color="secondary">
-        Envoyer un lien de paiement
-      </Button> */}
+      <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">
+        Terminer la commande
+      </Button>
+      <Button onClick={() => changeState("annulée")} fullWidth variant="outlined" color="danger">
+        Annuler la commande
+      </Button>
     </Stack>
   )
 }
@@ -170,7 +168,7 @@ function ProductsDetail({ products }) {
               height: "4rem",
               width: "4rem",
               objectFit: "cover"
-            }} component={"img"} src={`/api/img/${product.image}`}>
+            }} component={"img"} src={`/api/img/${product.photo}`}>
             </Box>
 
             <Stack spacing={1}>
