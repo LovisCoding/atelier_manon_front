@@ -31,9 +31,8 @@ export default function Profil() {
 	const disableAccount = async () => {
 		const res = await disableMyAccount();
 		if (res) logout();
-	  };
-	  
-
+		return;
+	};
 
 	useEffect(() => {
 		getProfilCurrentSession().then((data) => {
@@ -108,21 +107,18 @@ export default function Profil() {
 					<Button onClick={() => disconnect()} fullWidth variant="yellowButton" color="secondary">Déconnexion</Button>
 				</Stack>
 
+				{ !details.isAdmin &&
 				<Stack direction="row" justifyContent="center" >
 					<Button type="button" variant="outlined" onClick={() => adminPage()}
 					>Accéder à la page d'administrateur</Button>
-				</Stack>
+				</Stack>}
 
+				{ details.isAdmin &&
 				<Stack direction="row" justifyContent="center" >
 					<Button type="button" variant="outlined" onClick={() => disableAccount()}
-						sx={{
-							color: 'red',        
-							borderColor: 'red'
-						}}>
-						Désactiver le compte
-					</Button>
-
-				</Stack>
+						sx={{color: 'red', borderColor: 'red'}}
+					>Désactiver le compte</Button>
+				</Stack>}
 			</Stack>
 		</Container>
 
