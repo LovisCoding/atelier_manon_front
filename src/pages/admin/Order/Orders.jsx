@@ -8,6 +8,7 @@ import { useAuth } from "../../../utils/AuthContext";
 export default function Orders() {
 
   const [orders, setOrders] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const auth = useAuth();
 
@@ -20,8 +21,15 @@ export default function Orders() {
     getOrdersForAdmin()
       .then((data) => {
         if (data != null) setOrders(data);
+        else setError(true);
       })
   }, [])
+
+  if ( error !== null ){
+    return(
+      <Typography>Chargement des données...</Typography>
+    )
+  }
 
   return (
     <Box display="flex">
@@ -34,7 +42,7 @@ export default function Orders() {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Client</TableCell>
+                <TableCell>Adresse</TableCell>
                 <TableCell>Montant total</TableCell>
                 <TableCell>État</TableCell>
                 <TableCell>Date</TableCell>
@@ -50,12 +58,10 @@ export default function Orders() {
                     "&:hover": { backgroundColor: "#f5f5f5" },
                   }}
                 >
-                  <TableCell component="th" scope="row">
-                    {row.client}
-                  </TableCell>
+                  <TableCell>{row.adresse}</TableCell>
                   <TableCell>{row.amount.toFixed(2)} €</TableCell>
-                  <TableCell>{row.state}</TableCell>
-                  <TableCell>{row.date}</TableCell>
+                  <TableCell>{row.etat}</TableCell>
+                  <TableCell>{row.dateCommande}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
