@@ -11,6 +11,7 @@ export const getProduct = async (id) => {
 export const getAllProducts = async () => {
     const data = await axios
         .get('/api/produit/get-all-produits')
+
     if (data.data) return data.data
     return null;
 }
