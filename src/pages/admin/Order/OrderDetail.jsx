@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react"; 
-import { Box, Button, Typography, Stack } from "@mui/material"; 
-import SidebarMenu from "../SidebarMenu"; 
-import theme from "../../../theme/theme"; 
-import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService"; 
-import { getCompte } from "../../../services/UserService"; 
+import React, { useEffect, useState } from "react";
+import { Box, Button, Typography, Stack } from "@mui/material";
+import SidebarMenu from "../SidebarMenu";
+import theme from "../../../theme/theme";
+import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService";
+import { getCompte } from "../../../services/UserService";
 import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { FaEuroSign } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
@@ -30,7 +30,7 @@ function OrderDetailsContent() {
   const [client, setClient] = useState(null);
   const { id } = useParams();
   const [error, setError] = useState(null);
-  
+
 
   useEffect(() => {
     getOrderAdminDetail(id)
@@ -50,18 +50,18 @@ function OrderDetailsContent() {
         else setError("Une erreur est survenue lors du chargement du détail de la commande")
       })
   }, [])
-  
+
 
   useEffect(() => {
-    if ( !orderDetails ) return;
+    if (!orderDetails) return;
     getCompte(orderDetails.idCli)
       .then((data) => {
-        if ( data != null ) setClient(data);
+        if (data != null) setClient(data);
         else setError("Une erreur est survenue lors du chargment du détail du client")
       })
   }, [orderDetails])
 
-  if ( !orderDetails || !products || !client ) {
+  if (!orderDetails || !products || !client) {
     return (
       <Stack padding={5}>
         {
@@ -90,25 +90,30 @@ function OrderDetailsContent() {
           <MdCalendarToday />
           <Typography>{orderDetails.dateCommande}</Typography>
         </Stack>
-        <Stack direction={"row"} spacing={1} alignItems={"center"}>
-          <CiStickyNote />
-          <Typography>{orderDetails.carte}</Typography>
-        </Stack>
+
+        {
+          orderDetails.estCadeau &&
+          <>
+            <Stack direction={"row"} spacing={1} alignItems={"center"}>
+              <CiStickyNote />
+              <Typography>{orderDetails.carte}</Typography>
+            </Stack>
+            <Stack direction={"row"} spacing={1} alignItems={"center"}>
+              <FiGift />
+              <Typography>Cette commande est un cadeau</Typography>
+            </Stack>
+          </>
+
+        }
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <TbTruckDelivery />
           <Typography>livraison le {orderDetails.dateLivraison}</Typography>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <GrStatusGoodSmall />
-          <Typography>{ orderDetails.etat }</Typography>
+          <Typography>{orderDetails.etat}</Typography>
         </Stack>
-        {
-          orderDetails.estCadeau &&
-          <Stack direction={"row"} spacing={1} alignItems={"center"}>
-            <FiGift />
-            <Typography>est cadeau</Typography>
-          </Stack>
-        }
+
 
 
       </Stack>
@@ -138,7 +143,6 @@ function Actions({ setOrderDetails }) {
     try {
       await updateState(id, state);
     } catch (error) {
-      console.error("Erreur lors de la mise à jour de l'état :", error);
       setOrderDetails((prevDetails) => ({
         ...prevDetails,
         etat: prevDetails.etat,
