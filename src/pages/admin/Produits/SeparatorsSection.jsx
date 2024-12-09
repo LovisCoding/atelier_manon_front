@@ -25,7 +25,7 @@ const SeparatorsSection = ({ separateurs, selectedSeparators, setSelectedSeparat
                 })
             }
             renderInput={(params) => (
-                <TextField {...params} variant="outlined" label="Sélectionner des separateurs" />
+                <TextField {...params} variant="outlined" label="" />
             )}
             sx={{ marginBottom: 2 }}
         />

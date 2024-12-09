@@ -9,7 +9,7 @@ export const getPieProd = async (idProd) => {
     return null;
 }
 export const updatePieProd = async (idProd, tabPierres) => {
-    const data = await axios.post('/api/pieprod/update-pierres-produit', {
+    const data = await axios.post('/api/admin/pieprod/update-pierres-produit', {
         idProd,
         tabPierres
     })

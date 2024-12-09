@@ -10,7 +10,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Link from "../../../components/Link";
-import { getAllProduits, getProductImage } from "../../../services/ProductService";
+import { getAllProducts, getProductImage } from "../../../services/ProductService";
+
 
 export default function Produits() {
  
@@ -24,7 +25,7 @@ export default function Produits() {
   ]);
 
   useEffect(()=> {
-	getAllProduits().then((data) => {
+	getAllProducts().then((data) => {
 		const tmpData = [];
 		data.forEach((row) => {
 			row.image = getProductImage(row.photo);

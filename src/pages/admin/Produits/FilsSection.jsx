@@ -24,7 +24,7 @@ const FilsSection = ({ fils, selectedFils, setSelectedFils }) => {
                     })
                 }
                 renderInput={(params) => (
-                    <TextField {...params} variant="outlined" label="Sélectionner des fils" />
+                    <TextField {...params} variant="outlined" label="" />
                 )}
                 sx={{ marginBottom: 2 }}
             />

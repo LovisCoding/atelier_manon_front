@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/FilsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/FilsSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/SeparatorsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/SeparatorsSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits2/ImagesProduit.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits2/Produit.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits2/Produits.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/FilProdServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FilProdServices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/MatProdService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/MatProdService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/PieProdService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PieProdService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ProductService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProductService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733662690114</updated>
       <workItem from="1733662691179" duration="1650000" />
-      <workItem from="1733670361979" duration="26127000" />
+      <workItem from="1733670361979" duration="37913000" />
     </task>
     <task id="LOCAL-00001" summary="Add Loader component and integrate into AppRoutes&#10;&#10;Refactor the Suspense fallback in AppRoutes to use a new Loader component, providing a consistent loading experience with a customized message. This change improves the UI by visually enhancing the loading state and maintaining consistent layout structures across pages. Rendering of Navbar and Footer is conditioned on non-admin routes to keep the interface clean and relevant.">
       <option name="closed" value="true" />
@@ -125,7 +136,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733752499471</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states.">
+      <option name="closed" value="true" />
+      <created>1733752997005</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733752997005</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states.">
+      <option name="closed" value="true" />
+      <created>1733753012667</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733753012667</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

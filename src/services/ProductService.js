@@ -94,14 +94,21 @@ export const updateProduct = async (product) => {
 			.post('/api/produit/update-produit' , {
 				...product
 			}, { headers: { 'Content-Type':'application/json' } });
-		console.log("Response :",data.data)
+		return data.data
 	} catch (err) {
-		console.error("Une erreur est survenue : "+err)
+		return err
 	}
 }
-export const addImage= async (idProd, image) => {
+export const addImage= async (idProd, image, libImage) => {
     const data = await axios.post('/api/produit/add-image', {
-        idProd: Number(idProd),
-        image
+       idProd,
+        image,
+        libImage
+    })
+}
+export const reorderImages= async (idProd, tabPhoto) => {
+    const data = await axios.post('/api/admin/produit/update-images-order', {
+        idProd,
+        tabPhoto
     })
 }

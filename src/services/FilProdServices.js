@@ -10,3 +10,10 @@ export const getFilsById = async (idProd) => {
     if (!data.data) return null
     return data.data;
 }
+export const updateFilsProd = async (idProd, tabFils) => {
+    const data = await axios
+        .post('/api/admin/filprod/update-fils-produit', {
+            idProd,
+            tabFils
+        })
+}
