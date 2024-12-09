@@ -5,6 +5,7 @@ import VisibilityOn from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from "react-router";
 import { register } from "../services/UserService";
+import { useAuth } from "../utils/AuthContext";
 
 
 // email, mdp, nomCli, prenomCli, adresse

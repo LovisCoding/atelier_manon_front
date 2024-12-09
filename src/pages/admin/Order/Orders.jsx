@@ -1,44 +1,34 @@
-import { Box, TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Stack, Typography, Button } from "@mui/material";
+import { Box, TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Stack, Typography } from "@mui/material";
 import SidebarMenu from "../SidebarMenu";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { getOrdersForAdmin } from "../../../services/CommandService";
+import { useAuth } from "../../../utils/AuthContext";
 
 export default function Orders() {
+
+  const [orders, setOrders] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleClickRow = (to) => {
     navigate(to);
   };
 
-  const rows = [
-    {
-      id: 1,
-      client: "Matthias Bernouy",
-      amount: 25.37,
-      state: "En cours",
-      date: "16 novembre 2024",
-    },
-    {
-      id: 2,
-      client: "Jean Dupont",
-      amount: 54.99,
-      state: "Livrée",
-      date: "12 novembre 2024",
-    },
-    {
-      id: 3,
-      client: "Marie Curie",
-      amount: 75.5,
-      state: "Annulée",
-      date: "10 novembre 2024",
-    },
-    {
-      id: 4,
-      client: "Albert Einstein",
-      amount: 12.34,
-      state: "En attente",
-      date: "15 novembre 2024",
-    },
-  ];
+  useEffect(() => {
+    getOrdersForAdmin()
+      .then((data) => {
+        if (data != null) setOrders(data);
+        else setError(true);
+      })
+  }, [])
+
+  if ( error !== null ){
+    return(
+      <Typography>Chargement des données...</Typography>
+    )
+  }
 
   return (
     <Box display="flex">
@@ -51,28 +41,26 @@ export default function Orders() {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Client</TableCell>
-                <TableCell>Montant total</TableCell>
+                <TableCell>Adresse</TableCell>
+                {/* <TableCell>Montant total</TableCell> */}
                 <TableCell>État</TableCell>
                 <TableCell>Date</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              { orders.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => handleClickRow(`/admin/order/${row.id}`)}
+                  onClick={() => handleClickRow(`/admin/order/${row.idCommande}`)}
                   sx={{
                     cursor: "pointer",
                     "&:hover": { backgroundColor: "#f5f5f5" },
                   }}
                 >
-                  <TableCell component="th" scope="row">
-                    {row.client}
-                  </TableCell>
-                  <TableCell>{row.amount.toFixed(2)} €</TableCell>
-                  <TableCell>{row.state}</TableCell>
-                  <TableCell>{row.date}</TableCell>
+                  <TableCell>{row.adresse}</TableCell>
+                  {/* <TableCell>{row.amount.toFixed(2)} €</TableCell> */}
+                  <TableCell>{row.etat}</TableCell>
+                  <TableCell>{row.dateCommande}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

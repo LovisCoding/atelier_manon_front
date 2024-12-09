@@ -6,7 +6,16 @@ export const register = async (firstname, lastname, email, password, adresse) =>
 		"nomCli": lastname,
 		"email": email,
 		"mdp": password,
-		"adresse": adresse
+		"adresse": [adresse]
 	 });
 	return res.status == 200;
+}
+
+export const getCompte = async (idCli) => {
+	try {
+		let res = await axios.get("/api/admin/account/get-compte-admin", { idCli });
+        return data.data;
+      } catch (error) {
+        return null;
+      }
 }
