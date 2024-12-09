@@ -45,6 +45,7 @@ export const getOrdersForAdmin = async () => {
     if (!data.data) return null;
     return data.data
 }
+
 export const getCommandProducts = async (idCommand) => {
     const data = await axios
         .get('/api/client/commandeproduit/get-produits-commande', {params:{idCommande:idCommand}}).catch((error) => { return null });

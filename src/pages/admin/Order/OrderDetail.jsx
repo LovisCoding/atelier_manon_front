@@ -57,7 +57,7 @@ function OrderDetailsContent() {
       });
       setTotal(total);
     } else {
-      setTotal(0); // Si `products` est null ou vide, le total est 0
+      setTotal(0);
     }
   }, [products]);
   
@@ -66,7 +66,7 @@ function OrderDetailsContent() {
     getCompte()
       .then((data) => {
         if ( data != null ) setClient(data);
-        else setError("Une erreur est survenue lors du chargment du détail de la commande")
+        else setError("Une erreur est survenue lors du chargment du détail du client")
       })
   }, [orderDetails])
 
