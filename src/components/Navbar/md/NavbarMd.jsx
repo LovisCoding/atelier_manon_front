@@ -16,10 +16,12 @@ import ImgMui from "../../ImgMui";
 import imgManon from "../../../assets/img/logo_manon.webp";
 import DropDownMenu from "./DropDownMenu";
 import ElevationScroll from "../ElevationScroll";
+import { useAuth } from "../../../utils/AuthContext";
 
 export default function NavbarMd() {
   const location = useLocation();
   const theme = useTheme();
+  const auth = useAuth();
 
   const [navbarState, setNavbarState] = useState({
     bgNavbar: "transparent",
@@ -71,6 +73,12 @@ export default function NavbarMd() {
                 </Link>
                 <Link variant="navbar" sx={getLinkStyles("/contact")} href="/contact">
                   Contact
+                </Link>
+                {
+                  !auth.details && <Link variant="navbar" sx={getLinkStyles("/login")} href="/login">Connexion</Link>
+                }
+                <Link variant="navbar" sx={getLinkStyles("/profil")} href="/profil">
+                  Profil
                 </Link>
                 <IconButton>
                   <FaSearch color={scrolled ? theme.palette.text.white : theme.palette.text.primary} />

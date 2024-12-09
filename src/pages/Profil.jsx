@@ -56,12 +56,12 @@ export default function Profil() {
 				<FormControl>
 					<Stack spacing={3}>
 						
-						<Stack spacing={3}>
+						<Stack spacing={1}>
 							<Typography variant="h5">Nom</Typography>
 							<Typography>{userDetails && userDetails.nomCli}</Typography>
 						</Stack>
 
-						<Stack spacing={3}>
+						<Stack spacing={1}>
 							<Typography variant="h5">Prénom</Typography>
 							<Typography>{userDetails && userDetails.preCli}</Typography>
 						</Stack>
