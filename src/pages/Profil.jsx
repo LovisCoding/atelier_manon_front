@@ -1,20 +1,31 @@
-import { Button, Typography, Stack, Container, FormControl } from "@mui/material";
+import { Button, Typography, Stack, Container, FormControl, TextField, Select, MenuItem } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { getAvisBySession } from "../services/AvisService";
+import { addAvis, getAvisBySession } from "../services/AvisService";
 import { getOrdersProfil } from "../services/OrderService";
-import { getProfilCurrentSession, disableMyAccount } from "../services/AccountService";
+import { getProfilCurrentSession, disableMyAccount, updateUserDetailsApi } from "../services/AccountService";
 import { useAuth } from "../utils/AuthContext";
 
 export default function Profil() {
 
 	const [userDetails, setUserDetails] = useState();
 	const [orders, setOrders] = useState([]);
-	const [avis, setAvis] = useState("");
+	const [avis, setAvis] = useState({
+		contenu: "",
+		note: 1
+	});
 
 	const { details, logout } = useAuth();
 	const navigate = useNavigate();
 
+	const updateUserDetails = () => {
+		updateUserDetailsApi(userDetails.nomCli, userDetails.preCli);
+	}
+
+	const handleAddAvis = () => {
+		addAvis(avis.contenu, avis.note);
+	}
+ 
 	const disconnect = () => {
 		logout();
 	}
@@ -32,7 +43,7 @@ export default function Profil() {
 		const res = await disableMyAccount();
 		if (res) logout();
 		return;
-	};
+	}
 
 	useEffect(() => {
 		getProfilCurrentSession().then((data) => {
@@ -42,7 +53,7 @@ export default function Profil() {
 			setOrders(data);
 		})
 		getAvisBySession().then((data) => {
-			setAvis(data);
+			if (data) setAvis(data);
 		})
 	}, [])
 
@@ -66,13 +77,35 @@ export default function Profil() {
 						<Stack direction="row" justifyContent="space-between" >
 							<Stack spacing={1}>
 								<Typography variant="h5">Nom</Typography>
-								<Typography>{userDetails && userDetails.nomCli}</Typography>
+								<Stack direction="row" spacing={1}>
+									<TextField
+										value={userDetails && userDetails.nomCli}
+										onChange={(e) => {
+											setUserDetails({ ...userDetails, nomCli: e.target.value })
+										}}
+									/>
+								</Stack>
 							</Stack>
 
-							<Stack spacing={1}>
+							<Stack fullWidth spacing={1}>
 								<Typography variant="h5">Prénom</Typography>
-								<Typography>{userDetails && userDetails.preCli}</Typography>
+								<Stack direction="row" spacing={1}>
+									<TextField
+										value={userDetails && userDetails.preCli}
+										onChange={(e) => {
+											setUserDetails({ ...userDetails, preCli: e.target.value })
+										}}
+									/>
+								</Stack>
 							</Stack>
+							<Button 
+							onClick={() => {
+								updateUserDetails();
+							}}
+							sx={{
+								alignSelf: "end",
+								height: "fit-content"
+							}} variant="outlined">Modifier</Button>
 						</Stack>
 
 						<Stack spacing={1}>
@@ -81,7 +114,37 @@ export default function Profil() {
 						</Stack>
 						<Stack spacing={1}>
 							<Typography variant="h5">Avis</Typography>
-							<Typography>{avis || "Aucun avis pour le moment"}</Typography>
+
+							<Stack direction="row" spacing={1}>
+								<TextField
+									fullWidth
+									multiline
+									rows={5}
+									value={avis.contenu && avis.contenu}
+									onChange={(e) => {
+										setAvis({ ...avis, contenu: e.target.value })
+									}}
+								/>
+							<Stack spacing={3}>
+								<Select
+									value={avis && avis.note}
+									onChange={(e) => {
+										setAvis({...avis, note: e.target.value})
+									}}
+								>
+									<MenuItem value="1">1/5</MenuItem>
+									<MenuItem value="2">2/5</MenuItem>
+									<MenuItem value="3">3/5</MenuItem>
+									<MenuItem value="4">4/5</MenuItem>
+									<MenuItem value="5">5/5</MenuItem>
+								</Select>
+								<Button onClick={() => handleAddAvis()} sx={{
+									alignSelf: "end",
+									height: "fit-content"
+								}} variant="outlined">Modifier</Button>
+							</Stack>
+
+							</Stack>
 						</Stack>
 					</Stack>
 				</FormControl>

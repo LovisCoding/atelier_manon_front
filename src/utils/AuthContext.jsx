@@ -51,8 +51,7 @@ export default function AuthContextProvider({ children }) {
         mdp: password
       });
       if (res.status === 200) { getProfil(); return true; }
-      if (res.status === 403) return false;
-      return true;
+      return false;
     } catch (err) {
       console.error("Une erreur est survenue:",err)
       return false;

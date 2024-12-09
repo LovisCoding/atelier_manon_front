@@ -14,3 +14,9 @@ export const addImageCateg = async (idCateg, libImage, image) => {
 		image
 	})
 }
+
+export const getEvenement = async () => {
+	const data = await axios.get('/api/personnalisation/get-evenement');
+	if (data.status == 200) return data.data;
+	return "";
+}
