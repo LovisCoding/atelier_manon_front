@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { getAvisBySession } from "../services/AvisService";
 import { getOrdersProfil } from "../services/OrderService";
-import { getProfilCurrentSession } from "../services/AccountService";
+import { getProfilCurrentSession, disableMyAccount } from "../services/AccountService";
 import { useAuth } from "../utils/AuthContext";
 
 export default function Profil() {
@@ -12,7 +12,7 @@ export default function Profil() {
 	const [orders, setOrders] = useState([]);
 	const [avis, setAvis] = useState("");
 
-	const {details, logout} = useAuth();
+	const { details, logout } = useAuth();
 	const navigate = useNavigate();
 
 	const disconnect = () => {
@@ -28,6 +28,13 @@ export default function Profil() {
 		return;
 	}
 
+	const disableAccount = async () => {
+		const res = await disableMyAccount();
+		if (res) logout();
+	  };
+	  
+
+
 	useEffect(() => {
 		getProfilCurrentSession().then((data) => {
 			setUserDetails(data);
@@ -40,7 +47,7 @@ export default function Profil() {
 		})
 	}, [])
 
-	if ( details == null ) {
+	if (details == null) {
 		navigate('/login');
 		return;
 	}
@@ -55,7 +62,7 @@ export default function Profil() {
 
 				<FormControl>
 					<Stack spacing={3}>
-						
+
 						<Stack direction="row" justifyContent="space-between" >
 							<Stack spacing={1}>
 								<Typography variant="h5">Nom</Typography>
@@ -74,7 +81,7 @@ export default function Profil() {
 						</Stack>
 						<Stack spacing={1}>
 							<Typography variant="h5">Avis</Typography>
-							<Typography>{ avis || "Aucun avis pour le moment" }</Typography>
+							<Typography>{avis || "Aucun avis pour le moment"}</Typography>
 						</Stack>
 					</Stack>
 				</FormControl>
@@ -82,7 +89,7 @@ export default function Profil() {
 
 				<Typography variant="h2">Vos commandes</Typography>
 				<Stack>
-					{ orders.length == 0 && <Typography>Votre compte ne possède aucune commande</Typography> }
+					{orders.length == 0 && <Typography>Votre compte ne possède aucune commande</Typography>}
 					{
 						orders.map((order) => (
 							<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
@@ -105,7 +112,16 @@ export default function Profil() {
 					>Accéder à la page d'administrateur</Button>
 				</Stack>
 
+				<Stack direction="row" justifyContent="center" >
+					<Button type="button" variant="outlined" onClick={() => disableAccount()}
+						sx={{
+							color: 'red',        
+							borderColor: 'red'
+						}}>
+						Désactiver le compte
+					</Button>
 
+				</Stack>
 			</Stack>
 		</Container>
 
