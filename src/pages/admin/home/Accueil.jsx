@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button, TextField, MenuItem, Select, FormControl, InputLabel, Stack } from "@mui/material";
 import SidebarMenu from "../SidebarMenu";
-import { getCategories } from '/src/services/CategorieService';
+import { getCategories } from "/src/services/CategorieService";
+import { addImage, addImageCateg } from "/src/services/HomeService";
+import { convertFilesToBase64 } from "/src/utils/Base64";
 
 export default function Accueil() {
-  const [categorie] = useState("");
+  const [categorie, setCategorie] = useState("");
+  const [idCategorie, setIdCategorie] = useState(null);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -18,21 +21,41 @@ export default function Accueil() {
     fetchCategories();
   }, []);
 
-  const handleFileChangePageAccueil = (event) => {
+  const handleFileChange = async (event, type, idCategorie = null) => {
+    const files = event.target.files;
+    if (files.length > 0) {
+      try {
+        const base64Images = await convertFilesToBase64(files);
 
-  };
-
-  const handleFileChangePageBijoux = (event) => {
-
+        if (type === "categorie" && idCategorie) {
+          await addImageCateg(idCategorie, idCategorie, base64Images[0]);
+          alert("Image envoyée pour la catégorie avec succès !");
+        } else if (type !== "categorie") {
+          await addImage(base64Images[0], type);
+          alert("Image envoyée avec succès !");
+        } else {
+          alert("Aucune catégorie sélectionnée.");
+        }
+      } catch (error) {
+        console.error("Erreur lors de l'envoi de l'image :", error);
+        alert("Une erreur est survenue lors de l'envoi de l'image.");
+      }
+    }
   };
 
   const handleCategorieChange = (event) => {
+    setCategorie(event.target.value);
+    const selectedCategory = categories.find(
+      (cat) => cat.libCateg === event.target.value
+    );
+
+    setIdCategorie(selectedCategory ? selectedCategory.idCateg : null);
   };
 
   return (
     <Box sx={{ display: "flex" }}>
       <SidebarMenu />
-      
+
       <Box
         sx={{
           flexGrow: 1,
@@ -45,7 +68,11 @@ export default function Accueil() {
         }}
       >
         <Stack spacing={4} sx={{ width: "100%", maxWidth: 600 }}>
-          <Typography variant="h4" align="center" sx={{ fontWeight: "bold", color: "#333" }}>
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{ fontWeight: "bold", color: "#333" }}
+          >
             Gestion des Pages
           </Typography>
 
@@ -55,14 +82,11 @@ export default function Accueil() {
             </Typography>
             <TextField
               type="file"
-              onChange={handleFileChangePageAccueil}
+              onChange={(e) => handleFileChange(e, "home")}
               sx={{ marginBottom: 2 }}
               fullWidth
               variant="outlined"
               helperText="Sélectionnez un fichier pour la page d'accueil"
-              InputProps={{
-                style: { textAlign: 'center' },
-              }}
             />
           </Box>
 
@@ -72,14 +96,11 @@ export default function Accueil() {
             </Typography>
             <TextField
               type="file"
-              onChange={handleFileChangePageBijoux}
+              onChange={(e) => handleFileChange(e, "bijoux")}
               sx={{ marginBottom: 2 }}
               fullWidth
               variant="outlined"
               helperText="Sélectionnez un fichier pour la page des bijoux"
-              InputProps={{
-                style: { textAlign: 'center' },
-              }}
             />
           </Box>
 
@@ -109,18 +130,19 @@ export default function Accueil() {
             </Typography>
             <TextField
               type="file"
-              onChange={handleFileChangePageBijoux}
+              onChange={(e) => handleFileChange(e, "categorie", idCategorie)}
               sx={{ marginBottom: 2 }}
               fullWidth
               variant="outlined"
               helperText="Sélectionnez un fichier pour la catégorie"
-              InputProps={{
-                style: { textAlign: 'center' },
-              }}
             />
           </Box>
 
-          <Button variant="contained" color="primary" sx={{ marginTop: 2, fontWeight: "bold" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ marginTop: 2, fontWeight: "bold" }}
+          >
             Soumettre
           </Button>
         </Stack>

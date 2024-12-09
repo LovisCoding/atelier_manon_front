@@ -42,7 +42,7 @@ export default function Orders() {
             <TableHead>
               <TableRow>
                 <TableCell>Adresse</TableCell>
-                {/* <TableCell>Montant total</TableCell> */}
+                <TableCell>Montant total</TableCell>
                 <TableCell>État</TableCell>
                 <TableCell>Date</TableCell>
               </TableRow>
@@ -58,6 +58,7 @@ export default function Orders() {
                   }}
                 >
                   <TableCell>{row.adresse}</TableCell>
+                  <TableCell>{row.prixTotalReduc} €</TableCell>
                   {/* <TableCell>{row.amount.toFixed(2)} €</TableCell> */}
                   <TableCell>{row.etat}</TableCell>
                   <TableCell>{row.dateCommande}</TableCell>

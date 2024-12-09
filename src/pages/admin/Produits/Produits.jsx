@@ -53,7 +53,7 @@ export default function Produits() {
       <Stack spacing={5} mt={5}>
 		<Stack direction={'row'} spacing={4}>
 		<Typography variant="h4">Configurer les Produits</Typography>
-		<Button variant="contained" LinkComponent={Link} href={'/admin/produits/-1'} color="secondary"> Nouveau</Button>
+		<Button variant="contained" LinkComponent={Link} href={'/admin/products/-1'} color="secondary"> Nouveau</Button>
 		</Stack>
         
         <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
@@ -69,19 +69,18 @@ export default function Produits() {
             </TableHead>
             <TableBody >
               {rows.map((row) => (
-                <TableRow sx={{p:4}} key={row.id} component={Link} href={"/admin/produits/" + row.id}>
+                <TableRow sx={{p:4}} key={row.id} component={Link} href={"/admin/products/" + row.id}>
                   <TableCell sx={{p:2}}>
                     <img src={row.image} alt={row.name} width="50" height="50" />
                   </TableCell>
                   <TableCell  width={'30%'}>{row.name}</TableCell>
-				  <TableCell >{(row.prixU +"").replace('.', ',')+ " €"}</TableCell>
-				  <TableCell >{(row.total+"").replace('.',',')+ " €"}</TableCell>
+                  <TableCell >{(row.prixU +"").replace('.', ',')+ " €"}</TableCell>
+                  <TableCell >{(row.total+"").replace('.',',')+ " €"}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer> 
-		
       </Stack>
     </Box>
   );

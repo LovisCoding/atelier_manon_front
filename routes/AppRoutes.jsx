@@ -4,6 +4,8 @@ import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Footer from '../src/components/Footer.jsx';
 import Loader from '../src/components/Loader.jsx';
 import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
+import Blog from '../src/pages/Blog.jsx';
+import ClientArticle from '../src/pages/Article.jsx';
 
 // Lazy loading des pages publiques
 
@@ -13,7 +15,7 @@ const Register = React.lazy(() => import('../src/pages/Register.jsx'));
 const ForgotPassword = React.lazy(() => import('../src/pages/forgot-password/ForgotPassword.jsx'));
 const EmailSent = React.lazy(() => import('../src/pages/forgot-password/EmailSent.jsx'));
 const ResetPassword = React.lazy(() => import('../src/pages/forgot-password/ResetPassword.jsx'));
-const FAQ = React.lazy(() => import('../src/pages/FAQ/Faq'));
+const FAQ = React.lazy(() => import('../src/pages/faq/Faq'));
 const About = React.lazy(() => import('../src/pages/About'));
 const Home = React.lazy(() => import('../src/pages/home/Home'));
 const Contact = React.lazy(() => import('../src/pages/Contact.jsx'));
@@ -73,6 +75,10 @@ const AppRoutes = () => {
                     <Route path="/command/:id" element={<Command />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/product/:id" element={<Product />} />
+
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/article/:id" element={<ClientArticle />} />
+
                     <Route path="/jewelry" element={<Jewelry />} />
                     <Route path="/jewelry/necklaces" element={<Necklaces />} />
                     <Route path="/jewelry/bracelets" element={<Bracelets />} />

@@ -1,50 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
-import {
-  Box,
-  Button,
-  InputAdornment,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-  useTheme,
-  Snackbar,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Checkbox
-} from "@mui/material";
+import { useLocation, useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
-
-import {
-  CreatePromo,
-  DeleteCodePromo,
-  getOneCodePromo,
-  getAllProduits,
-  getProductImage,
-  addProduitsToPromo,
-  addProduitToPromo,
-  DeleteProduitFromPromo,
-  deleteProduitsFromPromo,
-  getProduitsByPromo
-} from "@services";
+import { Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Checkbox from '@mui/material/Checkbox';
+import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoService";
+import { getAllProducts, getProductImage } from "../../../services/ProductService";
+import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduitService";
+import Snackbar from "@mui/material/Snackbar";
 
 export default function CodePromo() {
 	const { id } = useParams();
-	const theme = useTheme()
-	const navigate = useNavigate();
 
 	const [name, setName] = useState('');
 	const [value, setValue] = useState('');
 	const [selectValue, setSelectValue] = useState('E');
-	const [selectedRows, setSelectedRows] = useState([]);
-	const [selectAll, setSelectAll] = useState(false);
+	const [selectedRows, setSelectedRows] = useState([]); // Liste des lignes sélectionnées
+	const [selectAll, setSelectAll] = useState(false); // Checkbox global
 	const [exist, setExist] = useState(false);
 
 	const [message, setMessage] = useState('');
@@ -98,7 +76,7 @@ export default function CodePromo() {
 			setSelectValue(data.type);
 			setExist(true);
 		});
-		getAllProduits().then((data) => {
+		getAllProducts().then((data) => {
 			const tmpData = [...data]
 			tmpData.forEach((row) => {
 				row.image = getProductImage(row.photo);
@@ -132,16 +110,6 @@ export default function CodePromo() {
 		
 	}
 
-	const handleDelete = () => {
-		try {
-			DeleteCodePromo(id)
-			navigate('/admin/codesPromo')
-		}
-		catch (err) {
-			console.error("Une erreur est survenue : " + err)
-		}
-
-	}
 	return (
 		<Box display="flex" justifyContent={'center'} >
 			<SidebarMenu />
@@ -223,7 +191,6 @@ export default function CodePromo() {
 				}
 				
 				{id == -1 ? <Button variant='yellowButton' onClick={handleCreate} >Enregistrer</Button> : ''}
-				{id != -1 ? <Button sx={{background: theme.palette.primary.error, color: theme.palette.text.white}} onClick={handleDelete} >Supprimer</Button> : ''}
 			</Stack>
 			<Snackbar open={snOpenValue} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={() => setSnOpenValue(false)} message={message} />
 		</Box>

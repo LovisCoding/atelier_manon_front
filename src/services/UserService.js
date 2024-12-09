@@ -13,8 +13,8 @@ export const register = async (firstname, lastname, email, password, adresse) =>
 
 export const getCompte = async (idCli) => {
 	try {
-		let res = await axios.get("/api/admin/account/get-compte-admin", { idCli });
-        return data.data;
+		let res = await axios.get("/api/admin/account/get-compte-admin", { params: { idCli: idCli } });
+        return res.data;
       } catch (error) {
         return null;
       }
