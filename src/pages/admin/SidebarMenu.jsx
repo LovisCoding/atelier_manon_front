@@ -70,7 +70,7 @@ const SidebarMenu = ({ children }) => {
         <List>
           {[
             { text: 'Produits', href: '/admin/products', icon: <FaBox /> },
-            { text: 'Commandes', href: '/admin/commandes', icon: <FaShoppingCart /> },
+            { text: 'Commandes', href: '/admin/orders', icon: <FaShoppingCart /> },
             { text: 'FAQ', href: '/admin/faq', icon: <FaQuestionCircle />, view: 'faq' },
             { text: 'Accueil', href: '/admin/accueil', icon: <FaHome /> },
             { text: 'Newsletters', href: '/admin/newsletter', icon: <FaNewspaper /> },
