@@ -1,138 +1,101 @@
-import React from 'react';
-import { Box, Button, Typography, Card, CardMedia, CardContent, Grid2 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Typography, Card, CardMedia, CardContent, Grid2, Popover, List, ListItem, ListItemText, Slider, TextField } from '@mui/material';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { getCategories } from '/src/services/CategorieService';
 
-const JewelryCollection = ({ collectionData, backgroundImage, collectionName, collectionTitle }) => {
-  const navigate = useNavigate();
+const JewelryCollection = ({ collectionData, backgroundImage, collectionName, collectionTitle, onCategoryChange }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('Tout voir');
+  const [categories, setCategories] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const handleNavigation = (idCateg, id) => {
-    navigate(`/product/${id}`);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const fetchedCategories = await getCategories();
+      setCategories(fetchedCategories || []);
+    };
+
+    fetchCategories();
+  }, []);
+
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+    onCategoryChange(category.toLowerCase() === 'tout voir' ? '' : category.toLowerCase());
+    handleClose();
   };
+
+  const filteredCollectionData = collectionData.filter((item) => {
+    const price = parseInt(item.price);
+    const [minPrice, maxPrice] = priceRange;
+    return price >= minPrice && price <= maxPrice && item.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <Box>
-      <Box
-        sx={{
-          position: 'relative',
-          height: '300px',
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 1,
-          }}
-        />
-        <Typography
-          variant="h2"
-          sx={{
-            position: 'relative',
-            zIndex: 2,
-            color: 'white',
-            textShadow: '2px 2px 8px rgba(0,0,0,0.7)',
-            fontSize: '5rem',
-            letterSpacing: '0.1em',
-            textAlign: 'center',
-          }}
-        >
+      <Box sx={{ position: 'relative', height: 300, backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 1 }} />
+        <Typography variant="h2" sx={{ position: 'relative', zIndex: 2, color: 'white', textShadow: '2px 2px 8px rgba(0,0,0,0.7)', fontSize: '3rem', textAlign: 'center' }}>
           {collectionName}
         </Typography>
       </Box>
 
-      <Box
-        sx={{
-          padding: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Typography
-          variant="h4"
-          sx={{
-            color: '#f9a825',
-            marginBottom: '2rem',
-            textAlign: 'center',
-          }}
-        >
+      <Box sx={{ padding: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Typography variant="h5" sx={{ color: '#f9a825', marginBottom: '1rem', textAlign: 'center' }}>
           {collectionTitle}
         </Typography>
 
-        <Box
-          sx={{
-            marginBottom: '2rem',
-            display: 'flex',
-            gap: '1rem',
-            justifyContent: 'center',
-          }}
-        >
-          {['Tout voir', 'Colliers', 'Bracelets'].map((label, index) => (
-            <Button
-              key={index}
-              variant="contained"
-              sx={{
-                backgroundColor: '#f9a825',
-                color: '#333',
-                fontWeight: 'bold',
-                border: '1px solid #333',
-                '&:hover': { backgroundColor: '#d49a00' },
-              }}
-            >
-              {label}
-            </Button>
-          ))}
+        <Box sx={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
+          <Button variant="outlined" sx={{ marginRight: '1rem', fontWeight: 'bold' }} onClick={handleClick} endIcon={<FilterListIcon />}>
+            Filtres
+          </Button>
+          <TextField
+            label="Recherche"
+            variant="outlined"
+            size="small"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            sx={{ width: 200 }}
+          />
         </Box>
 
-        <Grid2 container justifyContent="center">
-          {collectionData.map((item) => (
+        <Popover open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} transformOrigin={{ vertical: 'top', horizontal: 'center' }}>
+          <List>
+            {['Tout voir', ...categories.map(cat => cat.libCateg)].map((category) => (
+              <ListItem button key={category} onClick={() => handleCategorySelect(category)}>
+                <ListItemText primary={category} />
+              </ListItem>
+            ))}
+          </List>
+        </Popover>
+
+        <Box sx={{ width: '100%', marginBottom: '1rem', textAlign: 'center' }}>
+          <Typography variant="body2" sx={{ marginBottom: '0.5rem' }}>
+            Prix: {priceRange[0]} € - {priceRange[1]} €
+          </Typography>
+          <Slider 
+            value={priceRange} 
+            onChange={(e, newValue) => setPriceRange(newValue)} 
+            valueLabelDisplay="auto" 
+            valueLabelFormat={(value) => `${value} €`} 
+            min={0} 
+            max={100} 
+            step={5} 
+            sx={{ width: '80%' }} 
+          />
+        </Box>
+
+        <Grid2 container spacing={2} justifyContent="center">
+          {filteredCollectionData.map((item) => (
             <Grid2 item xs={12} sm={6} md={4} key={item.id}>
-              <Card
-                sx={{
-                  textAlign: 'center',
-                  boxShadow: 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  padding: '1rem',
-                  cursor: 'pointer', // Indique que c'est cliquable
-                }}
-                onClick={() => handleNavigation(item.idCateg, item.id)}
-              >
-                <CardMedia
-                  component="img"
-                  image={item.image}
-                  alt={item.title}
-                  sx={{
-                    height: '350px',
-                    width: '350px',
-                    objectFit: 'cover',
-                  }}
-                />
-                <CardContent sx={{ textAlign: 'center' }}>
-                  <Typography
-                    variant="h6"
-                    sx={{ color: '#f9a825', fontWeight: 'bold' }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{ color: '#333', fontWeight: 'bold' }}
-                  >
-                    {item.price}
-                  </Typography>
+              <Card sx={{ textAlign: 'center', boxShadow: 'none', padding: '1rem', cursor: 'pointer' }}>
+                <CardMedia component="img" image={item.image} alt={item.title} sx={{ height: '350px', width: '350px', objectFit: 'cover' }} />
+                <CardContent>
+                  <Typography variant="h6" sx={{ color: '#f9a825', fontWeight: 'bold' }}>{item.title}</Typography>
+                  <Typography variant="body2" sx={{ color: '#333', fontWeight: 'bold' }}>{item.price}</Typography>
                 </CardContent>
               </Card>
             </Grid2>
