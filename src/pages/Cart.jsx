@@ -97,7 +97,7 @@ function Cart() {
   }
 
   return (
-    <Box mb={3}>
+    <Box mb={3} mt={7}>
       <Typography
         fontWeight="bold"
         variant="h4"

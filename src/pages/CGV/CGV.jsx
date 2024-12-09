@@ -8,7 +8,7 @@ export default function CGV() {
 	return (
 		<>
 		<Navbar/>
-		<Container maxWidth={'md'} sx={{py:4}}>
+		<Container maxWidth={'md'} sx={{py:4,mt:7}}>
 			<Typography variant={'h1'} textAlign={'center'} sx={{fontSize : '4rem'}}>CGV</Typography>
 			<Stack mt={10}>
 				<Typography variant={'h5'}>Conditions générales de vente</Typography>
@@ -31,7 +31,6 @@ export default function CGV() {
 			
 		</Container>
 		<Footer/>
-		
 		</>
 	)
 }

@@ -3,7 +3,7 @@ import { Box, Button, Typography, Grid2, Card, CardMedia, CardContent } from '@m
 
 const JewelryCollection = ({ collectionData, backgroundImage, collectionName, collectionTitle }) => {
   return (
-    <Box>
+    <Box >
       <Box
         sx={{
           position: 'relative',

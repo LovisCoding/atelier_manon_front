@@ -45,7 +45,7 @@ function Command() {
                 display="flex"
                 justifyContent="center"
                 padding="1rem 0"
-                mt={3}
+                mt={7}
                 mb={2}
             >Récapitulatif de la commande</Typography>
 

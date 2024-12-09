@@ -19,7 +19,7 @@ function About() {
 
 	return (
 		<Container>
-			<Box sx={{ maxWidth: '1200px', margin: 'auto', p: {
+			<Box  sx={{ maxWidth: '1200px', margin: 'auto', mt:7, p: {
 				xs: 3
 			} }}>
 				<Presentation />
