@@ -30,4 +30,15 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary, cod
     }
 };
 
+export const getOrdersForAdmin = async () => {
+    const data = await axios.get('/api/admin/commande/get-commandes');
+    if (!data.data) return null;
+    return data.data
+}
+export const getCommandProducts = async (idCommand) => {
+    const data = await axios
+        .get('/api/client/commandeproduit/get-produits-commande', {params:{idCommande:idCommand}});
+    if (!data.data) return null;
+    return data.data;
+}
 
