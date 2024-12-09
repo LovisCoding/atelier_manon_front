@@ -11,11 +11,17 @@ export default function Accueil() {
   const [categorie, setCategorie] = useState("");
   const [idCategorie, setIdCategorie] = useState(null);
   const [categories, setCategories] = useState([]);
-  const [event, setEvent] = useState(null);
+  const [event, setEvent] = useState("");
 
-  const submit = () => {
+  const changeEvent = () => {
     axios.post("/api/personnalisation/update-evenement", {
-      
+      message: event
+    })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
     })
   }
 
@@ -28,6 +34,12 @@ export default function Accueil() {
     };
 
     fetchCategories();
+    axios.get("http://localhost:8080/evenement/message.data", {
+      withCredentials: true
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
   }, []);
 
   const handleFileChange = async (event, type, idCategorie = null) => {
@@ -142,24 +154,28 @@ export default function Accueil() {
 
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
             <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
-              Évènements (bannière en haut de la page)
+              Évènement (bannière en haut de la page)
             </Typography>
             <TextField
               type="text"
-              defaultValue={ event && event }
+              onChange={(e) => {
+                setEvent(e.target.value);
+              }}
+              value={event}
               sx={{ marginBottom: 2 }}
               fullWidth
               variant="outlined"
             />
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ fontWeight: "bold" }}
+              onClick={() => changeEvent()}>
+              Changer l'évènement
+            </Button>
           </Box>
 
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ marginTop: 2, fontWeight: "bold" }}
-          >
-            Soumettre
-          </Button>
+
         </Stack>
       </Box>
     </Box>

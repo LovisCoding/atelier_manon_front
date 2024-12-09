@@ -11,7 +11,7 @@ export const getAllAvis = async () => {
 
 export const getAvisBySession = async () => {
     const res = await axios
-        .get('api/avis/getAvisBySession');
+        .get('/api/avis/getAvisBySession');
     console.log(res);
     if (res.status == 200) return res.data;
     return "";
