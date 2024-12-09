@@ -4,7 +4,7 @@ import SidebarMenu from "../SidebarMenu";
 import theme from "../../../theme/theme"; 
 import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService"; 
 import { getCompte } from "../../../services/UserService"; 
-import { Link, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { FaEuroSign } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
 import { CiStickyNote, CiUser } from "react-icons/ci";
@@ -28,7 +28,6 @@ function OrderDetailsContent() {
   const [orderDetails, setOrderDetails] = useState();
   const [products, setProducts] = useState(null);
   const [client, setClient] = useState(null);
-  const [total, setTotal] = useState();
   const { id } = useParams();
   const [error, setError] = useState(null);
   
@@ -121,33 +120,46 @@ function OrderDetailsContent() {
 
       <ClientDetail client={client} />
       <ProductsDetail products={products} />
-      <Actions />
+      <Actions setOrderDetails={setOrderDetails} />
 
     </Stack>
   );
 }
 
-function Actions() {
+function Actions({ setOrderDetails }) {
+  const { id } = useParams();
 
-  const changeState = (state) => {
-    updateState(id, )
-  }
+  const changeState = async (state) => {
+    setOrderDetails((prevDetails) => ({
+      ...prevDetails,
+      etat: state,
+    }));
+
+    try {
+      await updateState(id, state);
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de l'état :", error);
+      setOrderDetails((prevDetails) => ({
+        ...prevDetails,
+        etat: prevDetails.etat,
+      }));
+    }
+  };
 
   return (
     <Stack spacing={3}>
       <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">
         Terminer la commande
       </Button>
-      <Button onClick={() => changeState("annulée")} fullWidth variant="outlined" color="danger">
+      <Button onClick={() => changeState("annulée")} fullWidth variant="outlined" color="error">
         Annuler la commande
       </Button>
     </Stack>
-  )
+  );
 }
 
-function ProductsDetail({ products }) {
 
-  console.log(products);
+function ProductsDetail({ products }) {
 
   return (
     <>
