@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-export const postNewsletter = async (data) => {
+export const sendNewsletter = async (subject, content) => {
 	try {
-		const response = await axios.post('/api/admin/account/send-newsletter', data);
-		if (response.data) {
-			console.log(response.data);
-			return response.data;
-		}
-		return null;
+		const response = await axios.post('/api/admin/account/send-newsletter', {
+			subject,
+			content
+		});
+		return response.data;
 	} catch (error) {
-		console.error('Erreur lors de la création de la newsletter:', error);
+		console.error('Newsletter Error:', error);
 		return null;
 	}
 };
+

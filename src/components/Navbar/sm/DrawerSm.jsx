@@ -1,34 +1,28 @@
-import {
-	Box,
-	Collapse,
-	Drawer,
-	IconButton,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemText,
-  } from "@mui/material";
-  import { RxCross2 } from "react-icons/rx";
-  import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
-  import { useState } from "react";
-import { useLocation } from "react-router";
-  
-  export default function DrawerSm({ open, setOpen }) {
+import { Box, Collapse, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { RxCross2 } from "react-icons/rx";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+import { useAuth } from "../../../utils/AuthContext";
+
+export default function DrawerSm({ open, setOpen }) {
 	const [openDdl, setOpenDdl] = useState(false);
-  
+	const tab = ['/', '/jewelry', '/about', '/faq', '/contact', '/login', '/profil']
+
 	const location = useLocation();
+	const navigate = useNavigate();
+	const {isLogged} = useAuth();
 	// Fonction pour gérer les clics
 	const onClickDdl = () => {
 	  setOpenDdl(!openDdl);
 	};
-	const setColorByLink= (index) => {
-		const tab = ['/home', '/bijoux', '/about', '/faq', '/contact']
-		if (location.pathname === tab[index]) {
+	const setColorByLink = (index) => {
+		if (location.pathname === tab[index] || location.pathname.includes(index) ) {
 			return 'text.secondary'
 		}
 		return 'rgba(255,255,255,1)'
 	}
-  
+
 	return (
 	  <Drawer open={Boolean(open)} onClose={() => setOpen(false)}
 	  PaperProps={{
@@ -53,7 +47,6 @@ import { useLocation } from "react-router";
 				<RxCross2 color={'rgba(255,255,255,1)'}/>
 			  </IconButton>
 			</ListItem>
-  
 			{/* Liste des items */}
 			{["Accueil", "Bijoux", "A propos", "FAQ", "Contact"].map(
 			  (text, index) => (
@@ -62,9 +55,7 @@ import { useLocation } from "react-router";
 					<ListItemButton 
 					sx={{paddingY: 0}}
 					  onClick={(e) => {
-						console.log('click');
-						
-						e.stopPropagation(); // Stoppe la fermeture du drawer
+						navigate(tab[index]);
 					  }}
 					>
 					  {/* Ajout du dropdown pour "Bijoux" */}
@@ -83,13 +74,13 @@ import { useLocation } from "react-router";
 							  <FaAngleDown size={"18px"} color={setColorByLink(index)} />
 							)}
 						  </IconButton>
-						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink(index)}}  primary={text} />
+						  <ListItemText primaryTypographyProps={{fontWeight: '300', color: setColorByLink(index)}}  primary={text} />
 						</>
 					  ) : (
 						<>
 						
 						<Box sx={{width:'40px'}}></Box>
-						<ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink(index)}} primary={text} />
+						<ListItemText primaryTypographyProps={{fontWeight: '300', color: setColorByLink(index)}} primary={text} />
 						</>
 					  )}
 					</ListItemButton>
@@ -99,13 +90,13 @@ import { useLocation } from "react-router";
 				  {text === "Bijoux" && (
 					<Collapse in={openDdl} timeout="auto" unmountOnExit>
 					  <List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 10, py:0 }}>
-						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink('/bijoux' )}}  primary="Colliers" />
+						<ListItemButton sx={{ pl: 10, py:0 }} onClick={() => navigate("/jewelry/necklaces")} >
+						  <ListItemText primaryTypographyProps={{fontWeight: '300', color: setColorByLink('/jewelry/necklaces' )}}  primary="Colliers" />
 						</ListItemButton>
 					  </List>
 					  <List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 10, py:0 }}>
-						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink('/bijoux')}} primary="Bracelets" />
+						<ListItemButton sx={{ pl: 10, py:0 }} onClick={() => navigate("/jewelry/bracelets")}>
+						  <ListItemText primaryTypographyProps={{fontWeight: '300', color: setColorByLink('/jewelry/bracelets')}} primary="Bracelets" />
 						</ListItemButton>
 					  </List>
 					</Collapse>
@@ -117,5 +108,5 @@ import { useLocation } from "react-router";
 		</Box>
 	  </Drawer>
 	);
-  }
-  
+}
+

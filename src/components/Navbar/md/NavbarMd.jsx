@@ -1,40 +1,34 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  AppBar,
-  Toolbar,
-  CssBaseline,
-  Stack,
-  IconButton,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { FaSearch } from "react-icons/fa";
+import { AppBar, Toolbar, Stack, IconButton, Typography, useTheme } from "@mui/material";
+import { MdAccountCircle } from "react-icons/md";
 import Link from "../../Link";
 import { useLocation } from "react-router";
 import ImgMui from "../../ImgMui";
 import imgManon from "../../../assets/img/logo_manon.webp";
 import DropDownMenu from "./DropDownMenu";
 import ElevationScroll from "../ElevationScroll";
+import { useAuth } from "../../../utils/AuthContext";
 
 export default function NavbarMd() {
   const location = useLocation();
   const theme = useTheme();
+  const { isLogged } = useAuth();
 
   const [navbarState, setNavbarState] = useState({
-    bgNavbar: "transparent",
+    bgNavbar: "white",
     textColor: "text.primary",
-    scrolled: false,
+    scrolled: false
   });
 
   const { bgNavbar, textColor, scrolled } = navbarState;
 
-  const isSelectedMenu = location.pathname === "/bijoux";
+  const isSelectedMenu = location.pathname.includes("/jewelry");
 
   const getLinkStyles = (path) =>
     location.pathname === path
-      ? { fontWeight: "bold", color: scrolled ? "text.secondary" : "text.primary" }
-      : { color: textColor };
+      ? { fontWeight: "bold", color: scrolled ? theme.palette.text.secondary : "text.primary" }
+      : { color: scrolled ? "text.white": textColor, fontWeight:'300' };
 
   return (
     <>
@@ -49,20 +43,20 @@ export default function NavbarMd() {
             >
               {/* Logo and title */}
               <Stack direction="row" spacing={2} alignItems="center">
-              <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', gap: 2 }}>
                 <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+                <Typography variant="h6" sx={{ fontWeight: 300, color: textColor }}
+                >L'Atelier de Manon</Typography>
               </Link>
-                <Typography variant="h6" sx={{ fontWeight: 200, color: textColor }}>
-                  L'Atelier de Manon
-                </Typography>
+                
               </Stack>
 
               {/* Navigation links */}
               <Stack direction="row" spacing={2} alignItems="center">
-                <Link variant="navbar" sx={getLinkStyles("/home")} href="/home">
+                <Link variant="navbar" sx={getLinkStyles("/")} href="/">
                   Accueil
                 </Link>
-                <DropDownMenu textColor={getLinkStyles("/home")} selected={isSelectedMenu} scrolled={scrolled} />
+                <DropDownMenu textColor={getLinkStyles("/about")} selected={isSelectedMenu} scrolled={scrolled} />
                 <Link variant="navbar" sx={getLinkStyles("/about")} href="/about">
                   À propos
                 </Link>
@@ -72,9 +66,11 @@ export default function NavbarMd() {
                 <Link variant="navbar" sx={getLinkStyles("/contact")} href="/contact">
                   Contact
                 </Link>
-                <IconButton>
-                  <FaSearch color={scrolled ? theme.palette.text.white : theme.palette.text.primary} />
-                </IconButton>
+                <Link variant="navbar" href={isLogged ? "/profil" : "/login"}>
+                  <IconButton>
+                    <MdAccountCircle color="text.primary" sx={getLinkStyles("/profil")} />
+                  </IconButton>
+                </Link>
               </Stack>
             </Stack>
           </Toolbar>

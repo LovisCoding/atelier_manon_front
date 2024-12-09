@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import JewelryCollection from './JewelryCollection';
-import { getProducts } from '../../services/ProductService';
+import { getAllProducts } from '../../services/ProductService';
 
 const Bangles = () => {
   const [bangleData, setBangleData] = useState([]);
@@ -16,10 +16,10 @@ const Bangles = () => {
         page: 1,
       };
 
-      const products = await getProducts(params);
+      const products = await getAllProducts(params);
 
-      if (products && products.produits) {
-        const formattedData = products.produits.map((product) => ({
+      if (products) {
+        const formattedData = products.map((product) => ({
           id: product.idProd,
           image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}`,
           title: product.libProd,

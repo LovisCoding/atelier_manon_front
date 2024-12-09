@@ -15,11 +15,12 @@ export default function AuthContextProvider({ children }) {
           setDetails({
             firstname: data.preCli,
             lastname: data.nomCli,
-            email: data.email
+            email: data.email,
+            isAdmin: data.estAdmin
           })
-        }
+        } else if (res.status == 403) {return;}
       })
-  }
+  };
 
   const login = async (email, password) => {
     try {
@@ -38,14 +39,17 @@ export default function AuthContextProvider({ children }) {
 
   const logout = () => {
     axios.post("/api/account/logout");
+    setDetails(null);
   };
 
   useEffect(() => {
     getProfil();
   }, []);
 
+  const isLogged = details !== null;
+
   return (
-    <AuthContext.Provider value={{ details, login, logout }}>
+    <AuthContext.Provider value={{ details, login, logout, isLogged }}>
       {children}
     </AuthContext.Provider>
   );

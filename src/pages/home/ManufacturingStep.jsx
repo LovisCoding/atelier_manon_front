@@ -27,8 +27,9 @@ const ManufacturingStep = () => {
             flexDirection: 'column', 
             alignItems: { xs: 'center', sm: 'flex-start' },
             marginTop: { xs: '1rem', sm: '2rem' },
-            paddingLeft: { sm: '0', xs: '1rem' },
+            paddingLeft: { xs: '0rem', sm: '0' },
             textAlign: { xs: 'center', sm: 'left' },
+            margin: { xs: '0 3rem',  }
           }}
         >
           <Typography

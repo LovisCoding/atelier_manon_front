@@ -4,13 +4,17 @@ import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Footer from '../src/components/Footer.jsx';
 import Loader from '../src/components/Loader.jsx';
 import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
+import Blog from '../src/pages/Blog.jsx';
+import ClientArticle from '../src/pages/Article.jsx';
 
-// Lazy loading des pages
+// Lazy loading des pages publiques
+
 const Test = React.lazy(() => import('../src/pages/Test/Test'));
 const Connection = React.lazy(() => import('../src/pages/Connection.jsx'));
 const Register = React.lazy(() => import('../src/pages/Register.jsx'));
-const ForgotPassword = React.lazy(() => import('../src/pages/ForgotPassword.jsx'));
-const EmailSent = React.lazy(() => import('../src/pages/EmailSent.jsx'));
+const ForgotPassword = React.lazy(() => import('../src/pages/forgot-password/ForgotPassword.jsx'));
+const EmailSent = React.lazy(() => import('../src/pages/forgot-password/EmailSent.jsx'));
+const ResetPassword = React.lazy(() => import('../src/pages/forgot-password/ResetPassword.jsx'));
 const FAQ = React.lazy(() => import('../src/pages/faq/Faq'));
 const About = React.lazy(() => import('../src/pages/About'));
 const Home = React.lazy(() => import('../src/pages/home/Home'));
@@ -21,10 +25,11 @@ const Command = React.lazy(() => import('../src/pages/Command.jsx'));
 const Product = React.lazy(() => import('../src/pages/Product/Product.jsx'));
 const CGV = React.lazy(() => import('../src/pages/CGV/CGV.jsx'));
 const Jewelry = React.lazy(() => import('../src/pages/Jewelry/Jewelry.jsx'));
+const Bracelets = React.lazy(() => import('../src/pages/Jewelry/Bracelets.jsx'));
 const Necklaces = React.lazy(() => import('../src/pages/Jewelry/Necklaces.jsx'));
-const Bangles = React.lazy(() => import('../src/pages/Jewelry/Bangles.jsx'));
 
 // Lazy loading pour la partie administration
+
 const Admin = React.lazy(() => import('../src/pages/admin/Admin'));
 const Orders = React.lazy(() => import('../src/pages/admin/Order/Orders.jsx'));
 const OrderDetails = React.lazy(() => import('../src/pages/admin/Order/OrderDetail.jsx'));
@@ -39,7 +44,7 @@ const Article = React.lazy(() => import('../src/pages/admin/Articles/Article.jsx
 const Newsletter = React.lazy(() => import('../src/pages/admin/Newsletter/Newsletter.jsx'));
 const Profil = React.lazy(() => import("../src/pages/Profil.jsx"));
 const Personalization = React.lazy(() => import("../src/pages/admin/Personalization/Personalization.jsx"));
-const Accueil = React.lazy(() => import("../src/pages/admin/Home/Accueil.jsx"));
+const Accueil = React.lazy(() => import("../src/pages/admin/home/Accueil.jsx"));
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -61,6 +66,7 @@ const AppRoutes = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/email-sent" element={<EmailSent />} />
+                    <Route path="/reset-password/:token" element={<ResetPassword />} />
                     <Route path="email/confirmAccount/:token" element={<ConfirmAccount />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/about" element={<About />} />
@@ -69,9 +75,13 @@ const AppRoutes = () => {
                     <Route path="/command/:id" element={<Command />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/product/:id" element={<Product />} />
+
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/article/:id" element={<ClientArticle />} />
+
                     <Route path="/jewelry" element={<Jewelry />} />
                     <Route path="/jewelry/necklaces" element={<Necklaces />} />
-                    <Route path="/jewelry/bangles" element={<Bangles />} />
+                    <Route path="/jewelry/bracelets" element={<Bracelets />} />
                     <Route path="/profil/" element={<Profil />} />
 
                     {/* Admin Routes without Footer */}

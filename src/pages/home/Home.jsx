@@ -4,7 +4,6 @@ import BestSale from "./BestSale";
 import ManufacturingStep from "./ManufacturingStep";
 import AvisList from "./AvisList";
 import { Box } from "@mui/material";
-
 import { getBestSellers } from "../../services/ProductService";
 import { getAllAvis } from "../../services/AvisService";
 

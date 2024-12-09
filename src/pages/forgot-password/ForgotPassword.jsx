@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography, Container, useTheme, Alert, Snackbar } from "@mui/material";
 import { useNavigate } from "react-router";
-import { forgotPassword } from "../services/ConnectionService";
+import { forgotPassword } from "../../services/ConnectionService";
 
 function ForgotPassword() {
 
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
-    const [isErrorDisplayed, setIsErrorDisplayed] = useState(true);
+    const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
     const [errorMessage, setErrorMessage] = useState("Erreur survenue");
 
     const theme = useTheme();
@@ -56,7 +56,7 @@ function ForgotPassword() {
         <Container maxWidth="xs" >
             <Box
                 sx={{
-                    mt: 8,
+                    mt: 10,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",

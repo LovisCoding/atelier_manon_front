@@ -1,20 +1,20 @@
 import { Button, Menu, MenuItem, Stack, useTheme } from "@mui/material";
 import { useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
-import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 
 export default function DropDownMenu({ scrolled, selected }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const color = () => {
-    if (scrolled && selected) {
-      return 'text.secondary'
+    console.log(scrolled,":",selected);
+    if (selected) {
+      if (scrolled) return 'text.secondary';
+      else return 'text.primary';
+    } else {
+      if (scrolled) return 'text.white'
+      else return 'text.primary';
     }
-    if (scrolled) {
-      return 'text.white'
-    }
-    return 'text.primary'
   }
 
   const handleClick = (event) => {
@@ -36,7 +36,7 @@ export default function DropDownMenu({ scrolled, selected }) {
             color: color(), 
             fontSize: '1rem', 
             textTransform: 'none', 
-            fontWeight: selected ? 'bold' : '400', 
+            fontWeight: selected ? 'bold' : '300', 
             paddingRight: 0 
           }}>
             Bijoux
@@ -59,7 +59,7 @@ export default function DropDownMenu({ scrolled, selected }) {
         }}
       >
         <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/necklaces">Colliers</MenuItem>
-        <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/bangles">Bracelets</MenuItem>
+        <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/bracelets">Bracelets</MenuItem>
       </Menu>
     </Stack>
   );

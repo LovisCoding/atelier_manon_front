@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 
 function ImageSlider({ images }) {
   const defaultImages = [
-    'https://via.placeholder.com/800x400', // Remplacez avec vos images
+    'https://via.placeholder.com/800x400',
     'https://via.placeholder.com/800x400',
     'https://via.placeholder.com/800x400',
   ];

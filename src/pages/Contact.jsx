@@ -1,14 +1,14 @@
-
 import { useTheme } from "@emotion/react";
 import { Box, Card, Typography, TextField, TextareaAutosize, Button, Snackbar, Alert } from "@mui/material";
 
 import { useState } from "react";
 
 import { addNewsLetter, sendContactMail } from "../services/ContactService";
+import { useAuth } from "../utils/AuthContext";
 
 function Contact() {
 
-    const isConnected = true;
+    const {isLogged} = useAuth();
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -146,7 +146,7 @@ function Contact() {
                         </Box>
                     </Card>
                 </Box>
-                {isConnected &&
+                {isLogged &&
                     <Box maxWidth="60rem" >
                         <Card sx={{ padding: '1rem 2rem' }} >
                             <Box display="flex" flexDirection="column" gap={2} >

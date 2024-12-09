@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Box,
-  Stack,
-} from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Box, Stack } from "@mui/material";
 import { ChevronDown } from "../../components/icons/ChevronDown";
 import { getQuestions } from "../../services/FAQService";
 
@@ -24,7 +17,7 @@ function FAQ() {
   }, []);
 
     return (
-        <Box sx={{ width: "60%", margin: "auto", padding: "20px" }}>
+        <Box sx={{ margin: "auto", padding: 3 }}>
         <Typography marginBottom={8} variant="h2" align="center" gutterBottom>
             FAQ
         </Typography>

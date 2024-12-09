@@ -38,7 +38,7 @@ const theme = createTheme({
     text: {
       primary: textPrimary,
       white: "#ffffff",
-      secondary: 'rgba(241, 198, 83, 1)',
+      secondary: '#EEB828',
     },
     customYellow: {
       main: '#EEB828',
