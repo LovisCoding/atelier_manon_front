@@ -37,7 +37,7 @@ export default function Orders() {
     <Box display="flex" justifyContent="center">
       <Box display="flex">
         <SidebarMenu />
-        <Stack margin={auto} spacing={5} p={5} flexGrow={1}>
+        <Stack spacing={5} p={5} flexGrow={1}>
           <Typography variant="h4" textAlign="center">
             Liste des commandes
           </Typography>
