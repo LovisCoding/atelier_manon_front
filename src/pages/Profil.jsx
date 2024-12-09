@@ -54,7 +54,8 @@ export default function Profil() {
 
 	return (
 		<Container sx={{
-			marginBottom: "2rem"
+			marginBottom: "2rem",
+			mt:2
 		}}>
 			<Stack margin={"0 auto"} maxWidth={"sm"} spacing={3}>
 

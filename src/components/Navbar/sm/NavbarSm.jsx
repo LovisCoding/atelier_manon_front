@@ -17,7 +17,7 @@ export default function NavbarSm() {
 
   const [openDrawer, setOpenDrawer] = useState(false);
   const [navbarState, setNavbarState] = useState({
-    bgNavbar: "transparent",
+    bgNavbar: "white",
     textColor: "text.primary",
     scrolled: false,
   });
@@ -40,7 +40,7 @@ export default function NavbarSm() {
           sx={{
             backgroundColor: bgNavbar,
             transition: "background-color 0.3s",
-            position: "fixed",
+            position: "sticky",
             width: "100%",
             top: 0,
             zIndex: 1100

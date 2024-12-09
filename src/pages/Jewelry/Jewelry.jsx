@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import JewelryCollection from './JewelryCollection';
-import { getAllProducts } from '/src/services/ProductService';
+import { getProducts } from '/src/services/ProductService';
 
 const Jewelry = () => {
   const [jewelryData, setJewelryData] = useState([]);
@@ -9,21 +9,22 @@ const Jewelry = () => {
     const fetchProducts = async () => {
       const params = {
         search: '',
-        category: null,
+        category: '',
         priceInf: null,
         priceSup: null,
         nbDisplay: 10,
         page: 1,
       };
 
-      const products = await getAllProducts(params);
+      const products = await getProducts(params);
 
       if (products) {
-        const formattedData = products.map((product) => ({
+        const formattedData = products.produits.map((product) => ({
           id: product.idProd,
           image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}`,
           title: product.libProd,
           price: `${product.prix}€`,
+          idCateg: product.idCateg
         }));
 
         setJewelryData(formattedData);
