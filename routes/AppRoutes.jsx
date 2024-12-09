@@ -26,7 +26,7 @@ const Product = React.lazy(() => import('../src/pages/Product/Product.jsx'));
 const CGV = React.lazy(() => import('../src/pages/CGV/CGV.jsx'));
 const Jewelry = React.lazy(() => import('../src/pages/Jewelry/Jewelry.jsx'));
 const Bracelets = React.lazy(() => import('../src/pages/Jewelry/Bracelets.jsx'));
-const Collars = React.lazy(() => import('../src/pages/Jewelry/Collars.jsx'));
+const Necklaces = React.lazy(() => import('../src/pages/Jewelry/Necklaces.jsx'));
 
 // Lazy loading pour la partie administration
 
@@ -80,7 +80,7 @@ const AppRoutes = () => {
                     <Route path="/article/:id" element={<ClientArticle />} />
 
                     <Route path="/jewelry" element={<Jewelry />} />
-                    <Route path="/jewelry/collars" element={<Collars />} />
+                    <Route path="/jewelry/necklaces" element={<Necklaces />} />
                     <Route path="/jewelry/bracelets" element={<Bracelets />} />
                     <Route path="/profil/" element={<Profil />} />
 
