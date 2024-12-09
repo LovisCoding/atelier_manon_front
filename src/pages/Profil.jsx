@@ -87,7 +87,7 @@ export default function Profil() {
 								<Typography>#{order.idCommande}</Typography>
 								<Typography>{order.etat}</Typography>
 								<Typography>{order.dateCommande}</Typography>
-								<Link to={`/order/${order.idCommande}`}><Typography>voir plus</Typography></Link>
+								<Link to={`/command/${order.idCommande}`}><Typography>voir plus</Typography></Link>
 							</Stack>
 						))
 					}
