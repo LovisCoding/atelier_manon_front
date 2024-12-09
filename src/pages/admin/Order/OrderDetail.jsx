@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, Typography, Stack } from "@mui/material";
-import { MdCalendarToday } from "react-icons/md";
-import { FaEuroSign } from "react-icons/fa";
-import SidebarMenu from "../SidebarMenu";
-import { CiUser } from "react-icons/ci";
-import theme from "../../../theme/theme";
-import { FiGift } from "react-icons/fi";
-import { CiStickyNote } from "react-icons/ci";
-import { TbTruckDelivery } from "react-icons/tb";
-import { GrStatusGoodSmall } from "react-icons/gr";
-import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService";
-import { getCompte } from "../../../services/UserService";
-import { Link, useLocation, useParams } from "react-router";
+import React, { useEffect, useState } from "react"; 
+import { Box, Button, Typography, Stack } from "@mui/material"; 
+import { MdCalendarToday, FaEuroSign, FiGift, CiStickyNote, TbTruckDelivery, GrStatusGoodSmall, CiUser } from "react-icons/all"; 
+import SidebarMenu from "../SidebarMenu"; 
+import theme from "../../../theme/theme"; 
+import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService"; 
+import { getCompte } from "../../../services/UserService"; 
+import { Link, useParams } from "react-router";
 
 export default function OrderDetails() {
 

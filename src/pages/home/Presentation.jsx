@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Stack, Box, IconButton } from '@mui/material';
+import { Button, Stack, Box, IconButton, Link } from '@mui/material';
 
 const Presentation = ({ scrollToSection }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -23,7 +23,7 @@ const Presentation = ({ scrollToSection }) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 'calc(100vh - 64px)', // Retire 64px de la hauteur totale
+        height: 'calc(100vh - 64px)',
         width: '100%',
         backgroundImage: 'url(/src/assets/img/home.webp)',
         backgroundPosition: `center ${scrollPosition * 0.1 - 100}px`,
@@ -55,12 +55,11 @@ const Presentation = ({ scrollToSection }) => {
         }}
       >
         <Box sx={{ display: 'flex', gap: '20px' }}>
-          <Button variant="home" size="large">
-            En savoir plus
-          </Button>
-          <Button variant="home" size="large">
-            Acheter
-          </Button>
+          <Link href="/jewelry" underline="none">
+            <Button variant="home" size="large">
+              Acheter
+            </Button>
+          </Link>
         </Box>
 
         <IconButton

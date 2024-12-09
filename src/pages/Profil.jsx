@@ -56,12 +56,12 @@ export default function Profil() {
 				<FormControl>
 					<Stack spacing={3}>
 						
-						<Stack spacing={3}>
+						<Stack spacing={1}>
 							<Typography variant="h5">Nom</Typography>
 							<Typography>{userDetails && userDetails.nomCli}</Typography>
 						</Stack>
 
-						<Stack spacing={3}>
+						<Stack spacing={1}>
 							<Typography variant="h5">Prénom</Typography>
 							<Typography>{userDetails && userDetails.preCli}</Typography>
 						</Stack>
@@ -87,7 +87,7 @@ export default function Profil() {
 								<Typography>#{order.idCommande}</Typography>
 								<Typography>{order.etat}</Typography>
 								<Typography>{order.dateCommande}</Typography>
-								<Link to={`/order/${order.idCommande}`}><Typography>voir plus</Typography></Link>
+								<Link to={`/command/${order.idCommande}`}><Typography>voir plus</Typography></Link>
 							</Stack>
 						))
 					}

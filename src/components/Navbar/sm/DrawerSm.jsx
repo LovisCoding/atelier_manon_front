@@ -1,28 +1,22 @@
-import {
-	Box,
-	Collapse,
-	Drawer,
-	IconButton,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemText,
-  } from "@mui/material";
-  import { RxCross2 } from "react-icons/rx";
-  import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
-  import { useState } from "react";
-import { useLocation } from "react-router";
+import { Box, Collapse, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, } from "@mui/material";
+import { RxCross2 } from "react-icons/rx";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+import { useAuth } from "../../../utils/AuthContext";
   
   export default function DrawerSm({ open, setOpen }) {
 	const [openDdl, setOpenDdl] = useState(false);
+	const tab = ['/', '/jewelry', '/about', '/faq', '/contact', '/login', '/profil']
   
 	const location = useLocation();
+	const navigate = useNavigate();
+	const auth = useAuth();
 	// Fonction pour gérer les clics
 	const onClickDdl = () => {
 	  setOpenDdl(!openDdl);
 	};
 	const setColorByLink= (index) => {
-		const tab = ['/home', '/bijoux', '/about', '/faq', '/contact']
 		if (location.pathname === tab[index]) {
 			return 'text.secondary'
 		}
@@ -55,16 +49,14 @@ import { useLocation } from "react-router";
 			</ListItem>
   
 			{/* Liste des items */}
-			{["Accueil", "Bijoux", "A propos", "FAQ", "Contact"].map(
+			{["Accueil", "Bijoux", "A propos", "FAQ", "Contact", "Connexion", "Profil"].map(
 			  (text, index) => (
 				<Box key={text}>
 				  <ListItem sx={{paddingY: 0}}>
 					<ListItemButton 
 					sx={{paddingY: 0}}
 					  onClick={(e) => {
-						console.log('click');
-						
-						e.stopPropagation(); // Stoppe la fermeture du drawer
+						navigate(tab[index]);						
 					  }}
 					>
 					  {/* Ajout du dropdown pour "Bijoux" */}
@@ -99,13 +91,13 @@ import { useLocation } from "react-router";
 				  {text === "Bijoux" && (
 					<Collapse in={openDdl} timeout="auto" unmountOnExit>
 					  <List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 10, py:0 }}>
-						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink('/bijoux' )}}  primary="Colliers" />
+						<ListItemButton sx={{ pl: 10, py:0 }} onClick={() => navigate("/jewelry/necklaces")} >
+						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink('/jewelry/necklaces' )}}  primary="Colliers" />
 						</ListItemButton>
 					  </List>
 					  <List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 10, py:0 }}>
-						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink('/bijoux')}} primary="Bracelets" />
+						<ListItemButton sx={{ pl: 10, py:0 }} onClick={() => navigate("/jewelry/bangles")}>
+						  <ListItemText primaryTypographyProps={{fontWeight: '200', color: setColorByLink('/jewelry/bangles')}} primary="Bracelets" />
 						</ListItemButton>
 					  </List>
 					</Collapse>
@@ -117,5 +109,4 @@ import { useLocation } from "react-router";
 		</Box>
 	  </Drawer>
 	);
-  }
-  
+}

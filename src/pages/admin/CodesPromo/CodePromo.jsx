@@ -1,20 +1,39 @@
-import { useNavigate, useParams} from "react-router";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+  Snackbar,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Checkbox
+} from "@mui/material";
 import SidebarMenu from "../SidebarMenu";
-import {Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography, useTheme} from "@mui/material";
-import { useEffect, useState } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import {CreatePromo, DeleteCodePromo, getOneCodePromo} from "../../../services/CodesPromoService";
-import { getAllProducts, getProductImage } from "../../../services/ProductService";
-import axios from "axios";
-import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduit";
-import Snackbar from "@mui/material/Snackbar";
+
+import {
+  CreatePromo,
+  DeleteCodePromo,
+  getOneCodePromo,
+  getAllProduits,
+  getProductImage,
+  addProduitsToPromo,
+  addProduitToPromo,
+  DeleteProduitFromPromo,
+  deleteProduitsFromPromo,
+  getProduitsByPromo
+} from "@services";
 
 export default function CodePromo() {
 	const { id } = useParams();
@@ -24,8 +43,8 @@ export default function CodePromo() {
 	const [name, setName] = useState('');
 	const [value, setValue] = useState('');
 	const [selectValue, setSelectValue] = useState('E');
-	const [selectedRows, setSelectedRows] = useState([]); // Liste des lignes sélectionnées
-	const [selectAll, setSelectAll] = useState(false); // Checkbox global
+	const [selectedRows, setSelectedRows] = useState([]);
+	const [selectAll, setSelectAll] = useState(false);
 	const [exist, setExist] = useState(false);
 
 	const [message, setMessage] = useState('');
