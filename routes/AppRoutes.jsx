@@ -18,6 +18,7 @@ const ResetPassword = React.lazy(() => import('../src/pages/forgot-password/Rese
 const FAQ = React.lazy(() => import('../src/pages/faq/Faq'));
 const About = React.lazy(() => import('../src/pages/About'));
 const Home = React.lazy(() => import('../src/pages/home/Home'));
+const EventBanner = React.lazy(() => import('../src/pages/home/EventBanner'));
 const Contact = React.lazy(() => import('../src/pages/Contact.jsx'));
 const NotFound = React.lazy(() => import('../src/pages/NotFound'));
 const Cart = React.lazy(() => import('../src/pages/Cart.jsx'));
@@ -52,8 +53,10 @@ const AppRoutes = () => {
 
     const isAdminRoute = location.pathname.includes('/admin');
 
+    const homeRoute = location.pathname == '/';
     return (
         <>
+            {homeRoute && <EventBanner /> }
             {/* Render Navbar only if not on an admin route */}
             {!isAdminRoute && <Navbar />}
 
