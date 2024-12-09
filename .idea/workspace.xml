@@ -4,7 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Add image upload and product update functionality&#10;&#10;Refactored the ImagesSection component to use base64 encoding for image uploads and updated the server with these images. Implemented the product update functionality to save product details including images, materials, stones, and fils to the server. This change improves the product management UX and ensures data consistency across components." />
+    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Add image upload and product update functionality&#10;&#10;Refactored the ImagesSection component to use base64 encoding for image uploads and updated the server with these images. Implemented the product update functionality to save product details including images, materials, stones, and fils to the server. This change improves the product management UX and ensures data consistency across components.">
+      <change afterPath="$PROJECT_DIR$/src/components/Loader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/ConfirmAccount.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/admin/Personalization/Personalization.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/admin/home/Accueil.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/ConnectionService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/ContactService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/NewsletterService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/PersonalizationService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/UserService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/AppRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/routes/AppRoutes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar/sm/NavbarSm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/sm/NavbarSm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Command.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Command.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Connection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Connection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Contact.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Contact.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/EmailSent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/EmailSent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ForgotPassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ForgotPassword.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Register.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/CodesPromo/CodePromo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/CodesPromo/CodePromo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Newsletter/Newsletter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Newsletter/Newsletter.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/SidebarMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/SidebarMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/BestSale.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/BestSale.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/CartService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/CartService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/CategorieService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/CategorieService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/CodesPromoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/CodesPromoService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/CommandService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/CommandService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/PromoProduit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PromoProduit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/theme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/AuthContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/AuthContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AuthContext.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +85,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "liaison-produits",
+    "git-widget-placeholder": "Merging liaison-produits",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,7 +112,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733662690114</updated>
       <workItem from="1733662691179" duration="1650000" />
-      <workItem from="1733670361979" duration="25028000" />
+      <workItem from="1733670361979" duration="25351000" />
     </task>
     <task id="LOCAL-00001" summary="Add Loader component and integrate into AppRoutes&#10;&#10;Refactor the Suspense fallback in AppRoutes to use a new Loader component, providing a consistent loading experience with a customized message. This change improves the UI by visually enhancing the loading state and maintaining consistent layout structures across pages. Rendering of Navbar and Footer is conditioned on non-admin routes to keep the interface clean and relevant.">
       <option name="closed" value="true" />
