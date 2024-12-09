@@ -55,16 +55,15 @@ export default function NavbarSm() {
               <IoMenu color={color}/>
             </IconButton>
             <Stack direction="row" spacing={2} alignItems="center">
-              <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', gap: 2 }}>
                 <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+                <Typography variant="h6" sx={{ fontWeight: 300, color }}
+                >L'Atelier de Manon</Typography>
               </Link>
-              <Typography variant="h6" sx={{ fontWeight: 300, color }}>
-                L'Atelier de Manon
-              </Typography>
             </Stack>
           </Stack>
 
-          {/* Search Icon */}
+          {/* Account Icon */}
           <Box>
               <IconButton onClick={(e) => { navigate(isLogged ? "/profil" : "/login");}}>
                 <MdAccountCircle color={scrolled ? theme.palette.text.white : theme.palette.text.primary} size={30} />

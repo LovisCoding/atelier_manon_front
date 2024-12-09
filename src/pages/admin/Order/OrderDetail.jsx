@@ -12,6 +12,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiGift } from "react-icons/fi";
 import { updateState } from "../../../services/OrderService";
+import { formatDate } from "../../../utils/Date";
 
 export default function OrderDetails() {
 
@@ -75,7 +76,7 @@ function OrderDetailsContent() {
   }
 
   return (
-    <Stack spacing={4} p={4}>
+    <Stack margin={"0 auto"} spacing={4} p={4}>
       <Typography variant="h4" fontWeight="bold">
         Détail de la commande
       </Typography>
@@ -88,7 +89,7 @@ function OrderDetailsContent() {
         </Stack>
         <Stack direction="row" alignItems="center" spacing={1}>
           <MdCalendarToday />
-          <Typography>{orderDetails.dateCommande}</Typography>
+          <Typography>{ formatDate(orderDetails.dateCommande) }</Typography>
         </Stack>
 
         {
@@ -96,7 +97,7 @@ function OrderDetailsContent() {
           <>
             <Stack direction={"row"} spacing={1} alignItems={"center"}>
               <CiStickyNote />
-              <Typography>{orderDetails.carte}</Typography>
+              <Typography>{ orderDetails.carte || "Pas de note"}</Typography>
             </Stack>
             <Stack direction={"row"} spacing={1} alignItems={"center"}>
               <FiGift />
@@ -107,7 +108,7 @@ function OrderDetailsContent() {
         }
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <TbTruckDelivery />
-          <Typography>livraison le {orderDetails.dateLivraison}</Typography>
+          <Typography>livraison le { formatDate(orderDetails.dateLivraison) }</Typography>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <GrStatusGoodSmall />
@@ -125,13 +126,13 @@ function OrderDetailsContent() {
 
       <ClientDetail client={client} />
       <ProductsDetail products={products} />
-      <Actions setOrderDetails={setOrderDetails} />
+      <Actions setOrderDetails={setOrderDetails} orderDetails={orderDetails} />
 
     </Stack>
   );
 }
 
-function Actions({ setOrderDetails }) {
+function Actions({ setOrderDetails, orderDetails }) {
   const { id } = useParams();
 
   const changeState = async (state) => {
@@ -152,9 +153,14 @@ function Actions({ setOrderDetails }) {
 
   return (
     <Stack spacing={3}>
-      <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">
-        Terminer la commande
-      </Button>
+      {
+        ( orderDetails.etat === "pas commencée" || orderDetails.etat === "en cours" ) &&
+        <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">
+          { orderDetails.etat === "pas commencée" &&  "Démmarer la commande" }
+          { orderDetails.etat === "en cours" &&  "Terminer la commande" }
+        </Button>
+      }
+
       <Button onClick={() => changeState("annulée")} fullWidth variant="outlined" color="error">
         Annuler la commande
       </Button>

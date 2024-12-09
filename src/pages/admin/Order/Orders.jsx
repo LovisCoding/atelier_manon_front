@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { getOrdersForAdmin } from "../../../services/CommandService";
 import { useAuth } from "../../../utils/AuthContext";
+import { formatDate } from "../../../utils/Date";
 
 export default function Orders() {
 
@@ -63,7 +64,7 @@ export default function Orders() {
                     <TableCell>{row.adresse}</TableCell>
                     <TableCell>{row.prixTotalReduc} €</TableCell>
                     <TableCell>{row.etat}</TableCell>
-                    <TableCell>{row.dateCommande}</TableCell>
+                    <TableCell> { formatDate(row.dateCommande) }</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

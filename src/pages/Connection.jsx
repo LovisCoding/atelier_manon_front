@@ -67,7 +67,6 @@ function Connection() {
         <Container maxWidth="xs" >
             <Box
                 sx={{
-                    mt: 9,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
