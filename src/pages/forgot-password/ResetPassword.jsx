@@ -21,59 +21,59 @@ function ForgotPassword() {
     const [errorMessage, setErrorMessage] = useState("");
     const [isSamePassword, setIsSamePassword] = useState(true);
 
+    const [isFinished, setIsFinished] = useState(false);
+
     const theme = useTheme();
 
     useEffect(() => {
-        if (!token) navigate('/');
-        // check token
+        // check token validity
+        if (!token) changeRoute('/');
         const exec = async () => {
             const response = await validateToken(token);
-            if (response.status == 400) { navigate('/'); return; }
+            if (response.status == 400) { changeRoute('/'); return; }
         };
         exec();
     }, [])
+
+    useEffect(() => {
+        if (password === confirmPassword) setIsSamePassword(true);
+    }, [password, confirmPassword])
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!password || !confirmPassword) {
             setErrorMessage("Veuillez renseigner votre mot de passe.");
             setIsErrorDisplayed(true);
+            setIsSamePassword(false);
             return;
         }
         if (password !== confirmPassword) {
             setErrorMessage("Veuillez rentrer 2 mots de passe identiques.");
             setIsErrorDisplayed(true);
+            setIsSamePassword(false);
+            return;
+        }
+        if (password.length < 8) {
+            setErrorMessage("Votre mot de passe doit faire 8 caractères minimum.");
+            setIsErrorDisplayed(true);
+            setIsSamePassword(false);
             return;
         }
         const exec = async () => {
-            const data = await resetPassword(token, password);
+            const data = await resetPassword(token, password, confirmPassword);
             if (!data) return;
-            if (data.status === 404) {
-                setErrorMessage("L'adresse renseignée n'est associée à aucun compte.");
+            if (data.status === 400) {
+                setErrorMessage(data.response.data);
                 setIsErrorDisplayed(true);
                 return;
             }
-            changeRoute('/email-sent');
+            console.log(data);
+            setIsFinished(true);
         }
         exec();
     };
 
-    const changeRoute = (route) => {
-        navigate(route);
-    };
-
     const handleClose = () => setIsErrorDisplayed(false);
-
-    const fieldStyle = {
-        "& .MuiOutlinedInput-root": {
-            "&.Mui-focused fieldset": {
-                borderColor: theme.palette.customYellow.main,
-            },
-        },
-        "& .MuiInputLabel-root.Mui-focused": {
-            color: theme.palette.customYellow.main, // Couleur quand focus
-        }
-    }
 
     const placeholderStyle = {
         "& input::placeholder": {
@@ -83,7 +83,9 @@ function ForgotPassword() {
     }
 
     return (
+        <>
 
+        { !isFinished &&
         <Container maxWidth="xs" >
             <Box
                 sx={{
@@ -168,15 +170,49 @@ function ForgotPassword() {
                         variant="yellowButton"
                         sx={{ mt: 3, mb: 2 }}
                     >Réinitialiser</Button>
-                    <Typography onClick={e => changeRoute('/login')} sx={{ justifySelf: 'center', fontSize: '12px', textDecoration: 'underline', cursor: 'pointer' }} >
+                    <Typography onClick={e => navigate('/login')} sx={{ justifySelf: 'center', fontSize: '12px', textDecoration: 'underline', cursor: 'pointer' }} >
                         Annuler</Typography>
                 </Box>
             </Box>
-        </Container>
+        </Container> }
+
+        { isFinished &&
+        <Container maxWidth="xs" >
+        <Box
+            sx={{
+                mt: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+            }}
+        >
+
+                <Typography color="customYellow" fontWeight="700" component="h1" variant="h5" >
+                    Mot de passe réinitialisé !
+                </Typography>
+                <Box
+                    noValidate
+                    sx={{ mt: 2 }}
+                    display="flex"
+                    flexDirection="column"
+                    gap=".5rem"
+                >
+                    <Typography fontSize={15} >Votre mot de passe a bien été réinitialisé.</Typography>
+                    <Typography fontSize={15} >Veuillez cliquer sur ce lien pour vous connecter à nouveau.</Typography>
+                    <Button
+                        fullWidth={false}
+                        variant="yellowButton"
+                        sx={{ mt: 1 }}
+                        onClick={e=>navigate('/login')}
+                    >Retourner à la page de connexion</Button>
+                </Box>
+
+        </Box>
+        </Container> }
+
+        </>
 
     );
-
 }
-
 
 export default ForgotPassword;
