@@ -7,7 +7,6 @@ export default function DropDownMenu({ scrolled, selected }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const color = () => {
-    console.log(scrolled,":",selected);
     if (selected) {
       if (scrolled) return 'text.secondary';
       else return 'text.primary';

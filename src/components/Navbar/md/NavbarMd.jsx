@@ -60,7 +60,7 @@ export default function NavbarMd() {
                 <Link variant="navbar" sx={getLinkStyles("/about")} href="/about">
                   À propos
                 </Link>
-                <Link variant="navbar" sx={getLinkStyles("/faq")} href="/faq">
+                <Link variant="navbar"  sx={getLinkStyles("/faq")} href="/faq">
                   FAQ
                 </Link>
                 <Link variant="navbar" sx={getLinkStyles("/contact")} href="/contact">
