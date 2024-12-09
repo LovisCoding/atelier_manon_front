@@ -22,6 +22,28 @@ export default function AuthContextProvider({ children }) {
       })
   };
 
+  const register = async (firstname, lastname, email, password, adresse) => {
+    let res = await axios.post("/api/account/register", { 
+      "prenomCli": firstname,
+      "nomCli": lastname,
+      "email": email,
+      "mdp": password,
+      "adresse": adresse
+     });
+     if (res.status == 200){
+      setDetails({
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        adresse: adresse
+      })
+      return true;
+     } else {
+      return false;
+     }
+    return res.status == 200;
+  }
+
   const login = async (email, password) => {
     try {
       let res = await axios.post("/api/account/login", {
@@ -49,7 +71,7 @@ export default function AuthContextProvider({ children }) {
   const isLogged = details !== null;
 
   return (
-    <AuthContext.Provider value={{ details, login, logout, isLogged }}>
+    <AuthContext.Provider value={{ details, login, logout, isLogged, register }}>
       {children}
     </AuthContext.Provider>
   );

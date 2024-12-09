@@ -4,11 +4,20 @@ import SidebarMenu from "../SidebarMenu";
 import { getCategories } from "/src/services/CategorieService";
 import { addImage, addImageCateg } from "/src/services/HomeService";
 import { convertFilesToBase64 } from "/src/utils/Base64";
+import axios from "axios";
 
 export default function Accueil() {
+
   const [categorie, setCategorie] = useState("");
   const [idCategorie, setIdCategorie] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [event, setEvent] = useState(null);
+
+  const submit = () => {
+    axios.post("/api/personnalisation/update-evenement", {
+      
+    })
+  }
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -125,6 +134,19 @@ export default function Accueil() {
             <TextField
               type="file"
               onChange={(e) => handleFileChange(e, "categorie", idCategorie)}
+              sx={{ marginBottom: 2 }}
+              fullWidth
+              variant="outlined"
+            />
+          </Box>
+
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
+              Évènements (bannière en haut de la page)
+            </Typography>
+            <TextField
+              type="text"
+              defaultValue={ event && event }
               sx={{ marginBottom: 2 }}
               fullWidth
               variant="outlined"
