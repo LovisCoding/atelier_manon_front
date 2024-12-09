@@ -49,10 +49,13 @@ export default function AuthContextProvider({ children }) {
       let res = await axios.post("/api/account/login", {
         email,
         mdp: password
-      })
+      });
+      console.log("res:",res)
+      console.log("status:",res.status)
       if (res.status === 200) { getProfil(); return true; }
-      console.log("c'est pas normal")
-
+      if (res.status === 403) return false;
+      
+      return true;
     } catch (err) {
       console.error("Une erreur est survenue:",err)
       return false;

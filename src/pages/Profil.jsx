@@ -1,18 +1,20 @@
-import { Button, Typography, Stack, Container, FormControl } from "@mui/material";
+import { Button, Typography, Stack, Container, FormControl, TextField, Select, MenuItem } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { getAvisBySession } from "../services/AvisService";
 import { getOrdersProfil } from "../services/OrderService";
-import { getProfilCurrentSession } from "../services/AccountService";
+import { getProfilCurrentSession, disableMyAccount } from "../services/AccountService";
 import { useAuth } from "../utils/AuthContext";
+import { FaCheckCircle } from "react-icons/fa";
+
 
 export default function Profil() {
 
 	const [userDetails, setUserDetails] = useState();
 	const [orders, setOrders] = useState([]);
-	const [avis, setAvis] = useState("");
+	const [avis, setAvis] = useState();
 
-	const {details, logout} = useAuth();
+	const { details, logout } = useAuth();
 	const navigate = useNavigate();
 
 	const disconnect = () => {
@@ -28,6 +30,12 @@ export default function Profil() {
 		return;
 	}
 
+	const disableAccount = async () => {
+		const res = await disableMyAccount();
+		if (res) logout();
+		return;
+	};
+
 	useEffect(() => {
 		getProfilCurrentSession().then((data) => {
 			setUserDetails(data);
@@ -40,7 +48,7 @@ export default function Profil() {
 		})
 	}, [])
 
-	if ( details == null ) {
+	if (details == null) {
 		navigate('/login');
 		return;
 	}
@@ -56,16 +64,36 @@ export default function Profil() {
 
 				<FormControl>
 					<Stack spacing={3}>
-						
+
 						<Stack direction="row" justifyContent="space-between" >
 							<Stack spacing={1}>
 								<Typography variant="h5">Nom</Typography>
-								<Typography>{userDetails && userDetails.nomCli}</Typography>
+								<Stack direction="row" spacing={1}>
+									<TextField
+										value={userDetails && userDetails.nomCli}
+										onChange={(e) => {
+											setUserDetails({ ...userDetails, nomCli: e.target.value })
+										}}
+									/>
+									<Button variant="outlined">
+										<FaCheckCircle />
+									</Button>
+								</Stack>
 							</Stack>
 
 							<Stack spacing={1}>
 								<Typography variant="h5">Prénom</Typography>
-								<Typography>{userDetails && userDetails.preCli}</Typography>
+								<Stack direction="row" spacing={1}>
+									<TextField
+										value={userDetails && userDetails.preCli}
+										onChange={(e) => {
+											setUserDetails({ ...userDetails, preCli: e.target.value })
+										}}
+									/>
+									<Button variant="outlined">
+										<FaCheckCircle />
+									</Button>
+								</Stack>
 							</Stack>
 						</Stack>
 
@@ -75,7 +103,29 @@ export default function Profil() {
 						</Stack>
 						<Stack spacing={1}>
 							<Typography variant="h5">Avis</Typography>
-							<Typography>{ avis || "Aucun avis pour le moment" }</Typography>
+							<Select
+								value={2}
+							>
+								<MenuItem value="1">1/5</MenuItem>
+								<MenuItem value="2">2/5</MenuItem>
+								<MenuItem value="3">3/5</MenuItem>
+								<MenuItem value="4">4/5</MenuItem>
+								<MenuItem value="5">5/5</MenuItem>
+							</Select>
+							<Stack direction="row" spacing={1}>
+								<TextField
+									fullWidth
+									multiline
+									rows={5}
+									value={userDetails && userDetails.comm}
+									onChange={(e) => {
+										setUserDetails({ ...userDetails, comm: e.target.value })
+									}}
+								/>
+								<Button variant="outlined">
+									<FaCheckCircle />
+								</Button>
+							</Stack>
 						</Stack>
 					</Stack>
 				</FormControl>
@@ -83,7 +133,7 @@ export default function Profil() {
 
 				<Typography variant="h2">Vos commandes</Typography>
 				<Stack>
-					{ orders.length == 0 && <Typography>Votre compte ne possède aucune commande</Typography> }
+					{orders.length == 0 && <Typography>Votre compte ne possède aucune commande</Typography>}
 					{
 						orders.map((order) => (
 							<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
@@ -101,12 +151,18 @@ export default function Profil() {
 					<Button onClick={() => disconnect()} fullWidth variant="yellowButton" color="secondary">Déconnexion</Button>
 				</Stack>
 
+				{ !details.isAdmin &&
 				<Stack direction="row" justifyContent="center" >
 					<Button type="button" variant="outlined" onClick={() => adminPage()}
 					>Accéder à la page d'administrateur</Button>
-				</Stack>
+				</Stack>}
 
-
+				{ details.isAdmin &&
+				<Stack direction="row" justifyContent="center" >
+					<Button type="button" variant="outlined" onClick={() => disableAccount()}
+						sx={{color: 'red', borderColor: 'red'}}
+					>Désactiver le compte</Button>
+				</Stack>}
 			</Stack>
 		</Container>
 

@@ -5,3 +5,9 @@ export const getProfilCurrentSession = async () => {
 	if ( res.status != 200 ) return null;
 	return res.data;
 }
+
+export const disableMyAccount = async () => {
+	let res = await axios.post("/api/client/account/disable-account");
+	if ( res.status != 200 ) return false;
+	return true;
+}
