@@ -17,7 +17,7 @@ function FAQ() {
   }, []);
 
     return (
-        <Box sx={{ margin: "auto", padding: 3, mt: 7 }}>
+        <Box sx={{ margin: "auto", padding: 3 }}>
         <Typography marginBottom={8} variant="h2" align="center" gutterBottom>
             FAQ
         </Typography>

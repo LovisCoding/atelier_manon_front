@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { List, ListItem, ListItemText, Drawer, Typography, Box, useTheme, useMediaQuery, IconButton } from '@mui/material';
+import { List, ListItem, ListItemText, Drawer, Typography, Box, useTheme, useMediaQuery, IconButton, Button } from '@mui/material';
 import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog, FaPaintBrush } from 'react-icons/fa';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from '../../components/Link';
+import { Navigate, useNavigate } from 'react-router';
 
 const SidebarMenu = ({ children }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
   const [open, setOpen] = useState(false);
 
@@ -67,7 +70,7 @@ const SidebarMenu = ({ children }) => {
             Tableau de bord
           </Typography>
         </Box>
-        <List>
+        <List sx={{height:'100%', display:'flex', flexDirection:'column', gap:1 }} >
           {[
             { text: 'Produits', href: '/admin/products', icon: <FaBox /> },
             { text: 'Commandes', href: '/admin/orders', icon: <FaShoppingCart /> },
@@ -121,6 +124,13 @@ const SidebarMenu = ({ children }) => {
               </Box>
             </ListItem>
           ))}
+          <ListItem sx={{justifySelf:'end', marginTop:'auto'}} >
+            <Button
+              variant='outlined'
+              sx={{margin:'0 auto'}}
+              onClick={()=>navigate('/')}
+            >Revenir au site web</Button>
+          </ListItem>
         </List>
       </Drawer>
 	  {children}

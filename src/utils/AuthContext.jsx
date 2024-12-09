@@ -15,7 +15,8 @@ export default function AuthContextProvider({ children }) {
           setDetails({
             firstname: data.preCli,
             lastname: data.nomCli,
-            email: data.email
+            email: data.email,
+            isAdmin: data.estAdmin
           })
         } else if (res.status == 403) {return;}
       })

@@ -16,7 +16,7 @@ export default function NavbarMd() {
   const { isLogged } = useAuth();
 
   const [navbarState, setNavbarState] = useState({
-    bgNavbar: "transparent",
+    bgNavbar: "white",
     textColor: "text.primary",
     scrolled: false
   });
@@ -33,7 +33,7 @@ export default function NavbarMd() {
   return (
     <>
       <ElevationScroll setNavbarState={setNavbarState}>
-        <AppBar position="fixed" sx={{ backgroundColor: bgNavbar, transition: "background-color 0.3s" }}>
+        <AppBar position="sticky" sx={{ backgroundColor: bgNavbar, transition: "background-color 0.3s" }}>
           <Toolbar>
             <Stack
               direction="row"
@@ -43,12 +43,12 @@ export default function NavbarMd() {
             >
               {/* Logo and title */}
               <Stack direction="row" spacing={2} alignItems="center">
-              <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', gap: 2 }}>
                 <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+                <Typography variant="h6" sx={{ fontWeight: 300, color: textColor }}
+                >L'Atelier de Manon</Typography>
               </Link>
-                <Typography variant="h6" sx={{ fontWeight: 300, color: textColor }}>
-                  L'Atelier de Manon
-                </Typography>
+                
               </Stack>
 
               {/* Navigation links */}
