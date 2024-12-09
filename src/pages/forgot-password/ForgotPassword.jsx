@@ -28,7 +28,12 @@ function ForgotPassword() {
                 setIsErrorDisplayed(true);
                 return;
             }
-            changeRoute('/email-sent');
+            if (data && data.status !== 500) changeRoute('/email-sent');
+            if (data.status === 500) {
+                setErrorMessage("Une erreur est survenue. Veuillez réessayer.");
+                setIsErrorDisplayed(true);
+                return;
+            }
         }
         exec();
     };
