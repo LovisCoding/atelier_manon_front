@@ -5,6 +5,7 @@ import { getAvisBySession } from "../services/AvisService";
 import { getOrdersProfil } from "../services/OrderService";
 import { getProfilCurrentSession } from "../services/AccountService";
 import { useAuth } from "../utils/AuthContext";
+import axios from "axios";
 
 export default function Profil() {
 
@@ -16,14 +17,18 @@ export default function Profil() {
 	const navigate = useNavigate();
 
 	const disconnect = () => {
-		document.cookie = `ci_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+		auth.logout();
+	}
+
+	const resetPassword = () => {
+		axios.post("/api/account/reset-password").then((res) => {
+			if (res.status == 200 || res.status == 201) navigate("/email-sent");
+		}).catch((error) => {
+			console.log(error);
+		})
 	}
 
 	useEffect(() => {
-		if ( auth.details == null ) {
-			navigate("/login");
-			return;
-		}
 		getProfilCurrentSession().then((data) => {
 			setUserDetails(data);
 		})
@@ -34,6 +39,10 @@ export default function Profil() {
 			setAvis(data);
 		})
 	}, [])
+
+	if ( auth.details == null ){
+		return ( <Typography mt={5} variant="h1" textAlign="center">Vous n'êtes pas connecté</Typography> )
+	}
 
 	return (
 		<Container sx={{
@@ -47,14 +56,14 @@ export default function Profil() {
 				<FormControl>
 					<Stack spacing={3}>
 						
-						<Stack direction="row">
-							{ userDetails && <TextField fullWidth id="outlined-basic" label="firstname" variant="outlined" defaultValue={userDetails.firstname} /> }
-							{/* <Button>OK</Button> */}
+						<Stack spacing={3}>
+							<Typography variant="h5">Nom</Typography>
+							<Typography>{userDetails && userDetails.nomCli}</Typography>
 						</Stack>
 
-						<Stack direction="row">
-							{ userDetails && <TextField fullWidth id="outlined-basic" label="lastname" variant="outlined" defaultValue={userDetails.lastname} /> }
-							{/* <Button>OK</Button> */}
+						<Stack spacing={3}>
+							<Typography variant="h5">Prénom</Typography>
+							<Typography>{userDetails && userDetails.preCli}</Typography>
 						</Stack>
 
 						<Stack spacing={1}>
@@ -75,19 +84,18 @@ export default function Profil() {
 					{
 						orders.map((order) => (
 							<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
-								<Typography>#{order.id}</Typography>
-								<Typography>{order.amount} €</Typography>
-								<Typography>{order.state}</Typography>
-								<Typography>{order.date}</Typography>
-								<Link to={`/order/${order.id}`}><Typography>voir plus</Typography></Link>
+								<Typography>#{order.idCommande}</Typography>
+								<Typography>{order.etat}</Typography>
+								<Typography>{order.dateCommande}</Typography>
+								<Link to={`/order/${order.idCommande}`}><Typography>voir plus</Typography></Link>
 							</Stack>
 						))
 					}
 				</Stack>
 
 				<Stack direction={"row"} spacing={3}>
-					{/* <Button fullWidth variant="outlined" color="danger">Supprimer le compte</Button> */}
-					<Button type="button" onClick={disconnect()} fullWidth variant="outlined" color="secondary">Déconnexion</Button>
+					<Button type="button" onClick={() => resetPassword()} fullWidth variant="outlined" color="secondary">Réinitialiser le mot de passe</Button>
+					<Button type="button" onClick={() => disconnect()} fullWidth variant="outlined" color="secondary">Déconnexion</Button>
 				</Stack>
 
 

@@ -38,6 +38,7 @@ export default function AuthContextProvider({ children }) {
 
   const logout = () => {
     axios.post("/api/account/logout");
+    setDetails(null);
   };
 
   useEffect(() => {

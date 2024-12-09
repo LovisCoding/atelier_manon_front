@@ -6,7 +6,7 @@ export const register = async (firstname, lastname, email, password, adresse) =>
 		"nomCli": lastname,
 		"email": email,
 		"mdp": password,
-		"adresse": adresse
+		"adresse": [adresse]
 	 });
 	return res.status == 200;
 }
