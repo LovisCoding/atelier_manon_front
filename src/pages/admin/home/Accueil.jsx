@@ -53,7 +53,7 @@ export default function Accueil() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", height: "100vh" }}>
       <SidebarMenu />
 
       <Box
@@ -68,16 +68,12 @@ export default function Accueil() {
         }}
       >
         <Stack spacing={4} sx={{ width: "100%", maxWidth: 600 }}>
-          <Typography
-            variant="h4"
-            align="center"
-            sx={{ fontWeight: "bold", color: "#333" }}
-          >
+          <Typography variant="h4" align="center">
             Gestion des Pages
           </Typography>
 
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <Typography variant="h6" sx={{ marginBottom: 1 }}>
+            <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
               Page d'accueil
             </Typography>
             <TextField
@@ -86,12 +82,11 @@ export default function Accueil() {
               sx={{ marginBottom: 2 }}
               fullWidth
               variant="outlined"
-              helperText="Sélectionnez un fichier pour la page d'accueil"
             />
           </Box>
 
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <Typography variant="h6" sx={{ marginBottom: 1 }}>
+            <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
               Page de Bijoux
             </Typography>
             <TextField
@@ -100,16 +95,15 @@ export default function Accueil() {
               sx={{ marginBottom: 2 }}
               fullWidth
               variant="outlined"
-              helperText="Sélectionnez un fichier pour la page des bijoux"
             />
           </Box>
 
           <Box>
-            <Typography variant="h6" sx={{ marginBottom: 1, textAlign: "center" }}>
+            <Typography variant="h6" sx={{ marginBottom: 1, textAlign: "center", color: "black" }}>
               Catégorie
             </Typography>
             <FormControl fullWidth sx={{ marginBottom: 2 }}>
-              <InputLabel>Choisir une catégorie</InputLabel>
+              <InputLabel sx={{ color: "black" }}>Choisir une catégorie</InputLabel>
               <Select
                 value={categorie}
                 onChange={handleCategorieChange}
@@ -125,7 +119,7 @@ export default function Accueil() {
           </Box>
 
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <Typography variant="h6" sx={{ marginBottom: 1 }}>
+            <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
               Fichier Catégorie
             </Typography>
             <TextField
@@ -134,7 +128,6 @@ export default function Accueil() {
               sx={{ marginBottom: 2 }}
               fullWidth
               variant="outlined"
-              helperText="Sélectionnez un fichier pour la catégorie"
             />
           </Box>
 

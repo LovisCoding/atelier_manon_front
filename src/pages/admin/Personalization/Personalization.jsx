@@ -9,8 +9,8 @@ import { addMatProd, getAllMateriau, getAllFils, getAllPierres, deleteMatProd, d
 const DataTable = ({ data, setData, title, keyField, valueField, descriptionField = null, addFunction = null, deleteFunction = null }) => {
   const [newValue, setNewValue] = useState("");
   const [newDescription, setNewDescription] = useState("");
-  const [error, setError] = useState(null);  // State to handle errors
-  const [successMessage, setSuccessMessage] = useState(null); // State to handle success
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleAdd = async () => {
     if (newValue.trim()) {
@@ -142,7 +142,7 @@ export default function Personalization() {
   }, []);
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" width="100%" minHeight="100vh">
+    <Box display="flex" justifyContent="center" width="100%" minHeight="100vh">
       <SidebarMenu />
       <Stack sx={{ mt: 5, width: "70%" }}>
         <Typography variant="h4" mb={4} sx={{ textAlign: "center" }}>

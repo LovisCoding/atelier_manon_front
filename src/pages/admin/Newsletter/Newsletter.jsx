@@ -57,7 +57,7 @@ export default function Newsletter() {
                         marginTop: 2,
                     }}
                 >
-                    <Typography variant="h4" mb={2} fontWeight="bold" textAlign="center">
+                    <Typography variant="h4" mb={5} textAlign="center">
                         Création de la Newsletter
                     </Typography>
 
