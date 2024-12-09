@@ -1,13 +1,14 @@
 import React from 'react';
-import { TextField, Select, MenuItem, Typography, Box, Grid2, Switch } from '@mui/material';
+import {TextField, Select, MenuItem, Typography, Box, Grid2, Switch, InputLabel, FormControl} from '@mui/material';
 import { InputAdornment } from '@mui/material';
 
-const ProductDetailsForm = ({
+const   ProductDetailsForm = ({
   valueLib, setValueLib,
   valueDesc, setValueDesc,
   valuePrix, setValuePrix,
   engraving, setEngraving,
-  categories, selectedCategory, setSelectedCategory
+  categories, selectedCategory, setSelectedCategory,
+    tempsRea, setTempsRea,
 }) => {
   return (
     <Box>
@@ -33,22 +34,40 @@ const ProductDetailsForm = ({
         sx={{ marginBottom: 2 }}
         required
       />
+        {/*Temps de réalisation*/}
+
+        <TextField
+            fullWidth
+            label="Temps de réalisation"
+            variant="outlined"
+            value={tempsRea}
+            onChange={(e) => setTempsRea(e.target.value)}
+            type="number"
+            InputProps={{
+                endAdornment: <InputAdornment position="end">jour(s)</InputAdornment>
+            }}
+            required
+        />
       {/* Catégorie du produit */}
-      <Typography variant="h6">Catégorie de produit</Typography>
-      <Select
-        fullWidth
-        variant="outlined"
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-        sx={{ marginBottom: 2 }}
-      >
-        <MenuItem value="">Sélectionner</MenuItem>
-        {categories.map((category) => (
-          <MenuItem key={category.idCateg} value={category.idCateg}>
-            {category.libCateg}
-          </MenuItem>
-        ))}
-      </Select>
+        <FormControl fullWidth sx={{mt: 4}}>
+            <InputLabel id={'select-category'}>Catégorie de produit</InputLabel>
+            <Select label={"Catégorie de produit"}
+                    fullWidth
+                    variant="outlined"
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    sx={{ marginBottom: 2 }}
+                    id={'select-category'}
+            >
+                <MenuItem value="">Sélectionner</MenuItem>
+                {categories.map((category) => (
+                    <MenuItem key={category.idCateg} value={category.idCateg}>
+                        {category.libCateg}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
+
       {/* Prix */}
       <Grid2 container spacing={2}>
         <Grid2 item xs={6}>
@@ -66,7 +85,7 @@ const ProductDetailsForm = ({
           />
         </Grid2>
         {/* Engraving */}
-        <Grid2 item xs={6}>
+        <Grid2 item xs={6} display={'flex'}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="body1" sx={{ marginRight: 1 }}>Gravure disponible</Typography>
             <Switch

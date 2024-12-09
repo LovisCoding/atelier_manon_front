@@ -99,3 +99,9 @@ export const updateProduct = async (product) => {
 		console.error("Une erreur est survenue : "+err)
 	}
 }
+export const addImage= async (idProd, image) => {
+    const data = await axios.post('/api/produit/add-image', {
+        idProd: Number(idProd),
+        image
+    })
+}

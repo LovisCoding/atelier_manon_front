@@ -12,7 +12,6 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoService";
 import { getAllProduits, getProductImage } from "../../../services/ProductService";
-import axios from "axios";
 import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduit";
 import Snackbar from "@mui/material/Snackbar";
 
