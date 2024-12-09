@@ -10,8 +10,9 @@ import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
 const Test = React.lazy(() => import('../src/pages/Test/Test'));
 const Connection = React.lazy(() => import('../src/pages/Connection.jsx'));
 const Register = React.lazy(() => import('../src/pages/Register.jsx'));
-const ForgotPassword = React.lazy(() => import('../src/pages/ForgotPassword.jsx'));
-const EmailSent = React.lazy(() => import('../src/pages/EmailSent.jsx'));
+const ForgotPassword = React.lazy(() => import('../src/pages/forgot-password/ForgotPassword.jsx'));
+const EmailSent = React.lazy(() => import('../src/pages/forgot-password/EmailSent.jsx'));
+const ResetPassword = React.lazy(() => import('../src/pages/forgot-password/ResetPassword.jsx'));
 const FAQ = React.lazy(() => import('../src/pages/faq/Faq'));
 const About = React.lazy(() => import('../src/pages/About'));
 const Home = React.lazy(() => import('../src/pages/home/Home'));
@@ -63,6 +64,7 @@ const AppRoutes = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/email-sent" element={<EmailSent />} />
+                    <Route path="/reset-password/:token" element={<ResetPassword />} />
                     <Route path="email/confirmAccount/:token" element={<ConfirmAccount />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/about" element={<About />} />

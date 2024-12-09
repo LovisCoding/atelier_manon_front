@@ -17,7 +17,6 @@ export default function Orders() {
   };
 
   useEffect(() => {
-    if ( auth.details == null ) navigate("/login");
     getOrdersForAdmin()
       .then((data) => {
         if (data != null) setOrders(data);
@@ -43,7 +42,7 @@ export default function Orders() {
             <TableHead>
               <TableRow>
                 <TableCell>Adresse</TableCell>
-                <TableCell>Montant total</TableCell>
+                {/* <TableCell>Montant total</TableCell> */}
                 <TableCell>État</TableCell>
                 <TableCell>Date</TableCell>
               </TableRow>
@@ -52,14 +51,14 @@ export default function Orders() {
               { orders.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => handleClickRow(`/admin/order/${row.id}`)}
+                  onClick={() => handleClickRow(`/admin/order/${row.idCommande}`)}
                   sx={{
                     cursor: "pointer",
                     "&:hover": { backgroundColor: "#f5f5f5" },
                   }}
                 >
                   <TableCell>{row.adresse}</TableCell>
-                  <TableCell>{row.amount.toFixed(2)} €</TableCell>
+                  {/* <TableCell>{row.amount.toFixed(2)} €</TableCell> */}
                   <TableCell>{row.etat}</TableCell>
                   <TableCell>{row.dateCommande}</TableCell>
                 </TableRow>
