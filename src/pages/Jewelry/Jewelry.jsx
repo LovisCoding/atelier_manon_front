@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import JewelryCollection from './JewelryCollection';
-import { getProducts } from '../../services/ProductService';
+import { getAllProducts } from '/src/services/ProductService';
 
 const Jewelry = () => {
   const [jewelryData, setJewelryData] = useState([]);
@@ -16,7 +16,7 @@ const Jewelry = () => {
         page: 1,
       };
 
-      const products = await getProducts(params);
+      const products = await getAllProducts(params);
 
       if (products && products.produits) {
         const formattedData = products.produits.map((product) => ({

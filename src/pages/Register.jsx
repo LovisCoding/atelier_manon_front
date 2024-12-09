@@ -11,6 +11,7 @@ import { register } from "../services/UserService";
 
 function Register() {
 
+    const {register} = useAuth();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
@@ -31,13 +32,11 @@ function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
         if (password !== confirmPassword) {
             setIsSamePassword(false);
             return;
         }
-
-        register(firstname, lastname, email, password, (addressNumber + " " + addressStreet + " " + addressCity + " " + addressPostalCode))
+        register(firstname, lastname, email, password, [addressNumber, addressStreet, addressCity, addressPostalCode])
             .then((res) => {
                 if (res) navigate("/email-sent");
                 else console.log("Faux");

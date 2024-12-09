@@ -34,4 +34,12 @@ export const CreatePromo = async (obj) => {
     return null;
 }
 
+export const DeleteCodePromo = async (code) => {
+    const data = await axios
+        .delete('/api/codepromo/delete-codepromo', {
+            data: {
+                code
+            }
+        })
+}
 

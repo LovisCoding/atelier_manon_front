@@ -42,6 +42,8 @@ const BestSale = ({ products }) => {
   );
 };
 
+const testImg = '../assets/img/bracelet1.webp';
+
 const BestSellerItem = ({ product }) => {
   const [image, setImage] = useState("");
 
@@ -57,7 +59,7 @@ const BestSellerItem = ({ product }) => {
         <CardMedia
           component="img"
           alt={product.photo}
-          src={image}
+          src={image || "coucou"}
           sx={{ width: "365px", objectFit: "cover" }}
         />
         <CardContent sx={{ textAlign: "center" }}>

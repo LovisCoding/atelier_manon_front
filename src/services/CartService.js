@@ -1,9 +1,9 @@
 
 import axios from "axios";
 
-export const getCartProducts = async (idUser) => {
+export const getCartProducts = async () => {
     const data = await axios
-        .get('/api/client/panier/get-panier-client', {params: {idCli:idUser}});
+        .get('/api/client/panier/get-panier-client');
     if (!data.data) return null;
     data.data.forEach(prod => {
         prod.idProd = parseInt(prod.idProd);
@@ -12,7 +12,7 @@ export const getCartProducts = async (idUser) => {
         prod.produit.prix = parseFloat(prod.produit.prix);
     });
     return data.data;
-}
+};
 
 export const addProductPanier = async (product) => {
     try {
@@ -28,7 +28,7 @@ export const addProductPanier = async (product) => {
         console.error("Une erreur est survenue : "+err);
         return null;
     }
-}
+};
 
 export const reduceProductPanier = async (product) => {
     try {
@@ -44,7 +44,7 @@ export const reduceProductPanier = async (product) => {
         console.error("Une erreur est survenue : "+err);
         return null;
     }
-}
+};
 
 export const deleteProductPanier = async (product) => {
     try {
@@ -62,7 +62,8 @@ export const deleteProductPanier = async (product) => {
     } catch (err) {
       console.error("Une erreur est survenue : ", err);
     }
-  };
+
+};
 
 export const addCommande = async (idCli, commentary, isGift, giftCommentary) => {
     try {
@@ -79,7 +80,5 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary) => 
         return null;
     }
 }
-
-
 
 

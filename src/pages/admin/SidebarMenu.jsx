@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Drawer,
-  Typography,
-  Box,
-  useTheme,
-  useMediaQuery,
-  IconButton
-} from '@mui/material';
-import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog } from 'react-icons/fa';
+import { List, ListItem, ListItemText, Drawer, Typography, Box, useTheme, useMediaQuery, IconButton } from '@mui/material';
+import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog, FaPaintBrush } from 'react-icons/fa';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from '../../components/Link';
 
@@ -87,6 +77,7 @@ const SidebarMenu = ({ children }) => {
             { text: 'Réductions', href: '/admin/codesPromo', icon: <FaPercent /> },
             { text: 'Évènements', href: '/admin/evenements', icon: <FaCalendarAlt /> },
             { text: 'Blog', href: '/admin/blog', icon: <FaBlog /> },
+            { text: 'Personnalisation', href: '/admin/personalization', icon: <FaPaintBrush /> },
           ].map((item) => (
             <ListItem
               button

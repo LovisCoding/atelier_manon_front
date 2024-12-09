@@ -11,10 +11,10 @@ import Link from "../../Link";
 
 export default function NavbarSm() {
   const [openDrawer, setOpenDrawer] = useState(false);
-const [navbarState, setNavbarState] = useState({
-	bgNavbar: "transparent",
-	textColor: "text.primary",
-	scrolled: false,
+  const [navbarState, setNavbarState] = useState({
+    bgNavbar: "transparent",
+    textColor: "text.primary",
+    scrolled: false,
   });
   const { bgNavbar, textColor, scrolled } = navbarState;
   const location = useLocation();

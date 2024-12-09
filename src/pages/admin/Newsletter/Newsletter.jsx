@@ -1,32 +1,33 @@
 import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import { postNewsletter } from "/src/services/NewsletterService";
+import { useEffect, useState } from "react";
+import { sendNewsletter } from "/src/services/NewsletterService";
 
 export default function Newsletter() {
-    const { id } = useParams();
 
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState(null);
+    const [message, setMessage] = useState("");
+    const [isError, setIsError] = useState(false);
 
     const handleSave = async () => {
         setLoading(true);
-        setMessage(null);
+        setMessage("");
         try {
-            const data = { subject, content: description }; // Correspondance avec l'API
-            const response = await postNewsletter(data);
+            const response = await sendNewsletter(subject, description);
             if (response) {
                 setMessage("Newsletter envoyée avec succès !");
-                setSubject(''); // Réinitialise l'objet
-                setDescription(''); // Réinitialise la description
+                setSubject('');
+                setDescription('');
             } else {
-                setMessage("Une erreur est survenue lors de l'envoi.");
+                setMessage("Une erreur est survenue lors de l'envoi des emails.");
             }
+            setIsError(true);
         } catch (error) {
-            setMessage("Erreur : " + error.message);
+            setMessage(error.message);
+            setIsError(true);
         } finally {
             setLoading(false);
         }
@@ -67,6 +68,7 @@ export default function Newsletter() {
                             fullWidth
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
+                            onInput={()=>setIsError(false)}
                         />
 
                         <TextField
@@ -77,9 +79,10 @@ export default function Newsletter() {
                             rows={6}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            onInput={()=>setIsError(false)}
                         />
 
-                        {message && (
+                        {isError &&
                             <Typography
                                 variant="body1"
                                 color={message.includes("succès") ? "green" : "red"}
@@ -87,7 +90,7 @@ export default function Newsletter() {
                             >
                                 {message}
                             </Typography>
-                        )}
+                        }
 
                         <Button
                             variant="contained"
