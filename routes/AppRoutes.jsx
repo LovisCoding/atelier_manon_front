@@ -24,6 +24,7 @@ const Cart = React.lazy(() => import('../src/pages/Cart.jsx'));
 const Command = React.lazy(() => import('../src/pages/Command.jsx'));
 const Product = React.lazy(() => import('../src/pages/Product/Product.jsx'));
 const CGV = React.lazy(() => import('../src/pages/CGV/CGV.jsx'));
+const LegalMentions = React.lazy(() => import('../src/pages/Legal/LegalMentions.jsx'));
 const Jewelry = React.lazy(() => import('../src/pages/Jewelry/Jewelry.jsx'));
 const Bracelets = React.lazy(() => import('../src/pages/Jewelry/Bracelets.jsx'));
 const Necklaces = React.lazy(() => import('../src/pages/Jewelry/Necklaces.jsx'));
@@ -67,10 +68,11 @@ const AppRoutes = () => {
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/email-sent" element={<EmailSent />} />
                     <Route path="/reset-password/:token" element={<ResetPassword />} />
-                    <Route path="email/confirmAccount/:token" element={<ConfirmAccount />} />
+                    <Route path="/email/confirmAccount/:token" element={<ConfirmAccount />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/cgv" element={<CGV />} />
+                    <Route path="/legal-mentions" element={<LegalMentions />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/command/:id" element={<Command />} />
                     <Route path="/contact" element={<Contact />} />
