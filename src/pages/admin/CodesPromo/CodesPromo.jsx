@@ -38,7 +38,7 @@ export default function CodesPromo() {
 						<TableHead>
 							<TableRow>
 								<TableCell>Nom du code promo</TableCell>
-								<TableCell>Nombre d'utilisation</TableCell>
+								<TableCell>Nombre d'utilisations</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>

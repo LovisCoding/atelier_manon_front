@@ -4,6 +4,8 @@ import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Footer from '../src/components/Footer.jsx';
 import Loader from '../src/components/Loader.jsx';
 import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
+import Blog from '../src/pages/Blog.jsx';
+import ClientArticle from '../src/pages/Article.jsx';
 
 // Lazy loading des pages publiques
 
@@ -73,6 +75,10 @@ const AppRoutes = () => {
                     <Route path="/command/:id" element={<Command />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/product/:id" element={<Product />} />
+
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/article/:id" element={<ClientArticle />} />
+
                     <Route path="/jewelry" element={<Jewelry />} />
                     <Route path="/jewelry/collars" element={<Collars />} />
                     <Route path="/jewelry/bracelets" element={<Bracelets />} />
