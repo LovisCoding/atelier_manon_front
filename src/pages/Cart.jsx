@@ -48,6 +48,7 @@ function Cart() {
   useEffect(() => {
     const exec = async () => {
       const data = await getCartProducts();
+      if (!data || data.status === 403) navigate('/');
       if (!data) return;
       setCartProducts(data);
     };
@@ -89,7 +90,7 @@ function Cart() {
     deleteProductPanier(cartProducts.find((product) => product.idProd+product.variante+product.gravure+product.idCli === idProd+variante+gravure+idCli));
   };
 
-  // TODO: idCli dans Context
+
   const handleConfirmCommand = async () => {
     const commandId = await addCommande(commentary, isGift, giftCommentary);
     if (!commandId) return; // TODO: handle error
@@ -97,7 +98,7 @@ function Cart() {
   }
 
   return (
-    <Box mb={3} >
+    <Box mb={3} fontFamily={theme.typography.fontFamily} >
       <Typography
         fontWeight="bold"
         variant="h4"
@@ -200,6 +201,7 @@ function Cart() {
                   resize: " none",
                   outlineColor: theme.palette.customYellow.main,
                   fontWeight: "normal",
+                  fontFamily: theme.typography.fontFamily
                 }}
                 placeholder="Ajoutez un commentaire sur votre commande"
                 value={commentary}
@@ -211,9 +213,9 @@ function Cart() {
                 setPromoCodes={setPromoCodes}
               />
 
-              <Box display="flex" alignItems="center">
+              <Box display="flex" alignItems="center" gap={1}>
                 <Box
-                  width="27rem"
+                  width="30rem"
                   ml={0}
                   display="flex"
                   gap={1}
@@ -238,6 +240,7 @@ function Cart() {
                     resize: " none",
                     outlineColor: theme.palette.customYellow.main,
                     fontWeight: "normal",
+                    fontFamily: theme.typography.fontFamily
                   }}
                   placeholder="Ajoutez un mot pour le destinataire"
                   value={giftCommentary}

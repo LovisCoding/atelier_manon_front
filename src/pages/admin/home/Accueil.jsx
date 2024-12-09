@@ -15,7 +15,17 @@ export default function Accueil() {
 
   const submit = () => {
     axios.post("/api/personnalisation/update-evenement", {
+<<<<<<< Updated upstream
       
+=======
+      message: event
+    })
+    .then((res) => {
+      // console.log(res)
+    })
+    .catch((err) => {
+      // console.log(err)
+>>>>>>> Stashed changes
     })
   }
 

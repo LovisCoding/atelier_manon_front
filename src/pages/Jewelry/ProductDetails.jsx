@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Select, MenuItem, TextField, Button, Box, Stack } from '@mui/material'; 
 import { IoTimeOutline } from "react-icons/io5"; 
 import { getMaterials, getRocks, getWires } from '../../services/ProductService';
+import {addSingleProductCommande} from '../../services/CommandService';
 
 export default function ProductDetails({product, validateCallback}) {
 
@@ -38,6 +39,13 @@ export default function ProductDetails({product, validateCallback}) {
 	useEffect(() => { product.gravure = engraving; }, [engraving]);
 
 
+	const createSingleProductCommand = () => {
+		const exec = async () => {
+			const data = await addSingleProductCommande(product.idProd, "coucouLaVariante") // TODO: change variant
+			console.log(data)
+		}
+		exec();
+	}
 
 	return (
 		<Box padding={2}>
@@ -46,7 +54,7 @@ export default function ProductDetails({product, validateCallback}) {
 				<Box display={"flex"} alignItems={"center"}>
 					<IoTimeOutline />
 					<Typography marginLeft={1} variant="subtitle2" color="customYellow">
-						disponible sous {product.tempsRea} jours
+						expédié sous {product.tempsRea} jours
 					</Typography>
 				</Box>
 			</Box>
@@ -55,11 +63,6 @@ export default function ProductDetails({product, validateCallback}) {
 			<Typography marginBottom={4} variant="body1">{product.descriptionProd}</Typography>
 
 			<Stack spacing={3}>
-				{/* <Select fullWidth defaultValue="" displayEmpty>
-					<MenuItem value="" disabled>Variante</MenuItem>
-					<MenuItem value="option1">Option 1</MenuItem>
-					<MenuItem value="option2">Option 2</MenuItem>
-				</Select> */}
 
 			{wires && wires.length >= 1 &&
 				<Select fullWidth defaultValue="" displayEmpty onChange={(e)=>product.fil = e.target.value} >
@@ -92,12 +95,21 @@ export default function ProductDetails({product, validateCallback}) {
 					value={engraving}
 					onChange={(e) =>{product.gravure = e.target.value; setEngraving(e.target.value)}}
 				/>}
-				<Button
-					variant="contained"
-					color="primary"
-					fullWidth
-					onClick={validateCallback}
-				>Ajouter au panier</Button>
+				<Box display="flex" >
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={validateCallback}
+						fullWidth
+					>Ajouter au panier</Button>
+					<Button
+						variant='outlined'
+						color="primary"
+						onClick={createSingleProductCommand}
+						sx={{width:'18rem'}}
+					>Passer la commande</Button>
+				</Box>
+				
 			</Stack>
 		</Box>
 	);

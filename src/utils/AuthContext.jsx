@@ -50,11 +50,8 @@ export default function AuthContextProvider({ children }) {
         email,
         mdp: password
       });
-      console.log("res:",res)
-      console.log("status:",res.status)
       if (res.status === 200) { getProfil(); return true; }
       if (res.status === 403) return false;
-      
       return true;
     } catch (err) {
       console.error("Une erreur est survenue:",err)

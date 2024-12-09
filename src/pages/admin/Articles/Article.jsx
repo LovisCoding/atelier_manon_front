@@ -11,7 +11,6 @@ export default function Article() {
     const [date, setDate] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    console.log(id);
 
     useEffect(() => {
         const fetchArticle = async () => {

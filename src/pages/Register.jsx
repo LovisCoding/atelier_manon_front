@@ -35,7 +35,6 @@ function Register() {
         register(firstname, lastname, email, password, [addressNumber, addressStreet, addressCity, addressPostalCode])
             .then((res) => {
                 if (res) navigate("/email-sent");
-                else console.log("Faux");
             })
     };
 
