@@ -60,7 +60,7 @@ function Contact() {
 
     return (
         <>
-            <Box display="flex" flexDirection="column" alignItems="center" mb={5} gap={5} mt={7} >
+            <Box display="flex" flexDirection="column" alignItems="center" mb={5} gap={5} >
                 <Box width="30rem" >
 
                     <Typography

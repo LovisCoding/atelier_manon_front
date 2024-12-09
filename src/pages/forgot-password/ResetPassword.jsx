@@ -27,10 +27,10 @@ function ForgotPassword() {
 
     useEffect(() => {
         // check token validity
-        if (!token) changeRoute('/');
+        if (!token) navigate('/');
         const exec = async () => {
             const response = await validateToken(token);
-            if (response.status == 400) { changeRoute('/'); return; }
+            if (response.status == 400) { navigate('/'); return; }
         };
         exec();
     }, [])

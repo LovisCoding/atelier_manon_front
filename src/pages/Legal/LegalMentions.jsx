@@ -2,10 +2,10 @@ import { Container, Stack, Typography } from "@mui/material";
 import Link from "../../components/Link";
 import Paragraphes from "./Paragraphes";
 
-export default function CGV() {
+function LegalMentions() {
 	return (
 		<Container maxWidth={'md'} sx={{py:4}}>
-			<Typography variant={'h1'} textAlign={'center'} sx={{fontSize : '4rem'}}>CGV</Typography>
+			<Typography variant={'h1'} textAlign={'center'} sx={{fontSize : '4rem'}}>Mentions Légales</Typography>
 			<Stack mt={10}>
 				<Typography variant={'h5'}>Conditions générales de vente</Typography>
 				<Typography variant={'body1'} mt={4}>
@@ -23,8 +23,14 @@ export default function CGV() {
 				Date de dernière mise à jour : 13/12/2024
 				</Typography>
 			</Stack>
-			<Paragraphes/>
+
+			<Typography>
+			Dernière mise à jour
+			Ce document a été mis à jour le [date de la dernière mise à jour].
+			</Typography>
 			
 		</Container>
 	)
 }
+
+export default LegalMentions;

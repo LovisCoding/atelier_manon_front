@@ -5,10 +5,10 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../../utils/AuthContext";
 
-  export default function DrawerSm({ open, setOpen }) {
+export default function DrawerSm({ open, setOpen }) {
 	const [openDdl, setOpenDdl] = useState(false);
 	const tab = ['/', '/jewelry', '/about', '/faq', '/contact', '/login', '/profil']
-  
+
 	const location = useLocation();
 	const navigate = useNavigate();
 	const {isLogged} = useAuth();
@@ -109,3 +109,4 @@ import { useAuth } from "../../../utils/AuthContext";
 	  </Drawer>
 	);
 }
+
