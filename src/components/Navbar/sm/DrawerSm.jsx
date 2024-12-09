@@ -1,21 +1,12 @@
-import {
-	Box,
-	Collapse,
-	Drawer,
-	IconButton,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemText,
-  } from "@mui/material";
-  import { RxCross2 } from "react-icons/rx";
-  import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
-  import { useState } from "react";
+import { Box, Collapse, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, } from "@mui/material";
+import { RxCross2 } from "react-icons/rx";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
+import { useState } from "react";
 import { useLocation } from "react-router";
-  
-  export default function DrawerSm({ open, setOpen }) {
+
+export default function DrawerSm({ open, setOpen }) {
 	const [openDdl, setOpenDdl] = useState(false);
-  
+
 	const location = useLocation();
 	// Fonction pour gérer les clics
 	const onClickDdl = () => {
@@ -117,5 +108,4 @@ import { useLocation } from "react-router";
 		</Box>
 	  </Drawer>
 	);
-  }
-  
+}

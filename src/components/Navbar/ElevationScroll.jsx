@@ -27,4 +27,3 @@ ElevationScroll.propTypes = {
   setNavbarState: PropTypes.func.isRequired,
   window: PropTypes.func,
 };
-

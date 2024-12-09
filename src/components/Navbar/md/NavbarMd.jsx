@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  AppBar,
-  Toolbar,
-  CssBaseline,
-  Stack,
-  IconButton,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { AppBar, Toolbar, Stack, IconButton, Typography, useTheme } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
 import Link from "../../Link";
 import { useLocation } from "react-router";

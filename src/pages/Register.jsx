@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { TextField, InputLabel, InputAdornment, IconButton, Button, Box, Typography, Container, OutlinedInput, FormControl } from "@mui/material";
-
 import VisibilityOn from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from "react-router";
 import { register } from "../services/UserService";
-
-
-// email, mdp, nomCli, prenomCli, adresse
 
 function Register() {
 

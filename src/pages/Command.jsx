@@ -1,9 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Card, CardContent, Grid2, TextareaAutosize } from "@mui/material";
-
 import ImgMui from "../components/ImgMui";
-
 import { getProductImage } from "../services/ProductService";
 
 function Command() {

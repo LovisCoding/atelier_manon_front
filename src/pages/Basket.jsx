@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Button, Card, CardContent, stepButtonClasses, } from "@mui/material";
 import { Delete, Add, Remove } from "@mui/icons-material";
 
-// gravure, variante, quantité, code promo
-// produit (prix, photo1, description)
-// isCadeau, commentaire sur la commande, address (préremplie par adresse du compte)
-
 function Basket() {
 
     const [basketProducts, setBasketProducts] = useState([
@@ -134,6 +130,5 @@ const BasketItem = ({ product }) => {
     )
 
 }
-
 
 export default Basket;

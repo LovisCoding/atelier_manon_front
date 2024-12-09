@@ -5,7 +5,8 @@ import Footer from '../src/components/Footer.jsx';
 import Loader from '../src/components/Loader.jsx';
 import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
 
-// Lazy loading des pages
+// Lazy loading des pages publiques
+
 const Test = React.lazy(() => import('../src/pages/Test/Test'));
 const Connection = React.lazy(() => import('../src/pages/Connection.jsx'));
 const Register = React.lazy(() => import('../src/pages/Register.jsx'));
@@ -21,10 +22,11 @@ const Command = React.lazy(() => import('../src/pages/Command.jsx'));
 const Product = React.lazy(() => import('../src/pages/Product/Product.jsx'));
 const CGV = React.lazy(() => import('../src/pages/CGV/CGV.jsx'));
 const Jewelry = React.lazy(() => import('../src/pages/Jewelry/Jewelry.jsx'));
-const Necklaces = React.lazy(() => import('../src/pages/Jewelry/Necklaces.jsx'));
-const Bangles = React.lazy(() => import('../src/pages/Jewelry/Bangles.jsx'));
+const Bracelets = React.lazy(() => import('../src/pages/Jewelry/Bracelets.jsx'));
+const Collars = React.lazy(() => import('../src/pages/Jewelry/Collars.jsx'));
 
 // Lazy loading pour la partie administration
+
 const Admin = React.lazy(() => import('../src/pages/admin/Admin'));
 const Orders = React.lazy(() => import('../src/pages/admin/Order/Orders.jsx'));
 const OrderDetails = React.lazy(() => import('../src/pages/admin/Order/OrderDetail.jsx'));
@@ -70,8 +72,8 @@ const AppRoutes = () => {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/product/:id" element={<Product />} />
                     <Route path="/jewelry" element={<Jewelry />} />
-                    <Route path="/jewelry/necklaces" element={<Necklaces />} />
-                    <Route path="/jewelry/bangles" element={<Bangles />} />
+                    <Route path="/jewelry/collars" element={<Collars />} />
+                    <Route path="/jewelry/bracelets" element={<Bracelets />} />
                     <Route path="/profil/" element={<Profil />} />
 
                     {/* Admin Routes without Footer */}

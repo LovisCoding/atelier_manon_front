@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Grid2,
-  Stack,
-  Typography,
-  CardMedia,
-  CardContent,
-} from "@mui/material";
+import { Box, Grid2, Stack, Typography, CardMedia, CardContent } from "@mui/material";
 import Banner from "../../components/Banner";
-
 import { getProductImage } from "../../services/ProductService";
 
 const BestSale = ({ products }) => {
-  console.log(products);
-
   return (
     <Stack sx={{ margin: "0 auto", padding: "2rem" }}>
       <Typography

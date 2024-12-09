@@ -1,13 +1,6 @@
 import { Box, colors, Container, Grid2, Typography } from "@mui/material";
 
-export function TextPresentation({
-	title,
-	titleType,
-	description,
-	image,
-	reverse,
-	sx,
-}) {
+export function TextPresentation({ title, titleType, description, image, reverse, sx }) {
 	titleType = titleType ?? 'h1';
 	reverse = reverse ?? false;
 	image = image ?? 'https://via.placeholder.com/800x400';

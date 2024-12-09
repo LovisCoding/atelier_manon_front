@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-import SidebarMenu from './SidebarMenu'; 
-import { Box } from '@mui/material';
-import FoireAuxQuestions from './FAQ/FAQS';
-
+import Products from './Produits/Produits';
 
 const Admin = () => {
-
-
-
   return (
-    <Box style={{ display: 'flex' }}>
-       <FoireAuxQuestions />
-    </Box>
+    <Products />
   );
 };
 

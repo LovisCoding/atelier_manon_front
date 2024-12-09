@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { sendNewsletter } from "/src/services/NewsletterService";
 
 export default function Newsletter() {
