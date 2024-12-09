@@ -147,6 +147,8 @@ function Actions() {
 
 function ProductsDetail({ products }) {
 
+  console.log(products);
+
   return (
     <>
       <Stack spacing={1}>
@@ -175,7 +177,7 @@ function ProductsDetail({ products }) {
               <Stack>
                 <Stack direction={"row"} spacing={1}>
                   <Typography color={theme.palette.grey[900]} variant="h6">{product.qa}x</Typography>
-                  <Typography color={theme.palette.grey[900]} variant="h6">{product.libProd}</Typography>
+                  <Typography color={theme.palette.grey[900]} variant="h6">{product.produit.libProd}</Typography>
                 </Stack>
                 <Stack color={theme.palette.grey[600]} direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={1}>
                   <Typography variant="body2">{product.variante}</Typography>
@@ -183,8 +185,8 @@ function ProductsDetail({ products }) {
                 </Stack>
               </Stack>
               <Stack direction={"row"} spacing={1}>
-                <Typography variant="body1">{product.prix * product.qa} €</Typography>
-                <Typography variant="body2">({product.prix}€ unitaire)</Typography>
+                <Typography variant="body1">{product.produit.prix * product.qa} €</Typography>
+                <Typography variant="body2">({product.produit.prix}€ unitaire)</Typography>
               </Stack>
             </Stack>
 
@@ -211,7 +213,7 @@ function ClientDetail({ client }) {
           <Stack maxWidth={"20rem"}>
             <Typography variant="h6">{client.preCli} {client.nomCli}</Typography>
             <Typography variant="body2">{client.email}</Typography>
-            <Typography>{client.adresse}</Typography>
+            <Typography>{client.adresse.replace(/[{}"]/g, '').replaceAll(',', ' ')}</Typography>
           </Stack>
         </Stack>
       </Stack>
