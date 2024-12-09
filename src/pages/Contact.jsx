@@ -4,10 +4,11 @@ import { Box, Card, Typography, TextField, TextareaAutosize, Button, Snackbar, A
 import { useState } from "react";
 
 import { addNewsLetter, sendContactMail } from "../services/ContactService";
+import { useAuth } from "../utils/AuthContext";
 
 function Contact() {
 
-    const isConnected = true;
+    const {isLogged} = useAuth();
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -59,7 +60,7 @@ function Contact() {
 
     return (
         <>
-            <Box display="flex" flexDirection="column" alignItems="center" mb={5} gap={5} >
+            <Box display="flex" flexDirection="column" alignItems="center" mb={5} gap={5} mt={7} >
                 <Box width="30rem" >
 
                     <Typography
@@ -145,7 +146,7 @@ function Contact() {
                         </Box>
                     </Card>
                 </Box>
-                {isConnected &&
+                {isLogged &&
                     <Box maxWidth="60rem" >
                         <Card sx={{ padding: '1rem 2rem' }} >
                             <Box display="flex" flexDirection="column" gap={2} >

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { AppBar, Toolbar, Stack, IconButton, Typography, useTheme } from "@mui/material";
-import { FaSearch } from "react-icons/fa";
+import { MdAccountCircle } from "react-icons/md";
 import Link from "../../Link";
 import { useLocation } from "react-router";
 import ImgMui from "../../ImgMui";
@@ -13,27 +13,27 @@ import { useAuth } from "../../../utils/AuthContext";
 export default function NavbarMd() {
   const location = useLocation();
   const theme = useTheme();
-  const auth = useAuth();
+  const { isLogged } = useAuth();
 
   const [navbarState, setNavbarState] = useState({
     bgNavbar: "transparent",
     textColor: "text.primary",
-    scrolled: false,
+    scrolled: false
   });
 
   const { bgNavbar, textColor, scrolled } = navbarState;
 
-  const isSelectedMenu = location.pathname === "/bijoux";
+  const isSelectedMenu = location.pathname.includes("/jewelry");
 
   const getLinkStyles = (path) =>
     location.pathname === path
-      ? { fontWeight: "bold", color: scrolled ? "text.secondary" : "text.primary" }
-      : { color: textColor };
+      ? { fontWeight: "bold", color: scrolled ? theme.palette.text.secondary : "text.primary" }
+      : { color: scrolled ? "text.white": textColor, fontWeight:'300' };
 
   return (
     <>
       <ElevationScroll setNavbarState={setNavbarState}>
-        <AppBar position="sticky" sx={{ backgroundColor: bgNavbar, transition: "background-color 0.3s" }}>
+        <AppBar position="fixed" sx={{ backgroundColor: bgNavbar, transition: "background-color 0.3s" }}>
           <Toolbar>
             <Stack
               direction="row"
@@ -46,7 +46,7 @@ export default function NavbarMd() {
               <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                 <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
               </Link>
-                <Typography variant="h6" sx={{ fontWeight: 200, color: textColor }}>
+                <Typography variant="h6" sx={{ fontWeight: 300, color: textColor }}>
                   L'Atelier de Manon
                 </Typography>
               </Stack>
@@ -66,15 +66,11 @@ export default function NavbarMd() {
                 <Link variant="navbar" sx={getLinkStyles("/contact")} href="/contact">
                   Contact
                 </Link>
-                {
-                  !auth.details && <Link variant="navbar" sx={getLinkStyles("/login")} href="/login">Connexion</Link>
-                }
-                <Link variant="navbar" sx={getLinkStyles("/profil")} href="/profil">
-                  Profil
+                <Link variant="navbar" href={isLogged ? "/profil" : "/login"}>
+                  <IconButton>
+                    <MdAccountCircle color="text.primary" sx={getLinkStyles("/profil")} />
+                  </IconButton>
                 </Link>
-                <IconButton>
-                  <FaSearch color={scrolled ? theme.palette.text.white : theme.palette.text.primary} />
-                </IconButton>
               </Stack>
             </Stack>
           </Toolbar>

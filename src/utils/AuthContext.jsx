@@ -45,8 +45,10 @@ export default function AuthContextProvider({ children }) {
     getProfil();
   }, []);
 
+  const isLogged = details !== null;
+
   return (
-    <AuthContext.Provider value={{ details, login, logout }}>
+    <AuthContext.Provider value={{ details, login, logout, isLogged }}>
       {children}
     </AuthContext.Provider>
   );

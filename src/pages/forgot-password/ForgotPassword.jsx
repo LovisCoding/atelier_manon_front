@@ -56,7 +56,7 @@ function ForgotPassword() {
         <Container maxWidth="xs" >
             <Box
                 sx={{
-                    mt: 8,
+                    mt: 7,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
