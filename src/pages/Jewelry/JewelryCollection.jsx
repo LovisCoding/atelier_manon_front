@@ -1,9 +1,16 @@
 import React from 'react';
-import { Box, Button, Typography, Grid2, Card, CardMedia, CardContent } from '@mui/material';
+import { Box, Button, Typography, Card, CardMedia, CardContent, Grid2 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const JewelryCollection = ({ collectionData, backgroundImage, collectionName, collectionTitle }) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (idCateg, id) => {
+    navigate(`/product/${id}`);
+  };
+
   return (
-    <Box >
+    <Box>
       <Box
         sx={{
           position: 'relative',
@@ -99,7 +106,9 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
                   flexDirection: 'column',
                   alignItems: 'center',
                   padding: '1rem',
+                  cursor: 'pointer', // Indique que c'est cliquable
                 }}
+                onClick={() => handleNavigation(item.idCateg, item.id)}
               >
                 <CardMedia
                   component="img"
@@ -112,10 +121,16 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
                   }}
                 />
                 <CardContent sx={{ textAlign: 'center' }}>
-                  <Typography variant="h6" sx={{ color: '#f9a825', fontWeight: 'bold' }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ color: '#f9a825', fontWeight: 'bold' }}
+                  >
                     {item.title}
                   </Typography>
-                  <Typography variant="body1" sx={{ color: '#333', fontWeight: 'bold' }}>
+                  <Typography
+                    variant="body1"
+                    sx={{ color: '#333', fontWeight: 'bold' }}
+                  >
                     {item.price}
                   </Typography>
                 </CardContent>

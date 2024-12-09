@@ -58,7 +58,7 @@ export default function DropDownMenu({ scrolled, selected }) {
           }
         }}
       >
-        <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/necklaces">Colliers</MenuItem>
+        <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/collars">Colliers</MenuItem>
         <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/bracelets">Bracelets</MenuItem>
       </Menu>
     </Stack>

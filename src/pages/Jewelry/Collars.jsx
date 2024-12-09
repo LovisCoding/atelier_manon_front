@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import JewelryCollection from './JewelryCollection';
 import { getAllProducts } from '../../services/ProductService';
 
-const Necklaces = () => {
+const Collars = () => {
   const [necklaceData, setNecklaceData] = useState([]);
 
   useEffect(() => {
@@ -43,4 +43,4 @@ const Necklaces = () => {
   );
 };
 
-export default Necklaces;
+export default Collars;
