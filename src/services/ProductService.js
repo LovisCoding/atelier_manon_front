@@ -8,13 +8,12 @@ export const getProduct = async (id) => {
     if (!data.data) return null;
     return data.data;
 }
-export const getAllProduits = async () => {
+export const getAllProducts = async () => {
     const data = await axios
         .get('/api/produit/get-all-produits')
     if (data.data) return data.data
     return null;
 }
-
 
 export const getWires = async (id) => {
     const data = await axios.get('/api/filprod/get-fils-produit', { params: {idProd:id} })
