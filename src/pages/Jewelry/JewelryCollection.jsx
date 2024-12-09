@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography, Card, CardMedia, CardContent, Grid2, Popover, List, ListItem, ListItemText, Slider, TextField } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { getCategories } from '/src/services/CategorieService';
+import { useNavigate } from 'react-router-dom';  // Importer useNavigate
 
 const JewelryCollection = ({ collectionData, backgroundImage, collectionName, collectionTitle, onCategoryChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -9,6 +10,7 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
   const [categories, setCategories] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 100]);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();  // Initialiser useNavigate
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -91,11 +93,23 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
         <Grid2 container spacing={2} justifyContent="center">
           {filteredCollectionData.map((item) => (
             <Grid2 item xs={12} sm={6} md={4} key={item.id}>
-              <Card sx={{ textAlign: 'center', boxShadow: 'none', padding: '1rem', cursor: 'pointer' }}>
-                <CardMedia component="img" image={item.image} alt={item.title} sx={{ height: '350px', width: '350px', objectFit: 'cover' }} />
+              <Card
+                sx={{ textAlign: 'center', boxShadow: 'none', padding: '1rem', cursor: 'pointer' }}
+                onClick={() => navigate(`/product/${item.id}`)}
+              >
+                <CardMedia
+                  component="img"
+                  image={item.image}
+                  alt={item.title}
+                  sx={{ height: '350px', width: '350px', objectFit: 'cover' }}
+                />
                 <CardContent>
-                  <Typography variant="h6" sx={{ color: '#f9a825', fontWeight: 'bold' }}>{item.title}</Typography>
-                  <Typography variant="body2" sx={{ color: '#333', fontWeight: 'bold' }}>{item.price}</Typography>
+                  <Typography variant="h6" sx={{ color: '#f9a825', fontWeight: 'bold' }}>
+                    {item.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: '#333', fontWeight: 'bold' }}>
+                    {item.price}
+                  </Typography>
                 </CardContent>
               </Card>
             </Grid2>
