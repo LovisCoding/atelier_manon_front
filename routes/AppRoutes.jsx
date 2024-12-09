@@ -18,15 +18,17 @@ const ResetPassword = React.lazy(() => import('../src/pages/forgot-password/Rese
 const FAQ = React.lazy(() => import('../src/pages/faq/Faq'));
 const About = React.lazy(() => import('../src/pages/About'));
 const Home = React.lazy(() => import('../src/pages/home/Home'));
+const EventBanner = React.lazy(() => import('../src/pages/home/EventBanner'));
 const Contact = React.lazy(() => import('../src/pages/Contact.jsx'));
 const NotFound = React.lazy(() => import('../src/pages/NotFound'));
 const Cart = React.lazy(() => import('../src/pages/Cart.jsx'));
 const Command = React.lazy(() => import('../src/pages/Command.jsx'));
-const Product = React.lazy(() => import('../src/pages/Product/Product.jsx'));
+const Product = React.lazy(() => import('../src/pages/Jewelry/Product.jsx'));
 const CGV = React.lazy(() => import('../src/pages/CGV/CGV.jsx'));
+const LegalMentions = React.lazy(() => import('../src/pages/Legal/LegalMentions.jsx'));
 const Jewelry = React.lazy(() => import('../src/pages/Jewelry/Jewelry.jsx'));
 const Bracelets = React.lazy(() => import('../src/pages/Jewelry/Bracelets.jsx'));
-const Necklaces = React.lazy(() => import('../src/pages/Jewelry/Necklaces.jsx'));
+const Collars = React.lazy(() => import('../src/pages/Jewelry/Collars.jsx'));
 
 // Lazy loading pour la partie administration
 
@@ -51,8 +53,10 @@ const AppRoutes = () => {
 
     const isAdminRoute = location.pathname.includes('/admin');
 
+    const homeRoute = location.pathname == '/';
     return (
         <>
+            {homeRoute && <EventBanner /> }
             {/* Render Navbar only if not on an admin route */}
             {!isAdminRoute && <Navbar />}
 
@@ -67,10 +71,11 @@ const AppRoutes = () => {
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/email-sent" element={<EmailSent />} />
                     <Route path="/reset-password/:token" element={<ResetPassword />} />
-                    <Route path="email/confirmAccount/:token" element={<ConfirmAccount />} />
+                    <Route path="/email/confirmAccount/:token" element={<ConfirmAccount />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/cgv" element={<CGV />} />
+                    <Route path="/legal-mentions" element={<LegalMentions />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/command/:id" element={<Command />} />
                     <Route path="/contact" element={<Contact />} />
@@ -80,8 +85,9 @@ const AppRoutes = () => {
                     <Route path="/article/:id" element={<ClientArticle />} />
 
                     <Route path="/jewelry" element={<Jewelry />} />
-                    <Route path="/jewelry/necklaces" element={<Necklaces />} />
+                    <Route path="/jewelry/collars" element={<Collars />} />
                     <Route path="/jewelry/bracelets" element={<Bracelets />} />
+
                     <Route path="/profil/" element={<Profil />} />
 
                     {/* Admin Routes without Footer */}

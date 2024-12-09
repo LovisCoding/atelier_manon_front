@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { getAvisBySession } from "../services/AvisService";
 import { getOrdersProfil } from "../services/OrderService";
-import { getProfilCurrentSession } from "../services/AccountService";
+import { getProfilCurrentSession, disableMyAccount } from "../services/AccountService";
 import { useAuth } from "../utils/AuthContext";
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -13,8 +13,6 @@ export default function Profil() {
 	const [userDetails, setUserDetails] = useState();
 	const [orders, setOrders] = useState([]);
 	const [avis, setAvis] = useState();
-
-	console.log(avis);
 
 	const { details, logout } = useAuth();
 	const navigate = useNavigate();
@@ -31,6 +29,12 @@ export default function Profil() {
 		if (details.isAdmin) navigate('/admin');
 		return;
 	}
+
+	const disableAccount = async () => {
+		const res = await disableMyAccount();
+		if (res) logout();
+		return;
+	};
 
 	useEffect(() => {
 		getProfilCurrentSession().then((data) => {
@@ -51,7 +55,8 @@ export default function Profil() {
 
 	return (
 		<Container sx={{
-			marginBottom: "2rem"
+			marginBottom: "2rem",
+			mt:2
 		}}>
 			<Stack margin={"0 auto"} maxWidth={"sm"} spacing={3}>
 
@@ -146,12 +151,18 @@ export default function Profil() {
 					<Button onClick={() => disconnect()} fullWidth variant="yellowButton" color="secondary">Déconnexion</Button>
 				</Stack>
 
+				{ !details.isAdmin &&
 				<Stack direction="row" justifyContent="center" >
 					<Button type="button" variant="outlined" onClick={() => adminPage()}
 					>Accéder à la page d'administrateur</Button>
-				</Stack>
+				</Stack>}
 
-
+				{ details.isAdmin &&
+				<Stack direction="row" justifyContent="center" >
+					<Button type="button" variant="outlined" onClick={() => disableAccount()}
+						sx={{color: 'red', borderColor: 'red'}}
+					>Désactiver le compte</Button>
+				</Stack>}
 			</Stack>
 		</Container>
 

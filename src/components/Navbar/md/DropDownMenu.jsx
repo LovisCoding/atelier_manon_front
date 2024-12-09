@@ -7,7 +7,6 @@ export default function DropDownMenu({ scrolled, selected }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const color = () => {
-    console.log(scrolled,":",selected);
     if (selected) {
       if (scrolled) return 'text.secondary';
       else return 'text.primary';
@@ -58,7 +57,7 @@ export default function DropDownMenu({ scrolled, selected }) {
           }
         }}
       >
-        <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/necklaces">Colliers</MenuItem>
+        <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/collars">Colliers</MenuItem>
         <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/bracelets">Bracelets</MenuItem>
       </Menu>
     </Stack>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import JewelryCollection from './JewelryCollection';
-import { getAllProducts } from '../../services/ProductService';
+import { getProducts } from '../../services/ProductService';
 
-const Necklaces = () => {
+const Collars = () => {
   const [necklaceData, setNecklaceData] = useState([]);
 
   useEffect(() => {
@@ -16,10 +16,10 @@ const Necklaces = () => {
         page: 1,
       };
 
-      const products = await getAllProducts(params);
+      const products = await getProducts(params);
 
       if (products) {
-        const formattedData = products.map((product) => ({
+        const formattedData = products.produits.map((product) => ({
           id: product.idProd,
           image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}`,
           title: product.libProd,
@@ -43,4 +43,4 @@ const Necklaces = () => {
   );
 };
 
-export default Necklaces;
+export default Collars;
