@@ -14,4 +14,3 @@ function ImgMui({ sx, alt, src }) {
 }
 
 export default ImgMui;
-

@@ -4,9 +4,7 @@ import SidebarMenu from "../SidebarMenu";
 import { getCategories } from '/src/services/CategorieService';
 
 export default function Accueil() {
-  const [filePageAccueil, setFilePageAccueil] = useState(null);
-  const [filePageBijoux, setFilePageBijoux] = useState(null);
-  const [categorie, setCategorie] = useState("");
+  const [categorie] = useState("");
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {

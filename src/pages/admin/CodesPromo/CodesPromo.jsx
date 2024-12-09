@@ -13,12 +13,10 @@ import {
 import { useEffect, useState } from "react";
 import SidebarMenu from "../SidebarMenu";
 import Link from "../../../components/Link";
-import axios from "axios";
 import { getAllCodesPromoWithUse } from "../../../services/CodesPromoService";
 
 export default function CodesPromo() {
 	const [rows, setRows] = useState([]);
-	
 	
 	useEffect(() => {
 		getAllCodesPromoWithUse().then((data) => {
@@ -40,7 +38,7 @@ export default function CodesPromo() {
 						<TableHead>
 							<TableRow>
 								<TableCell>Nom du code promo</TableCell>
-								<TableCell>Nombre d'utilisation</TableCell>
+								<TableCell>Nombre d'utilisations</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>

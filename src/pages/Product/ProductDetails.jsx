@@ -1,15 +1,6 @@
-import React, { useEffect } from 'react';
-import Typography from '@mui/material/Typography';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import { Stack } from '@mui/material';
-
-import { IoTimeOutline } from "react-icons/io5";
-
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
+import { Typography, Select, MenuItem, TextField, Button, Box, Stack } from '@mui/material'; 
+import { IoTimeOutline } from "react-icons/io5"; 
 import { getMaterials, getRocks, getWires } from '../../services/ProductService';
 
 export default function ProductDetails({product, validateCallback}) {

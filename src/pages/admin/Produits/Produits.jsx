@@ -1,4 +1,3 @@
-import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
@@ -9,12 +8,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
 import Link from "../../../components/Link";
 
 export default function Produits() {
-  
-
   const [name, setName] = useState('');
   const [value, setValue] = useState('');
   const [selectValue, setSelectValue] = useState('option1');

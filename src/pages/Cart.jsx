@@ -34,10 +34,6 @@ import { useNavigate } from "react-router";
 
 import { useAuth } from "../utils/AuthContext";
 
-// titre, détails, prix, quantité, total
-// description, gravure/variante
-// isCadeau, commentaire sur la commande, address (préremplie par adresse du compte)
-
 function Cart() {
   const {details} = useAuth();
   const [cartProducts, setCartProducts] = useState([]);

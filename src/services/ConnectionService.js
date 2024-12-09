@@ -25,11 +25,12 @@ export const validateToken = async (token) => {
     }
 }
 
-export const resetPassword = async (token, password) => {
+export const resetPassword = async (token, password, confirmPassword) => {
     try {
         const data = await axios.post('/api/account/update-password', {
             token,
-            password
+            password,
+            confirm_password: confirmPassword
         })
         return data.data;
     } catch (err) {

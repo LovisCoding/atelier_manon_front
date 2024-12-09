@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  Box,
-  Stack,
-} from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Box, Stack } from "@mui/material";
 import { ChevronDown } from "../../components/icons/ChevronDown";
 import { getQuestions } from "../../services/FAQService";
 

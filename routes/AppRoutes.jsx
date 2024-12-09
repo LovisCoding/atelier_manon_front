@@ -7,14 +7,15 @@ import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
 import Blog from '../src/pages/Blog.jsx';
 import ClientArticle from '../src/pages/Article.jsx';
 
-// Lazy loading des pages
+// Lazy loading des pages publiques
+
 const Test = React.lazy(() => import('../src/pages/Test/Test'));
 const Connection = React.lazy(() => import('../src/pages/Connection.jsx'));
 const Register = React.lazy(() => import('../src/pages/Register.jsx'));
 const ForgotPassword = React.lazy(() => import('../src/pages/forgot-password/ForgotPassword.jsx'));
 const EmailSent = React.lazy(() => import('../src/pages/forgot-password/EmailSent.jsx'));
 const ResetPassword = React.lazy(() => import('../src/pages/forgot-password/ResetPassword.jsx'));
-const FAQ = React.lazy(() => import('../src/pages/faq/Faq'));
+const FAQ = React.lazy(() => import('../src/pages/FAQ/Faq'));
 const About = React.lazy(() => import('../src/pages/About'));
 const Home = React.lazy(() => import('../src/pages/home/Home'));
 const Contact = React.lazy(() => import('../src/pages/Contact.jsx'));
@@ -24,10 +25,11 @@ const Command = React.lazy(() => import('../src/pages/Command.jsx'));
 const Product = React.lazy(() => import('../src/pages/Product/Product.jsx'));
 const CGV = React.lazy(() => import('../src/pages/CGV/CGV.jsx'));
 const Jewelry = React.lazy(() => import('../src/pages/Jewelry/Jewelry.jsx'));
-const Necklaces = React.lazy(() => import('../src/pages/Jewelry/Necklaces.jsx'));
-const Bangles = React.lazy(() => import('../src/pages/Jewelry/Bangles.jsx'));
+const Bracelets = React.lazy(() => import('../src/pages/Jewelry/Bracelets.jsx'));
+const Collars = React.lazy(() => import('../src/pages/Jewelry/Collars.jsx'));
 
 // Lazy loading pour la partie administration
+
 const Admin = React.lazy(() => import('../src/pages/admin/Admin'));
 const Orders = React.lazy(() => import('../src/pages/admin/Order/Orders.jsx'));
 const OrderDetails = React.lazy(() => import('../src/pages/admin/Order/OrderDetail.jsx'));
@@ -78,8 +80,8 @@ const AppRoutes = () => {
                     <Route path="/article/:id" element={<ClientArticle />} />
 
                     <Route path="/jewelry" element={<Jewelry />} />
-                    <Route path="/jewelry/necklaces" element={<Necklaces />} />
-                    <Route path="/jewelry/bangles" element={<Bangles />} />
+                    <Route path="/jewelry/collars" element={<Collars />} />
+                    <Route path="/jewelry/bracelets" element={<Bracelets />} />
                     <Route path="/profil/" element={<Profil />} />
 
                     {/* Admin Routes without Footer */}
