@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"; 
-import { Box, Button, Typography, Stack } from "@mui/material"; 
-import SidebarMenu from "../SidebarMenu"; 
-import theme from "../../../theme/theme"; 
-import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService"; 
-import { getCompte } from "../../../services/UserService"; 
-import { Link, useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Typography, Stack } from "@mui/material";
+import SidebarMenu from "../SidebarMenu";
+import theme from "../../../theme/theme";
+import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService";
+import { getCompte } from "../../../services/UserService";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { FaEuroSign } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
 import { CiStickyNote, CiUser } from "react-icons/ci";
@@ -12,6 +12,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiGift } from "react-icons/fi";
 import { updateState } from "../../../services/OrderService";
+import { formatDate } from "../../../utils/Date";
 
 export default function OrderDetails() {
 
@@ -28,10 +29,9 @@ function OrderDetailsContent() {
   const [orderDetails, setOrderDetails] = useState();
   const [products, setProducts] = useState(null);
   const [client, setClient] = useState(null);
-  const [total, setTotal] = useState();
   const { id } = useParams();
   const [error, setError] = useState(null);
-  
+
 
   useEffect(() => {
     getOrderAdminDetail(id)
@@ -51,18 +51,18 @@ function OrderDetailsContent() {
         else setError("Une erreur est survenue lors du chargement du détail de la commande")
       })
   }, [])
-  
+
 
   useEffect(() => {
-    if ( !orderDetails ) return;
+    if (!orderDetails) return;
     getCompte(orderDetails.idCli)
       .then((data) => {
-        if ( data != null ) setClient(data);
+        if (data != null) setClient(data);
         else setError("Une erreur est survenue lors du chargment du détail du client")
       })
   }, [orderDetails])
 
-  if ( !orderDetails || !products || !client ) {
+  if (!orderDetails || !products || !client) {
     return (
       <Stack padding={5}>
         {
@@ -76,7 +76,7 @@ function OrderDetailsContent() {
   }
 
   return (
-    <Stack spacing={4} p={4}>
+    <Stack margin={"0 auto"} spacing={4} p={4}>
       <Typography variant="h4" fontWeight="bold">
         Détail de la commande
       </Typography>
@@ -89,27 +89,32 @@ function OrderDetailsContent() {
         </Stack>
         <Stack direction="row" alignItems="center" spacing={1}>
           <MdCalendarToday />
-          <Typography>{orderDetails.dateCommande}</Typography>
+          <Typography>{ formatDate(orderDetails.dateCommande) }</Typography>
         </Stack>
-        <Stack direction={"row"} spacing={1} alignItems={"center"}>
-          <CiStickyNote />
-          <Typography>{orderDetails.carte}</Typography>
-        </Stack>
+
+        {
+          orderDetails.estCadeau &&
+          <>
+            <Stack direction={"row"} spacing={1} alignItems={"center"}>
+              <CiStickyNote />
+              <Typography>{ orderDetails.carte || "Pas de note"}</Typography>
+            </Stack>
+            <Stack direction={"row"} spacing={1} alignItems={"center"}>
+              <FiGift />
+              <Typography>Cette commande est un cadeau</Typography>
+            </Stack>
+          </>
+
+        }
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <TbTruckDelivery />
-          <Typography>livraison le {orderDetails.dateLivraison}</Typography>
+          <Typography>livraison le { formatDate(orderDetails.dateLivraison) }</Typography>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <GrStatusGoodSmall />
-          <Typography>{ orderDetails.etat }</Typography>
+          <Typography>{orderDetails.etat}</Typography>
         </Stack>
-        {
-          orderDetails.estCadeau &&
-          <Stack direction={"row"} spacing={1} alignItems={"center"}>
-            <FiGift />
-            <Typography>est cadeau</Typography>
-          </Stack>
-        }
+
 
 
       </Stack>
@@ -121,33 +126,50 @@ function OrderDetailsContent() {
 
       <ClientDetail client={client} />
       <ProductsDetail products={products} />
-      <Actions />
+      <Actions setOrderDetails={setOrderDetails} orderDetails={orderDetails} />
 
     </Stack>
   );
 }
 
-function Actions() {
+function Actions({ setOrderDetails, orderDetails }) {
+  const { id } = useParams();
 
-  const changeState = (state) => {
-    updateState(id, )
-  }
+  const changeState = async (state) => {
+    setOrderDetails((prevDetails) => ({
+      ...prevDetails,
+      etat: state,
+    }));
+
+    try {
+      await updateState(id, state);
+    } catch (error) {
+      setOrderDetails((prevDetails) => ({
+        ...prevDetails,
+        etat: prevDetails.etat,
+      }));
+    }
+  };
 
   return (
     <Stack spacing={3}>
-      <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">
-        Terminer la commande
-      </Button>
-      <Button onClick={() => changeState("annulée")} fullWidth variant="outlined" color="danger">
+      {
+        ( orderDetails.etat === "pas commencée" || orderDetails.etat === "en cours" ) &&
+        <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">
+          { orderDetails.etat === "pas commencée" &&  "Démmarer la commande" }
+          { orderDetails.etat === "en cours" &&  "Terminer la commande" }
+        </Button>
+      }
+
+      <Button onClick={() => changeState("annulée")} fullWidth variant="outlined" color="error">
         Annuler la commande
       </Button>
     </Stack>
-  )
+  );
 }
 
-function ProductsDetail({ products }) {
 
-  console.log(products);
+function ProductsDetail({ products }) {
 
   return (
     <>

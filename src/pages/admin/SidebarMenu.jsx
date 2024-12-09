@@ -41,10 +41,10 @@ const SidebarMenu = ({ children }) => {
         open={open}
         onClose={toggleDrawer}
         sx={{
-          width: isSmallScreen ? '100%' : 250,
+          width: isSmallScreen ? '45%' : 250,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: isSmallScreen ? '100%' : 250,
+            width: isSmallScreen ? '45%' : 250,
             boxSizing: 'border-box',
             backgroundColor: '#f4f4f4',
             paddingTop: '16px',

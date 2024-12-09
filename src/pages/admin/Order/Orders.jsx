@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { getOrdersForAdmin } from "../../../services/CommandService";
 import { useAuth } from "../../../utils/AuthContext";
+import { formatDate } from "../../../utils/Date";
 
 export default function Orders() {
 
@@ -24,50 +25,53 @@ export default function Orders() {
       })
   }, [])
 
-  if ( error !== null ){
-    return(
-      <Typography>Chargement des données...</Typography>
-    )
+  if (error !== null) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Typography>Chargement des données...</Typography>
+      </Box>
+    );
   }
 
   return (
-    <Box display="flex">
-      <SidebarMenu />
-      <Stack spacing={5} p={5}>
-        <Typography variant="h1">
-          Liste des commandes
-        </Typography>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Adresse</TableCell>
-                <TableCell>Montant total</TableCell>
-                <TableCell>État</TableCell>
-                <TableCell>Date</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              { orders.map((row) => (
-                <TableRow
-                  key={row.id}
-                  onClick={() => handleClickRow(`/admin/order/${row.idCommande}`)}
-                  sx={{
-                    cursor: "pointer",
-                    "&:hover": { backgroundColor: "#f5f5f5" },
-                  }}
-                >
-                  <TableCell>{row.adresse}</TableCell>
-                  <TableCell>{row.prixTotalReduc} €</TableCell>
-                  {/* <TableCell>{row.amount.toFixed(2)} €</TableCell> */}
-                  <TableCell>{row.etat}</TableCell>
-                  <TableCell>{row.dateCommande}</TableCell>
+    <Box display="flex" justifyContent="center">
+      <Box display="flex">
+        <SidebarMenu />
+        <Stack spacing={5} p={5} flexGrow={1}>
+          <Typography variant="h4" textAlign="center">
+            Liste des commandes
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Adresse</TableCell>
+                  <TableCell>Montant total</TableCell>
+                  <TableCell>État</TableCell>
+                  <TableCell>Date</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Stack>
+              </TableHead>
+              <TableBody>
+                {orders.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    onClick={() => handleClickRow(`/admin/order/${row.idCommande}`)}
+                    sx={{
+                      cursor: "pointer",
+                      "&:hover": { backgroundColor: "#f5f5f5" },
+                    }}
+                  >
+                    <TableCell>{row.adresse}</TableCell>
+                    <TableCell>{row.prixTotalReduc} €</TableCell>
+                    <TableCell>{row.etat}</TableCell>
+                    <TableCell> { formatDate(row.dateCommande) }</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Stack>
+      </Box>
     </Box>
   );
 }
