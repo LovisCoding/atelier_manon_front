@@ -17,9 +17,9 @@ export default function AuthContextProvider({ children }) {
             lastname: data.nomCli,
             email: data.email
           })
-        }
+        } else if (res.status == 403) {return;}
       })
-  }
+  };
 
   const login = async (email, password) => {
     try {
