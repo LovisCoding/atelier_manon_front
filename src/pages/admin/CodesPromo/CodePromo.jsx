@@ -11,8 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoService";
-import { getAllProduits, getProductImage } from "../../../services/ProductService";
-import axios from "axios";
+import { getAllProducts, getProductImage } from "../../../services/ProductService";
 import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduitService";
 import Snackbar from "@mui/material/Snackbar";
 
@@ -77,7 +76,7 @@ export default function CodePromo() {
 			setSelectValue(data.type);
 			setExist(true);
 		});
-		getAllProduits().then((data) => {
+		getAllProducts().then((data) => {
 			const tmpData = [...data]
 			tmpData.forEach((row) => {
 				row.image = getProductImage(row.photo);
