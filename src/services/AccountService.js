@@ -11,3 +11,16 @@ export const disableMyAccount = async () => {
 	if ( res.status != 200 ) return false;
 	return true;
 }
+
+export const updateUserDetailsApi = async (firstname, lastname) => {
+	try {
+        const data = await axios
+            .post('/api/client/account/update-nom-prenom' , {
+                nom : firstname,
+                prenom : lastname
+            });
+		return data == 200 || data == 201;
+    } catch (err) {
+        return false;
+    }
+}
