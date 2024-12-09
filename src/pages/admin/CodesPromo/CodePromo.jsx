@@ -33,7 +33,7 @@ import {
   DeleteProduitFromPromo,
   deleteProduitsFromPromo,
   getProduitsByPromo
-} from "@services";
+} from "/src/services/PromoProduitService";
 
 export default function CodePromo() {
 	const { id } = useParams();

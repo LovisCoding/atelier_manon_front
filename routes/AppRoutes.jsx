@@ -15,7 +15,7 @@ const Register = React.lazy(() => import('../src/pages/Register.jsx'));
 const ForgotPassword = React.lazy(() => import('../src/pages/forgot-password/ForgotPassword.jsx'));
 const EmailSent = React.lazy(() => import('../src/pages/forgot-password/EmailSent.jsx'));
 const ResetPassword = React.lazy(() => import('../src/pages/forgot-password/ResetPassword.jsx'));
-const FAQ = React.lazy(() => import('../src/pages/FAQ/Faq'));
+const FAQ = React.lazy(() => import('../src/pages/faq/Faq'));
 const About = React.lazy(() => import('../src/pages/About'));
 const Home = React.lazy(() => import('../src/pages/home/Home'));
 const Contact = React.lazy(() => import('../src/pages/Contact.jsx'));
