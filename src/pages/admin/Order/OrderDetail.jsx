@@ -1,62 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Typography, Stack, Paper, IconButton, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { Box, Button, Typography, Stack } from "@mui/material";
 import { MdCalendarToday } from "react-icons/md";
 import { FaEuroSign } from "react-icons/fa";
 import SidebarMenu from "../SidebarMenu";
 import { CiUser } from "react-icons/ci";
-import { GoDotFill } from "react-icons/go";
 import theme from "../../../theme/theme";
 import { FiGift } from "react-icons/fi";
 import { CiStickyNote } from "react-icons/ci";
 import { TbTruckDelivery } from "react-icons/tb";
-
-
-const orderDetailTmp = {
-  "amount": "34,00 €",
-  "date_creation": "15 novembre 2024",
-  "delivery": null,
-  "gift": true,
-  "note": "Note de la commande",
-  "commentary": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga doloremque repellat eligendi eum accusamus, culpa libero tempora vero suscipit quos veritatis ducimus, corporis quas atque, consectetur perspiciatis architecto nisi amet.",
-  "state": "En cours",
-  "client": {
-    "firstname": "MAtthias",
-    "lastname": "Bernouy",
-    "email": "matt.bernouy@orange.fr"
-  },
-  "products": [
-    {
-      "id": "1",
-      "title": "Titre du produit",
-      "qty": 6,
-      "price": 5.50,
-      "image": "image1.jpg",
-      "gravure": "Florian",
-      "fil": "...",
-      "materiaux": "...",
-      "pierre": "..."
-    },
-    {
-      "id": "2",
-      "title": "Titre du produit",
-      "qty": 6,
-      "price": 5.50,
-      "image": "image1.jpg",
-      "gravure": "Florian",
-      "fil": "...",
-      "materiaux": "...",
-      "pierre": "..."
-    }
-  ]
-}
+import { GrStatusGoodSmall } from "react-icons/gr";
+import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService";
+import { getCompte } from "../../../services/UserService";
+import { Link, useLocation, useParams } from "react-router";
 
 export default function OrderDetails() {
-
-  const [orderDetails, setOrderDetails] = useState(null);
-
-  useEffect(() => {
-
-  }, [])
 
   return (
     <Box display={"flex"}>
@@ -68,49 +25,110 @@ export default function OrderDetails() {
 
 function OrderDetailsContent() {
 
+  const [orderDetails, setOrderDetails] = useState();
+  const [products, setProducts] = useState(null);
+  const [client, setClient] = useState(null);
+  const [total, setTotal] = useState();
+  const { id } = useParams();
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getOrderAdminDetail(id)
+      .then((data) => {
+        if (data != null) {
+          setOrderDetails(data);
+        } else {
+          console.log("Hello World");
+          setError("Une erreur est survenue lors du chargment du détail de la commande")
+        }
+      })
+    getProduitsCommande(id)
+      .then((data) => {
+        if (data != null) setProducts(data);
+        else setError("Une erreur est survenue lors du chargment du détail de la commande")
+      })
+  }, [])
+
+  useEffect(() => {
+    if (Array.isArray(products) && products.length > 0) {
+      let total = 0;
+      products.forEach((product) => {
+        total += product.qa * product.prix;
+      });
+      setTotal(total);
+    } else {
+      setTotal(0); // Si `products` est null ou vide, le total est 0
+    }
+  }, [products]);
+  
+
+  useEffect(() => {
+    getCompte()
+      .then((data) => {
+        if ( data != null ) setClient(data);
+        else setError("Une erreur est survenue lors du chargment du détail de la commande")
+      })
+  }, [orderDetails])
+
+  if ( !orderDetails || !products || !client ) {
+    return (
+      <Stack padding={5}>
+        {
+          error ? <>
+            <Typography mb={5} variant="h2">{error}</Typography>
+            <Typography><Link to="/admin/orders">Revenir à la liste des commandes</Link></Typography>
+          </> : <Typography variant="h1">Chargement des détails de la commande...</Typography>
+        }
+      </Stack>
+    );
+  }
+
   return (
     <Stack spacing={4} p={4}>
       <Typography variant="h4" fontWeight="bold">
         Détail de la commande
       </Typography>
 
-      <Stack direction="row" spacing={2} alignItems="center">
+      <Stack spacing={2}>
+
         <Stack direction="row" alignItems="center" spacing={1}>
           <FaEuroSign />
-          <Typography>34,00</Typography>
+          <Typography>{total}</Typography>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={1}>
           <MdCalendarToday />
-          <Typography>25 novembre 2024</Typography>
+          <Typography>{orderDetails.dateCommande}</Typography>
         </Stack>
-      </Stack>
-
-      <Stack spacing={2}>
-
-
-
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <CiStickyNote />
-          <Typography>Note de la commande</Typography>
+          <Typography>{orderDetails.carte}</Typography>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <TbTruckDelivery />
-          <Typography>livraison le 25 novembre 2024</Typography>
+          <Typography>livraison le {orderDetails.dateLivraison}</Typography>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
-          <FiGift />
-          <Typography>est cadeau</Typography>
+          <GrStatusGoodSmall />
+          <Typography>{ orderDetails.etat }</Typography>
         </Stack>
+        {
+          orderDetails.estCadeau &&
+          <Stack direction={"row"} spacing={1} alignItems={"center"}>
+            <FiGift />
+            <Typography>est cadeau</Typography>
+          </Stack>
+        }
+
 
       </Stack>
 
       <Stack maxWidth={"30rem"} spacing={2}>
         <Typography variant="h4">Commentaire</Typography>
-        <Typography variant="body1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum fugit qui eveniet ducimus quasi rem excepturi dolore, magni iste, consequatur necessitatibus ab repellat et non dolor? Suscipit dignissimos quod sint.</Typography>
+        <Typography variant="body1">{orderDetails.comm}</Typography>
       </Stack>
 
-      <ClientDetail />
-      <ProductsDetail />
+      <ClientDetail client={client} />
+      <ProductsDetail products={products} />
       <Actions />
 
     </Stack>
@@ -124,22 +142,18 @@ function Actions() {
         <Button fullWidth variant="yellowButton">
           Changer l'état
         </Button>
-        <Button fullWidth variant="contained" color="error">
+{/*         <Button fullWidth variant="contained" color="error">
           Supprimer
-        </Button>
+        </Button> */}
       </Stack>
-      <Button variant="outlined" color="secondary">
+      {/* <Button variant="outlined" color="secondary">
         Envoyer un lien de paiement
-      </Button>
+      </Button> */}
     </Stack>
   )
 }
 
-function ProductsDetail() {
-
-  const products = [
-    "", "", ""
-  ]
+function ProductsDetail({ products }) {
 
   return (
     <>
@@ -162,28 +176,23 @@ function ProductsDetail() {
               height: "4rem",
               width: "4rem",
               objectFit: "cover"
-            }} component={"img"} src="https://via.placeholder.com/200x400">
+            }} component={"img"} src={`/api/img/${product.image}`}>
             </Box>
 
             <Stack spacing={1}>
               <Stack>
                 <Stack direction={"row"} spacing={1}>
-                  <Typography color={theme.palette.grey[900]} variant="h6">5x</Typography>
-                  <Typography color={theme.palette.grey[900]} variant="h6">Nom du produit 1</Typography>
+                  <Typography color={theme.palette.grey[900]} variant="h6">{product.qa}x</Typography>
+                  <Typography color={theme.palette.grey[900]} variant="h6">{product.libProd}</Typography>
                 </Stack>
                 <Stack color={theme.palette.grey[600]} direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={1}>
-                  <Typography variant="body2">10x Howlite</Typography>
-                  <GoDotFill size={6} />
-                  <Typography variant="body2">5x séparateur</Typography>
-                  <GoDotFill size={6} />
-                  <Typography variant="body2">fil doré</Typography>
-                  <GoDotFill size={6} />
-                  <Typography variant="body2">gravure: Florian</Typography>
+                  <Typography variant="body2">{product.variante}</Typography>
+                  <Typography variant="body2">gravure: {product.gravure}</Typography>
                 </Stack>
               </Stack>
               <Stack direction={"row"} spacing={1}>
-                <Typography variant="body1">30,00 €</Typography>
-                <Typography variant="body2">(6€ unitaire)</Typography>
+                <Typography variant="body1">{product.prix * product.qa} €</Typography>
+                <Typography variant="body2">({product.prix}€ unitaire)</Typography>
               </Stack>
             </Stack>
 
@@ -195,7 +204,7 @@ function ProductsDetail() {
   )
 }
 
-function ClientDetail() {
+function ClientDetail({ client }) {
   return (
     <>
       <Stack spacing={1}>
@@ -208,9 +217,9 @@ function ClientDetail() {
         }} direction={"row"} spacing={3}>
           <CiUser size={64} />
           <Stack maxWidth={"20rem"}>
-            <Typography variant="h6">Matthias Bernouy</Typography>
-            <Typography variant="body2">matthias.bernouy@orange.fr</Typography>
-            <Typography>18b chemin du fond du val, 76930 octeville-sur-mer</Typography>
+            <Typography variant="h6">{client.preCli} {client.nomCli}</Typography>
+            <Typography variant="body2">{client.email}</Typography>
+            <Typography>{client.adresse}</Typography>
           </Stack>
         </Stack>
       </Stack>
