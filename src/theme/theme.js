@@ -225,10 +225,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textDecoration: 'none',
-          color: textPrimary,
-          '&:hover': {
-            color: 'black',
-          },
+          color: textPrimary
         },
       },
     },
