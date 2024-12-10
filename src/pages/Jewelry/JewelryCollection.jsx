@@ -3,11 +3,11 @@ import { Box, Button, Typography, Card, CardMedia, CardContent, Popover, List, L
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { getCategories } from '/src/services/CategorieService';
+import { getCategories, getImageURL } from '/src/services/CategorieService';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
-const JewelryCollection = ({ collectionData, backgroundImage, collectionName, collectionTitle, onCategoryChange }) => {
+const JewelryCollection = ({ collectionData, category, collectionName, collectionTitle, onCategoryChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('Tout voir');
   const [categories, setCategories] = useState([]);
@@ -54,7 +54,7 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
 
   return (
     <Box>
-      <Box sx={{ position: 'relative', height: 300, backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box sx={{ position: 'relative', height: 300, backgroundImage: `url(${getImageURL(category)})`, backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 1 }} />
         <Typography variant="h2" sx={{ position: 'relative', zIndex: 2, color: 'white', textShadow: '2px 2px 8px rgba(0,0,0,0.7)', fontSize: '3rem', textAlign: 'center' }}>
           {collectionName}
