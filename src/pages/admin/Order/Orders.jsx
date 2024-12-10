@@ -45,6 +45,7 @@ export default function Orders() {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
+                  <TableCell>ID</TableCell>
                   <TableCell>Adresse</TableCell>
                   <TableCell>Montant total</TableCell>
                   <TableCell>État</TableCell>
@@ -61,6 +62,7 @@ export default function Orders() {
                       "&:hover": { backgroundColor: "#f5f5f5" },
                     }}
                   >
+                    <TableCell>{row.idCommande}</TableCell>
                     <TableCell>{row.adresse}</TableCell>
                     <TableCell>{row.prixTotalReduc} €</TableCell>
                     <TableCell>{row.etat}</TableCell>
