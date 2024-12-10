@@ -101,7 +101,7 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
             value={priceRange} 
             onChange={(e, newValue) => setPriceRange(newValue)} 
             valueLabelDisplay="auto" 
-            valueLabelFormat={(value) => `${value}`} 
+            valueLabelFormat={(value) => `${value} €`} 
             min={0} 
             max={100} 
             step={5} 
@@ -127,7 +127,7 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
                     {item.title}
                   </Typography>
                   <Typography variant="body2" sx={{ color: '#333', fontWeight: 'bold' }}>
-                    {item.price} €
+                    {item.price}
                   </Typography>
                 </CardContent>
               </Card>
