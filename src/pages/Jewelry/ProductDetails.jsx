@@ -165,7 +165,7 @@ export default function ProductDetails({product, validateCallback}) {
 				/>}
 				<Box display="flex" gap={1} >
 					<Button
-						variant="contained"
+						variant="customYellow"
 						color="primary"
 						onClick={handleAddToCart}
 						sx={{width:'59%'}}
@@ -174,7 +174,7 @@ export default function ProductDetails({product, validateCallback}) {
 						variant='outlined'
 						color="primary"
 						onClick={createSingleProductCommand}
-						sx={{width:'40%'}}
+						sx={{width:'40%', outlineColor:'customYellow', borderColor: 'customYellow'}}
 					>Passer la commande</Button>
 				</Box>
 				

@@ -5,7 +5,7 @@ import { getCategories } from "/src/services/CategorieService";
 import { addImage, addImageCateg } from "/src/services/HomeService";
 import { convertFilesToBase64 } from "/src/utils/Base64";
 import axios from "axios";
-import { getEvenement } from "../../../services/HomeService";
+import { getEvenement, getImageURL } from "../../../services/HomeService";
 
 export default function Accueil() {
 
@@ -92,30 +92,36 @@ export default function Accueil() {
             Gestion des Pages
           </Typography>
 
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
-              Page d'accueil
-            </Typography>
-            <TextField
-              type="file"
-              onChange={(e) => handleFileChange(e, "home")}
-              sx={{ marginBottom: 2 }}
-              fullWidth
-              variant="outlined"
-            />
+          <Box display="flex" width="100%" gap={1} >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width:'100%' }}>
+              <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
+                Page d'accueil
+              </Typography>
+              <TextField
+                type="file"
+                onChange={(e) => handleFileChange(e, "home")}
+                sx={{ marginBottom: 2 }}
+                fullWidth
+                variant="outlined"
+              />
+            </Box>
+            <Box sx={{borderRadius: "15px", backgroundImage: `url(${getImageURL('home')})`, backgroundSize:'cover', width:200, height:'auto', backgroundPosition:'center'}} ></Box>
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
-              Page de Bijoux
-            </Typography>
-            <TextField
-              type="file"
-              onChange={(e) => handleFileChange(e, "bijoux")}
-              sx={{ marginBottom: 2 }}
-              fullWidth
-              variant="outlined"
-            />
+          <Box display="flex" width="100%" gap={1} >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width:'100%' }} >
+              <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
+                Page de Bijoux
+              </Typography>
+              <TextField
+                type="file"
+                onChange={(e) => handleFileChange(e, "bijoux")}
+                sx={{ marginBottom: 2 }}
+                fullWidth
+                variant="outlined"
+              />
+            </Box>
+            <Box sx={{borderRadius: "15px", backgroundImage: `url(${getImageURL('bijoux')})`, backgroundSize:'cover', width:200, height:'auto', backgroundPosition:'center'}} ></Box>
           </Box>
 
           <Box>
@@ -138,17 +144,20 @@ export default function Accueil() {
             </FormControl>
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
-              Fichier Catégorie
-            </Typography>
-            <TextField
-              type="file"
-              onChange={(e) => handleFileChange(e, "categorie", idCategorie)}
-              sx={{ marginBottom: 2 }}
-              fullWidth
-              variant="outlined"
-            />
+          <Box display="flex" width="100%" gap={1} >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width:'100%' }} >
+              <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
+                Fichier Catégorie
+              </Typography>
+              <TextField
+                type="file"
+                onChange={(e) => handleFileChange(e, "categorie", idCategorie)}
+                sx={{ marginBottom: 2 }}
+                fullWidth
+                variant="outlined"
+              />
+            </Box>
+            <Box sx={{borderRadius: "15px", backgroundImage: `url(${getImageURL(idCategorie)})`, backgroundSize:'cover', width:200, height:'auto', backgroundPosition:'center'}} ></Box>
           </Box>
 
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
