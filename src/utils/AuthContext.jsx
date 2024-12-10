@@ -22,7 +22,7 @@ export default function AuthContextProvider({ children }) {
           })
         } else if (res.status == 403) {return;}
         setFirstFetch(true);
-      })
+      }).catch(err=>setFirstFetch(true));
   };
 
   const register = async (firstname, lastname, email, password, adresse) => {
