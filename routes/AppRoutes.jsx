@@ -1,8 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Route, Routes, useLocation } from 'react-router';
 import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Footer from '../src/components/Footer.jsx';
-import Loader from '../src/components/Loader.jsx';
 import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
 import Blog from '../src/pages/Blog.jsx';
 import ClientArticle from '../src/pages/Article.jsx';
@@ -46,8 +45,6 @@ const AppRoutes = () => {
             {/* Render Navbar only if not on an admin route */}
             { !isAdminRoute && <Navbar /> }
 
-            {/* Suspense fallback replaced with Loader */}
-            <Suspense fallback={<Loader message="Loading content..." />}>
                 <Routes>
                     {/* Public Routes with Footer */}
                     <Route path="/" element={<Home />} />
@@ -81,7 +78,6 @@ const AppRoutes = () => {
                     {/* Fallback Route */}
                     <Route path="*" element={<NotFound />} />
                 </Routes>
-            </Suspense>
 
             {/* Render Footer only if not on an admin route */}
             {!isAdminRoute && <Footer />}

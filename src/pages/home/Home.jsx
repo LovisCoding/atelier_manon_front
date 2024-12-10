@@ -25,7 +25,6 @@ const Home = () => {
   useEffect(() => {
     const exec = async () => {
       const avis = await getAvisToDisplay();
-      console.log(avis);
       if (!avis) return;
       setAvisData(avis);
     };
