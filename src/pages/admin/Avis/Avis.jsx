@@ -1,8 +1,7 @@
-import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Checkbox, CircularProgress, IconButton } from "@mui/material";
+import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Checkbox, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import SidebarMenu from "../SidebarMenu";
-import { getAllAvis, updateAvis, deleteAvis } from "../../../services/AvisService";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { getAllAvis, updateAvis } from "../../../services/AvisService";
 
 export default function Avis() {
     const [avisList, setAvisList] = useState([]);
@@ -44,18 +43,6 @@ export default function Avis() {
         }
     };
 
-    const handleDelete = async (id) => {
-        const response = await deleteAvis(id);
-        if (response){
-            alert("Avis supprimé avec succès !");
-            setAvisList((prev) =>
-                prev.filter((avis) => avis.idAvis !== id)
-              );
-        }
-        else 
-            alert("Impossible de supprimer cet avis");
-    };
-
     return (
         <Box display={"flex"}>
             <SidebarMenu />
@@ -76,7 +63,6 @@ export default function Avis() {
                                         <TableCell>Contenu de l'avis</TableCell>
                                         <TableCell>Note</TableCell>
                                         <TableCell>Affiché</TableCell>
-                                        <TableCell></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -94,14 +80,6 @@ export default function Avis() {
                                                         )
                                                     }
                                                 />
-                                            </TableCell>
-                                            <TableCell>
-                                                <IconButton
-                                                    color="error"
-                                                    onClick={() => handleDelete(avis.idAvis)}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
                                             </TableCell>
                                         </TableRow>
                                     ))}

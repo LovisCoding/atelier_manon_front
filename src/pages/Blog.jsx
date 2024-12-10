@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../services/BlogService";
-import { Typography, CircularProgress, Box, Grid } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Stack, CircularProgress, Grid2 } from "@mui/material";
 import { useNavigate } from "react-router";
 
 const truncateText = (text, wordLimit) => {
-  const words = text.split(" ");
-  return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
-};
+    const words = text.split(" ");
+    return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
+  };
 
 export default function Blog() {
   const [articles, setArticles] = useState([]);
@@ -31,76 +31,62 @@ export default function Blog() {
 
   if (loading) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <Stack alignItems="center" justifyContent="center" height="100vh">
         <CircularProgress />
-        <Typography mt={2} variant="body1" color="text.secondary">
-          Chargement des articles...
-        </Typography>
-      </Box>
+        <Typography>Chargement des articles...</Typography>
+      </Stack>
     );
   }
 
   if (err) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-        <Typography variant="h4" color="error" align="center">
+      <Stack alignItems="center" justifyContent="center" height="100vh">
+        <Typography variant="h4" color="error">
           {err}
         </Typography>
-      </Box>
+      </Stack>
     );
   }
 
   return (
-    <Box sx={{ padding: 4, bgcolor: "background.default", minHeight: "100vh", maxWidth: 1200, margin: "auto" }}>
-      <Typography variant="h3" align="center" gutterBottom>
+    <Stack spacing={4} padding={4}>
+      <Typography variant="h3" align="center">
         Bienvenue sur notre blog
       </Typography>
 
-      <Grid container spacing={4} justifyContent="center" sx={{ marginTop: 4 }}>
+      <Grid2 container spacing={2}>
         {articles.map((article) => (
-          <Grid item xs={12} sm={6} md={4} key={article.id}>
-            <ArticleLine article={article} />
-          </Grid>
+          <CardArticle key={article.id} article={article} />
         ))}
-      </Grid>
-    </Box>
+      </Grid2>
+    </Stack>
   );
 }
 
-function ArticleLine({ article }) {
-  const navigate = useNavigate();
+function CardArticle({ article }) {
 
-  return (
-    <Box
-      onClick={() => navigate(`/article/${article.idArticle}`)}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        padding: 3,
-        borderRadius: 2,
-        boxShadow: 3,
-        cursor: "pointer",
-        transition: "background-color 0.3s, transform 0.3s, box-shadow 0.3s",
-        backgroundColor: "background.paper",
-        "&:hover": {
-          backgroundColor: "action.hover",
-          transform: "scale(1.05)",
-          boxShadow: 6,
-        },
-      }}
-    >
-      <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="h6" fontWeight="bold" color="text.primary">
-          {article.titreArticle}
-        </Typography>
-        <Typography variant="body2" color="text.primary" sx={{ marginTop: 1 }}>
-          {truncateText(article.contenu, 30)}
-        </Typography>
-      </Box>
-      <Typography variant="caption" color="text.primary" sx={{ textAlign: "right", marginTop: 2, fontStyle: "italic" }}>
-        {article.dateArticle}
-      </Typography>
-    </Box>
+	const navigate = useNavigate();
+
+	return (
+		<Grid2 item size={{
+			xs: 12,
+			sm: 6,
+			md: 4
+		}}>
+			<Card onClick={() => navigate(`/article/${article.idArticle}`)} sx={{ display: "flex", alignItems: "center", padding: 2, gap: 2, cursor: "pointer" }}>
+				<CardContent>
+					<Typography variant="h5" fontWeight="bold">
+						{article.titreArticle}
+					</Typography>
+					<Typography variant="body1">
+						{ truncateText(article.contenu, 50) }
+					</Typography>
+					<Typography variant="body2">
+						{article.dateArticle}
+					</Typography>
+				</CardContent>
+			</Card>
+		</Grid2>
+
   );
 }

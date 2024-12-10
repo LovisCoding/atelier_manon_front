@@ -21,17 +21,9 @@ export const getArticleById = async (id) => {
     }
 };
 
-export const createArticle = async ({ idArticle, titreArticle, descriptionProd, contenu }) => {
+export const createArticle = async (article) => {
     try {
-        const article = {
-            idArticle,
-            titreArticle,
-            descriptionProd,
-            contenu
-        };
-
-        const response = await axios.post('/api/admin/article/add-update-article', article);
-
+        const response = await axios.post('/api/article/create-article', article);
         if (response.status === 200) {
             return true;
         }

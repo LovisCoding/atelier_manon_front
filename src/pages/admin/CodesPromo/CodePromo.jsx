@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -22,11 +22,9 @@ export default function CodePromo() {
 	const [name, setName] = useState('');
 	const [value, setValue] = useState('');
 	const [selectValue, setSelectValue] = useState('E');
-	const [selectedRows, setSelectedRows] = useState([]);
-	const [selectAll, setSelectAll] = useState(false);
+	const [selectedRows, setSelectedRows] = useState([]); // Liste des lignes sélectionnées
+	const [selectAll, setSelectAll] = useState(false); // Checkbox global
 	const [exist, setExist] = useState(false);
-	const [err, setErr] = useState(null);
-	const navigate = useNavigate();
 
 	const [message, setMessage] = useState('');
 	const [snOpenValue, setSnOpenValue] = useState(false);
@@ -105,13 +103,6 @@ export default function CodePromo() {
 		}
 		try {
 			CreatePromo(obj)
-			.then((res) => {
-				if (res === true) navigate("/admin/codesPromo/"+obj.code);
-				else setErr(res)				
-			})
-			.catch((err) => {
-				setErr(err);
-			})
 		}
 		catch (err) {
 			console.error("Une erreur est survenue : " + err)
@@ -124,7 +115,6 @@ export default function CodePromo() {
 		<Box display="flex" justifyContent={'center'} >
 			<SidebarMenu />
 			<Stack spacing={3} mt={5}>
-				{ err && <Typography color="danger">{err}</Typography> }
 				<Typography variant="h4">Détail du code de promotion</Typography>
 				<TextField
 					onChange={(e) => setName(e.target.value)}

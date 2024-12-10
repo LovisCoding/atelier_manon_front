@@ -26,16 +26,12 @@ export const getOneCodePromo = async (code) => {
 }
 
 export const CreatePromo = async (obj) => {
-    return axios.post('/api/codepromo/add-codepromo', {
-        ...obj
-    })
-    .then((res) => {
-        if (res.status == 200 || res.status == 201) return true;
-        return "Une erreur est survenue";
-    })
-    .catch((err) => {
-        return err.response.data.messages.error;
-    })
+    const data = await axios
+        .post('/api/codepromo/add-codepromo', {
+            ...obj
+        })
+    if (data.data) return data.data
+    return null;
 }
 
 export const DeleteCodePromo = async (code) => {
