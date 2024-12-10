@@ -1,14 +1,14 @@
 import React from 'react';
 import { Autocomplete, Chip, TextField, Box, Typography } from '@mui/material';
 
-const PierresSection = ({ pierres, selectedPierres, setSelectedPierres }) => {
+const PierresSection = ({ pierres, selectedPierres, setSelectedPierres, setPierres }) => {
 
   return (
     <Box>
       <Typography variant="h6">Pierres disponibles</Typography>
         <Autocomplete
             multiple
-            options={pierres}
+            options={pierres.filter(p => !selectedPierres.map(v => v.libPierre).includes(p.libPierre))}
             getOptionLabel={(option) => option.libPierre}
             value={selectedPierres}
             onChange={(event, newValue) => setSelectedPierres(newValue)}

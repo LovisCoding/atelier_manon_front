@@ -4,15 +4,16 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { addImage } from '../../../services/ProductService';
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
-
-const ImagesSection = ({ images = [], setImages, id , imagesAUpload, setImagesAUpload}) => {
-  const handleAddImage = (url) => {
-    setImages([...images, url]);
-  };
+//TODO bug quand je crée et supprime une image avant de l'enregistrer
+const ImagesSection = ({ images = [], setImages, id , imagesAUpload, setImagesAUpload, imageADelete, setImageADelete}) => {
 const [selectedImg, setSelectedImg] = React.useState(null);
 
   const handleDeleteImage = (index) => {
-    setImages(images.filter((_, i) => i !== index));
+
+      setImageADelete(prev => [...prev, images[index]]);
+      setImages(images.filter((_, i) => i !== index));
+
+   setImageADelete(prev => [...prev, imagesAUpload[index]]);
   };
 
     const handleUpload = async (e) => {
@@ -82,7 +83,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
                   <input type="file" hidden accept={'image/*'} onChange={(e) => handleUpload(e)} />
               </Button>
               <Stack direction={'row'} spacing={1}>
-                  <IconButton disabled={images.length < 2}onClick={() => reorderImages('left')} ><ChevronLeft/></IconButton>
+                  <IconButton disabled={images.length < 2} onClick={() => reorderImages('left')} ><ChevronLeft/></IconButton>
                   <IconButton disabled={images.length < 2} onClick={()=> reorderImages('right')}><ChevronRight/></IconButton>
               </Stack>
           </Stack>

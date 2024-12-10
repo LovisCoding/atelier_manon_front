@@ -9,7 +9,7 @@ import ImagesSection from './ImagesSection';
 import PierresSection from './PierresSection';
 import SeparatorsSection from './SeparatorsSection';
 import {
-  addImage,
+  addImage, deleteImage,
   deleteProduct,
   getProduct,
   getProductImage,
@@ -51,15 +51,8 @@ const Produit = () => {
   const [message, setMessage] = useState('');
   const [snOpenValue, setSnOpenValue] = useState(false);
   const [imagesAUpload,  setImagesAUpload] = useState([]);
+  const [imageADelete, setImageADelete] = useState([]);
 
-  function isBase64(str) {
-    if (str ==='' || str.trim() ===''){ return false; }
-    try {
-      return btoa(atob(str)) == str;
-    } catch (err) {
-      return false;
-    }
-  }
 
   console.log(imagesAUpload);
 
@@ -93,7 +86,7 @@ const Produit = () => {
             setTempsRea(productData.tempsRea);
             const tmpImages = []
             productData.tabPhoto.forEach(image => {
-             tmpImages.push(getProductImage(image))
+             tmpImages.push(getProductImage(image, 100,100))
 
             });
             setImages(tmpImages);
@@ -168,6 +161,9 @@ const Produit = () => {
       imagesAUpload.forEach( (image,index) => {
         addImage(id, image.file, image.name)
       })
+      imageADelete.filter(el => !el?.includes('base64')).forEach( (image,index) => {
+        deleteImage(id, image)
+      })
 
 
 
@@ -212,8 +208,8 @@ const Produit = () => {
                       tempsRea={tempsRea}
                       setTempsRea={setTempsRea}
                   />
-                  <ImagesSection images={images} setImages={setImages} id={id} setImagesAUpload={setImagesAUpload} imagesAUpload={imagesAUpload} />
-                  <PierresSection pierres={pierres} selectedPierres={selectedPierres} setSelectedPierres={setSelectedPierres} />
+                  <ImagesSection images={images} setImages={setImages} id={id} setImagesAUpload={setImagesAUpload} imagesAUpload={imagesAUpload} imageADelete={imageADelete} setImageADelete={setImageADelete} />
+                  <PierresSection pierres={pierres} selectedPierres={selectedPierres} setSelectedPierres={setSelectedPierres} setPierres={setPierres}/>
                   <SeparatorsSection separateurs={separators} selectedSeparators={selectedSeparators} setSelectedSeparateurs={setSelectedSeparators} />
                   <FilsSection fils={filsSection} selectedFils={selectedFils} setSelectedFils={setSelectedFils} id={id} />
                   <Stack direction="row" justifyContent="space-between">

@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section.">
+    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="merge dev">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/FilsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/FilsSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/PierresSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/PierresSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/SeparatorsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/SeparatorsSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/ProductService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProductService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733765850634</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="merge dev">
+      <option name="closed" value="true" />
+      <created>1733820621607</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733820621607</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +200,7 @@
     <MESSAGE value="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states." />
     <MESSAGE value="merge dev&#10;" />
     <MESSAGE value="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section." />
+    <MESSAGE value="merge dev" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge dev" />
   </component>
 </project>

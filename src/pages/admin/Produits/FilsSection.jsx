@@ -7,7 +7,7 @@ const FilsSection = ({ fils, selectedFils, setSelectedFils }) => {
             <Typography variant="h6">Fils disponibles</Typography>
             <Autocomplete
                 multiple
-                options={fils}
+                options={fils.filter(p => !selectedFils.map(v => v.libCouleur).includes(p.libCouleur))}
                 getOptionLabel={(option) => option.libCouleur}
                 value={selectedFils}
                 onChange={(event, newValue) => setSelectedFils(newValue)}

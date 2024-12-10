@@ -70,8 +70,8 @@ export const getBestSellers = async () => {
     }
 };
 
-export const getProductImage = (imgName) => {
-    return import.meta.env.VITE_API_URL+'img/'+imgName;
+export const getProductImage = (imgName, width, height) => {
+    return import.meta.env.VITE_API_URL+'img/'+imgName+ (width ? '?width='+width : '')+ (height ? '?height='+height : '');
 }
 
 
@@ -133,5 +133,11 @@ export const reorderImages= async (idProd, tabPhoto) => {
     const data = await axios.post('/api/admin/produit/update-images-order', {
         idProd,
         tabPhoto
+    })
+}
+export const deleteImage= async (idProd, idImage) => {
+    const data = await axios.post('/api/produit/delete-image', {
+        idProd,
+        idImage
     })
 }

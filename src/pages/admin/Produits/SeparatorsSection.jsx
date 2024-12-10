@@ -8,7 +8,7 @@ const SeparatorsSection = ({ separateurs, selectedSeparators, setSelectedSeparat
       <Typography variant="h6">Séparateurs disponibles</Typography>
         <Autocomplete
             multiple
-            options={separateurs}
+            options={separateurs.filter(p => !selectedSeparators.map(v => v.libMateriau).includes(p.libMateriau))}
             getOptionLabel={(option) => option.libMateriau}
             value={selectedSeparators}
             onChange={(event, newValue) => setSelectedSeparateurs(newValue)}
