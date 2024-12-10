@@ -29,9 +29,7 @@ export default function ClientArticle(){
 		}}>
 			<Typography textAlign="center" variant="h1">{article.titreArticle}</Typography>
 			<Typography textAlign="center" variant="body2">le {article.dateArticle}</Typography>
-			<Typography mt={"3rem"} variant="body1">{article.contenu}</Typography>
-
+			<Typography textAlign="center" mt={"3rem"} mb={"3rem"} variant="body1">{article.contenu}</Typography>
 		</Container>
 	)
-
 }
