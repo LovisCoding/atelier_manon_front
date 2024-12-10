@@ -66,9 +66,9 @@ const ProductDetailsForm = ({
             />
             {/* Catégorie du produit */}
             <FormControl fullWidth sx={{ mt: 4 }}>
-                <InputLabel id="select-category">Catégorie de produit</InputLabel>
+                <InputLabel id="select-category">Catégorie de produit *</InputLabel>
                 <Select
-                    label="Catégorie de produit"
+                    label="Catégorie de produit *"
                     fullWidth
                     variant="outlined"
                     value={selectedCategory}
