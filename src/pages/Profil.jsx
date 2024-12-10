@@ -170,13 +170,13 @@ export default function Profil() {
 					<Button onClick={() => disconnect()} fullWidth variant="yellowButton" color="secondary">Déconnexion</Button>
 				</Stack>
 
-				{ !details.isAdmin &&
+				{ details.isAdmin &&
 				<Stack direction="row" justifyContent="center" >
 					<Button type="button" variant="outlined" onClick={() => adminPage()}
 					>Accéder à la page d'administrateur</Button>
 				</Stack>}
 
-				{ details.isAdmin &&
+				{ !details.isAdmin &&
 				<Stack direction="row" justifyContent="center" >
 					<Button type="button" variant="outlined" onClick={() => disableAccount()}
 						sx={{color: 'red', borderColor: 'red'}}
