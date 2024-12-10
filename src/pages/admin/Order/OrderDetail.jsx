@@ -4,7 +4,7 @@ import SidebarMenu from "../SidebarMenu";
 import theme from "../../../theme/theme";
 import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService";
 import { getCompte } from "../../../services/UserService";
-import { Link, useLocation, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { FaEuroSign } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
 import { CiStickyNote, CiUser } from "react-icons/ci";
@@ -13,8 +13,12 @@ import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiGift } from "react-icons/fi";
 import { updateState } from "../../../services/OrderService";
 import { formatDate } from "../../../utils/Date";
+import { useAuth } from "../../../utils/AuthContext";
 
 export default function OrderDetails() {
+
+  const {isLogged,details} = useAuth();
+  if (!isLogged || !details.isAdmin) window.location = '/';
 
   return (
     <Box display={"flex"}>

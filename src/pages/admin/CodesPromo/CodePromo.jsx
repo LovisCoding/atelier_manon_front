@@ -14,6 +14,7 @@ import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoServic
 import { getAllProducts, getProductImage } from "../../../services/ProductService";
 import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduitService";
 import Snackbar from "@mui/material/Snackbar";
+import { useAuth } from "../../../utils/AuthContext";
 
 export default function CodePromo() {
 	const { id } = useParams();
@@ -27,7 +28,10 @@ export default function CodePromo() {
 
 	const [message, setMessage] = useState('');
 	const [snOpenValue, setSnOpenValue] = useState(false);
-	
+
+	const {isLogged,details} = useAuth();
+	if (!isLogged || !details.isAdmin) {navigate('/'); return;}
+
 	const handleSelectChange = (event) => {
 		setSelectValue(event.target.value);
 	};

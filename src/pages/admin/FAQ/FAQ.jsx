@@ -3,6 +3,7 @@ import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getQuestionsById, updateQuestion, deleteQuestion } from "/src/services/FAQService";
+import { useAuth } from "../../../utils/AuthContext";
 
 export default function FAQDetails() {
     const { id } = useParams();
@@ -14,6 +15,9 @@ export default function FAQDetails() {
     });
     const [loading, setLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
+
+    const {isLogged,details} = useAuth();
+    if (!isLogged || !details.isAdmin) window.location = '/';
 
     useEffect(() => {
         const fetchFaqData = async () => {
