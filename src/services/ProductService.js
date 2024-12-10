@@ -8,6 +8,7 @@ export const getProduct = async (id) => {
     if (!data.data) return null;
     return data.data;
 }
+
 export const getAllProducts = async () => {
     const data = await axios
         .get('/api/produit/get-all-produits')
@@ -15,6 +16,25 @@ export const getAllProducts = async () => {
     if (data.data) return data.data
     return null;
 }
+
+export const getProducts = async (params) => {
+    const { search, category, priceInf, priceSup, nbDisplay, page } = params;
+    
+    const queryParams = new URLSearchParams({
+      search,
+      category,
+      priceInf,
+      priceSup,
+      nbDisplay,
+      page,
+    });
+  
+    const data = await axios
+      .get(`/api/produit/get-produits?${queryParams.toString()}`);
+  
+    if (data.data) return data.data;
+    return null;
+};
 
 export const getWires = async (id) => {
     const data = await axios.get('/api/filprod/get-fils-produit', { params: {idProd:id} })
@@ -69,8 +89,10 @@ export const addProductToPanier = async (product) => {
                 variante : variant
             }, { headers: { 'Content-Type':'application/json' } });
         console.log("Response :",data.data)
+        return data;
     } catch (err) {
         console.error("Une erreur est survenue : "+err)
+        return null;
     }
 }
 

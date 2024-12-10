@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Grid2, Stack, Typography, CardMedia, CardContent } from "@mui/material";
 import Banner from "../../components/Banner";
 import { getProductImage } from "../../services/ProductService";
+import { useNavigate } from "react-router";
 
 const BestSale = ({ products }) => {
   return (
@@ -35,16 +36,24 @@ const BestSale = ({ products }) => {
 const testImg = '../assets/img/bracelet1.webp';
 
 const BestSellerItem = ({ product }) => {
+  const navigate = useNavigate();
+
   const [image, setImage] = useState("");
 
   useEffect(() => {
     setImage(getProductImage(product.photo));
   }, []);
 
+  const goToProduct = () => {
+    navigate('/product/'+product.idProd);
+    return;
+  }
+
   return (
     <Grid2 item xs={12} sm={6} md={4}>
       <Box
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center", cursor:'pointer' }}
+        onClick={() => goToProduct()}
       >
         <CardMedia
           component="img"

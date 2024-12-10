@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { AppBar, Toolbar, Stack, IconButton, Typography, useTheme } from "@mui/material";
 import { MdAccountCircle } from "react-icons/md";
+import { IoMdCart } from "react-icons/io";
 import Link from "../../Link";
 import { useLocation } from "react-router";
 import ImgMui from "../../ImgMui";
@@ -60,15 +61,20 @@ export default function NavbarMd() {
                 <Link variant="navbar" sx={getLinkStyles("/about")} href="/about">
                   À propos
                 </Link>
-                <Link variant="navbar" sx={getLinkStyles("/faq")} href="/faq">
+                <Link variant="navbar"  sx={getLinkStyles("/faq")} href="/faq">
                   FAQ
                 </Link>
                 <Link variant="navbar" sx={getLinkStyles("/contact")} href="/contact">
                   Contact
                 </Link>
+                {isLogged && <Link variant="navbar" href="/cart" >
+                  <IconButton>
+                    <IoMdCart color={scrolled ? theme.palette.text.white : theme.palette.text.primary} sx={getLinkStyles("/cart")} />
+                  </IconButton>
+                </Link>}
                 <Link variant="navbar" href={isLogged ? "/profil" : "/login"}>
                   <IconButton>
-                    <MdAccountCircle color="text.primary" sx={getLinkStyles("/profil")} />
+                    <MdAccountCircle color={scrolled ? theme.palette.text.white : theme.palette.text.primary} sx={getLinkStyles("/profil")} />
                   </IconButton>
                 </Link>
               </Stack>

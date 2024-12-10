@@ -10,7 +10,7 @@ export default function App() {
 	axios.get(
 		'/api/test'
 	).then((response) => {
-		console.log(response.data);
+		// console.log(response.data);
 	}).catch((error) => {
 		console.error(error);
 	}

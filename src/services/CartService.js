@@ -2,16 +2,21 @@
 import axios from "axios";
 
 export const getCartProducts = async () => {
-    const data = await axios
+    try {
+        const data = await axios
         .get('/api/client/panier/get-panier-client');
-    if (!data.data) return null;
-    data.data.forEach(prod => {
-        prod.idProd = parseInt(prod.idProd);
-        prod.idCli = parseInt(prod.idCli);
-        prod.qa = parseInt(prod.qa);
-        prod.produit.prix = parseFloat(prod.produit.prix);
-    });
-    return data.data;
+        if (!data.data || data.status === 403) return null;
+        data.data.forEach(prod => {
+            prod.idProd = parseInt(prod.idProd);
+            prod.idCli = parseInt(prod.idCli);
+            prod.qa = parseInt(prod.qa);
+            prod.produit.prix = parseFloat(prod.produit.prix);
+        });
+        return data.data;
+    } catch (err) {
+        console.log("Une erreur est survenue:",err);
+        return null;
+    }
 };
 
 export const addProductPanier = async (product) => {
@@ -65,11 +70,10 @@ export const deleteProductPanier = async (product) => {
 
 };
 
-export const addCommande = async (idCli, commentary, isGift, giftCommentary) => {
+export const addCommande = async (commentary, isGift, giftCommentary) => {
     try {
         const data = await axios
             .post('/api/client/commande/add-commande' , {
-                idCli : idCli,
                 comm : commentary ,
                 estCadeau : isGift,
                 carte : giftCommentary

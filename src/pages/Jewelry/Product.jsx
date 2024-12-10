@@ -1,4 +1,4 @@
-import { Container, Grid2 } from "@mui/material";
+import { Container, Grid2, Snackbar, Alert } from "@mui/material";
 import ProductDetails from "./ProductDetails";
 import ProductImages from "./ProductImages";
 
@@ -12,6 +12,9 @@ export default function Product() {
 
 	const [product, setProduct] = useState(null);
 	const [images, setImages] = useState([]);
+
+	const [errorMessage, setErrorMessage] = useState("");
+	const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
 
 	useEffect(() => {
 		const exec = async () => {
@@ -27,17 +30,30 @@ export default function Product() {
 
 	const handleAddToCart = () => {
 		const exec = async () => {
-			console.log("added to cart");
-			await addProductToPanier(product);
+			const data = await addProductToPanier(product);
+			if (data && data.data) setErrorMessage(data.data);
+			else setErrorMessage("Une erreur est survenue lors de l'ajout au panier");
+			setIsErrorDisplayed(true);
 		};
 		exec();
 	}
 
+	const handleClose = () => setIsErrorDisplayed(false)
 
 	return (
 		<Container sx={{
 			marginTop: '4rem'
 		}}>
+			<Snackbar
+				open={isErrorDisplayed}
+				autoHideDuration={3000}
+				onClose={handleClose}
+				anchorOrigin={{ vertical: "top", horizontal: "center" }}
+			>
+				<Alert onClose={handleClose} severity={errorMessage.includes("erreur") ? "error" : "success"} sx={{ width: "100%" }}>
+					{errorMessage}
+				</Alert>
+			</Snackbar>
 			{product &&
 			<Grid2 container spacing={5}>
 				<Grid2 item size={{

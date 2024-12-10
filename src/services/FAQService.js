@@ -37,6 +37,21 @@ export const updateQuestion = async (question) => {
     }
 };
 
+export const addQuestion = async (question) => {
+    return axios.post("/api/client/question/add-update-question", {
+        reponse: "",
+        contenu: question,
+        idQuestion: -1
+    })
+    .then((res) => {
+        if (res.status == 201 || res.status == 200) return true;
+        return false;    
+    })
+    .catch((err) => {
+        return false;
+    })
+}
+
 export const deleteQuestion = async (id) => {
     try {
         const response = await axios.delete(`/api/admin/question/delete-question`, {
