@@ -4,7 +4,8 @@ import SidebarMenu from "../SidebarMenu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import { addMatProd, getAllMateriau, getAllFils, getAllPierres, getAllTailles, getAllPendentifs, deleteMatProd, deleteFilProd, deletePierreProd, deleteTailleProd, deletePendentifProd } from "/src/services/PersonalizationService";
+import { getAllMateriau, getAllFils, getAllPierres, getAllTailles, getAllPendentifs, deleteMatProd, deleteFilProd, deletePierreProd, deleteTailleProd, deletePendentifProd } from "/src/services/PersonalizationService";
+import { addMatProd, addFilProd, addPierreProd, addPendentifProd, addTailleProd } from "../../../services/PersonalizationService";
 
 const DataTable = ({ data, setData, title, keyField, valueField, descriptionField = null, addFunction = null, deleteFunction = null }) => {
   const [newValue, setNewValue] = useState("");
@@ -144,6 +145,11 @@ export default function Personalization() {
       if (dataPierres) {
         setPierres(dataPierres);
       }
+
+      const dataPendentifs = await getAllPendentifs();
+      if (dataPendentifs) {
+        setPendentifs(dataPendentifs);
+      }
     };
 
     fetchData();
@@ -171,8 +177,9 @@ export default function Personalization() {
           data={fils}
           setData={setFils}
           title="Fil"
-          keyField="id"
+          keyField="libCouleur"
           valueField="libCouleur"
+          addFunction={addFilProd}
           deleteFunction={deleteFilProd}
         />
 
@@ -180,9 +187,10 @@ export default function Personalization() {
           data={pierres}
           setData={setPierres}
           title="Pierre"
-          keyField="id"
+          keyField="libPierre"
           valueField="libPierre"
           descriptionField="descriptionPierre"
+          addFunction={addPierreProd}
           deleteFunction={deletePierreProd}
         />
 
@@ -190,8 +198,9 @@ export default function Personalization() {
           data={tailles}
           setData={setTailles}
           title="Taille"
-          keyField="id"
+          keyField="libTaille"
           valueField="libTaille"
+          addFunction={addTailleProd}
           deleteFunction={deleteTailleProd}
         />
 
@@ -199,8 +208,9 @@ export default function Personalization() {
           data={pendentifs}
           setData={setPendentifs}
           title="Pendentif"
-          keyField="id"
+          keyField="libPendentif"
           valueField="libPendentif"
+          addFunction={addPendentifProd}
           deleteFunction={deletePendentifProd}
         />
       </Stack>
