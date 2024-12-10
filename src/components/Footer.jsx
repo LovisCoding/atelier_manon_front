@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Link, Grid2, Stack } from "@mui/material";
+import { Box, Typography, Grid2, Stack, Link } from "@mui/material";
 import ImgMui from './ImgMui';
 const InstagramPNG = '../src/assets/img/instagram.webp';
 
@@ -47,9 +47,14 @@ function Footer() {
                     <Grid2 item size={{xs: 2, sm: 8, md: 5}} paddingLeft={2} display="flex" flexDirection="column" alignItems="start" justifyContent="center" gap="1rem" >
                         <Typography sx={{ fontSize: '12px' }} >ME SUIVRE</Typography>
                         <Typography sx={{ fontSize: '12px' }} >Rejoignez moi sur Instagram pour me partager vos compositions de bijoux !</Typography>
+                        <Link href="https://www.instagram.com/latelierdemanoncreations/">
+
                         <Box sx={{ justifySelf: 'center', display: 'flex', alignItems: 'center', alignSelf: 'center', bgcolor: "#FE005C", width: 'fit-content', height: 'fit-content', borderRadius: '20px' }}>
-                            <ImgMui src={InstagramPNG} sx={{ width: '30px', height: 'auto' }} />
+                                <ImgMui src={InstagramPNG} sx={{ width: '30px', height: 'auto' }} />
+                            
                         </Box>
+                        </Link>
+
                     </Grid2>
                 </Grid2>
             </Box>

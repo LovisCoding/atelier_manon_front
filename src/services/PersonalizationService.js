@@ -22,6 +22,20 @@ export const getAllPierres = async () => {
     return null;
 };
 
+export const getAllTailles = async () => {
+    const data = await axios
+        .get('/api/taille/get-tailles');
+    if (data.data) return data.data;
+    return null;
+};
+
+export const getAllPendentifs = async () => {
+    const data = await axios
+        .get('/api/pendentif/get-pendentifs');
+    if (data.data) return data.data;
+    return null;
+};
+
 export const addMatProd = async (data) => {
     try {
         const response = await axios.post(
@@ -111,6 +125,38 @@ export const deletePierreProd = async (id) => {
         return null;
     } catch (error) {
         console.error('Erreur lors de la suppression de la pierre :', error);
+        return null;
+    }
+};
+
+export const deleteTailleProd = async (id) => {
+    try {
+        const response = await axios.request({
+            url: `/api/admin/taille/delete-taille`,
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            data: { libTaille: id }
+        });
+        if (response.data) return response.data;
+        return null;
+    } catch (error) {
+        console.error('Erreur lors de la suppression de la taille :', error);
+        return null;
+    }
+};
+
+export const deletePendentifProd = async (id) => {
+    try {
+        const response = await axios.request({
+            url: `/api/admin/pendentif/delete-pendentif`,
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            data: { libTaille: id }
+        });
+        if (response.data) return response.data;
+        return null;
+    } catch (error) {
+        console.error('Erreur lors de la suppression du pendentif :', error);
         return null;
     }
 };
