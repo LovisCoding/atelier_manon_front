@@ -45,8 +45,6 @@ export default function Article() {
             contenu: description,
         };
 
-        console.log(newArticle);
-
         await createArticle(newArticle);
         navigate('/admin/blog');
     };
