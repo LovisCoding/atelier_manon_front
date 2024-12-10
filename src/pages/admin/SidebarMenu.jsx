@@ -78,7 +78,6 @@ const SidebarMenu = ({ children }) => {
             { text: 'Accueil', href: '/admin/accueil', icon: <FaHome /> },
             { text: 'Newsletters', href: '/admin/newsletter', icon: <FaNewspaper /> },
             { text: 'Réductions', href: '/admin/codesPromo', icon: <FaPercent /> },
-            { text: 'Évènements', href: '/admin/evenements', icon: <FaCalendarAlt /> },
             { text: 'Blog', href: '/admin/blog', icon: <FaBlog /> },
             { text: 'Personnalisation', href: '/admin/personalization', icon: <FaPaintBrush /> },
             { text: 'Avis', href: '/admin/avis', icon: <FaRegComment /> },
