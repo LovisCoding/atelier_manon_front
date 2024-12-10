@@ -13,7 +13,6 @@ const [selectedImg, setSelectedImg] = React.useState(null);
       setImageADelete(prev => [...prev, images[index]]);
       setImages(images.filter((_, i) => i !== index));
 
-   setImageADelete(prev => [...prev, imagesAUpload[index]]);
   };
 
     const handleUpload = async (e) => {
@@ -37,12 +36,12 @@ const [selectedImg, setSelectedImg] = React.useState(null);
 
             // Transformer en objets avec name et file
             const filesWithDetails = Array.from(files).map((file, i) => ({
-                name: file.name.split('.')[0],
+                name: file.name.split('.')[0] + '.webp',
                 file: base64Files[i],
             }));
 
             // Mettre à jour les états
-            setImages([...images, ...filesWithDetails.map((f) => f.file)]); // Ajouter les base64 au tableau d'images
+            setImages([...images, ...filesWithDetails]); // Ajouter les base64 au tableau d'images
             setImagesAUpload([...imagesAUpload, ...filesWithDetails]); // Ajouter les objets au tableau de fichiers à uploader
 
             console.log(filesWithDetails); // Afficher le tableau d'objets
@@ -73,6 +72,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
     }
     setImages(tmpImages)
   }
+    console.log(images)
 
   return (
       <Box>
@@ -80,7 +80,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
               <Typography variant="h6">Images</Typography>
               <Button component="label">
                   <AddCircleOutlineIcon />
-                  <input type="file" hidden accept={'image/*'} onChange={(e) => handleUpload(e)} />
+                  <input type="file" hidden accept=".jpg,.jpeg,.webp" onChange={(e) => handleUpload(e)} />
               </Button>
               <Stack direction={'row'} spacing={1}>
                   <IconButton disabled={images.length < 2} onClick={() => reorderImages('left')} ><ChevronLeft/></IconButton>
@@ -104,7 +104,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
                   component={Button}
               >
                 <img
-                    src={src}
+                    src={src.file}
                     alt={`image-${index}`}
                     style={{
                       width: 100,

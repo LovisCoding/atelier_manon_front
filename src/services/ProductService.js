@@ -71,7 +71,7 @@ export const getBestSellers = async () => {
 };
 
 export const getProductImage = (imgName, width, height) => {
-    return import.meta.env.VITE_API_URL+'img/'+imgName+ (width ? '?width='+width : '')+ (height ? '?height='+height : '');
+    return import.meta.env.VITE_API_URL+'img/'+imgName+ (width ? '?width='+width : '');
 }
 
 
@@ -122,12 +122,17 @@ export const updateProduct = async (product) => {
 	}
 }
 export const addImage= async (idProd, image, libImage) => {
+    try {
 
-    const data = await axios.post('/api/produit/add-image', {
-       idProd,
-        image,
-        libImage
-    })
+        const data = await axios.post('/api/produit/add-image', {
+            idProd,
+            image,
+            libImage
+        })
+    } catch (err) {
+        console.error("Une erreur est survenue : ",err)
+        return err;
+    }
 }
 export const reorderImages= async (idProd, tabPhoto) => {
     const data = await axios.post('/api/admin/produit/update-images-order', {
@@ -135,9 +140,9 @@ export const reorderImages= async (idProd, tabPhoto) => {
         tabPhoto
     })
 }
-export const deleteImage= async (idProd, idImage) => {
+export const deleteImage= async (idProd, libImage) => {
     const data = await axios.post('/api/produit/delete-image', {
         idProd,
-        idImage
+        libImage
     })
 }

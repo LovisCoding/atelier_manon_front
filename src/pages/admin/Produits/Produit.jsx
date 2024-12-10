@@ -85,8 +85,9 @@ const Produit = () => {
             setSelectedCategory(productData.idCateg);
             setTempsRea(productData.tempsRea);
             const tmpImages = []
-            productData.tabPhoto.forEach(image => {
-             tmpImages.push(getProductImage(image, 100,100))
+            console.log(getProductImage(productData.tabPhoto[0], 100,100))
+            productData?.tabPhoto.forEach(image => {
+             tmpImages.push({file:getProductImage(image, 100,100), libImage: image})
 
             });
             setImages(tmpImages);
@@ -134,11 +135,8 @@ const Produit = () => {
     const tmpMessage = [];
     if (product.libProd === '') tmpMessage.push('Libellé');
     if (product.descriptionProd === '') tmpMessage.push('Description');
-    if (product.prix === 0) tmpMessage.push('Prix');
+    if (product.prix  <1) tmpMessage.push('Prix');
     if (product.idCateg === '') tmpMessage.push('Catégorie');
-    if (selectedPierres.length === 0) tmpMessage.push('Pierres');
-    if (selectedSeparators.length === 0) tmpMessage.push('Separateurs');
-    if (selectedFils.length === 0) tmpMessage.push('Fils');
 
     if (tmpMessage.length > 0) {
       const s = tmpMessage.length > 1 ? 's' : '';
@@ -158,11 +156,27 @@ const Produit = () => {
       if (id === "-1") {
         product.idProd = productData;
       }
-      imagesAUpload.forEach( (image,index) => {
-        addImage(id, image.file, image.name)
-      })
-      imageADelete.filter(el => !el?.includes('base64')).forEach( (image,index) => {
-        deleteImage(id, image)
+
+
+        for (const image of imagesAUpload) {
+            let res = await addImage(product.idProd, image.file, image.name);
+            if (res && res?.status !== 201 ) {
+              setMessage(res.response.data);
+              setSnOpenValue(true);
+
+              const link = '/admin/products/'+product.idProd
+              setTimeout(function(){
+                navigate(id === "-1" ? link : 0);
+              }, 3000);
+
+              return
+            }
+
+        }
+
+      console.log(imageADelete);
+      imageADelete?.filter(el => !el.file.includes('base64')).forEach( (image,index) => {
+        deleteImage(id, image.libImage)
       })
 
 
@@ -172,13 +186,13 @@ const Produit = () => {
         updatePieProd(product.idProd, selectedPierres.map(item => item.libPierre)),
         updateMatProd(product.idProd, selectedSeparators.map(item => item.libMateriau)),
         updateFilsProd(product.idProd, selectedFils.map(item => item.libCouleur)),
-        reorderImages(product.idProd, images.filter((el) => !el.includes('base64'))),
+        reorderImages(product.idProd, images.map((el) => el.name)),
       ]);
 
       console.log('All associated data updated successfully');
-      navigate('/admin/products');
+      /*navigate('/admin/products');*/
     } catch (error) {
-      console.log('la')
+
       console.error('Error updating product or associated data:', error);
     }
   };

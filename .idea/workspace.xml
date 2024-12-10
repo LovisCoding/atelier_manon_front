@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="merge dev">
+    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/FilsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/FilsSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/PierresSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/PierresSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/SeparatorsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/SeparatorsSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/ProductService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProductService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733820621607</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience.">
+      <option name="closed" value="true" />
+      <created>1733826235819</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733826235819</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,6 +208,7 @@
     <MESSAGE value="merge dev&#10;" />
     <MESSAGE value="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section." />
     <MESSAGE value="merge dev" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge dev" />
+    <MESSAGE value="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience." />
+    <option name="LAST_COMMIT_MESSAGE" value="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience." />
   </component>
 </project>
