@@ -127,7 +127,7 @@ const SidebarMenu = ({ children }) => {
           <ListItem sx={{justifySelf:'end', marginTop:'auto'}} >
             <Button
               variant='outlined'
-              sx={{margin:'0 auto'}}
+              sx={{margin:'0 auto', fontWeight:'bold'}}
               onClick={()=>navigate('/')}
             >Revenir au site web</Button>
           </ListItem>

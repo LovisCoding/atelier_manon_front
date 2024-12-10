@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Typography, Box, Stack, Button, Snackbar} from '@mui/material';
+import {Typography, Box, Stack, Button, Snackbar, CircularProgress} from '@mui/material';
 import { RiSave2Fill } from 'react-icons/ri';
 import { MdDelete } from 'react-icons/md';
 import { useNavigate, useParams } from 'react-router';
@@ -24,7 +24,6 @@ import { getMatProd, updateMatProd } from "../../../services/MatProdService.js";
 import FilsSection from "./FilsSection.jsx";
 import { getFilsById, updateFilsProd } from "../../../services/FilProdServices.js";
 import { getAllFils } from "../../../services/PersonalizationService.js";
-import Loader from "../../../components/Loader.jsx";
 
 
 const Produit = () => {
@@ -121,6 +120,7 @@ const Produit = () => {
   // Update product
   // Update product
   const handleUpdate = async () => {
+    setLoading(true)
     const product = {
       idProd: Number(id),
       libProd: valueLib,
@@ -135,13 +135,15 @@ const Produit = () => {
     const tmpMessage = [];
     if (product.libProd === '') tmpMessage.push('Libellé');
     if (product.descriptionProd === '') tmpMessage.push('Description');
-    if (product.prix  <1) tmpMessage.push('Prix');
+    if (product.prix  <1 || product.prix >1000) tmpMessage.push('Prix entre 1 et 1000e');
     if (product.idCateg === '') tmpMessage.push('Catégorie');
+    if (product.tempsRea < 1 || product.tempsRea > 100) tmpMessage.push('Temps réalisation entre 0 et 100 jours')
 
     if (tmpMessage.length > 0) {
       const s = tmpMessage.length > 1 ? 's' : '';
       setMessage(`Veuillez remplir le${s} champ${s} suivant${s} : ${tmpMessage.join(', ')}`);
       setSnOpenValue(true);
+      setLoading(false);
       return;
     }
 
@@ -151,6 +153,7 @@ const Produit = () => {
       if (productData?.status === 400) {
         setMessage(productData.response.data);
         setSnOpenValue(true);
+        setLoading(false);
         return;
       }
       if (id === "-1") {
@@ -159,7 +162,7 @@ const Produit = () => {
 
 
         for (const image of imagesAUpload) {
-            let res = await addImage(product.idProd, image.file, image.name);
+            let res = await addImage(product.idProd, image.file, image.libImage);
             if (res && res?.status !== 201 ) {
               setMessage(res.response.data);
               setSnOpenValue(true);
@@ -175,24 +178,24 @@ const Produit = () => {
         }
 
       console.log(imageADelete);
-      imageADelete?.filter(el => !el.file.includes('base64')).forEach( (image,index) => {
+      imageADelete?.filter(el => !el.file.includes('base64')).forEach( (image) => {
         deleteImage(id, image.libImage)
       })
 
 
-
+      console.log(images)
       // Update associated data concurrently
       await Promise.all([
         updatePieProd(product.idProd, selectedPierres.map(item => item.libPierre)),
         updateMatProd(product.idProd, selectedSeparators.map(item => item.libMateriau)),
         updateFilsProd(product.idProd, selectedFils.map(item => item.libCouleur)),
-        reorderImages(product.idProd, images.map((el) => el.name)),
+        reorderImages(product.idProd, images.map((el) => el.libImage)),
       ]);
 
       console.log('All associated data updated successfully');
-      /*navigate('/admin/products');*/
+      navigate('/admin/products');
     } catch (error) {
-
+      setLoading(false)
       console.error('Error updating product or associated data:', error);
     }
   };
@@ -201,11 +204,11 @@ const Produit = () => {
   return (
       <>
         {loading ? (
-            <Loader /> // Display loader while loading data
+            <Box display="flex" justifyContent="center" mt={5} ><CircularProgress size={60} thickness={5} color="" /></Box> // Display loader while loading data
         ) : (
             <SidebarMenu>
-              <Box display="flex" justifyContent="center" width="100%">
-                <Stack maxWidth="600px" spacing={3}>
+              <Box display="flex" justifyContent="center" width="100%" mb={5}>
+                <Stack maxWidth="600px" spacing={2}>
                   <Typography variant="h4">Détail du produit</Typography>
                   <ProductDetailsForm
                       valueLib={valueLib}
@@ -226,7 +229,7 @@ const Produit = () => {
                   <PierresSection pierres={pierres} selectedPierres={selectedPierres} setSelectedPierres={setSelectedPierres} setPierres={setPierres}/>
                   <SeparatorsSection separateurs={separators} selectedSeparators={selectedSeparators} setSelectedSeparateurs={setSelectedSeparators} />
                   <FilsSection fils={filsSection} selectedFils={selectedFils} setSelectedFils={setSelectedFils} id={id} />
-                  <Stack direction="row" justifyContent="space-between">
+                  <Stack direction="column" spacing={3}>
                     <Button variant="contained" color="info" startIcon={<RiSave2Fill />} onClick={handleUpdate}>
                       Enregistrer
                     </Button>
@@ -240,6 +243,7 @@ const Produit = () => {
 
         )}
         <Snackbar open={snOpenValue} autoHideDuration={6000} onClose={() => {setSnOpenValue(false)}} message={message} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}/>
+
       </>
   );
 };

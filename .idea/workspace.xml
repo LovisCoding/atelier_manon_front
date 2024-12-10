@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components.">
+    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Link.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Link.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="admin_configure_product" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,7 +38,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/LovisCoding/atelier_manon_front.git&quot;,
+    &quot;url&quot;: &quot;git@github.com:LovisCoding/atelier_manon_front.git&quot;,
     &quot;accountId&quot;: &quot;78df1259-107b-4b41-8230-29d717acd6ed&quot;
   }
 }</component>
@@ -53,21 +53,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;liaison-produits&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/arthur/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/Users/arthur/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -183,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733841155273</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience.">
+      <option name="closed" value="true" />
+      <created>1733845120148</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1733845120148</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,6 +232,8 @@
     <MESSAGE value="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience." />
     <MESSAGE value="Refactor product admin components and enhance UX&#10;&#10;Refactored product-related admin components for improved code readability and maintainability. Enhanced the product configuration table with clickable rows for better navigation. Fixed image handling logic by ensuring proper Base64 transformations and type requirements for uploads and deletions." />
     <MESSAGE value="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components." />
+    <MESSAGE value="merge ca mere full bugged" />
+    <MESSAGE value="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience." />
   </component>
 </project>
