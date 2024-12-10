@@ -92,7 +92,7 @@ export default function Article() {
                     variant="outlined"
                     fullWidth
                     multiline
-                    rows={4}
+                    maxRows={25}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
