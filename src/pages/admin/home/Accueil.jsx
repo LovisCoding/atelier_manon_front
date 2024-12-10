@@ -18,6 +18,12 @@ export default function Accueil() {
     axios.post("/api/personnalisation/update-evenement", {
       message: event
     })
+    .then((res) => {
+      // console.log(res)
+    })
+    .catch((err) => {
+      // console.log(err)
+    })
   }
 
   useEffect(() => {

@@ -30,17 +30,6 @@ export default function AuthContextProvider({ children }) {
       "mdp": password,
       "adresse": adresse
      });
-     if (res.status == 200){
-      setDetails({
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        adresse: adresse
-      })
-      return true;
-     } else {
-      return false;
-     }
     return res.status == 200;
   }
 
@@ -50,9 +39,7 @@ export default function AuthContextProvider({ children }) {
         email,
         mdp: password
       });
-      console.log("res:",res)
-      console.log("status:",res.status)
-      if (res.status === 200) { getProfil(); return true; }      
+      if (res.status === 200) { getProfil(); return true; }
       return false;
     } catch (err) {
       console.error("Une erreur est survenue:",err)
@@ -61,7 +48,7 @@ export default function AuthContextProvider({ children }) {
   };
 
   const logout = () => {
-    axios.post("/api/account/logout");
+    axios.post("/api/client/account/logout");
     setDetails(null);
   };
 

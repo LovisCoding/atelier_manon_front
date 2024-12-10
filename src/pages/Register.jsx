@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, InputLabel, InputAdornment, IconButton, Button, Box, Typography, Container, OutlinedInput, FormControl } from "@mui/material";
+import { TextField, InputLabel, InputAdornment, IconButton, Button, Box, Typography, Container, OutlinedInput, FormControl, Snackbar, Alert, CircularProgress } from "@mui/material";
 import VisibilityOn from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from "react-router";
@@ -9,6 +9,10 @@ function Register() {
 
     const {register} = useAuth();
     const navigate = useNavigate();
+
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -31,34 +35,38 @@ function Register() {
         if (password !== confirmPassword) {
             setIsSamePassword(false);
             return;
-        }
+        } else setIsSamePassword(true)
+        setIsLoading(true);
         register(firstname, lastname, email, password, [addressNumber, addressStreet, addressCity, addressPostalCode])
             .then((res) => {
                 if (res) navigate("/email-sent");
-                else console.log("Faux");
-            })
+                setIsLoading(false);
+            }).catch(err => {setErrorMessage(err.response.data); setIsErrorDisplayed(true); setIsLoading(false)})
     };
-
-    const changeRoute = (route) => {
-        window.location = route;
-    }
-
-
-    // useEffect(() => {
-    //     setIsSamePassword(password === confirmPassword);
-    // }, [password, confirmPassword])
 
     const placeholderStyle = {
         "& input::placeholder": {
-            color: "blue", // Couleur du placeholder
-            fontWeight: "bold", // Style supplémentaire
+            color: "blue",
+            fontWeight: "bold",
         }
     }
+
+    const handleClose = () => setIsErrorDisplayed(false)
 
     return (
 
         <Container maxWidth="sm" >
-            <Box
+            <Snackbar
+                open={isErrorDisplayed}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+                <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+                    {errorMessage}
+                </Alert>
+            </Snackbar>
+            { !isLoading && <Box
                 sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -221,11 +229,12 @@ function Register() {
                     >S'inscrire</Button>
                     <Box display="flex" gap={1} justifySelf='center' >
                         <Typography sx={{ fontSize: '12px' }} >Vous avez déjà un compte ?</Typography>
-                        <Typography onClick={e => changeRoute('/login')} sx={{ textDecoration: 'underline', fontSize: '12px', cursor: 'pointer' }}
+                        <Typography onClick={e => navigate('/login')} sx={{ textDecoration: 'underline', fontSize: '12px', cursor: 'pointer' }}
                         >Se connecter</Typography>
                     </Box>
                 </Box>
-            </Box>
+            </Box>}
+            {isLoading && <CircularProgress size={60} thickness={5} color="" />}
         </Container>
 
     );

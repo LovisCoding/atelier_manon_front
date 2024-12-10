@@ -50,7 +50,7 @@ export const getCommandProducts = async (idCommand) => {
     const data = await axios
         .get('/api/client/commandeproduit/get-produits-commande', {params:{idCommande:idCommand}}).catch((error) => { return null });
     if (!data.data) return null;
-    return data.data;
+    return data;
 }
 
 export const getProduitsCommande = async (idCommand) => {
@@ -61,3 +61,17 @@ export const getProduitsCommande = async (idCommand) => {
         return null;
       }
 }
+
+
+export const addSingleProductCommande = async (idProd, variante) => {
+    try {
+        const data = await axios.post("/api/client/commande/add-single-product-commande", {
+            idProd,
+            variante
+        })
+        return data.data
+    } catch (err) {
+        return null;
+    }
+}
+

@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Select, MenuItem, TextField, Button, Box, Stack } from '@mui/material'; 
 import { IoTimeOutline } from "react-icons/io5"; 
 import { getMaterials, getRocks, getWires } from '../../services/ProductService';
+import {addSingleProductCommande} from '../../services/CommandService';
+import { useNavigate } from 'react-router';
 
 export default function ProductDetails({product, validateCallback}) {
+	const navigate = useNavigate();
 
 	const [wires, setWires] = useState(["laPremiere", "laDeuxieme", "laTroisieme"]);
 	const [materials, setMaterials] = useState([]);
 	const [rocks, setRocks] = useState([]);
 	const [engraving, setEngraving] = useState("");
+
+	const [isWireError, setIsWireError] = useState(false);
+	const [isMaterialError, setIsMaterialError] = useState(false);
+	const [isRockError, setIsRockError] = useState(false);
 
 	useEffect(() => {
 		const exec = async () => {
@@ -37,7 +44,26 @@ export default function ProductDetails({product, validateCallback}) {
 
 	useEffect(() => { product.gravure = engraving; }, [engraving]);
 
+	const handleAddToCart = () => {
+		let error = false;
 
+		if (wires && wires.length >= 1 && !product.fil) {setIsWireError(true); error=true;}
+		else setIsWireError(false);
+		if (materials && materials.length >= 1 && !product.materiel) {setIsMaterialError(true); error=true;}
+		else setIsMaterialError(false);
+		if (rocks && rocks.length >= 1 && !product.pierre) {setIsRockError(true); error=true;}
+		else setIsRockError(false);
+
+		if (!error) validateCallback();
+	}
+
+	const createSingleProductCommand = () => {
+		const exec = async () => {
+			const data = await addSingleProductCommande(product.idProd, "coucouLaVariante") // TODO: change variant
+			if (data) navigate('/command/'+data)
+		}
+		exec();
+	}
 
 	return (
 		<Box padding={2}>
@@ -46,7 +72,7 @@ export default function ProductDetails({product, validateCallback}) {
 				<Box display={"flex"} alignItems={"center"}>
 					<IoTimeOutline />
 					<Typography marginLeft={1} variant="subtitle2" color="customYellow">
-						disponible sous {product.tempsRea} jours
+						expédié sous {product.tempsRea} jours
 					</Typography>
 				</Box>
 			</Box>
@@ -55,14 +81,9 @@ export default function ProductDetails({product, validateCallback}) {
 			<Typography marginBottom={4} variant="body1">{product.descriptionProd}</Typography>
 
 			<Stack spacing={3}>
-				{/* <Select fullWidth defaultValue="" displayEmpty>
-					<MenuItem value="" disabled>Variante</MenuItem>
-					<MenuItem value="option1">Option 1</MenuItem>
-					<MenuItem value="option2">Option 2</MenuItem>
-				</Select> */}
 
 			{wires && wires.length >= 1 &&
-				<Select fullWidth defaultValue="" displayEmpty onChange={(e)=>product.fil = e.target.value} >
+				<Select fullWidth defaultValue="" error={isWireError} displayEmpty onChange={(e)=>product.fil = e.target.value} >
 					<MenuItem value="" disabled>Selectionner un fil</MenuItem>
 					{  wires.map( (wire) =>
 						<MenuItem value={wire} >{wire}</MenuItem>
@@ -70,7 +91,7 @@ export default function ProductDetails({product, validateCallback}) {
 				</Select>}
 
 			{materials && materials.length >= 1 &&
-				<Select fullWidth defaultValue="" displayEmpty onChange={(e)=>product.materiel = e.target.value} >
+				<Select fullWidth defaultValue="" error={isMaterialError} displayEmpty onChange={(e)=>product.materiel = e.target.value} >
 					<MenuItem value="" disabled>Selectionner un matériel</MenuItem>
 					{ materials.map( (material) =>
 						<MenuItem value={material} >{material}</MenuItem>
@@ -78,7 +99,7 @@ export default function ProductDetails({product, validateCallback}) {
 				</Select>}
 
 			{rocks && rocks.length >= 1 &&
-				<Select fullWidth defaultValue="" displayEmpty onChange={(e)=>product.pierre = e.target.value} >
+				<Select fullWidth defaultValue="" error={isRockError} displayEmpty onChange={(e)=>product.pierre = e.target.value} >
 					<MenuItem value="" disabled>Selectionner une pierre</MenuItem>
 					{rocks.map((rock) =>
 						<MenuItem value={rock} >{rock}</MenuItem>
@@ -92,12 +113,21 @@ export default function ProductDetails({product, validateCallback}) {
 					value={engraving}
 					onChange={(e) =>{product.gravure = e.target.value; setEngraving(e.target.value)}}
 				/>}
-				<Button
-					variant="contained"
-					color="primary"
-					fullWidth
-					onClick={validateCallback}
-				>Ajouter au panier</Button>
+				<Box display="flex" gap={1} >
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={handleAddToCart}
+						sx={{width:'59%'}}
+					>Ajouter au panier</Button>
+					<Button
+						variant='outlined'
+						color="primary"
+						onClick={createSingleProductCommand}
+						sx={{width:'40%'}}
+					>Passer la commande</Button>
+				</Box>
+				
 			</Stack>
 		</Box>
 	);
