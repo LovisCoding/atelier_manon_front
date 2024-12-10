@@ -38,7 +38,7 @@ export const updateQuestion = async (question) => {
 };
 
 export const addQuestion = async (question) => {
-    axios.post("/api/client/question/add-update-question", {
+    return axios.post("/api/client/question/add-update-question", {
         reponse: "",
         contenu: question,
         idQuestion: -1

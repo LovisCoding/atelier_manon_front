@@ -27,6 +27,7 @@ const ModalAskQuestion = ({ open, handleClose }) => {
 	const submitNewQuestion = () => {
 		addQuestion(msg)
 			.then((res) => {
+				console.log("RES : " + res)
 				if (res) {
 					setMsg("");
 					handleClose();
