@@ -45,6 +45,7 @@ const Newsletter = React.lazy(() => import('../src/pages/admin/Newsletter/Newsle
 const Profil = React.lazy(() => import("../src/pages/Profil.jsx"));
 const Personalization = React.lazy(() => import("../src/pages/admin/Personalization/Personalization.jsx"));
 const Accueil = React.lazy(() => import("../src/pages/admin/home/Accueil.jsx"));
+const AdminAvis = React.lazy(() => import("../src/pages/admin/Avis/Avis.jsx"));
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -102,6 +103,7 @@ const AppRoutes = () => {
                     <Route path="/admin/newsletter" element={<Newsletter />} />
                     <Route path="/admin/personalization" element={<Personalization />} />
                     <Route path="/admin/accueil" element={<Accueil />} />
+                    <Route path="/admin/avis" element={<AdminAvis />} />
 
                     {/* Fallback Route */}
                     <Route path="*" element={<NotFound />} />

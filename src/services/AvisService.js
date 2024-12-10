@@ -20,6 +20,17 @@ export const getAvisBySession = async () => {
     })    
 }
 
+export const getAvisToDisplay = async () => {
+    return axios.get('/api/avis/get-avis-display')
+    .then((res) => {
+        if (res.status == 200) return res.data;
+        return null
+    })
+    .catch(() => {
+        return null;
+    })    
+}
+
 export const addAvis = async (content, note) => {
     axios.post("/api/client/avis/add-avis", {
         contenu: content,
@@ -30,5 +41,12 @@ export const addAvis = async (content, note) => {
     })
     .catch((err) => {
         console.log(err);
+    })
+}
+
+export const updateAvis = async (id, estAffiche) => {
+    axios.post("/api/admin/avis/update-avis-display", {
+        idAvis: id,
+        estAffiche: estAffiche
     })
 }
