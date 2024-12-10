@@ -1,39 +1,66 @@
-import { Button, Typography, Stack, Container, FormControl, TextField, Select, MenuItem, Box, Modal } from "@mui/material";
+import {
+	Button,
+	Typography,
+	Stack,
+	Container,
+	FormControl,
+	TextField,
+	Select,
+	MenuItem,
+	Box,
+	Modal,
+	FormControlLabel,
+	Checkbox,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { addAvis, getAvisBySession } from "../services/AvisService";
-import { getOrdersProfil } from "../services/OrderService";
-import { getProfilCurrentSession, disableMyAccount, updateUserDetailsApi } from "../services/AccountService";
+import {
+	addAvis,
+	getAvisBySession,
+} from "../services/AvisService";
+import {
+	getOrdersProfil,
+} from "../services/OrderService";
+import {
+	getProfilCurrentSession,
+	disableMyAccount,
+	updateUserDetailsApi,
+} from "../services/AccountService";
+import {
+	addQuestion,
+} from "../services/FAQService";
+import {
+	subNewsletters,
+	unsubNewletters,
+} from "../services/UserService";
 import { useAuth } from "../utils/AuthContext";
-import { addQuestion } from "../services/FAQService";
 
-const style = {
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
+// Styles pour la Modal
+const modalStyle = {
+	position: "absolute",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%, -50%)",
 	width: 600,
 	maxWidth: "80vw",
-	bgcolor: 'background.paper',
+	bgcolor: "background.paper",
 	boxShadow: 24,
 	p: 4,
 	borderRadius: 2,
 };
 
+// Composant pour poser une question
 const ModalAskQuestion = ({ open, handleClose }) => {
-
 	const [msg, setMsg] = useState("");
 
 	const submitNewQuestion = () => {
-		addQuestion(msg)
-			.then((res) => {
-				console.log("RES : " + res)
-				if (res) {
-					setMsg("");
-					handleClose();
-				}
-			})
-	}
+		addQuestion(msg).then((res) => {
+			if (res) {
+				setMsg("");
+				handleClose();
+			}
+		});
+	};
 
 	return (
 		<Modal
@@ -42,238 +69,220 @@ const ModalAskQuestion = ({ open, handleClose }) => {
 			aria-labelledby="modal-title"
 			aria-describedby="modal-description"
 		>
-			<Box sx={style}>
-				<Typography id="modal-title" variant="h6" component="h6">
+			<Box sx={modalStyle}>
+				<Typography id="modal-title" variant="h6">
 					Posez votre question
 				</Typography>
-				<Stack margin={"1rem 0rem"} spacing={1}>
-					<Stack direction="row" spacing={1}>
-						<TextField
-							value={msg}
-							onChange={(e) => { setMsg(e.target.value) }}
-							rows={3}
-							multiline
-							fullWidth
-						/>
-					</Stack>
-				</Stack>
-				<Stack direction={"row"} spacing={3}>
-					<Button fullWidth onClick={() => submitNewQuestion()} variant="yellowButton" sx={{ mt: 2 }}>
+				<TextField
+					value={msg}
+					onChange={(e) => setMsg(e.target.value)}
+					rows={3}
+					multiline
+					fullWidth
+					sx={{ mt: 2, mb: 2 }}
+				/>
+				<Stack direction="row" spacing={2}>
+					<Button
+						onClick={submitNewQuestion}
+						variant="contained"
+						fullWidth
+					>
 						Envoyer
 					</Button>
-					<Button fullWidth onClick={handleClose} color="danger" variant="contained" sx={{ mt: 2 }}>
-						Close
+					<Button
+						onClick={handleClose}
+						variant="outlined"
+						color="error"
+						fullWidth
+					>
+						Fermer
 					</Button>
 				</Stack>
-
 			</Box>
 		</Modal>
-	)
-}
+	);
+};
 
+// Composant principal
 export default function Profil() {
-
 	const [open, setOpen] = useState(false);
-
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
-
-	const [userDetails, setUserDetails] = useState();
+	const [userDetails, setUserDetails] = useState({});
 	const [orders, setOrders] = useState([]);
-	const [avis, setAvis] = useState({
-		contenu: "",
-		note: 0
-	});
+	const [avis, setAvis] = useState({ contenu: "", note: 1 });
 	const [hasAvis, setHasAvis] = useState(true);
-
 	const { details, logout } = useAuth();
 	const navigate = useNavigate();
 
+	const handleNewsletterChange = (event) => {
+		const checked = event.target.checked;
+		setUserDetails({ ...userDetails, news: checked });
+		if (checked) {
+			subNewsletters(userDetails.email);
+		} else {
+			unsubNewletters();
+		}
+	};
+
+	const handleAvisChange = () => {
+		addAvis(avis.contenu, avis.note).then(() => setHasAvis(true));
+	};
+
 	const updateUserDetails = () => {
 		updateUserDetailsApi(userDetails.nomCli, userDetails.preCli);
-	}
-
-	const handleAddAvis = () => {
-		addAvis(avis.contenu, avis.note);
-		setHasAvis(true);
-	}
-
-	const disconnect = () => {
-		logout();
-	}
-
-	const resetPassword = () => {
-		navigate('/forgot-password')
-	}
-
-	const adminPage = () => {
-		if (details.isAdmin) navigate('/admin');
-		return;
-	}
+	};
 
 	const disableAccount = async () => {
 		const res = await disableMyAccount();
 		if (res) logout();
-		return;
-	}
+	};
 
 	useEffect(() => {
 		getProfilCurrentSession().then((data) => {
-			setUserDetails(data);
-		})
-		getOrdersProfil().then((data) => {
-			setOrders(data);
-		})
+			setUserDetails({ ...data, news: data.news === "t" });
+		});
+		getOrdersProfil().then(setOrders);
 		getAvisBySession().then((data) => {
 			if (data) setAvis(data);
 			else setHasAvis(false);
-		})
-	}, [])
+		});
+	}, []);
 
-	if (details == null) {
-		navigate('/login');
-		return;
+	if (!details) {
+		navigate("/login");
+		return null;
 	}
 
 	return (
-		<Container sx={{
-			marginBottom: "2rem",
-			mt: 2
-		}}>
+		<Container sx={{ mb: 4, mt: 2 }}>
+			<ModalAskQuestion open={open} handleClose={() => setOpen(false)} />
 
-			<Stack margin={"0 auto"} maxWidth={"sm"} spacing={3}>
-
+			<Stack maxWidth="sm" margin="0 auto" spacing={3}>
 				<Typography variant="h1">Espace client</Typography>
 
-				<FormControl>
+				<FormControl component="form">
 					<Stack spacing={3}>
-
-						<Stack direction="row" justifyContent="space-between" >
-							<Stack spacing={1}>
-								<Typography variant="h5">Nom</Typography>
-								<Stack direction="row" spacing={1}>
-									<TextField
-										value={userDetails && userDetails.nomCli}
-										onChange={(e) => {
-											setUserDetails({ ...userDetails, nomCli: e.target.value })
-										}}
-									/>
-								</Stack>
-							</Stack>
-
-							<Stack fullWidth spacing={1}>
-								<Typography variant="h5">Prénom</Typography>
-								<Stack direction="row" spacing={1}>
-									<TextField
-										value={userDetails && userDetails.preCli}
-										onChange={(e) => {
-											setUserDetails({ ...userDetails, preCli: e.target.value })
-										}}
-									/>
-								</Stack>
-							</Stack>
-							<Button
-								onClick={() => {
-									updateUserDetails();
-								}}
-								sx={{
-									alignSelf: "end",
-									height: "fit-content"
-								}} variant="outlined">Modifier</Button>
-						</Stack>
-
-						<Stack spacing={1}>
-							<Typography variant="h5">Email</Typography>
-							<Typography>{userDetails && userDetails.email}</Typography>
-						</Stack>
-						<Stack spacing={1}>
-							<Typography variant="h5">Avis {hasAvis && ` : ${avis.note}/5`}</Typography>
-
-							<Stack direction="row" spacing={1}>
-								{!hasAvis ?
-									<TextField
-										fullWidth
-										multiline
-										rows={5}
-										value={avis.contenu && avis.contenu}
-										onChange={(e) => {
-											setAvis({ ...avis, contenu: e.target.value })
-										}}
-									/> :
-									<Typography variant="body1">{avis.contenu}</Typography>
+						{/* Nom et Prénom */}
+						<Stack direction="row" justifyContent="space-between" spacing={2}>
+							<TextField
+								label="Nom"
+								value={userDetails?.nomCli || ""}
+								onChange={(e) =>
+									setUserDetails({ ...userDetails, nomCli: e.target.value })
 								}
-
-								<Stack spacing={3}>
-
-									{
-										!hasAvis &&
-										<>
-											<Select
-												value={avis && avis.note}
-												onChange={(e) => {
-													setAvis({ ...avis, note: e.target.value })
-												}}
-											>
-												<MenuItem value="1">1/5</MenuItem>
-												<MenuItem value="2">2/5</MenuItem>
-												<MenuItem value="3">3/5</MenuItem>
-												<MenuItem value="4">4/5</MenuItem>
-												<MenuItem value="5">5/5</MenuItem>
-											</Select>
-											<Button onClick={() => handleAddAvis()} sx={{
-												alignSelf: "end",
-												height: "fit-content"
-											}} variant="outlined">Modifier</Button>
-										</>
-									}
-
-
-								</Stack>
-
-							</Stack>
+							/>
+							<TextField
+								label="Prénom"
+								value={userDetails?.preCli || ""}
+								onChange={(e) =>
+									setUserDetails({ ...userDetails, preCli: e.target.value })
+								}
+							/>
+							<Button onClick={updateUserDetails} variant="outlined">
+								Modifier
+							</Button>
 						</Stack>
+
+						{/* Email */}
+						<Typography variant="body1">
+							<strong>Email :</strong> {userDetails?.email}
+						</Typography>
+
+						{/* Avis */}
+						<Stack>
+							<Typography variant="h5">Avis {hasAvis && `: ${avis.note}/5`}</Typography>
+							{hasAvis ? (
+								<Typography>{avis.contenu}</Typography>
+							) : (
+								<Stack spacing={2}>
+									<TextField
+										label="Votre avis"
+										multiline
+										rows={3}
+										value={avis.contenu || ""}
+										onChange={(e) =>
+											setAvis({ ...avis, contenu: e.target.value })
+										}
+									/>
+									<Select
+										value={avis.note}
+										onChange={(e) =>
+											setAvis({ ...avis, note: e.target.value })
+										}
+									>
+										{[1, 2, 3, 4, 5].map((note) => (
+											<MenuItem key={note} value={note}>
+												{note}/5
+											</MenuItem>
+										))}
+									</Select>
+									<Button onClick={handleAvisChange} variant="outlined">
+										Envoyer
+									</Button>
+								</Stack>
+							)}
+						</Stack>
+
+						{/* Newsletter */}
+						<FormControlLabel
+							label="S'abonner à la newsletter"
+							control={
+								<Checkbox
+									checked={userDetails.news || false}
+									onChange={handleNewsletterChange}
+								/>
+							}
+						/>
 					</Stack>
 				</FormControl>
 
-
+				{/* Commandes */}
 				<Typography variant="h2">Vos commandes</Typography>
-				<Stack>
-					{orders.length == 0 && <Typography>Votre compte ne possède aucune commande</Typography>}
-					{
+				<Stack spacing={2}>
+					{orders.length === 0 ? (
+						<Typography>Aucune commande disponible</Typography>
+					) : (
 						orders.map((order) => (
-							<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"} justifyContent="space-between">
+							<Stack
+								key={order.idCommande}
+								direction="row"
+								justifyContent="space-between"
+								padding={2}
+								sx={{ borderBottom: "1px solid grey" }}
+							>
 								<Typography>#{order.idCommande}</Typography>
 								<Typography>{order.etat}</Typography>
 								<Typography>{order.dateCommande}</Typography>
-								<Link to={`/command/${order.idCommande}`}><Typography>voir plus</Typography></Link>
+								<Link to={`/command/${order.idCommande}`}>Voir plus</Link>
 							</Stack>
 						))
-					}
+					)}
 				</Stack>
 
-				<Stack direction={"row"} spacing={3}>
-					<Button onClick={() => resetPassword()} fullWidth variant="yellowButton" color="secondary">Réinitialiser le mot de passe</Button>
-					<Button onClick={() => disconnect()} fullWidth variant="yellowButton" color="secondary">Déconnexion</Button>
-				</Stack>
-				<Stack direction={"row"} spacing={3}>
-					<Button onClick={() => handleOpen()} fullWidth variant="yellowButton" color="secondary">Poser une question</Button>
+				{/* Boutons Actions */}
+				<Stack direction="row" spacing={2}>
+					<Button fullWidth onClick={() => navigate("/forgot-password")} variant="contained">
+						Réinitialiser le mot de passe
+					</Button>
+					<Button fullWidth onClick={logout} variant="outlined">
+						Déconnexion
+					</Button>
 				</Stack>
 
-				{ details.isAdmin &&
-				<Stack direction="row" justifyContent="center" >
-					<Button type="button" variant="outlined" onClick={() => adminPage()}
-					>Accéder à la page d'administrateur</Button>
-				</Stack>}
+				<Button onClick={() => setOpen(true)} variant="contained">
+					Poser une question
+				</Button>
 
-				{ !details.isAdmin &&
-				<Stack direction="row" justifyContent="center" >
-					<Button type="button" variant="outlined" onClick={() => disableAccount()}
-						sx={{color: 'red', borderColor: 'red'}}
-					>Désactiver le compte</Button>
-				</Stack>}
+				{details.isAdmin && (
+					<Button onClick={disableAccount} color="error" variant="outlined">
+						Désactiver le compte
+					</Button>
+				)}
+				{details.isAdmin &&
+					<Stack direction="row" justifyContent="center" >
+						<Button type="button" variant="outlined" onClick={() => navigate("/admin")}
+						>Accéder à la page d'administrateur</Button>
+					</Stack>}
 			</Stack>
 		</Container>
-
-	)
+	);
 }
-
