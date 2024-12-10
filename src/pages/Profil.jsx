@@ -255,25 +255,22 @@ export default function Profil() {
 					<Button onClick={() => resetPassword()} fullWidth variant="yellowButton" color="secondary">Réinitialiser le mot de passe</Button>
 					<Button onClick={() => disconnect()} fullWidth variant="yellowButton" color="secondary">Déconnexion</Button>
 				</Stack>
-
 				<Stack direction={"row"} spacing={3}>
 					<Button onClick={() => handleOpen()} fullWidth variant="yellowButton" color="secondary">Poser une question</Button>
 				</Stack>
-				{!details.isAdmin &&
-					<Stack direction="row" justifyContent="center" >
-						<Button type="button" variant="outlined" onClick={() => adminPage()}
-						>Accéder à la page d'administrateur</Button>
-					</Stack>}
 
-				{
-					details.isAdmin &&
-					<Stack direction="row" justifyContent="center" >
-						<Button type="button" variant="outlined" onClick={() => disableAccount()}
-							sx={{ color: 'red', borderColor: 'red' }}
-						>Désactiver le compte</Button>
-					</Stack>
-				}
-				<ModalAskQuestion open={open} handleClose={handleClose} />
+				{ details.isAdmin &&
+				<Stack direction="row" justifyContent="center" >
+					<Button type="button" variant="outlined" onClick={() => adminPage()}
+					>Accéder à la page d'administrateur</Button>
+				</Stack>}
+
+				{ !details.isAdmin &&
+				<Stack direction="row" justifyContent="center" >
+					<Button type="button" variant="outlined" onClick={() => disableAccount()}
+						sx={{color: 'red', borderColor: 'red'}}
+					>Désactiver le compte</Button>
+				</Stack>}
 			</Stack>
 		</Container>
 
