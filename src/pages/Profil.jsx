@@ -258,6 +258,10 @@ export default function Profil() {
 					)}
 				</Stack>
 
+				<Button onClick={() => setOpen(true)} variant="contained">
+					Poser une question
+				</Button>
+
 				{/* Boutons Actions */}
 				<Stack direction="row" spacing={2}>
 					<Button fullWidth onClick={() => navigate("/forgot-password")} variant="contained">
@@ -268,11 +272,8 @@ export default function Profil() {
 					</Button>
 				</Stack>
 
-				<Button onClick={() => setOpen(true)} variant="contained">
-					Poser une question
-				</Button>
 
-				{details.isAdmin && (
+				{!details.isAdmin && (
 					<Button onClick={disableAccount} color="error" variant="outlined">
 						Désactiver le compte
 					</Button>
