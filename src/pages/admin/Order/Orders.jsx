@@ -11,7 +11,9 @@ export default function Orders() {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const auth = useAuth();
+  const {isLogged, details} = useAuth();
+
+  if (!isLogged || !details.isAdmin) window.location = '/';
 
   const handleClickRow = (to) => {
     navigate(to);

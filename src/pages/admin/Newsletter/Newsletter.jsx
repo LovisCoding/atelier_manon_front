@@ -3,6 +3,7 @@ import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { sendNewsletter } from "/src/services/NewsletterService";
+import { useAuth } from "../../../utils/AuthContext";
 
 export default function Newsletter() {
 
@@ -11,6 +12,9 @@ export default function Newsletter() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [isError, setIsError] = useState(false);
+
+    const {isLogged,details} = useAuth();
+    if (!isLogged || !details.isAdmin) window.location = '/';
 
     const handleSave = async () => {
         setLoading(true);
