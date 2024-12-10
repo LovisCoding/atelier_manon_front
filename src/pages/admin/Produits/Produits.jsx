@@ -1,6 +1,5 @@
-import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
-import { Box, Button, InputAdornment, MenuItem, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Link from "../../../components/Link";
 import { useNavigate } from "react-router-dom";
 import { getAllProducts, getProductImage } from "../../../services/ProductService";
+import Categories from './Categories.jsx';
 
 export default function Produits() {
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ export default function Produits() {
     return (
         <Box display="flex" justifyContent={'center'}>
             <SidebarMenu />
-            <Stack spacing={5} mt={5}>
+            <Stack spacing={5} mt={5} direction={"column"} >
                 <Stack direction={'row'} spacing={4}>
                     <Typography variant="h4">Configurer les Produits</Typography>
                     <Button variant="contained" component={Link} href={'/admin/products/-1'} color="secondary"> Nouveau</Button>
@@ -77,6 +77,7 @@ export default function Produits() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Categories />
             </Stack>
         </Box>
     );
