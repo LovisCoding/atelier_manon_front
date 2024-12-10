@@ -30,8 +30,9 @@ function Command() {
     useEffect(() => {
         const exec = async () => {
             const data = await getCommandProducts(id);
-            if (!data) return
-            setProducts(data);
+            console.log("data:",data)
+            if (!data.data) return
+            setProducts(data.data);
         };
         exec();
     }, []);

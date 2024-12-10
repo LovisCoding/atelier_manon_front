@@ -240,7 +240,7 @@ export default function Profil() {
 					{orders.length == 0 && <Typography>Votre compte ne possède aucune commande</Typography>}
 					{
 						orders.map((order) => (
-							<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"}>
+							<Stack borderBottom={"1px solid grey"} padding={3} direction={"row"} spacing={4} alignItems={"center"} justifyContent="space-between">
 								<Typography>#{order.idCommande}</Typography>
 								<Typography>{order.etat}</Typography>
 								<Typography>{order.dateCommande}</Typography>

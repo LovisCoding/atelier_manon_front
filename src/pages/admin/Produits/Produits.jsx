@@ -55,7 +55,6 @@ export default function Produits() {
 		<Typography variant="h4">Configurer les Produits</Typography>
 		<Button variant="contained" LinkComponent={Link} href={'/admin/products/-1'} color="secondary"> Nouveau</Button>
 		</Stack>
-        
         <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
           <Table>
             <TableHead>
