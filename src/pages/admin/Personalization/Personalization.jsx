@@ -4,7 +4,7 @@ import SidebarMenu from "../SidebarMenu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import { addMatProd, getAllMateriau, getAllFils, getAllPierres, deleteMatProd, deleteFilProd, deletePierreProd } from "/src/services/PersonalizationService";
+import { addMatProd, getAllMateriau, getAllFils, getAllPierres, getAllTailles, getAllPendentifs, deleteMatProd, deleteFilProd, deletePierreProd, deleteTailleProd, deletePendentifProd } from "/src/services/PersonalizationService";
 import { useAuth } from "../../../utils/AuthContext";
 
 const DataTable = ({ data, setData, title, keyField, valueField, descriptionField = null, addFunction = null, deleteFunction = null }) => {
@@ -13,7 +13,7 @@ const DataTable = ({ data, setData, title, keyField, valueField, descriptionFiel
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
-  const {isLogged,details} = useAuth();
+  const { isLogged, details } = useAuth();
   if (!isLogged || !details.isAdmin) window.location = '/';
 
   const handleAdd = async () => {
@@ -59,9 +59,9 @@ const DataTable = ({ data, setData, title, keyField, valueField, descriptionFiel
       </AccordionSummary>
       <AccordionDetails>
         <Box sx={{ maxHeight: "400px", overflow: "auto" }}>
-          {error && <Alert severity="error">{error}</Alert>} 
-          {successMessage && <Alert severity="success">{successMessage}</Alert>} 
-          
+          {error && <Alert severity="error">{error}</Alert>}
+          {successMessage && <Alert severity="success">{successMessage}</Alert>}
+
           <TextField
             label={`Ajouter un ${title.toLowerCase()}`}
             variant="outlined"
@@ -123,6 +123,9 @@ export default function Personalization() {
   const [materials, setMaterials] = useState([]);
   const [fils, setFils] = useState([]);
   const [pierres, setPierres] = useState([]);
+  const [tailles, setTailles] = useState([]);
+  const [pendentifs, setPendentifs] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -134,6 +137,11 @@ export default function Personalization() {
       const dataFils = await getAllFils();
       if (dataFils) {
         setFils(dataFils);
+      }
+
+      const dataTailles = await getAllTailles();
+      if (dataTailles) {
+        setTailles(dataTailles);
       }
 
       const dataPierres = await getAllPierres();
@@ -180,6 +188,24 @@ export default function Personalization() {
           valueField="libPierre"
           descriptionField="descriptionPierre"
           deleteFunction={deletePierreProd}
+        />
+
+        <DataTable
+          data={tailles}
+          setData={setTailles}
+          title="Taille"
+          keyField="id"
+          valueField="libTaille"
+          deleteFunction={deleteTailleProd}
+        />
+
+        <DataTable
+          data={pendentifs}
+          setData={setPendentifs}
+          title="Pendentif"
+          keyField="id"
+          valueField="libPendentif"
+          deleteFunction={deletePendentifProd}
         />
       </Stack>
     </Box>
