@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Typography, Card, CardMedia, CardContent, Grid2, Popover, List, ListItem, ListItemText, Slider, TextField } from '@mui/material';
+import { Box, Button, Typography, Card, CardMedia, CardContent, Popover, List, ListItem, ListItemText, Slider, TextField, IconButton, Grid2 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { getCategories } from '/src/services/CategorieService';
-import { useNavigate } from 'react-router-dom';  // Importer useNavigate
+import { useNavigate } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 
 const JewelryCollection = ({ collectionData, backgroundImage, collectionName, collectionTitle, onCategoryChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -10,16 +13,21 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
   const [categories, setCategories] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 100]);
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();  // Initialiser useNavigate
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
       const fetchedCategories = await getCategories();
       setCategories(fetchedCategories || []);
     };
-
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [priceRange, searchTerm, selectedCategory]);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -30,11 +38,19 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
     handleClose();
   };
 
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   const filteredCollectionData = collectionData.filter((item) => {
     const price = parseInt(item.price);
     const [minPrice, maxPrice] = priceRange;
     return price >= minPrice && price <= maxPrice && item.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredCollectionData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <Box>
@@ -54,14 +70,17 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
           <Button variant="outlined" sx={{ marginRight: '1rem', fontWeight: 'bold' }} onClick={handleClick} endIcon={<FilterListIcon />}>
             Filtres
           </Button>
-          <TextField
-            label="Recherche"
-            variant="outlined"
-            size="small"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            sx={{ width: 200 }}
-          />
+          <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #ccc', borderRadius: 1, padding: '0.25rem 0.5rem' }}>
+            <SearchIcon sx={{ color: '#888', marginRight: '0.5rem' }} />
+            <TextField
+              placeholder="Recherche"
+              variant="standard"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              InputProps={{ disableUnderline: true }}
+              sx={{ width: 200 }}
+            />
+          </Box>
         </Box>
 
         <Popover open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} transformOrigin={{ vertical: 'top', horizontal: 'center' }}>
@@ -74,7 +93,7 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
           </List>
         </Popover>
 
-        <Box sx={{ width: '100%', marginBottom: '1rem', textAlign: 'center' }}>
+        <Box sx={{ width: '20%', marginBottom: '1rem', textAlign: 'center' }}>
           <Typography variant="body2" sx={{ marginBottom: '0.5rem' }}>
             Prix: {priceRange[0]} € - {priceRange[1]} €
           </Typography>
@@ -82,7 +101,7 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
             value={priceRange} 
             onChange={(e, newValue) => setPriceRange(newValue)} 
             valueLabelDisplay="auto" 
-            valueLabelFormat={(value) => `${value} €`} 
+            valueLabelFormat={(value) => `${value}`} 
             min={0} 
             max={100} 
             step={5} 
@@ -91,7 +110,7 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
         </Box>
 
         <Grid2 container spacing={2} justifyContent="center">
-          {filteredCollectionData.map((item) => (
+          {currentItems.map((item) => (
             <Grid2 item xs={12} sm={6} md={4} key={item.id}>
               <Card
                 sx={{ textAlign: 'center', boxShadow: 'none', padding: '1rem', cursor: 'pointer' }}
@@ -101,20 +120,38 @@ const JewelryCollection = ({ collectionData, backgroundImage, collectionName, co
                   component="img"
                   image={item.image}
                   alt={item.title}
-                  sx={{ height: '350px', width: '350px', objectFit: 'cover' }}
+                  sx={{ objectFit: 'cover' }}
                 />
                 <CardContent>
                   <Typography variant="h6" sx={{ color: '#f9a825', fontWeight: 'bold' }}>
                     {item.title}
                   </Typography>
                   <Typography variant="body2" sx={{ color: '#333', fontWeight: 'bold' }}>
-                    {item.price}
+                    {item.price} €
                   </Typography>
                 </CardContent>
               </Card>
             </Grid2>
           ))}
         </Grid2>
+
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem' }}>
+          <IconButton 
+            onClick={() => handlePageChange(currentPage - 1)} 
+            disabled={currentPage === 1}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography variant="body2" sx={{ margin: '0 1rem' }}>
+            Page {currentPage} sur {Math.ceil(filteredCollectionData.length / itemsPerPage)}
+          </Typography>
+          <IconButton 
+            onClick={() => handlePageChange(currentPage + 1)} 
+            disabled={currentPage === Math.ceil(filteredCollectionData.length / itemsPerPage)}
+          >
+            <ArrowForwardIcon />
+          </IconButton>
+        </Box>
       </Box>
     </Box>
   );

@@ -50,11 +50,12 @@ const Jewelry = () => {
       };
 
       const products = await getProducts(params);
+      console.log(products);
 
       if (products) {
         const formattedData = products.produits.map((product) => ({
           id: product.idProd,
-          image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}`,
+          image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}?width=350`,
           title: product.libProd,
           price: `${product.prix}€`,
           idCateg: product.idCateg
