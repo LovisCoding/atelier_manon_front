@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states.">
+    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/FilsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/FilsSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/SeparatorsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/SeparatorsSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits2/ImagesProduit.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits2/Produit.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits2/Produits.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FilProdServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FilProdServices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/MatProdService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/MatProdService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/PieProdService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PieProdService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/ProductService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProductService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +85,8 @@
       <option name="presentableId" value="Default" />
       <updated>1733662690114</updated>
       <workItem from="1733662691179" duration="1650000" />
-      <workItem from="1733670361979" duration="37913000" />
+      <workItem from="1733670361979" duration="43126000" />
+      <workItem from="1733817050700" duration="2499000" />
     </task>
     <task id="LOCAL-00001" summary="Add Loader component and integrate into AppRoutes&#10;&#10;Refactor the Suspense fallback in AppRoutes to use a new Loader component, providing a consistent loading experience with a customized message. This change improves the UI by visually enhancing the loading state and maintaining consistent layout structures across pages. Rendering of Navbar and Footer is conditioned on non-admin routes to keep the interface clean and relevant.">
       <option name="closed" value="true" />
@@ -152,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733753012667</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section.">
+      <option name="closed" value="true" />
+      <created>1733765850634</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733765850634</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +187,8 @@
     <MESSAGE value="Add image upload and product update functionality&#10;&#10;Refactored the ImagesSection component to use base64 encoding for image uploads and updated the server with these images. Implemented the product update functionality to save product details including images, materials, stones, and fils to the server. This change improves the product management UX and ensures data consistency across components." />
     <MESSAGE value="Implement product personalization and new services&#10;&#10;This update introduces a product personalization feature, adding CRUD operations for materials, threads, and stones through a new PersonalizationService. Additionally, new routes and components are created for account confirmation and improved newsletter management, enhancing user engagement and administration functionalities. The AuthContext utility was removed, and cleanup in the workspace settings was performed for improved maintainability." />
     <MESSAGE value="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states." />
-    <option name="LAST_COMMIT_MESSAGE" value="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states." />
+    <MESSAGE value="merge dev&#10;" />
+    <MESSAGE value="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section." />
   </component>
 </project>

@@ -15,32 +15,40 @@ const [selectedImg, setSelectedImg] = React.useState(null);
     setImages(images.filter((_, i) => i !== index));
   };
 
-  const handleUpload = async (e) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
+    const handleUpload = async (e) => {
+        const files = e.target.files;
+        console.log(files);
 
-    const base64Files = await Promise.all(
-        Array.from(files).map((file) => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(file);
-          });
-        })
-    );
+        if (!files || files.length === 0) return;
 
-    try {
-      // Example: Update the state and server with Base64 images
-      setImages([...images, ...base64Files]);
-      setImagesAUpload([...imagesAUpload, ...base64Files]);
-      /*base64Files.forEach((url) => {
-        addImage(id, url, 0);
-      });*/
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        try {
+            // Convertir les fichiers en base64
+            const base64Files = await Promise.all(
+                Array.from(files).map((file) => {
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result);
+                        reader.onerror = (error) => reject(error);
+                        reader.readAsDataURL(file);
+                    });
+                })
+            );
+
+            // Transformer en objets avec name et file
+            const filesWithDetails = Array.from(files).map((file, i) => ({
+                name: file.name.split('.')[0],
+                file: base64Files[i],
+            }));
+
+            // Mettre à jour les états
+            setImages([...images, ...filesWithDetails.map((f) => f.file)]); // Ajouter les base64 au tableau d'images
+            setImagesAUpload([...imagesAUpload, ...filesWithDetails]); // Ajouter les objets au tableau de fichiers à uploader
+
+            console.log(filesWithDetails); // Afficher le tableau d'objets
+        } catch (error) {
+            console.error(error);
+        }
+    };
     function arraymove(arr, fromIndex, toIndex) {
         const element = arr[fromIndex];
         arr.splice(fromIndex, 1);

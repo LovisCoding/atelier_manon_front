@@ -52,6 +52,17 @@ const Produit = () => {
   const [snOpenValue, setSnOpenValue] = useState(false);
   const [imagesAUpload,  setImagesAUpload] = useState([]);
 
+  function isBase64(str) {
+    if (str ==='' || str.trim() ===''){ return false; }
+    try {
+      return btoa(atob(str)) == str;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  console.log(imagesAUpload);
+
   // Load data
   useEffect(() => {
     setLoading(true); // Start loading
@@ -82,7 +93,7 @@ const Produit = () => {
             setTempsRea(productData.tempsRea);
             const tmpImages = []
             productData.tabPhoto.forEach(image => {
-             tmpImages.push(image)
+             tmpImages.push(getProductImage(image))
 
             });
             setImages(tmpImages);
@@ -155,17 +166,17 @@ const Produit = () => {
         product.idProd = productData;
       }
       imagesAUpload.forEach( (image,index) => {
-        addImage(id, image, 'toto'+index)
+        addImage(id, image.file, image.name)
       })
 
 
-      console.log(productData);
+
       // Update associated data concurrently
       await Promise.all([
         updatePieProd(product.idProd, selectedPierres.map(item => item.libPierre)),
         updateMatProd(product.idProd, selectedSeparators.map(item => item.libMateriau)),
         updateFilsProd(product.idProd, selectedFils.map(item => item.libCouleur)),
-        reorderImages(product.idProd, images),
+        reorderImages(product.idProd, images.filter((el) => !el.includes('base64'))),
       ]);
 
       console.log('All associated data updated successfully');

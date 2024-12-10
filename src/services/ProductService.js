@@ -100,6 +100,7 @@ export const updateProduct = async (product) => {
 	}
 }
 export const addImage= async (idProd, image, libImage) => {
+
     const data = await axios.post('/api/produit/add-image', {
        idProd,
         image,
