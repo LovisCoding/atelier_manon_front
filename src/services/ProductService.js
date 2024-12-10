@@ -54,6 +54,18 @@ export const getRocks = async (id) => {
     return data.data;
 }
 
+export const getSizes = async (id) => {
+    const data = await axios.get('/api/taiprod/get-tailles-produit', { params: {idProd:id} })
+    if (!data.data) return null;
+    return data.data;
+}
+
+export const getPendants = async (id) => {
+    const data = await axios.get('/api/penprod/get-pendentifs-produit', { params: {idProd:id} })
+    if (!data.data) return null;
+    return data.data;
+}
+
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
 });

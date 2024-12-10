@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react'; 
 import { Typography, Select, MenuItem, TextField, Button, Box, Stack } from '@mui/material'; 
 import { IoTimeOutline } from "react-icons/io5"; 
-import { getMaterials, getRocks, getWires } from '../../services/ProductService';
+import { getMaterials, getRocks, getWires, getSizes, getPendants } from '../../services/ProductService';
 import {addSingleProductCommande} from '../../services/CommandService';
 import { useNavigate } from 'react-router';
 
 export default function ProductDetails({product, validateCallback}) {
 	const navigate = useNavigate();
 
-	const [wires, setWires] = useState(["laPremiere", "laDeuxieme", "laTroisieme"]);
+	const [wires, setWires] = useState([]);
 	const [materials, setMaterials] = useState([]);
 	const [rocks, setRocks] = useState([]);
 	const [engraving, setEngraving] = useState("");
+	const [sizes, setSizes] = useState([]);
+	const [pendants, setPendants] = useState([]);
 
 	const [isWireError, setIsWireError] = useState(false);
 	const [isMaterialError, setIsMaterialError] = useState(false);
 	const [isRockError, setIsRockError] = useState(false);
+	const [isSizeError, setIsSizeError] = useState(false);
+	const [isPendantError, setIsPendantError] = useState(false);
 
 	useEffect(() => {
 		const exec = async () => {
@@ -41,6 +45,21 @@ export default function ProductDetails({product, validateCallback}) {
 		exec();
 	}, []);
 
+	useEffect(() => {
+		const exec = async () => {
+			const data = await getSizes(product.idProd);
+			if (data) setSizes(data);
+		}
+		exec();
+	}, []);
+
+	useEffect(() => {
+		const exec = async () => {
+			const data = await getPendants(product.idProd);
+			if (data) setPendants(data);
+		}
+		exec();
+	}, []);
 
 	useEffect(() => { product.gravure = engraving; }, [engraving]);
 
@@ -52,6 +71,10 @@ export default function ProductDetails({product, validateCallback}) {
 		else setIsMaterialError(false);
 		if (rocks && rocks.length >= 1 && !product.pierre) {setIsRockError(true); error=true;}
 		else setIsRockError(false);
+		if (sizes && sizes.length >= 1 && !product.taille) {setIsSizeError(true); error=true;}
+		else setIsSizeError(false);
+		if (pendants && pendants.length >= 1 && !product.pendentif) {setIsPendantError(true); error=true;}
+		else setIsPendantError(false);
 		return error;
 	}
 
@@ -60,6 +83,8 @@ export default function ProductDetails({product, validateCallback}) {
 		if (wires && wires.length >= 1 && product.fil) variant += "fil: "+product.fil+" ; ";
 		if (materials && materials.length >= 1 && product.materiel) variant += "materiel: "+product.materiel+" ; ";
 		if (rocks && rocks.length >= 1 && product.pierre) variant += "pierre: "+product.pierre+" ; ";
+		if (sizes && sizes.length >= 1 && product.taille) variant += "taille: "+product.taille+" ; ";
+		if (pendants && pendants.length >= 1 && product.pendentif) variant += "pendentif: "+product.pendentif+" ; ";
 		return variant;
 	}
 
@@ -101,7 +126,7 @@ export default function ProductDetails({product, validateCallback}) {
 
 			{materials && materials.length >= 1 &&
 				<Select fullWidth defaultValue="" error={isMaterialError} displayEmpty onChange={(e)=>product.materiel = e.target.value} >
-					<MenuItem value="" disabled>Selectionner un matériel</MenuItem>
+					<MenuItem value="" disabled>Selectionner un matériau</MenuItem>
 					{ materials.map( (material) =>
 						<MenuItem value={material} >{material}</MenuItem>
 					) }
@@ -112,6 +137,22 @@ export default function ProductDetails({product, validateCallback}) {
 					<MenuItem value="" disabled>Selectionner une pierre</MenuItem>
 					{rocks.map((rock) =>
 						<MenuItem value={rock} >{rock}</MenuItem>
+					)}
+				</Select>}
+
+			{sizes && sizes.length >= 1 &&
+				<Select fullWidtht defaultValue="" error={isSizeError} displayEmpty onChange={(e)=>product.taille = e.target.value} >
+					<MenuItem value="" disabled>Selectionner une taille</MenuItem>
+					{sizes.map((size) =>
+						<MenuItem value={size} >{size}</MenuItem>
+					)}
+				</Select>}
+
+			{pendants && pendants.length >= 1 &&
+				<Select fullWidtht defaultValue="" error={isPendantError} displayEmpty onChange={(e)=>product.pendentif = e.target.value} >
+					<MenuItem value="" disabled>Selectionner un pendentif</MenuItem>
+					{pendants.map((pendant) =>
+						<MenuItem value={pendant} >{pendant}</MenuItem>
 					)}
 				</Select>}
 
