@@ -1,8 +1,9 @@
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, redirect } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getQuestionsById, updateQuestion, deleteQuestion } from "/src/services/FAQService";
+import { useAuth } from "../../../utils/AuthContext";
 
 export default function FAQDetails() {
     const { id } = useParams();
@@ -41,7 +42,7 @@ export default function FAQDetails() {
         setIsSaving(true);
 
         const updatedFaq = {
-            idQuestion: id,
+            idQuestion: Number(id),
             contenu: faq.contenu,
             reponse: faq.reponse
         };
@@ -53,6 +54,7 @@ export default function FAQDetails() {
         } else {
             alert("Erreur lors de la mise à jour de la FAQ");
         }
+        navigate(`/admin/faq`);
 
         setIsSaving(false);
     };

@@ -4,7 +4,8 @@ import SidebarMenu from "../SidebarMenu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import { addMatProd, getAllMateriau, getAllFils, getAllPierres, deleteMatProd, deleteFilProd, deletePierreProd } from "/src/services/PersonalizationService";
+import { getAllMateriau, getAllFils, getAllPierres, getAllTailles, getAllPendentifs, deleteMatProd, deleteFilProd, deletePierreProd, deleteTailleProd, deletePendentifProd } from "/src/services/PersonalizationService";
+import { addMatProd, addFilProd, addPierreProd, addPendentifProd, addTailleProd } from "../../../services/PersonalizationService";
 
 const DataTable = ({ data, setData, title, keyField, valueField, descriptionField = null, addFunction = null, deleteFunction = null }) => {
   const [newValue, setNewValue] = useState("");
@@ -55,9 +56,9 @@ const DataTable = ({ data, setData, title, keyField, valueField, descriptionFiel
       </AccordionSummary>
       <AccordionDetails>
         <Box sx={{ maxHeight: "400px", overflow: "auto" }}>
-          {error && <Alert severity="error">{error}</Alert>} 
-          {successMessage && <Alert severity="success">{successMessage}</Alert>} 
-          
+          {error && <Alert severity="error">{error}</Alert>}
+          {successMessage && <Alert severity="success">{successMessage}</Alert>}
+
           <TextField
             label={`Ajouter un ${title.toLowerCase()}`}
             variant="outlined"
@@ -119,6 +120,9 @@ export default function Personalization() {
   const [materials, setMaterials] = useState([]);
   const [fils, setFils] = useState([]);
   const [pierres, setPierres] = useState([]);
+  const [tailles, setTailles] = useState([]);
+  const [pendentifs, setPendentifs] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,9 +136,19 @@ export default function Personalization() {
         setFils(dataFils);
       }
 
+      const dataTailles = await getAllTailles();
+      if (dataTailles) {
+        setTailles(dataTailles);
+      }
+
       const dataPierres = await getAllPierres();
       if (dataPierres) {
         setPierres(dataPierres);
+      }
+
+      const dataPendentifs = await getAllPendentifs();
+      if (dataPendentifs) {
+        setPendentifs(dataPendentifs);
       }
     };
 
@@ -163,8 +177,9 @@ export default function Personalization() {
           data={fils}
           setData={setFils}
           title="Fil"
-          keyField="id"
+          keyField="libCouleur"
           valueField="libCouleur"
+          addFunction={addFilProd}
           deleteFunction={deleteFilProd}
         />
 
@@ -172,10 +187,31 @@ export default function Personalization() {
           data={pierres}
           setData={setPierres}
           title="Pierre"
-          keyField="id"
+          keyField="libPierre"
           valueField="libPierre"
           descriptionField="descriptionPierre"
+          addFunction={addPierreProd}
           deleteFunction={deletePierreProd}
+        />
+
+        <DataTable
+          data={tailles}
+          setData={setTailles}
+          title="Taille"
+          keyField="libTaille"
+          valueField="libTaille"
+          addFunction={addTailleProd}
+          deleteFunction={deleteTailleProd}
+        />
+
+        <DataTable
+          data={pendentifs}
+          setData={setPendentifs}
+          title="Pendentif"
+          keyField="libPendentif"
+          valueField="libPendentif"
+          addFunction={addPendentifProd}
+          deleteFunction={deletePendentifProd}
         />
       </Stack>
     </Box>

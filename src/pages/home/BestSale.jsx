@@ -58,8 +58,8 @@ const BestSellerItem = ({ product }) => {
         <CardMedia
           component="img"
           alt={product.photo}
-          src={image || "coucou"}
-          sx={{ width: "365px", objectFit: "cover" }}
+          src={image || ""}
+          sx={{ width: "365px", height:'365px', objectFit: "cover" }}
         />
         <CardContent sx={{ textAlign: "center" }}>
           <Typography

@@ -7,6 +7,14 @@ export const getQuestions = async () => {
     return null;
 }
 
+export const getQuestionsAdmin = async () => {
+    const data = await axios
+        .get('/api/admin/question/get-questions')
+    if (data.data) return data.data
+    return null;
+}
+
+
 export const getQuestionsById = async (id) => {
     try {
       const response = await axios.get(`/api/question/get-question?idQuestion=${id}`);

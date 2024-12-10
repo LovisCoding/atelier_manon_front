@@ -1,4 +1,3 @@
-import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
@@ -11,6 +10,7 @@ export default function Newsletter() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [isError, setIsError] = useState(false);
+
 
     const handleSave = async () => {
         setLoading(true);

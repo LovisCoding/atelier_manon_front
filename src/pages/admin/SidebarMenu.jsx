@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { List, ListItem, ListItemText, Drawer, Typography, Box, useTheme, useMediaQuery, IconButton, Button } from '@mui/material';
-import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog, FaPaintBrush } from 'react-icons/fa';
+import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog, FaPaintBrush, FaRegComment } from 'react-icons/fa';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from '../../components/Link';
 import { Navigate, useNavigate } from 'react-router';
@@ -78,9 +78,9 @@ const SidebarMenu = ({ children }) => {
             { text: 'Accueil', href: '/admin/accueil', icon: <FaHome /> },
             { text: 'Newsletters', href: '/admin/newsletter', icon: <FaNewspaper /> },
             { text: 'Réductions', href: '/admin/codesPromo', icon: <FaPercent /> },
-            { text: 'Évènements', href: '/admin/evenements', icon: <FaCalendarAlt /> },
             { text: 'Blog', href: '/admin/blog', icon: <FaBlog /> },
             { text: 'Personnalisation', href: '/admin/personalization', icon: <FaPaintBrush /> },
+            { text: 'Avis', href: '/admin/avis', icon: <FaRegComment /> },
           ].map((item) => (
             <ListItem
               button

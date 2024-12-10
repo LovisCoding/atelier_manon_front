@@ -15,7 +15,7 @@ export default function ConfirmAccount() {
 			"token": token
 		})
 		.then((res) => {
-			if (res.status == 201) {
+			if (res.status == 201 || res.status == 200) {
 				setMsg("Votre a été activé avec succès !");
 				setTimeout(() => {
 					navigate("/login");

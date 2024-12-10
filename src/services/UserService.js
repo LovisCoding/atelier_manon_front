@@ -19,3 +19,20 @@ export const getCompte = async (idCli) => {
         return null;
       }
 }
+
+export const unsubNewletters = async () => {
+	axios.post("/api/client/account/remove-newsletter");
+}
+
+export const subNewsletters = async (mail) => {
+	return axios.post("/api/client/account/add-newsletter", {
+		mail: mail
+	})
+		.then((res) => {
+			if (res.status == 200 || res.status == 201) return true;
+			return null;
+		})
+		.catch((err) => {
+			return null;
+		})
+}

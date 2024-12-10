@@ -4,7 +4,7 @@ import SidebarMenu from "../SidebarMenu";
 import theme from "../../../theme/theme";
 import { getOrderAdminDetail, getProduitsCommande } from "../../../services/CommandService";
 import { getCompte } from "../../../services/UserService";
-import { Link, useLocation, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { FaEuroSign } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
 import { CiStickyNote, CiUser } from "react-icons/ci";

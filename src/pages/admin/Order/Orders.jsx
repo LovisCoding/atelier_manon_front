@@ -1,17 +1,14 @@
 import { Box, TableContainer, Table, TableHead, TableCell, TableRow, TableBody, Paper, Stack, Typography } from "@mui/material";
 import SidebarMenu from "../SidebarMenu";
-import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { getOrdersForAdmin } from "../../../services/CommandService";
-import { useAuth } from "../../../utils/AuthContext";
 import { formatDate } from "../../../utils/Date";
 
 export default function Orders() {
 
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const auth = useAuth();
+
 
   const handleClickRow = (to) => {
     navigate(to);

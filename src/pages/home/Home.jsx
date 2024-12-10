@@ -5,8 +5,7 @@ import ManufacturingStep from "./ManufacturingStep";
 import AvisList from "./AvisList";
 import { Box } from "@mui/material";
 import { getBestSellers } from "../../services/ProductService";
-import { getAllAvis } from "../../services/AvisService";
-
+import { getAvisToDisplay } from "../../services/AvisService";
 
 const Home = () => {
   const bestSaleRef = useRef(null);
@@ -25,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     const exec = async () => {
-      const avis = await getAllAvis();
+      const avis = await getAvisToDisplay();
       if (!avis) return;
       setAvisData(avis);
     };
