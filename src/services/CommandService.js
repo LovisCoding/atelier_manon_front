@@ -63,11 +63,12 @@ export const getProduitsCommande = async (idCommand) => {
 }
 
 
-export const addSingleProductCommande = async (idProd, variante) => {
+export const addSingleProductCommande = async (idProd, variante, gravure) => {
     try {
         const data = await axios.post("/api/client/commande/add-single-product-commande", {
             idProd,
-            variante
+            variante: variante || "",
+            gravure: gravure || ""
         })
         return data.data
     } catch (err) {

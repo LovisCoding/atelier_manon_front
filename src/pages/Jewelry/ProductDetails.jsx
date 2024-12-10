@@ -44,22 +44,31 @@ export default function ProductDetails({product, validateCallback}) {
 
 	useEffect(() => { product.gravure = engraving; }, [engraving]);
 
-	const handleAddToCart = () => {
+	const checkErrorInputs = () => {
 		let error = false;
-
 		if (wires && wires.length >= 1 && !product.fil) {setIsWireError(true); error=true;}
 		else setIsWireError(false);
 		if (materials && materials.length >= 1 && !product.materiel) {setIsMaterialError(true); error=true;}
 		else setIsMaterialError(false);
 		if (rocks && rocks.length >= 1 && !product.pierre) {setIsRockError(true); error=true;}
 		else setIsRockError(false);
-
-		if (!error) validateCallback();
+		return error;
 	}
 
+	const generateVariant = () => {
+		let variant = "";
+		if (wires && wires.length >= 1 && product.fil) variant += "fil: "+product.fil+" ; ";
+		if (materials && materials.length >= 1 && product.materiel) variant += "materiel: "+product.materiel+" ; ";
+		if (rocks && rocks.length >= 1 && product.pierre) variant += "pierre: "+product.pierre+" ; ";
+		return variant;
+	}
+
+	const handleAddToCart = () => { if (!checkErrorInputs()) validateCallback(); }
+
 	const createSingleProductCommand = () => {
+		if (checkErrorInputs()) return;
 		const exec = async () => {
-			const data = await addSingleProductCommande(product.idProd, "coucouLaVariante") // TODO: change variant
+			const data = await addSingleProductCommande(product.idProd, generateVariant(), product.gravure);
 			if (data) navigate('/command/'+data)
 		}
 		exec();
