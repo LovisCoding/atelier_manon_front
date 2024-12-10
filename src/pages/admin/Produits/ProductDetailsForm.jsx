@@ -60,15 +60,17 @@ const ProductDetailsForm = ({
                 type="number"
                 InputProps={{
                     endAdornment: <InputAdornment position="end">jour(s)</InputAdornment>,
+                    min: 0,
+                    max: 100
                 }}
                 required
                 sx={{ marginBottom: 2 }}
             />
             {/* Catégorie du produit */}
             <FormControl fullWidth sx={{ mt: 4 }}>
-                <InputLabel id="select-category">Catégorie de produit</InputLabel>
+                <InputLabel id="select-category">Catégorie de produit *</InputLabel>
                 <Select
-                    label="Catégorie de produit"
+                    label="Catégorie de produit *"
                     fullWidth
                     variant="outlined"
                     value={selectedCategory}

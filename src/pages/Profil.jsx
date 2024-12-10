@@ -116,7 +116,7 @@ export default function Profil() {
 	const handleNewsletterChange = (event) => {
 		const checked = event.target.checked;
 		setUserDetails({ ...userDetails, news: checked });
-		if (checked) {
+		if (event.target.checked) {
 			subNewsletters(userDetails.email);
 		} else {
 			unsubNewletters();
@@ -138,7 +138,7 @@ export default function Profil() {
 
 	useEffect(() => {
 		getProfilCurrentSession().then((data) => {
-			setUserDetails({ ...data, news: data.news === "t" });
+			setUserDetails({ ...data, news: data.news });
 		});
 		getOrdersProfil().then(setOrders);
 		getAvisBySession().then((data) => {

@@ -2,10 +2,9 @@ import React from 'react';
 import {Box, Button, IconButton, Stack, Typography} from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { addImage } from '../../../services/ProductService';
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 //TODO bug quand je crée et supprime une image avant de l'enregistrer
-const ImagesSection = ({ images = [], setImages, id , imagesAUpload, setImagesAUpload, imageADelete, setImageADelete}) => {
+const ImagesSection = ({ images = [], setImages , imagesAUpload, setImagesAUpload, setImageADelete}) => {
 const [selectedImg, setSelectedImg] = React.useState(null);
 
   const handleDeleteImage = (index) => {
@@ -13,11 +12,15 @@ const [selectedImg, setSelectedImg] = React.useState(null);
       setImageADelete(prev => [...prev, images[index]]);
       setImages(images.filter((_, i) => i !== index));
 
+
+
+      setImagesAUpload(prev => prev.filter((img) => img.libImage !== images[index].libImage));
+
+
   };
 
     const handleUpload = async (e) => {
         const files = e.target.files;
-        console.log(files);
 
         if (!files || files.length === 0) return;
 
@@ -36,7 +39,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
 
             // Transformer en objets avec name et file
             const filesWithDetails = Array.from(files).map((file, i) => ({
-                name: file.name.split('.')[0] + '.webp',
+                libImage: file.name.split('.')[0] + '.webp',
                 file: base64Files[i],
             }));
 
@@ -44,7 +47,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
             setImages([...images, ...filesWithDetails]); // Ajouter les base64 au tableau d'images
             setImagesAUpload([...imagesAUpload, ...filesWithDetails]); // Ajouter les objets au tableau de fichiers à uploader
 
-            console.log(filesWithDetails); // Afficher le tableau d'objets
+
         } catch (error) {
             console.error(error);
         }
@@ -72,7 +75,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
     }
     setImages(tmpImages)
   }
-    console.log(images)
+
 
   return (
       <Box>
@@ -80,7 +83,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
               <Typography variant="h6">Images</Typography>
               <Button component="label">
                   <AddCircleOutlineIcon />
-                  <input type="file" hidden accept=".jpg,.jpeg,.webp" onChange={(e) => handleUpload(e)} />
+                  <input type="file" multiple hidden accept=".jpg,.jpeg,.webp" onChange={(e) => handleUpload(e)} />
               </Button>
               <Stack direction={'row'} spacing={1}>
                   <IconButton disabled={images.length < 2} onClick={() => reorderImages('left')} ><ChevronLeft/></IconButton>
