@@ -72,6 +72,7 @@ const SidebarMenu = ({ children }) => {
         </Box>
         <List sx={{height:'100%', display:'flex', flexDirection:'column', gap:1 }} >
           {[
+            { text: 'Statistiques', href: '/admin/stats'},
             { text: 'Produits', href: '/admin/products', icon: <FaBox /> },
             { text: 'Commandes', href: '/admin/orders', icon: <FaShoppingCart /> },
             { text: 'FAQ', href: '/admin/faq', icon: <FaQuestionCircle />, view: 'faq' },
