@@ -203,7 +203,7 @@ function ProductsDetail({ products }) {
                 </Stack>
                 <Stack color={theme.palette.grey[600]} direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={1}>
                   <Typography variant="body2">{product.variante}</Typography>
-                  <Typography variant="body2">gravure: {product.gravure}</Typography>
+                  <Typography variant="body2">{ product.gravure && `gravure: ${product.gravure}` }</Typography>
                 </Stack>
               </Stack>
               <Stack direction={"row"} spacing={1}>
