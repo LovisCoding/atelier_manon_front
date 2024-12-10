@@ -24,7 +24,7 @@ const DataTable = ({ data, setData, title, keyField, valueField, descriptionFiel
         const addedItem = addFunction ? await addFunction(newItem) : newItem;
 
         if (addedItem) {
-          setData((prevData) => [...prevData, { ...addedItem, [keyField]: addedItem[keyField] || new Date().getTime() }]);
+          setData((prevData) => [...prevData, newItem]);
           setSuccessMessage(`${title} ajouté avec succès !`);
         } else {
           setError(`Erreur lors de l'ajout du ${title}`);
