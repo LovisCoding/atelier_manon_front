@@ -25,7 +25,7 @@ const Jewelry = () => {
     const fetchProducts = async () => {
       let categoryId = '';
       let title = 'Retrouvez ici tous les bijoux disponibles !';
-      let bgImage = '/src/assets/img/bijoux.webp';
+      let bgImage = 'bijoux';
 
       if (category) {
         const matchedCategory = categories.find(cat => cat.libCateg.toLowerCase() === category.toLowerCase());
@@ -33,10 +33,10 @@ const Jewelry = () => {
         if (matchedCategory) {
           categoryId = matchedCategory.idCateg;
           title = `Découvrez les ${category.charAt(0).toUpperCase() + category.slice(1)} !`;
-          bgImage = `/src/assets/img/${category}.webp`;
+          bgImage = categoryId;
         } else {
           title = `Retrouvez ici tous les bijoux disponibles !`;
-          bgImage = '/src/assets/img/bijoux.webp';
+          bgImage = category;
         }
       }
 
@@ -78,7 +78,7 @@ const Jewelry = () => {
   return (
     <JewelryCollection
       collectionData={jewelryData}
-      backgroundImage={backgroundImage}
+      category={backgroundImage}
       collectionName={category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Bijoux'}
       collectionTitle={collectionTitle}
       onCategoryChange={handleCategoryChange}

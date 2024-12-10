@@ -4,18 +4,236 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e0a666b-f002-4fac-8806-701c64187acf" name="Changes" comment="Insertion images Produit.jsx" />
+    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSX File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LovisCoding&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:LovisCoding/atelier_manon_front.git&quot;,
+    &quot;accountId&quot;: &quot;78df1259-107b-4b41-8230-29d717acd6ed&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2pw2Cg9Ed2ScelomgkcA0BikCxt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "node.js.selected.package.tslint": "(autodetect)"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/Users/arthur/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.112" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="" />
+      <created>1733662690114</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733662690114</updated>
+      <workItem from="1733662691179" duration="1650000" />
+      <workItem from="1733670361979" duration="43126000" />
+      <workItem from="1733817050700" duration="2499000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add Loader component and integrate into AppRoutes&#10;&#10;Refactor the Suspense fallback in AppRoutes to use a new Loader component, providing a consistent loading experience with a customized message. This change improves the UI by visually enhancing the loading state and maintaining consistent layout structures across pages. Rendering of Navbar and Footer is conditioned on non-admin routes to keep the interface clean and relevant.">
+      <option name="closed" value="true" />
+      <created>1733677446331</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733677446331</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add delete functionality for promo codes&#10;&#10;Implemented the ability to delete promo codes from the admin UI, including a new button styled with the theme's error color. The DeleteCodePromo function in the CodesPromoService makes an API call to remove promo codes, and navigation is handled to redirect upon successful deletion.">
+      <option name="closed" value="true" />
+      <created>1733678537477</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733678537477</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add image upload and product update functionality&#10;&#10;Refactored the ImagesSection component to use base64 encoding for image uploads and updated the server with these images. Implemented the product update functionality to save product details including images, materials, stones, and fils to the server. This change improves the product management UX and ensures data consistency across components.">
+      <option name="closed" value="true" />
+      <created>1733751758624</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733751758624</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Implement product personalization and new services&#10;&#10;This update introduces a product personalization feature, adding CRUD operations for materials, threads, and stones through a new PersonalizationService. Additionally, new routes and components are created for account confirmation and improved newsletter management, enhancing user engagement and administration functionalities. The AuthContext utility was removed, and cleanup in the workspace settings was performed for improved maintainability.">
+      <option name="closed" value="true" />
+      <created>1733752231561</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733752231561</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states.">
+      <option name="closed" value="true" />
+      <created>1733752499471</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733752499471</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states.">
+      <option name="closed" value="true" />
+      <created>1733752997005</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733752997005</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states.">
+      <option name="closed" value="true" />
+      <created>1733753012667</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733753012667</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section.">
+      <option name="closed" value="true" />
+      <created>1733765850634</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733765850634</updated>
+    </task>
+    <task id="LOCAL-00009" summary="merge dev">
+      <option name="closed" value="true" />
+      <created>1733820621607</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733820621607</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience.">
+      <option name="closed" value="true" />
+      <created>1733826235819</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733826235819</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Refactor product admin components and enhance UX&#10;&#10;Refactored product-related admin components for improved code readability and maintainability. Enhanced the product configuration table with clickable rows for better navigation. Fixed image handling logic by ensuring proper Base64 transformations and type requirements for uploads and deletions.">
+      <option name="closed" value="true" />
+      <created>1733841039803</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733841039803</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components.">
+      <option name="closed" value="true" />
+      <created>1733841155273</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1733841155273</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience.">
+      <option name="closed" value="true" />
+      <created>1733845120148</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1733845120148</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/liaison-produits" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add Loader component and integrate into AppRoutes&#10;&#10;Refactor the Suspense fallback in AppRoutes to use a new Loader component, providing a consistent loading experience with a customized message. This change improves the UI by visually enhancing the loading state and maintaining consistent layout structures across pages. Rendering of Navbar and Footer is conditioned on non-admin routes to keep the interface clean and relevant." />
+    <MESSAGE value="Add delete functionality for promo codes&#10;&#10;Implemented the ability to delete promo codes from the admin UI, including a new button styled with the theme's error color. The DeleteCodePromo function in the CodesPromoService makes an API call to remove promo codes, and navigation is handled to redirect upon successful deletion." />
+    <MESSAGE value="Add image upload and product update functionality&#10;&#10;Refactored the ImagesSection component to use base64 encoding for image uploads and updated the server with these images. Implemented the product update functionality to save product details including images, materials, stones, and fils to the server. This change improves the product management UX and ensures data consistency across components." />
+    <MESSAGE value="Implement product personalization and new services&#10;&#10;This update introduces a product personalization feature, adding CRUD operations for materials, threads, and stones through a new PersonalizationService. Additionally, new routes and components are created for account confirmation and improved newsletter management, enhancing user engagement and administration functionalities. The AuthContext utility was removed, and cleanup in the workspace settings was performed for improved maintainability." />
+    <MESSAGE value="Integrate dynamic order and product fetching in admin pages&#10;&#10;Refactored the admin order and product pages to fetch data dynamically from the backend instead of using hard-coded values. Introduced useEffect hooks to retrieve data via new services, handling loading states and potential errors. Adjusted UI components to display the fetched data and updated order detail interactions, like changing order states." />
+    <MESSAGE value="merge dev&#10;" />
+    <MESSAGE value="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section." />
+    <MESSAGE value="merge dev" />
+    <MESSAGE value="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience." />
+    <MESSAGE value="Refactor product admin components and enhance UX&#10;&#10;Refactored product-related admin components for improved code readability and maintainability. Enhanced the product configuration table with clickable rows for better navigation. Fixed image handling logic by ensuring proper Base64 transformations and type requirements for uploads and deletions." />
+    <MESSAGE value="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components." />
+    <MESSAGE value="merge ca mere full bugged" />
+    <MESSAGE value="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience." />
   </component>
 </project>

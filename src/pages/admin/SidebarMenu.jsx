@@ -79,7 +79,6 @@ const SidebarMenu = ({ children }) => {
             { text: 'Accueil', href: '/admin/accueil', icon: <FaHome /> },
             { text: 'Newsletters', href: '/admin/newsletter', icon: <FaNewspaper /> },
             { text: 'Réductions', href: '/admin/codesPromo', icon: <FaPercent /> },
-            { text: 'Évènements', href: '/admin/evenements', icon: <FaCalendarAlt /> },
             { text: 'Blog', href: '/admin/blog', icon: <FaBlog /> },
             { text: 'Personnalisation', href: '/admin/personalization', icon: <FaPaintBrush /> },
             { text: 'Avis', href: '/admin/avis', icon: <FaRegComment /> },
@@ -129,7 +128,7 @@ const SidebarMenu = ({ children }) => {
           <ListItem sx={{justifySelf:'end', marginTop:'auto'}} >
             <Button
               variant='outlined'
-              sx={{margin:'0 auto'}}
+              sx={{margin:'0 auto', fontWeight:'bold'}}
               onClick={()=>navigate('/')}
             >Revenir au site web</Button>
           </ListItem>
