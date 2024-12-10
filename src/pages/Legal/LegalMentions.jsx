@@ -123,7 +123,7 @@ function LegalMentions() {
 
         {/* Dernière mise à jour */}
         <Typography variant="body2" mt={4}>
-          Dernière mise à jour : [date de la dernière mise à jour]
+          Dernière mise à jour : 10 décembre 2024
         </Typography>
       </Stack>
     </Container>
