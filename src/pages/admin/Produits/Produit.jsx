@@ -120,6 +120,7 @@ const Produit = () => {
   // Update product
   // Update product
   const handleUpdate = async () => {
+    setLoading(true)
     const product = {
       idProd: Number(id),
       libProd: valueLib,
@@ -141,6 +142,7 @@ const Produit = () => {
       const s = tmpMessage.length > 1 ? 's' : '';
       setMessage(`Veuillez remplir le${s} champ${s} suivant${s} : ${tmpMessage.join(', ')}`);
       setSnOpenValue(true);
+      setLoading(false);
       return;
     }
 
@@ -150,6 +152,7 @@ const Produit = () => {
       if (productData?.status === 400) {
         setMessage(productData.response.data);
         setSnOpenValue(true);
+        setLoading(false);
         return;
       }
       if (id === "-1") {
@@ -189,9 +192,9 @@ const Produit = () => {
       ]);
 
       console.log('All associated data updated successfully');
-      /*navigate('/admin/products');*/
+      navigate('/admin/products');
     } catch (error) {
-
+      setLoading(false)
       console.error('Error updating product or associated data:', error);
     }
   };
