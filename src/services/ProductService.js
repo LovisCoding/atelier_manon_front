@@ -89,8 +89,10 @@ export const addProductToPanier = async (product) => {
                 variante : variant
             }, { headers: { 'Content-Type':'application/json' } });
         console.log("Response :",data.data)
+        return data;
     } catch (err) {
         console.error("Une erreur est survenue : "+err)
+        return null;
     }
 }
 

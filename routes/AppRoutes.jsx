@@ -54,9 +54,9 @@ const AppRoutes = () => {
     const homeRoute = location.pathname == '/';
     return (
         <>
-            {homeRoute && <EventBanner /> }
+            { homeRoute && <EventBanner /> }
             {/* Render Navbar only if not on an admin route */}
-            {!isAdminRoute && <Navbar />}
+            { !isAdminRoute && <Navbar /> }
 
             {/* Suspense fallback replaced with Loader */}
             <Suspense fallback={<Loader message="Loading content..." />}>

@@ -5,6 +5,7 @@ import { getCategories } from "/src/services/CategorieService";
 import { addImage, addImageCateg } from "/src/services/HomeService";
 import { convertFilesToBase64 } from "/src/utils/Base64";
 import axios from "axios";
+import { getEvenement } from "../../../services/HomeService";
 
 export default function Accueil() {
 
@@ -18,10 +19,10 @@ export default function Accueil() {
       message: event
     })
     .then((res) => {
-      console.log(res)
+      // console.log(res)
     })
     .catch((err) => {
-      console.log(err)
+      // console.log(err)
     })
   }
 
@@ -34,12 +35,10 @@ export default function Accueil() {
     };
 
     fetchCategories();
-    axios.get("http://localhost:8080/evenement/message.data", {
-      withCredentials: true
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
+    getEvenement()
+      .then((data) => {
+        setEvent(data);
+      })
   }, []);
 
   const handleFileChange = async (event, type, idCategorie = null) => {

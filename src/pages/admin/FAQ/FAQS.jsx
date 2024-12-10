@@ -14,7 +14,6 @@ const FoireAuxQuestions = () => {
       if (data) {
         setFaqList(data);
       }
-      console.log(data);
     };
     fetchFaqs();
   }, []);
