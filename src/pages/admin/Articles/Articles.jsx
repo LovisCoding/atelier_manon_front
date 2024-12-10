@@ -3,6 +3,12 @@ import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
 import Link from "../../../components/Link";
 import { getArticles } from "/src/services/ArticleService"; // Assurez-vous d'importer la méthode
+import DOMPurify from 'dompurify';
+
+const truncateText = (text, wordLimit) => {
+    const words = text.split("<br>");
+    return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
+};
 
 export default function Articles() {
     const [articles, setArticles] = useState([]);
@@ -40,7 +46,7 @@ export default function Articles() {
                         Nouvel Article
                     </Button>
                 </Stack>
-                <Box mx={15} mt={8}>
+                <Box mx={3} mt={8}>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
@@ -60,8 +66,24 @@ export default function Articles() {
                                         href={`/admin/blog/${article.idArticle}`}
                                     >
                                         <TableCell>{article.titreArticle}</TableCell>
-                                        <TableCell>{article.contenu}</TableCell>
-                                        <TableCell>{article.dateArticle}</TableCell>
+                                        <TableCell>
+                                            <div 
+                                                style={{
+                                                    overflowWrap: "break-word",
+                                                    whiteSpace: "normal",
+                                                    wordBreak: "break-word",
+                                                    }}
+                                            dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(truncateText(article.contenu, 3)),
+                                            }} />
+                                        </TableCell>
+                                        <TableCell style={{ whiteSpace: "nowrap" }}> 
+                                            {new Date(article.dateArticle).toLocaleDateString("fr-FR", {
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                            })}
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

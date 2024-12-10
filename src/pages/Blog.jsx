@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { getArticles } from "../services/BlogService";
 import { Typography, CircularProgress, Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router";
+import DOMPurify from 'dompurify';
 
 const truncateText = (text, wordLimit) => {
-  const words = text.split(" ");
+  const words = text.split("<br>");
   return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
 };
 
@@ -95,11 +96,22 @@ function ArticleLine({ article }) {
           {article.titreArticle}
         </Typography>
         <Typography variant="body2" color="text.primary" sx={{ marginTop: 1 }}>
-          {truncateText(article.contenu, 30)}
+          <div 
+            style={{
+              overflowWrap: "break-word",
+              whiteSpace: "normal"
+            }}
+            dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(truncateText(article.contenu, 3)),
+          }} />        
         </Typography>
       </Box>
       <Typography variant="caption" color="text.primary" sx={{ textAlign: "right", marginTop: 2, fontStyle: "italic" }}>
-        {article.dateArticle}
+        {new Date(article.dateArticle).toLocaleDateString("fr-FR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        })}
       </Typography>
     </Box>
   );

@@ -6,6 +6,9 @@ import { getArticleById, createArticle } from "/src/services/ArticleService"; //
 import { useAuth } from "../../../utils/AuthContext";
 import { Navigate, useNavigate } from 'react-router';
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 export default function Article() {
     const { id } = useParams();
     const [title, setTitle] = useState('');
@@ -76,7 +79,7 @@ export default function Article() {
     return (
         <Box display="flex">
             <SidebarMenu />
-            <Stack spacing={3} mt={5} width="100%" mx={15}>
+            <Stack spacing={3} mt={5} width="100%" mx={3}>
                 <Typography variant="h4">{id === "-1" ? "Créer un nouvel article" : "Détail de l'Article"}</Typography>
 
                 <TextField
@@ -87,16 +90,19 @@ export default function Article() {
                     onChange={(e) => setTitle(e.target.value)}
                 />
 
-                <TextField
-                    label="Description de l'article"
-                    variant="outlined"
-                    fullWidth
-                    multiline
-                    maxRows={25}
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
+                <Box>
+                    <Typography variant="h6" gutterBottom>
+                        Description de l'article
+                    </Typography>
+                    <ReactQuill
+                        theme="snow"
+                        value={description}
+                        onChange={setDescription}
+                        placeholder="Écrivez la description ici..."
+                    />
+                </Box>
 
+                
                 <TextField
                     label="Date de publication"
                     variant="outlined"
