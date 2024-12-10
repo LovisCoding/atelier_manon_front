@@ -47,7 +47,7 @@ export default function Produits() {
             <Stack spacing={5} mt={5}>
                 <Stack direction={'row'} spacing={4}>
                     <Typography variant="h4">Configurer les Produits</Typography>
-                    <Button variant="contained" LinkComponent={Link} href={'/admin/products/-1'} color="secondary"> Nouveau</Button>
+                    <Button variant="contained" component={Link} href={'/admin/products/-1'} color="secondary"> Nouveau</Button>
                 </Stack>
                 <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
                     <Table>

@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience.">
+    <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ImagesSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Link.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Link.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produits.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ProductService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ProductService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +167,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733826235819</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Refactor product admin components and enhance UX&#10;&#10;Refactored product-related admin components for improved code readability and maintainability. Enhanced the product configuration table with clickable rows for better navigation. Fixed image handling logic by ensuring proper Base64 transformations and type requirements for uploads and deletions.">
+      <option name="closed" value="true" />
+      <created>1733841039803</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733841039803</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components.">
+      <option name="closed" value="true" />
+      <created>1733841155273</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1733841155273</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +222,8 @@
     <MESSAGE value="Refactor product admin pages and update API endpoints&#10;&#10;Remove redundant product-related components and consolidate features into updated components for improved maintainability. Adjust API service endpoints for fetching and updating materials, stones, and images to match new backend paths. Introduce loading states for better user experience when data fetching, along with improved handling of dynamic data in the product admin section." />
     <MESSAGE value="merge dev" />
     <MESSAGE value="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience." />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhance product admin with image deletion and filtering&#10;&#10;Implemented the functionality to delete product images that are not in Base64 and ensured width and height parameters for fetching product images. Enhanced selection filtering on the &quot;Fils&quot;, &quot;Pierres&quot;, and &quot;Separators&quot; sections to avoid duplicate selections, improving data handling and user experience." />
+    <MESSAGE value="Refactor product admin components and enhance UX&#10;&#10;Refactored product-related admin components for improved code readability and maintainability. Enhanced the product configuration table with clickable rows for better navigation. Fixed image handling logic by ensuring proper Base64 transformations and type requirements for uploads and deletions." />
+    <MESSAGE value="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor admin routes, enhance product handling, and update UI&#10;&#10;Consolidated admin routes into a dedicated `AdminRouter` for cleaner routing and implemented enhancements to product details, including size and pendant options. Additionally, updated application branding elements such as the favicon, title, and Instagram integration, while improving visual consistency across components." />
   </component>
 </project>
