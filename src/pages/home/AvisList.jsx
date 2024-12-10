@@ -3,6 +3,7 @@ import { Box, Typography, Grid2 } from '@mui/material';
 import Avis from '../../components/Avis';
 
 const AvisList = ({ title, avisData }) => {
+
   return (
     <Box
       sx={{
@@ -33,6 +34,7 @@ const AvisList = ({ title, avisData }) => {
         alignItems="center"
         sx={{ flexWrap: 'wrap' }}
       >
+        { avisData.length == 0 && <Typography>Aucun avis pour le moment</Typography>}
         {avisData.map((avis, index) => (
           <Grid2 item xs={12} sm={4} md={4} key={index}>
             <Avis

@@ -1,3 +1,4 @@
+import { Box,CircularProgress } from "@mui/material";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -6,6 +7,7 @@ const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
 
   const [details, setDetails] = useState(null);
+  const [firstFetch, setFirstFetch] = useState(false);
 
   const getProfil = () => {
     axios.get("/api/client/account/get-compte")
@@ -19,7 +21,8 @@ export default function AuthContextProvider({ children }) {
             isAdmin: data.estAdmin
           })
         } else if (res.status == 403) {return;}
-      })
+        setFirstFetch(true);
+      }).catch(err=>setFirstFetch(true));
   };
 
   const register = async (firstname, lastname, email, password, adresse) => {
@@ -50,6 +53,7 @@ export default function AuthContextProvider({ children }) {
   const logout = () => {
     axios.post("/api/client/account/logout");
     setDetails(null);
+    setFirstFetch(false);
   };
 
   useEffect(() => {
@@ -60,7 +64,9 @@ export default function AuthContextProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{ details, login, logout, isLogged, register }}>
-      {children}
+      {
+        firstFetch ? children : <Box display="flex" justifyContent="center" mt={5} ><CircularProgress size={60} thickness={5} color="" /></Box>
+      }
     </AuthContext.Provider>
   );
 }

@@ -15,8 +15,6 @@ export default function Article() {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
 
-    const { isLogged, details } = useAuth();
-    if (!isLogged || !details.isAdmin) window.location = '/';
 
     useEffect(() => {
         if (id !== "-1") {

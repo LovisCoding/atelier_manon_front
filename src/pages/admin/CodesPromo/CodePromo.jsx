@@ -29,9 +29,6 @@ export default function CodePromo() {
 	const [message, setMessage] = useState('');
 	const [snOpenValue, setSnOpenValue] = useState(false);
 
-	const {isLogged,details} = useAuth();
-	if (!isLogged || !details.isAdmin) {navigate('/'); return;}
-
 	const handleSelectChange = (event) => {
 		setSelectValue(event.target.value);
 	};

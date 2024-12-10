@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, redirect } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -15,9 +15,6 @@ export default function FAQDetails() {
     });
     const [loading, setLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
-
-    const {isLogged,details} = useAuth();
-    if (!isLogged || !details.isAdmin) window.location = '/';
 
     useEffect(() => {
         const fetchFaqData = async () => {
@@ -45,7 +42,7 @@ export default function FAQDetails() {
         setIsSaving(true);
 
         const updatedFaq = {
-            idQuestion: id,
+            idQuestion: Number(id),
             contenu: faq.contenu,
             reponse: faq.reponse
         };
@@ -57,6 +54,7 @@ export default function FAQDetails() {
         } else {
             alert("Erreur lors de la mise à jour de la FAQ");
         }
+        navigate(`/admin/faq`);
 
         setIsSaving(false);
     };

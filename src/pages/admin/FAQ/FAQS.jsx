@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Box, Typography, Link, Grid2 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../utils/AuthContext';
 import SidebarMenu from '../SidebarMenu';
-import { getQuestions } from "/src/services/FAQService";
+import { getQuestionsAdmin } from "/src/services/FAQService";
 
 const FoireAuxQuestions = () => {
   const navigate = useNavigate();
   const [faqList, setFaqList] = useState([]);
 
-  const {isLogged,details} = useAuth();
-  if (!isLogged || !details.isAdmin) window.location = '/';
-
   useEffect(() => {
     const fetchFaqs = async () => {
-      const data = await getQuestions();
+      const data = await getQuestionsAdmin();
       if (data) {
         setFaqList(data);
       }

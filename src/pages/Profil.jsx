@@ -188,7 +188,7 @@ export default function Profil() {
 						</Typography>
 
 						{/* Avis */}
-						<Stack>
+						<Stack gap={1}>
 							<Typography variant="h5">Avis {hasAvis && `: ${avis.note}/5`}</Typography>
 							{hasAvis ? (
 								<Typography>{avis.contenu}</Typography>
@@ -225,6 +225,7 @@ export default function Profil() {
 						{/* Newsletter */}
 						<FormControlLabel
 							label="S'abonner à la newsletter"
+							sx={{width:'fit-content'}}
 							control={
 								<Checkbox
 									checked={userDetails.news || false}

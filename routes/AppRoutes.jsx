@@ -1,8 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Route, Routes, useLocation } from 'react-router';
 import Navbar from '../src/components/Navbar/Navbar.jsx';
 import Footer from '../src/components/Footer.jsx';
-import Loader from '../src/components/Loader.jsx';
 import ConfirmAccount from '../src/pages/ConfirmAccount.jsx';
 import Blog from '../src/pages/Blog.jsx';
 import ClientArticle from '../src/pages/Article.jsx';
@@ -30,22 +29,9 @@ const Jewelry = React.lazy(() => import('../src/pages/Jewelry/Jewelry.jsx'));
 
 // Lazy loading pour la partie administration
 
-const Admin = React.lazy(() => import('../src/pages/admin/Admin'));
-const Orders = React.lazy(() => import('../src/pages/admin/Order/Orders.jsx'));
-const OrderDetails = React.lazy(() => import('../src/pages/admin/Order/OrderDetail.jsx'));
-const CodesPromo = React.lazy(() => import('../src/pages/admin/CodesPromo/CodesPromo.jsx'));
-const CodePromo = React.lazy(() => import('../src/pages/admin/CodesPromo/CodePromo.jsx'));
-const FoireAuxQuestions = React.lazy(() => import('../src/pages/admin/FAQ/FAQS.jsx'));
-const FAQDetails = React.lazy(() => import('../src/pages/admin/FAQ/FAQ.jsx'));
-const Produits = React.lazy(() => import('../src/pages/admin/Produits/Produits.jsx'));
-const Produit = React.lazy(() => import('../src/pages/admin/Produits/Produit.jsx'));
-const Articles = React.lazy(() => import('../src/pages/admin/Articles/Articles.jsx'));
-const Article = React.lazy(() => import('../src/pages/admin/Articles/Article.jsx'));
-const Newsletter = React.lazy(() => import('../src/pages/admin/Newsletter/Newsletter.jsx'));
 const Profil = React.lazy(() => import("../src/pages/Profil.jsx"));
-const Personalization = React.lazy(() => import("../src/pages/admin/Personalization/Personalization.jsx"));
-const Accueil = React.lazy(() => import("../src/pages/admin/home/Accueil.jsx"));
-const AdminAvis = React.lazy(() => import("../src/pages/admin/Avis/Avis.jsx"));
+
+import AdminRouter from './AdminRouter.jsx';
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -59,8 +45,6 @@ const AppRoutes = () => {
             {/* Render Navbar only if not on an admin route */}
             { !isAdminRoute && <Navbar /> }
 
-            {/* Suspense fallback replaced with Loader */}
-            <Suspense fallback={<Loader message="Loading content..." />}>
                 <Routes>
                     {/* Public Routes with Footer */}
                     <Route path="/" element={<Home />} />
@@ -88,27 +72,12 @@ const AppRoutes = () => {
 
                     <Route path="/profil/" element={<Profil />} />
 
-                    {/* Admin Routes without Footer */}
-                    <Route path="/admin" element={<Admin />} />
-                    <Route path="/admin/orders" element={<Orders />} />
-                    <Route path="/admin/order/:id" element={<OrderDetails />} />
-                    <Route path="/admin/codesPromo" element={<CodesPromo />} />
-                    <Route path="/admin/codesPromo/:id" element={<CodePromo />} />
-                    <Route path="/admin/faq" element={<FoireAuxQuestions />} />
-                    <Route path="/admin/faq/:id" element={<FAQDetails />} />
-                    <Route path="/admin/products" element={<Produits />} />
-                    <Route path="/admin/products/:id" element={<Produit />} />
-                    <Route path="/admin/blog" element={<Articles />} />
-                    <Route path="/admin/blog/:id" element={<Article />} />
-                    <Route path="/admin/newsletter" element={<Newsletter />} />
-                    <Route path="/admin/personalization" element={<Personalization />} />
-                    <Route path="/admin/accueil" element={<Accueil />} />
-                    <Route path="/admin/avis" element={<AdminAvis />} />
+                        {/* Admin Routes without Footer */}
+                        <Route path="/admin/*" element={<AdminRouter />} />
 
                     {/* Fallback Route */}
                     <Route path="*" element={<NotFound />} />
                 </Routes>
-            </Suspense>
 
             {/* Render Footer only if not on an admin route */}
             {!isAdminRoute && <Footer />}
