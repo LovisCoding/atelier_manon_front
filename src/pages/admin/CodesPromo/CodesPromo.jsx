@@ -14,14 +14,10 @@ import { useEffect, useState } from "react";
 import SidebarMenu from "../SidebarMenu";
 import Link from "../../../components/Link";
 import { getAllCodesPromoWithUse } from "../../../services/CodesPromoService";
-import { useAuth } from "../../../utils/AuthContext";
 
 export default function CodesPromo() {
 	const [rows, setRows] = useState([]);
 
-	const {isLogged,details} = useAuth();
-	if (!isLogged || !details.isAdmin) window.location = '/';
-	
 	useEffect(() => {
 		getAllCodesPromoWithUse().then((data) => {
 			

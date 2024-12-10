@@ -3,7 +3,6 @@ import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
 import { getArticleById, createArticle } from "/src/services/ArticleService"; // Assurez-vous que createArticle est implémenté
-import { useAuth } from "../../../utils/AuthContext";
 
 export default function Article() {
     const { id } = useParams();
@@ -13,8 +12,6 @@ export default function Article() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    const { isLogged, details } = useAuth();
-    if (!isLogged || !details.isAdmin) window.location = '/';
 
     useEffect(() => {
         if (id !== "-1") {

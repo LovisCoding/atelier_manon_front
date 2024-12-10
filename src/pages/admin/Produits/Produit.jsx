@@ -6,7 +6,6 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import SidebarMenu from '../SidebarMenu';
 import { MdDelete } from "react-icons/md";
 import { RiSave2Fill } from "react-icons/ri";
-import { useAuth } from '../../../utils/AuthContext';
 
 const Produit = () => {
 	const [tags, setTags] = useState(['tag1', 'tag2', 'tag3']);
@@ -19,8 +18,6 @@ const Produit = () => {
 		'https://placehold.co/100?text=4',
 	]);
 
-	const {isLogged,details} = useAuth();
-	if (!isLogged || !details.isAdmin) window.location = '/';
 
 	// Ajouter une image (simulée avec un placeholder)
 	const handleAddImage = () => {

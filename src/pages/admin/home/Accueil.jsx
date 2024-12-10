@@ -6,7 +6,6 @@ import { addImage, addImageCateg } from "/src/services/HomeService";
 import { convertFilesToBase64 } from "/src/utils/Base64";
 import axios from "axios";
 import { getEvenement } from "../../../services/HomeService";
-import { useAuth } from "../../../utils/AuthContext";
 
 export default function Accueil() {
 
@@ -14,9 +13,6 @@ export default function Accueil() {
   const [idCategorie, setIdCategorie] = useState(null);
   const [categories, setCategories] = useState([]);
   const [event, setEvent] = useState("");
-
-  const {isLogged,details} = useAuth();
-  if (!isLogged || !details.isAdmin) window.location = '/';
 
   const changeEvent = () => {
     axios.post("/api/personnalisation/update-evenement", {

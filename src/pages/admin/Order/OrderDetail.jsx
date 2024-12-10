@@ -13,12 +13,8 @@ import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiGift } from "react-icons/fi";
 import { updateState } from "../../../services/OrderService";
 import { formatDate } from "../../../utils/Date";
-import { useAuth } from "../../../utils/AuthContext";
 
 export default function OrderDetails() {
-
-  const {isLogged,details} = useAuth();
-  if (!isLogged || !details.isAdmin) window.location = '/';
 
   return (
     <Box display={"flex"}>
