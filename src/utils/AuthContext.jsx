@@ -30,17 +30,6 @@ export default function AuthContextProvider({ children }) {
       "mdp": password,
       "adresse": adresse
      });
-     if (res.status == 200){
-      setDetails({
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        adresse: adresse
-      })
-      return true;
-     } else {
-      return false;
-     }
     return res.status == 200;
   }
 
