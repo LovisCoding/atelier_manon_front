@@ -76,7 +76,7 @@ const AppRoutes = () => {
                     <Route path="/profil/" element={<Profil />} />
 
                         {/* Admin Routes without Footer */}
-                        <Route path="/admin" element={<AdminRouter />} />
+                        <Route path="/admin/*" element={<AdminRouter />} />
 
                     {/* Fallback Route */}
                     <Route path="*" element={<NotFound />} />

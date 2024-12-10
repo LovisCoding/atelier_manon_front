@@ -23,9 +23,9 @@ const AdminAvis = React.lazy(() => import("../src/pages/admin/Avis/Avis.jsx"));
 const AdminRouter = () => {
 
     const navigate = useNavigate();
+    const {isLogged,details} = useAuth();
 
     useEffect(() => {
-        const {isLogged,details} = useAuth();
         if (!isLogged || !details.isAdmin) navigate('/');
     }, []);
 
@@ -34,6 +34,7 @@ const AdminRouter = () => {
 
             {/* Admin Routes without Footer */}
             <Route index element={<Admin />} />
+
             <Route path="/orders" element={<Orders />} />
             <Route path="/order/:id" element={<OrderDetails />} />
             <Route path="/codesPromo" element={<CodesPromo />} />
