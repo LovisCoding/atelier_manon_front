@@ -66,6 +66,37 @@ export const addFilProd = async (data) => {
 	}
 }
 
+export const addTailleProd = async (data) => {
+	try {
+		const response = await axios.post(
+			'/api/admin/taille/add-taille',
+			data,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		if (response.data) return response.data;
+		return null;
+	} catch (error) {
+		console.error('Erreur lors de l\'ajout de la taille :', error);
+		return null;
+	}
+}
+
+
+export const addPendentifProd = async (data) => {
+	try {
+		const response = await axios.post(
+			'/api/admin/pendentif/add-pendentif',
+			data,
+			{ headers: { 'Content-Type': 'application/json' } }
+		);
+		if (response.data) return response.data;
+		return null;
+	} catch (error) {
+		console.error('Erreur lors de l\'ajout de la taille :', error);
+		return null;
+	}
+}
+
 export const addPierreProd = async (data) => {
 	try {
 		const response = await axios.post(
