@@ -46,6 +46,8 @@ const Profil = React.lazy(() => import("../src/pages/Profil.jsx"));
 const Personalization = React.lazy(() => import("../src/pages/admin/Personalization/Personalization.jsx"));
 const Accueil = React.lazy(() => import("../src/pages/admin/home/Accueil.jsx"));
 
+import AdminRouter from './AdminRouter.jsx';
+
 const AppRoutes = () => {
     const location = useLocation();
 
@@ -87,6 +89,7 @@ const AppRoutes = () => {
 
                     <Route path="/profil/" element={<Profil />} />
 
+<<<<<<< Updated upstream
                     {/* Admin Routes without Footer */}
                     <Route path="/admin" element={<Admin />} />
                     <Route path="/admin/orders" element={<Orders />} />
@@ -102,6 +105,10 @@ const AppRoutes = () => {
                     <Route path="/admin/newsletter" element={<Newsletter />} />
                     <Route path="/admin/personalization" element={<Personalization />} />
                     <Route path="/admin/accueil" element={<Accueil />} />
+=======
+                        {/* Admin Routes without Footer */}
+                        <Route path="/admin" element={<AdminRouter />} />
+>>>>>>> Stashed changes
 
                     {/* Fallback Route */}
                     <Route path="*" element={<NotFound />} />

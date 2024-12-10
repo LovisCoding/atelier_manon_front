@@ -3,7 +3,6 @@ import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
 import { getArticleById } from "/src/services/ArticleService";
-import { useAuth } from "../../../utils/AuthContext";
 
 export default function Article() {
     const { id } = useParams();
@@ -12,9 +11,6 @@ export default function Article() {
     const [date, setDate] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
-    const {isLogged,details} = useAuth();
-    if (!isLogged || !details.isAdmin) window.location = '/';
 
     useEffect(() => {
         const fetchArticle = async () => {

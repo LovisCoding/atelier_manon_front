@@ -3,14 +3,10 @@ import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
 import Link from "../../../components/Link";
 import { getArticles } from "/src/services/ArticleService"; // Assurez-vous d'importer la méthode
-import { useAuth } from "../../../utils/AuthContext";
 
 export default function Articles() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const {isLogged,details} = useAuth();
-    if (!isLogged || !details.isAdmin) window.location = '/';
 
     useEffect(() => {
         const fetchArticles = async () => {

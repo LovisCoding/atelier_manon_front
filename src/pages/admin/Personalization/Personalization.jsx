@@ -5,16 +5,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { addMatProd, getAllMateriau, getAllFils, getAllPierres, deleteMatProd, deleteFilProd, deletePierreProd } from "/src/services/PersonalizationService";
-import { useAuth } from "../../../utils/AuthContext";
 
 const DataTable = ({ data, setData, title, keyField, valueField, descriptionField = null, addFunction = null, deleteFunction = null }) => {
   const [newValue, setNewValue] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-
-  const {isLogged,details} = useAuth();
-  if (!isLogged || !details.isAdmin) window.location = '/';
 
   const handleAdd = async () => {
     if (newValue.trim()) {
