@@ -104,7 +104,7 @@ export default function FAQDetails() {
                     variant="outlined"
                     fullWidth
                     multiline
-                    rows={4}
+                    maxRows={25}
                     value={faq.reponse}
                     onChange={(e) => handleChange('reponse', e.target.value)}
                     inputProps={{ style: { color: 'black' } }}
