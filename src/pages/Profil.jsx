@@ -161,26 +161,27 @@ export default function Profil() {
 
 				<FormControl component="form">
 					<Stack spacing={3}>
-						{/* Nom et Prénom */}
 						<Stack direction="row" justifyContent="space-between" spacing={2}>
-							<TextField
-								label="Nom"
-								value={userDetails?.nomCli || ""}
-								onChange={(e) =>
-									setUserDetails({ ...userDetails, nomCli: e.target.value })
-								}
-							/>
-							<TextField
-								label="Prénom"
-								value={userDetails?.preCli || ""}
-								onChange={(e) =>
-									setUserDetails({ ...userDetails, preCli: e.target.value })
-								}
-							/>
-							<Button onClick={updateUserDetails} variant="outlined">
-								Modifier
-							</Button>
+						<TextField
+							label="Nom"
+							value={userDetails?.nomCli || ""}
+							onChange={(e) =>
+							setUserDetails({ ...userDetails, nomCli: e.target.value })
+							}
+							sx={{ width: "48%" }}  // Augmenter la largeur ici
+						/>
+						<TextField
+							label="Prénom"
+							value={userDetails?.preCli || ""}
+							onChange={(e) =>
+							setUserDetails({ ...userDetails, preCli: e.target.value })
+							}
+							sx={{ width: "48%" }}  // Augmenter la largeur ici
+						/>
 						</Stack>
+						<Button onClick={updateUserDetails} variant="outlined" sx={{ mt: 2 }}>
+							Modifier
+						</Button>
 
 						{/* Email */}
 						<Typography variant="body1">
@@ -225,7 +226,7 @@ export default function Profil() {
 						{/* Newsletter */}
 						<FormControlLabel
 							label="S'abonner à la newsletter"
-							sx={{width:'fit-content'}}
+							sx={{ width: "fit-content" }}
 							control={
 								<Checkbox
 									checked={userDetails.news || false}
@@ -263,27 +264,32 @@ export default function Profil() {
 					Poser une question
 				</Button>
 
-				{/* Boutons Actions */}
-				<Stack direction="row" spacing={2}>
+				{/* Boutons pour actions de connexion et réinitialisation */}
+				<Stack direction="row" spacing={2} mb={3}>
 					<Button fullWidth onClick={() => navigate("/forgot-password")} variant="contained">
 						Réinitialiser le mot de passe
 					</Button>
-					<Button fullWidth onClick={logout} variant="outlined">
+					<Button fullWidth onClick={logout} variant="contained" color="error">
 						Déconnexion
 					</Button>
 				</Stack>
-
 
 				{!details.isAdmin && (
 					<Button onClick={disableAccount} color="error" variant="outlined">
 						Désactiver le compte
 					</Button>
 				)}
-				{details.isAdmin &&
-					<Stack direction="row" justifyContent="center" >
-						<Button type="button" variant="outlined" onClick={() => navigate("/admin")}
-						>Accéder à la page d'administrateur</Button>
-					</Stack>}
+				{details.isAdmin && (
+					<Stack direction="row" justifyContent="center">
+						<Button
+							type="button"
+							variant="outlined"
+							onClick={() => navigate("/admin")}
+						>
+							Accéder à la page d'administrateur
+						</Button>
+					</Stack>
+				)}
 			</Stack>
 		</Container>
 	);

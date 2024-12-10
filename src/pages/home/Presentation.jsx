@@ -24,7 +24,7 @@ const Presentation = ({ scrollToSection }) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 'calc(100vh - 64px)',
+        height: 'calc(100vh - 115px)',
         width: '100%',
         backgroundImage: `url(${getImageURL('home')})`,
         backgroundPosition: `center ${scrollPosition * 0.1 - 100}px`,
