@@ -50,3 +50,11 @@ export const updateAvis = async (id, estAffiche) => {
         estAffiche: estAffiche
     })
 }
+
+export const deleteAvis = async (id) => {
+    const data =  await axios.delete("/api/admin/avis/delete-avis", {
+        data:{idAvis: Number(id)}
+    });
+
+    return data.status == 200 || data.status == 201;
+}

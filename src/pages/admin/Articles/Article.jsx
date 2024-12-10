@@ -3,6 +3,8 @@ import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
 import { getArticleById, createArticle } from "/src/services/ArticleService"; // Assurez-vous que createArticle est implémenté
+import { useAuth } from "../../../utils/AuthContext";
+import { Navigate, useNavigate } from 'react-router';
 
 export default function Article() {
     const { id } = useParams();
@@ -11,6 +13,7 @@ export default function Article() {
     const [date, setDate] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -35,19 +38,15 @@ export default function Article() {
     }, [id]);
 
     const handleSave = async () => {
-        if (id === "-1") {
-            const newArticle = { title, description, date };
-            const success = await createArticle(newArticle);
+        const newArticle = {
+            idArticle: parseInt(id),
+            titreArticle: title,
+            descriptionProd: description,
+            contenu: description,
+        };
 
-            if (success) {
-                alert(`Article créé:\nTitre: ${title}\nDescription: ${description}\nDate: ${date}`);
-                window.location = "/admin/blog";
-            } else {
-                setError(true);
-            }
-        } else {
-            alert(`Article sauvegardé:\nID: ${id}\nTitre: ${title}\nDescription: ${description}\nDate: ${date}`);
-        }
+        await createArticle(newArticle);
+        navigate('/admin/blog');
     };
 
     if (loading) {
