@@ -21,7 +21,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
 
     const handleUpload = async (e) => {
         const files = e.target.files;
-        c
+
         if (!files || files.length === 0) return;
 
         try {
