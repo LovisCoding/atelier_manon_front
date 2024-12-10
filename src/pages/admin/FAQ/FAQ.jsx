@@ -16,9 +16,6 @@ export default function FAQDetails() {
     const [loading, setLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
 
-    const {isLogged,details} = useAuth();
-    if (!isLogged || !details.isAdmin) window.location = '/';
-
     useEffect(() => {
         const fetchFaqData = async () => {
             if (id !== "-1") {

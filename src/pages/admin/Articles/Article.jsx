@@ -2,8 +2,7 @@ import { useParams } from "react-router";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
-import { getArticleById } from "/src/services/ArticleService";
-import { useAuth } from "../../../utils/AuthContext";
+import { getArticleById, createArticle } from "/src/services/ArticleService"; // Assurez-vous que createArticle est implémenté
 
 export default function Article() {
     const { id } = useParams();
@@ -13,28 +12,42 @@ export default function Article() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    const {isLogged,details} = useAuth();
-    if (!isLogged || !details.isAdmin) window.location = '/';
 
     useEffect(() => {
-        const fetchArticle = async () => {
-            const article = await getArticleById(id);
+        if (id !== "-1") {
+            const fetchArticle = async () => {
+                const article = await getArticleById(id);
 
-            if (article) {
-                setTitle(article.titreArticle);
-                setDescription(article.contenu);
-                setDate(article.dateArticle);
+                if (article) {
+                    setTitle(article.titreArticle);
+                    setDescription(article.contenu);
+                    setDate(article.dateArticle);
+                } else {
+                    setError(true);
+                }
+                setLoading(false);
+            };
+
+            fetchArticle();
+        } else {
+            setLoading(false);
+        }
+    }, [id]);
+
+    const handleSave = async () => {
+        if (id === "-1") {
+            const newArticle = { title, description, date };
+            const success = await createArticle(newArticle);
+
+            if (success) {
+                alert(`Article créé:\nTitre: ${title}\nDescription: ${description}\nDate: ${date}`);
+                window.location = "/admin/blog";
             } else {
                 setError(true);
             }
-            setLoading(false);
-        };
-
-        fetchArticle();
-    }, [id]);
-
-    const handleSave = () => {
-        alert(`Article sauvegardé:\nID: ${id}\nTitre: ${title}\nDescription: ${description}\nDate: ${date}`);
+        } else {
+            alert(`Article sauvegardé:\nID: ${id}\nTitre: ${title}\nDescription: ${description}\nDate: ${date}`);
+        }
     };
 
     if (loading) {
@@ -54,7 +67,7 @@ export default function Article() {
                 <SidebarMenu />
                 <Stack spacing={3} mt={5} width="100%" mx={15}>
                     <Typography variant="h4" color="error">
-                        Erreur : Article introuvable.
+                        Erreur : Article introuvable ou problème lors de la création.
                     </Typography>
                 </Stack>
             </Box>
@@ -65,7 +78,7 @@ export default function Article() {
         <Box display="flex">
             <SidebarMenu />
             <Stack spacing={3} mt={5} width="100%" mx={15}>
-                <Typography variant="h4">Détail de l'Article</Typography>
+                <Typography variant="h4">{id === "-1" ? "Créer un nouvel article" : "Détail de l'Article"}</Typography>
 
                 <TextField
                     label="Titre de l'article"
@@ -98,7 +111,7 @@ export default function Article() {
                 />
 
                 <Button variant="contained" color="primary" onClick={handleSave}>
-                    Enregistrer
+                    {id === "-1" ? "Créer" : "Enregistrer"}
                 </Button>
             </Stack>
         </Box>

@@ -5,7 +5,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { getAllMateriau, getAllFils, getAllPierres, getAllTailles, getAllPendentifs, deleteMatProd, deleteFilProd, deletePierreProd, deleteTailleProd, deletePendentifProd } from "/src/services/PersonalizationService";
-import { useAuth } from "../../../utils/AuthContext";
 import { addMatProd, addFilProd, addPierreProd, addPendentifProd, addTailleProd } from "../../../services/PersonalizationService";
 
 const DataTable = ({ data, setData, title, keyField, valueField, descriptionField = null, addFunction = null, deleteFunction = null }) => {
@@ -13,9 +12,6 @@ const DataTable = ({ data, setData, title, keyField, valueField, descriptionFiel
   const [newDescription, setNewDescription] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-
-  const { isLogged, details } = useAuth();
-  if (!isLogged || !details.isAdmin) window.location = '/';
 
   const handleAdd = async () => {
     if (newValue.trim()) {

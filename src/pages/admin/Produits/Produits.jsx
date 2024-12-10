@@ -9,7 +9,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Link from "../../../components/Link";
-import { useAuth } from "../../../utils/AuthContext";
 
 export default function Produits() {
   const [name, setName] = useState('');
@@ -18,8 +17,6 @@ export default function Produits() {
   const [selectedRows, setSelectedRows] = useState([]); // Liste des lignes sélectionnées
   const [selectAll, setSelectAll] = useState(false); // Checkbox global
 
-  const {isLogged,details} = useAuth();
-  if (!isLogged || !details.isAdmin) window.location = '/';
 
   const handleSelectChange = (event) => {
     setSelectValue(event.target.value);
