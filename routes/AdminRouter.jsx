@@ -16,6 +16,7 @@ const Produit = React.lazy(() => import('../src/pages/admin/Produits/Produit.jsx
 const Articles = React.lazy(() => import('../src/pages/admin/Articles/Articles.jsx'));
 const Article = React.lazy(() => import('../src/pages/admin/Articles/Article.jsx'));
 const Newsletter = React.lazy(() => import('../src/pages/admin/Newsletter/Newsletter.jsx'));
+const CGV = React.lazy(() => import('../src/pages/admin/CGV/CGV.jsx'));
 const Personalization = React.lazy(() => import("../src/pages/admin/Personalization/Personalization.jsx"));
 const Accueil = React.lazy(() => import("../src/pages/admin/home/Accueil.jsx"));
 const AdminAvis = React.lazy(() => import("../src/pages/admin/Avis/Avis.jsx"));
@@ -51,6 +52,7 @@ const AdminRouter = () => {
             <Route path="/accueil" element={<Accueil />} />
             <Route path="/avis" element={<AdminAvis />} />
             <Route path="/stats" element={<AdminStats />} />
+            <Route path="/cgv" element={<CGV />} />
 
             <Route path="*" element={<NotFound />} />
 
