@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Stack, Typography, CircularProgress } from "@mui/material";
+import { Box, Stack, Typography, CircularProgress, Grid2 } from "@mui/material";
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
 import SidebarMenu from "../SidebarMenu";
@@ -188,12 +188,12 @@ export default function Stats() {
 
 
 	const getColorForProduct = (product) => {
-		switch (product) {
-			case "Kelyan": return "#FF6384";
-			case "Yvan": return "#36A2EB";
-			case "Sandrine": return "#FFCD56";
-			default: return "#4CAF50";
+		const letters = '0123456789ABCDEF';
+		let color = '#';
+		for (let i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
 		}
+		return color;
 	};
 
 	const months = Object.keys(saleProductProportion); // Ex: ["2024-12", "2024-11"]
@@ -232,6 +232,7 @@ export default function Stats() {
 		},
 		scales: {
 			x: {
+				stacked: true,
 				title: {
 					display: true,
 					text: "Mois",
@@ -243,6 +244,7 @@ export default function Stats() {
 				}
 			},
 			y: {
+				stacked: true,
 				beginAtZero: true,
 				max: 100,
 				title: {
@@ -260,56 +262,40 @@ export default function Stats() {
 
 
 	return (
-		<Box display={"flex"}>
+		<Box display="flex" flexWrap="wrap" justifyContent="center">
 			<SidebarMenu />
-			<Stack sx={{ mt: 5, width: "100%" }} spacing={5}>
+			<Stack sx={{ mt: 5 }} spacing={5} >
 				<Typography variant="h4" align="center">Statistiques</Typography>
-				<Stack direction="row" spacing={5} justifyContent="center">
-					<Box sx={{ width: 300 }}>
+				<Grid2 container spacing={5} justifyContent="center" >
+					<Grid2 item maxWidth={400}>
 						<Typography variant="h6" align="center">Proportion par Catégorie</Typography>
 						<Pie data={categoryProportionData} />
-					</Box>
-					<Box sx={{ width: 300 }}>
+					</Grid2>
+					<Grid2 item maxWidth={400}>
 						<Typography variant="h6" align="center">Commandes avec Cartes Cadeaux</Typography>
 						<Doughnut data={giftCardData} />
-					</Box>
-				</Stack>
-				<Stack direction="row" spacing={5} justifyContent="center">
-					<Box sx={{ width: 300 }}>
+					</Grid2>
+				</Grid2>
+				<Grid2 container spacing={5} justifyContent="center" >
+					<Grid2 item maxWidth={400}>
 						<Typography variant="h6" align="center">Produits Personnalisés</Typography>
 						<Doughnut data={customProductData} />
-					</Box>
-					<Box sx={{ width: 300 }}>
+					</Grid2>
+					<Grid2 item maxWidth={400}>
 						<Typography variant="h6" align="center">Revenu Moyen par Commande</Typography>
 						<Bar data={averageRevenueData} options={{ indexAxis: "y" }} />
-					</Box>
-				</Stack>
-				<Stack>
-					<Box>
-						<Typography variant="h4" align="center" gutterBottom>
-							Statistiques
-						</Typography>
-						<Box sx={{ width: "80%", margin: "0 auto" }}>
-							<Typography variant="h6" align="center" gutterBottom>
-								Revenu Mensuel
-							</Typography>
-							<Bar data={revenueSalesMonthData} options={revenueSalesMonthDataOptions} />
-						</Box>
-					</Box>
-				</Stack>
-				<Stack>
-					<Box>
-						<Typography variant="h4" align="center" gutterBottom>
-							Statistiques des Ventes par Produit (en Pourcentage)
-						</Typography>
-						<Box sx={{ width: "80%", margin: "0 auto" }}>
-							<Typography variant="h6" align="center" gutterBottom>
-								Répartition des Ventes par Produit en Pourcentage
-							</Typography>
-							<Bar data={saleProductProportionData} options={saleProductProportionDataOptions} />
-						</Box>
-					</Box>
-				</Stack>
+					</Grid2>
+				</Grid2>
+				<Grid2 container spacing={5} justifyContent="center" >
+					<Grid2 item maxWidth={400}>
+						<Typography variant="h6" align="center" gutterBottom>Revenu Mensuel</Typography>
+						<Bar data={revenueSalesMonthData} options={revenueSalesMonthDataOptions} />
+					</Grid2>
+					<Grid2 item maxWidth={400}>
+						<Typography variant="h6" align="center" gutterBottom>Répartition des Ventes par Produit en Pourcentage</Typography>
+						<Bar data={saleProductProportionData} options={saleProductProportionDataOptions} />
+					</Grid2>
+				</Grid2>
 			</Stack>
 		</Box>
 	);
