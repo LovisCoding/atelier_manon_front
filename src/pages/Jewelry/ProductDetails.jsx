@@ -101,7 +101,7 @@ export default function ProductDetails({product, validateCallback}) {
 
 	return (
 		<Box padding={2}>
-			<Box marginBottom={3}>
+			<Box mb={3}>
 				<Typography variant="h4">{product.libProd}</Typography>
 				<Box display={"flex"} alignItems={"center"}>
 					<IoTimeOutline />
@@ -111,6 +111,7 @@ export default function ProductDetails({product, validateCallback}) {
 				</Box>
 			</Box>
 
+			<Typography mb={3} fontWeight='bold' fontSize={20} >{product.prix} €</Typography>
 
 			<Typography marginBottom={4} variant="body1">{product.descriptionProd}</Typography>
 
@@ -165,7 +166,7 @@ export default function ProductDetails({product, validateCallback}) {
 				/>}
 				<Box display="flex" gap={1} >
 					<Button
-						variant="customYellow"
+						variant='contained'
 						color="primary"
 						onClick={handleAddToCart}
 						sx={{width:'59%'}}

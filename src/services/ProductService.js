@@ -57,7 +57,7 @@ export const getMaterials = async (id) => {
 }
 
 export const getRocks = async (id) => {
-    const data = await axios.get('/api/matprod/get-pierres-produit', { params: {idProd:id} })
+    const data = await axios.get('/api/pieprod/get-pierres-produit', { params: {idProd:id} })
     if (!data.data) return null;
     return data.data;
 }

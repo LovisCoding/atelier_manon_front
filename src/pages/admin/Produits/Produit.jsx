@@ -234,9 +234,9 @@ const Produit = () => {
             <Box display="flex" justifyContent="center" mt={5} ><CircularProgress size={60} thickness={5} color="" /></Box> // Display loader while loading data
         ) : (
             <SidebarMenu>
-              <Box display="flex" justifyContent="center" width="100%" mb={5} mx={2}>
+              <Box display="flex" justifyContent="center" width="100%" mb={5} mx={2} mt={2}>
                 <Stack maxWidth="600px" spacing={2}>
-                  <Typography variant="h4">Détail du produit</Typography>
+                  <Typography textAlign="center" variant="h4">Détail du produit</Typography>
                   <ProductDetailsForm
                       valueLib={valueLib}
                       setValueLib={setValueLib}
