@@ -23,7 +23,7 @@ export default function Product() {
 			setProduct({...data, idCli:2});
 			let tmpImages = [];
 			data.tabPhoto.forEach(image => {
-				tmpImages = [...tmpImages, getProductImage(image) ];
+				tmpImages = [...tmpImages, getProductImage(image, null, id) ];
 			});
 			setImages(tmpImages);
 		}

@@ -103,7 +103,7 @@ const Produit = () => {
 
             const tmpImages = []
             productData?.tabPhoto.forEach(image => {
-             tmpImages.push({file:getProductImage(image, 100,100), libImage: image})
+             tmpImages.push({file:getProductImage(image, 100,id), libImage: image})
 
             });
             setImages(tmpImages);

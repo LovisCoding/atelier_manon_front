@@ -90,8 +90,8 @@ export const getBestSellers = async () => {
     }
 };
 
-export const getProductImage = (imgName, width, height) => {
-    return import.meta.env.VITE_API_URL+'img/'+imgName+ (width ? '?width='+width : '');
+export const getProductImage = (imgName, width, idProd) => {
+    return import.meta.env.VITE_API_URL+'img/'+imgName+(idProd ? '?idProd='+idProd : '')  + (width ? '&width='+width : '')  ;
 }
 
 
