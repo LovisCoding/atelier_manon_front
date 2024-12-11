@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { IconButton, Stack, Typography, useTheme, Box } from "@mui/material";
 import { IoMenu } from "react-icons/io5";
 import ImgMui from "../../ImgMui";
-import imgManon from "../../../assets/img/logo_manon.webp";
 import DrawerSm from "./DrawerSm";
 import ElevationScroll from "../ElevationScroll";
 import Link from "../../Link";
@@ -10,6 +9,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../../utils/AuthContext";
 import { IoMdCart } from "react-icons/io";
+import { getImageURL } from '../../../services/HomeService'
 
 export default function NavbarSm() {
   const theme = useTheme();
@@ -57,7 +57,7 @@ export default function NavbarSm() {
             </IconButton>
             <Stack direction="row" spacing={2} alignItems="center">
               <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', gap: 2 }}>
-                <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+                <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={getImageURL('logo')} />
                 <Typography variant="h6" sx={{ fontWeight: 300, color }}
                 >L'Atelier de Manon</Typography>
               </Link>

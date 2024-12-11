@@ -6,10 +6,10 @@ import { IoMdCart } from "react-icons/io";
 import Link from "../../Link";
 import { useLocation } from "react-router";
 import ImgMui from "../../ImgMui";
-import imgManon from "../../../assets/img/logo_manon.webp";
 import DropDownMenu from "./DropDownMenu";
 import ElevationScroll from "../ElevationScroll";
 import { useAuth } from "../../../utils/AuthContext";
+import { getImageURL } from '../../../services/HomeService'
 
 export default function NavbarMd() {
   const location = useLocation();
@@ -45,7 +45,7 @@ export default function NavbarMd() {
               {/* Logo and title */}
               <Stack direction="row" spacing={2} alignItems="center">
               <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', gap: 2 }}>
-                <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={imgManon} />
+                <ImgMui sx={{ width: 40, height: 40 }} alt="logo" src={getImageURL('logo')} />
                 <Typography variant="h6" sx={{ fontWeight: 300, color: textColor }}
                 >L'Atelier de Manon</Typography>
               </Link>
