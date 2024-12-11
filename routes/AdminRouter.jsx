@@ -21,6 +21,7 @@ const Personalization = React.lazy(() => import("../src/pages/admin/Personalizat
 const Accueil = React.lazy(() => import("../src/pages/admin/home/Accueil.jsx"));
 const AdminAvis = React.lazy(() => import("../src/pages/admin/Avis/Avis.jsx"));
 const AdminStats = React.lazy(() => import("../src/pages/admin/Stats/Stats.jsx"));
+const MentionsLegales = React.lazy(() => import("../src/pages/admin/MentionsLegales/MentionsLegales.jsx"));
 
 const AdminRouter = () => {
 
@@ -53,6 +54,7 @@ const AdminRouter = () => {
             <Route path="/avis" element={<AdminAvis />} />
             <Route path="/stats" element={<AdminStats />} />
             <Route path="/cgv" element={<CGV />} />
+            <Route path="/mentionsLegales" element={<MentionsLegales />} />
 
             <Route path="*" element={<NotFound />} />
 

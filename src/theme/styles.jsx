@@ -3,10 +3,10 @@ import { GlobalStyles } from "@mui/material";
 
 export default function StylesMUI() {
     const styles = {
-        ".caca": {
-            color: "red",
-            backgroundColor: "blue",
-        },
+        ".overflowReactQuill .ql-editor": {
+            overflow:"auto",
+            maxHeight:"35rem"
+        }
     };
 
     return (

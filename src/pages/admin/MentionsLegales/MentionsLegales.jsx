@@ -5,9 +5,6 @@ import { useState, useEffect } from "react";
 
 import { getEvenement, updateEvenement } from "../../../services/HomeService";
 
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-
 
 export default function CGV() {
 
@@ -16,16 +13,16 @@ export default function CGV() {
 	const [openSnackbar, setOpenSnackbar] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	const updateCGV = async () => {
-		const data = await updateEvenement('cgv', message);
+	const updateMentionsLegales = async () => {
+		const data = await updateEvenement('mentionsLegales', message);
 		if (data) {
 			setLoading(false);
-			setSnackbarMessage("Page CGV mise à jour avec succès !");
+			setSnackbarMessage("Page Mentions Légales mise à jour avec succès !");
 			setOpenSnackbar(true);
 		}
 		else {
 			setLoading(false);
-			setSnackbarMessage("Erreur lors de la modification des conditions générales de ventes.");
+			setSnackbarMessage("Erreur lors de la modification des Mentions Légales.");
 			setOpenSnackbar(true);
 		}
 	}
@@ -33,7 +30,7 @@ export default function CGV() {
 
 	useEffect(() => {
 		const exec = async () => {
-			const response = await getEvenement('cgv');
+			const response = await getEvenement('mentionsLegales');
 			setMessage(response);
 		}
 		exec();
@@ -70,16 +67,16 @@ export default function CGV() {
 					}}
 				>
 					<Typography variant="h4" mb={5} textAlign="center">
-						Modification de la page CGV
+						Modification de la page Mentions Legales
 					</Typography>
 
 					<Stack spacing={2}>
-						<Quill title={"Contenu de la page CGV"} message={message} setMessage={setMessage}/>
+						<Quill title={"Contenu de la page Mentions Legales"} message={message} setMessage={setMessage}/>
 
 						<Button
 							variant="contained"
 							color="primary"
-							onClick={updateCGV}
+							onClick={updateMentionsLegales}
 							sx={{
 								fontWeight: "bold",
 								alignSelf: "center",
