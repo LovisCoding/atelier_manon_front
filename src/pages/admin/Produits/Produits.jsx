@@ -1,6 +1,5 @@
-import { useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
-import { Box, Button, Typography, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Box, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import Link from "../../../components/Link";
 import { useNavigate } from "react-router-dom";

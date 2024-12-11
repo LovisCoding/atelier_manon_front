@@ -5,7 +5,6 @@ import SidebarMenu from "../SidebarMenu";
 import { getArticleById, createArticle } from "/src/services/ArticleService"; // Assurez-vous que createArticle est implémenté
 import { useNavigate } from 'react-router';
 
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Quill from "../../../components/Quill";
 

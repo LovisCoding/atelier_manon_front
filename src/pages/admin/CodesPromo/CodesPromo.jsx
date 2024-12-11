@@ -2,7 +2,7 @@ import {
     Box,
     Button,
     Paper,
-    Stack, Table,
+    Table,
     TableBody,
     TableCell,
     TableContainer,

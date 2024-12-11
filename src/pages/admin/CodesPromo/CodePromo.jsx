@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import SidebarMenu from "../SidebarMenu";
 import { Box, Button, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -14,7 +14,6 @@ import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoServic
 import { getAllProducts, getProductImage } from "../../../services/ProductService";
 import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduitService";
 import Snackbar from "@mui/material/Snackbar";
-import { useAuth } from "../../../utils/AuthContext";
 
 export default function CodePromo() {
 	const { id } = useParams();
