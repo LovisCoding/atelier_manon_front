@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Stack, Box, IconButton, Link } from '@mui/material';
-import { getImageURL } from '../../services/HomeService';
+import { getImageURL, getEvenement } from '../../services/HomeService';
 
 const Presentation = ({ scrollToSection }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
+	const [message, setMessage] = useState("");
 
   const handleScroll = () => {
     setScrollPosition(window.scrollY);
@@ -15,6 +16,14 @@ const Presentation = ({ scrollToSection }) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+		const exec = async () => {
+			const response = await getEvenement('produitEvenement');
+			setMessage("/product/" + response);
+		}
+		exec();
+	}, [])
 
   return (
     <Box
@@ -56,7 +65,12 @@ const Presentation = ({ scrollToSection }) => {
         }}
       >
         <Box sx={{ display: 'flex', gap: '20px' }}>
-          <Link href="/jewelry" underline="none">
+        <Link href="/jewelry" underline="none">
+            <Button variant="home" size="large">
+              En savoir plus
+            </Button>
+          </Link>
+          <Link href={message} underline="none">
             <Button variant="home" size="large">
               Acheter
             </Button>
