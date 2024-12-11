@@ -36,7 +36,6 @@ const ManufacturingStep = () => {
             variant="h4"
             sx={{
               fontSize: { xs: '1.8rem', sm: '2.5rem' },
-              color: '#F3A800',
               marginBottom: '20px',
               letterSpacing: '2px',
             }}

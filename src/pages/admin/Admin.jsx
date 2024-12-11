@@ -1,9 +1,9 @@
 import React from 'react';
-import Products from './Produits/Produits';
+import Stats from './Stats/Stats';
 
 const Admin = () => {
   return (
-    <Products />
+    <Stats />
   );
 };
 

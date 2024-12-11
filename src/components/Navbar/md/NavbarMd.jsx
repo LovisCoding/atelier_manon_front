@@ -49,7 +49,7 @@ export default function NavbarMd() {
                 <Typography variant="h6" sx={{ fontWeight: 300, color: textColor }}
                 >L'Atelier de Manon</Typography>
               </Link>
-                
+
               </Stack>
 
               {/* Navigation links */}

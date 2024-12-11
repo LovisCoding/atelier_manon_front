@@ -19,6 +19,7 @@ const Newsletter = React.lazy(() => import('../src/pages/admin/Newsletter/Newsle
 const Personalization = React.lazy(() => import("../src/pages/admin/Personalization/Personalization.jsx"));
 const Accueil = React.lazy(() => import("../src/pages/admin/home/Accueil.jsx"));
 const AdminAvis = React.lazy(() => import("../src/pages/admin/Avis/Avis.jsx"));
+const AdminStats = React.lazy(() => import("../src/pages/admin/Stats/Stats.jsx"));
 
 const AdminRouter = () => {
 
@@ -49,6 +50,7 @@ const AdminRouter = () => {
             <Route path="/personalization" element={<Personalization />} />
             <Route path="/accueil" element={<Accueil />} />
             <Route path="/avis" element={<AdminAvis />} />
+            <Route path="/stats" element={<AdminStats />} />
 
             <Route path="*" element={<NotFound />} />
 

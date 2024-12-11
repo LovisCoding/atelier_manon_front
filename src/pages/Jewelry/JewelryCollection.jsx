@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Typography, Card, CardMedia, CardContent, Popover, List, ListItem, ListItemText, Slider, TextField, IconButton, Grid2 } from '@mui/material';
+import { Box, Button, Typography, Card, CardMedia, CardContent, Popover, List, ListItem, ListItemText, Slider, TextField, IconButton, Grid2, useTheme } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -16,6 +16,7 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const navigate = useNavigate();
+  const theme = useTheme();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -62,16 +63,16 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
       </Box>
 
       <Box sx={{ padding: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography variant="h5" sx={{ color: '#f9a825', marginBottom: '1rem', textAlign: 'center' }}>
+        <Typography variant="h5" sx={{ color: 'customYellow', marginBottom: '1rem', textAlign: 'center' }}>
           {collectionTitle}
         </Typography>
 
         <Box sx={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
-          <Button variant="outlined" sx={{ marginRight: '1rem', fontWeight: 'bold' }} onClick={handleClick} endIcon={<FilterListIcon />}>
+          <Button variant="yellowButton" sx={{ marginRight: '1rem', fontWeight: 'bold' }} onClick={handleClick} endIcon={<FilterListIcon />}>
             Filtres
           </Button>
-          <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #ccc', borderRadius: 1, padding: '0.25rem 0.5rem' }}>
-            <SearchIcon sx={{ color: '#888', marginRight: '0.5rem' }} />
+          <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #EEB828', borderRadius: 1, padding: '0.25rem 0.5rem' }}>
+            <SearchIcon sx={{ color: '#EEB828', marginRight: '0.5rem' }} />
             <TextField
               placeholder="Recherche"
               variant="standard"
@@ -105,7 +106,8 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
             min={0} 
             max={100} 
             step={5} 
-            sx={{ width: '80%' }} 
+            sx={{ width: '80%' }}
+            color='customYellow'
           />
         </Box>
 
@@ -123,7 +125,7 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
                   sx={{ objectFit: 'cover' }}
                 />
                 <CardContent>
-                  <Typography variant="h6" sx={{ color: '#f9a825', fontWeight: 'bold' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                     {item.title}
                   </Typography>
                   <Typography variant="body2" sx={{ color: '#333', fontWeight: 'bold' }}>

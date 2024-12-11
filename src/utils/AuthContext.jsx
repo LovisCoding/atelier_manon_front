@@ -10,6 +10,7 @@ export default function AuthContextProvider({ children }) {
   const [firstFetch, setFirstFetch] = useState(false);
 
   const getProfil = () => {
+    setFirstFetch(false);
     axios.get("/api/client/account/get-compte")
       .then((res) => {
         if ( res.status == 200 ){
@@ -53,7 +54,6 @@ export default function AuthContextProvider({ children }) {
   const logout = () => {
     axios.post("/api/client/account/logout");
     setDetails(null);
-    setFirstFetch(false);
   };
 
   useEffect(() => {
