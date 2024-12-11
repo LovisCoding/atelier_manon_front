@@ -23,7 +23,7 @@ export default function Accueil() {
   const [eventBar, setEventBar] = useState("");
 
   const changeEvent = () => {
-    axios.post("/api/personnalisation/update-evenement", {
+    axios.post("/api/admin/personnalisation/update-evenement", {
       message: event
     })
       .then((res) => {

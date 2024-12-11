@@ -129,7 +129,7 @@ export const deleteProduct = async (idProd) => {
 export const updateProduct = async (product) => {
 	try {
 		const data = await axios
-			.post('/api/produit/update-produit' , {
+			.post('/api/admin/produit/update-produit' , {
 				...product
 			}, { headers: { 'Content-Type':'application/json' } });
 		return data.data
@@ -140,7 +140,7 @@ export const updateProduct = async (product) => {
 export const addImage= async (idProd, image, libImage) => {
     try {
 
-        const data = await axios.post('/api/produit/add-image', {
+        const data = await axios.post('/api/admin/produit/add-image', {
             idProd,
             image,
             libImage
@@ -157,7 +157,7 @@ export const reorderImages= async (idProd, tabPhoto) => {
     })
 }
 export const deleteImage= async (idProd, libImage) => {
-    const data = await axios.post('/api/produit/delete-image', {
+    const data = await axios.post('/api/admin/produit/delete-image', {
         idProd,
         libImage
     })
