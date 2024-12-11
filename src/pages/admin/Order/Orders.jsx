@@ -41,8 +41,8 @@ export default function Orders() {
           <Typography variant="h4" textAlign="center">
             Liste des commandes
           </Typography>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableContainer component={Paper}> 
+            <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>

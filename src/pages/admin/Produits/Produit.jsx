@@ -24,6 +24,12 @@ import { getMatProd, updateMatProd } from "../../../services/MatProdService.js";
 import FilsSection from "./FilsSection.jsx";
 import { getFilsById, updateFilsProd } from "../../../services/FilProdServices.js";
 import { getAllFils } from "../../../services/PersonalizationService.js";
+import TaillesSection from "./TaillesSection.jsx";
+import {getTailles} from "../../../services/TailleServices.js";
+import {getTaillesProduit, updateTaillesProduit} from "../../../services/TaiProdServices.js";
+import PendentifsSection from "./PendentifsSection.jsx";
+import {getPendentifs} from "../../../services/PendentifServices.js";
+import {getPendentifsProduit, updatePenProd} from "../../../services/PenProdServices.js";
 
 
 const Produit = () => {
@@ -44,13 +50,18 @@ const Produit = () => {
   const [valuePrix, setValuePrix] = useState(0);
   const [engraving, setEngraving] = useState(false);
   const [tempsRea, setTempsRea] = useState(0);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [tailles, setTailles] = useState([]);
+  const [selectedTailles, setSelectedTailles] = useState([]);
+  const [pendentifs, setPendentifs] = useState([]);
+    const [selectedPendentifs, setSelectedPendentifs] = useState([]);
 
+  const [loading, setLoading] = useState(true); // Loading state
   const [images, setImages] = useState([]);
   const [message, setMessage] = useState('');
   const [snOpenValue, setSnOpenValue] = useState(false);
   const [imagesAUpload,  setImagesAUpload] = useState([]);
   const [imageADelete, setImageADelete] = useState([]);
+
 
 
   console.log(imagesAUpload);
@@ -68,13 +79,21 @@ const Produit = () => {
       getPieProd(id),
       getMatProd(id),
       getAllFils(),
-      getFilsById(id)
+      getFilsById(id),
+      getTailles(),
+      getTaillesProduit(id),
+      getPendentifs(),
+      getPendentifsProduit(id)
+
     ])
-        .then(([categoriesData, pierresData, productData, separatorsData, pieProdData, matProdData, filsData, filsByIdData]) => {
+        .then(([categoriesData, pierresData, productData, separatorsData, pieProdData, matProdData, filsData, filsByIdData, taillesData,taiProdData, pendentifsData, penProdData]) => {
           // Set state with fetched data
           setCategories(categoriesData);
           setPierres(pierresData);
           setSeparators(separatorsData);
+          setTailles(taillesData);
+          setPendentifs(pendentifsData);
+
 
           if (id !== "-1") {
             setValueLib(productData.libProd);
@@ -83,8 +102,8 @@ const Produit = () => {
             setEngraving(productData.estGravable);
             setSelectedCategory(productData.idCateg);
             setTempsRea(productData.tempsRea);
+
             const tmpImages = []
-            console.log(getProductImage(productData.tabPhoto[0], 100,100))
             productData?.tabPhoto.forEach(image => {
              tmpImages.push({file:getProductImage(image, 100,100), libImage: image})
 
@@ -103,6 +122,12 @@ const Produit = () => {
 
           const filsObjects = filsByIdData.map(item => ({ libCouleur: item }));
           setSelectedFils(filsObjects);
+
+          const taillesObjects = taiProdData.map(item => ({ libTaille: item }));
+          setSelectedTailles(taillesObjects)
+
+          const pendentifsObjects = penProdData.map(item => ({ libPendentif: item }));
+          setSelectedPendentifs(pendentifsObjects)
         })
         .catch(error => {
           console.error('Error loading data:', error);
@@ -177,18 +202,20 @@ const Produit = () => {
 
         }
 
-      console.log(imageADelete);
+
       imageADelete?.filter(el => !el.file.includes('base64')).forEach( (image) => {
         deleteImage(id, image.libImage)
       })
 
 
-      console.log(images)
+
       // Update associated data concurrently
       await Promise.all([
         updatePieProd(product.idProd, selectedPierres.map(item => item.libPierre)),
         updateMatProd(product.idProd, selectedSeparators.map(item => item.libMateriau)),
         updateFilsProd(product.idProd, selectedFils.map(item => item.libCouleur)),
+        updateTaillesProduit(product.idProd, selectedTailles.map(item => item.libTaille)),
+        updatePenProd(product.idProd, selectedPendentifs.map(item => item.libPendentif)),
         reorderImages(product.idProd, images.map((el) => el.libImage)),
       ]);
 
@@ -207,7 +234,7 @@ const Produit = () => {
             <Box display="flex" justifyContent="center" mt={5} ><CircularProgress size={60} thickness={5} color="" /></Box> // Display loader while loading data
         ) : (
             <SidebarMenu>
-              <Box display="flex" justifyContent="center" width="100%" mb={5}>
+              <Box display="flex" justifyContent="center" width="100%" mb={5} mx={2}>
                 <Stack maxWidth="600px" spacing={2}>
                   <Typography variant="h4">Détail du produit</Typography>
                   <ProductDetailsForm
@@ -226,9 +253,12 @@ const Produit = () => {
                       setTempsRea={setTempsRea}
                   />
                   <ImagesSection images={images} setImages={setImages} id={id} setImagesAUpload={setImagesAUpload} imagesAUpload={imagesAUpload} imageADelete={imageADelete} setImageADelete={setImageADelete} />
+                  {/*mettre dans un grid2*/}
                   <PierresSection pierres={pierres} selectedPierres={selectedPierres} setSelectedPierres={setSelectedPierres} setPierres={setPierres}/>
                   <SeparatorsSection separateurs={separators} selectedSeparators={selectedSeparators} setSelectedSeparateurs={setSelectedSeparators} />
                   <FilsSection fils={filsSection} selectedFils={selectedFils} setSelectedFils={setSelectedFils} id={id} />
+                  <TaillesSection tailles={tailles} selectedTailles={selectedTailles} setSelectedTailles={setSelectedTailles} />
+                  <PendentifsSection pendentifs={pendentifs} selectedPendentifs={selectedPendentifs} setSelectedPendentifs={setSelectedPendentifs} />
                   <Stack direction="column" spacing={3}>
                     <Button variant="contained" color="info" startIcon={<RiSave2Fill />} onClick={handleUpdate}>
                       Enregistrer
