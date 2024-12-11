@@ -30,7 +30,6 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
     return max;
   };
 
-
   useEffect(() => {
     const fetchCategories = async () => {
       const fetchedCategories = await getCategories();
@@ -88,8 +87,8 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
           {collectionTitle}
         </Typography>
 
-        <Box sx={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: 3 }}>
-          <Button variant="yellowButton" sx={{ fontWeight: 'bold' }} onClick={handleClick} endIcon={<FilterListIcon />}>
+        <Box sx={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: 3 }} >
+          <Button variant="yellowButton" sx={{ fontWeight: 'bold' }} fullWidth onClick={handleClick} endIcon={<FilterListIcon />}>
             Filtres
           </Button>
           <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #EEB828', borderRadius: 1 }}>
@@ -103,7 +102,7 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
               sx={{ width: 200 }}
             />
           </Box>
-          <Box sx={{ width: '20%', marginBottom: '1rem', textAlign: 'center' }}>
+          <Box sx={{ marginBottom: '1rem', textAlign: 'center', minWidth:'10rem' }}>
             <Typography variant="body2" sx={{ marginBottom: '0.5rem' }}>
               Prix: {priceRange[0]} € - {priceRange[1]} €
             </Typography>
@@ -132,7 +131,6 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
         </Popover>
 
 
-
         <Grid2 container spacing={2} justifyContent="center">
           {currentItems.map((item) => (
             <Grid2 item xs={12} sm={6} md={4} key={item.id}>
@@ -144,7 +142,7 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
                   component="img"
                   image={item.image}
                   alt={item.title}
-                  sx={{ objectFit: 'cover' }}
+                  sx={{ objectFit: 'cover', maxHeight:'20rem' }}
                 />
                 <CardContent>
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>

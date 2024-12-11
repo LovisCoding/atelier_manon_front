@@ -21,9 +21,12 @@ export default function Product() {
 			const data = await getProduct(id);
 			if (!data) return;
 			setProduct({...data, idCli:2});
+			let tmpImages = [];
 			data.tabPhoto.forEach(image => {
-				setImages([...images, getProductImage(image, null, id) ]);
+				tmpImages = [...tmpImages, getProductImage(image, null, id) ];
 			});
+			setImages(tmpImages);
+			console.log("imgs:",tmpImages)
 		}
 		exec();
 	}, []);
