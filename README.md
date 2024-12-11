@@ -33,29 +33,44 @@ Enfin, une page de contact et des liens vers ses réseaux sociaux faciliteront l
 ### 1. **Cloner le dépôt**  
 Récupérez le projet en local avec la commande suivante :  
 ```bash
-git clone git@github.com:LovisCoding/atelier_manon_front.git
+git clone git@github.com:LovisCoding/atelier_manon_back.git
 ```
 
-### 2. **Accéder au projet**  
+### 2. **Accéder au projet**
 Déplacez-vous dans le dossier du projet :  
 ```bash
-cd atelier_manon_front
+cd atelier_manon_back
 ```
 
-### 3. **Installer les dépendances**  
-Installez les bibliothèques nécessaires avec npm :  
+### 3. **Installer les dépendances**
+Installez les dépendances du projet avec la commande suivante :  
 ```bash
-npm install
+composer install
 ```
 
-### 4. **Démarrer l'application**  
-Lancez l'application avec la commande :  
+### 4. **Configurer CodeIgniter 4**
+Copiez le fichier de configuration d'exemple :  
 ```bash
-npm run dev
+cp .env.example .env
 ```
 
-### 5. **Accéder à l'application**  
-Ouvrez votre navigateur et accédez au site via l'adresse :  
+### 5. **Configurer la base de données**
+Modifiez le fichier .env en y ajoutant vos informations de connexion :
 ```bash
-http://localhost:5173
+database.default.DSN =
+database.default.hostname = localhost
+database.default.database = votredb
+database.default.username = votreuser
+database.default.password = motdepasse
+database.default.DBDriver = Postgre
+database.default.port = 7777
+```
+
+### 6. **Créer la base de données**
+Exécutez le fichier SQL `init.sql` situé à la racine du projet pour créer manuellement les tables dans votre base de données.
+
+### 7. **Démarrer l'application**
+Lancez l'application avec la commande suivante :  
+```bash
+php spark serve
 ```
