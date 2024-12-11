@@ -6,15 +6,6 @@ import axios from 'axios';
 import Link from './components/Link';
 
 export default function App() {
-
-	axios.get(
-		'/api/test'
-	).then((response) => {
-		// console.log(response.data);
-	}).catch((error) => {
-		console.error(error);
-	}
-	)
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>

@@ -19,7 +19,6 @@ const AvisList = ({ title, avisData }) => {
         variant="h4"
         sx={{
           fontSize: '2.5rem',
-          color: '#F3A800',
           marginBottom: '20px',
           textAlign: 'center',
         }}

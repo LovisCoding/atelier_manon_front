@@ -12,16 +12,16 @@ const theme = createTheme({
     h1: {
       fontSize: '2.4rem',
       fontWeight: '800',
-      color: '#eeba39',
+      color: '#EEB828',
     },
     h2: {
       fontSize: '2.2rem',
-      color: '#eeba39',
+      color: '#EEB828',
     },
-    h3: { color: '#eeba39' },
-    h4: { color: '#eeba39' },
-    h5: { color: '#eeba39' },
-    h6: { color: '#eeba39' },
+    h3: { color: '#EEB828' },
+    h4: { color: '#EEB828' },
+    h5: { color: '#EEB828' },
+    h6: { color: '#EEB828' },
   },
   palette: {
     primary: {
@@ -60,7 +60,7 @@ const theme = createTheme({
         {
           props: { variant: 'sectionTitle' },
           style: {
-            color: 'orange',
+            color: '#EEB828',
             textAlign: 'center',
             marginTop: '40px',
             marginBottom: '20px',
@@ -69,7 +69,7 @@ const theme = createTheme({
         {
           props: { variant: 'cardTitle' },
           style: {
-            color: 'orange',
+            color: '#EEB828',
             fontWeight: 'bold',
             marginBottom: '8px',
           },
@@ -163,7 +163,7 @@ const theme = createTheme({
         {
           props : { variant: 'customYellowTextField' },
           style : {
-            outlineColor: 'yellow'
+            outlineColor: 'customYellow'
           }
         }
       ],

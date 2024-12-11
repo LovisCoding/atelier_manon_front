@@ -25,19 +25,20 @@ export default function Articles() {
         fetchArticles();
     }, []);
 
+
     if (loading) {
         return (
-            <Box display={'flex'}>
+            <Box display="flex" sx={{ width: '100%' }}>
                 <SidebarMenu />
-                <Stack sx={{ mt: 5, width: '100%' }}>
-                    <Typography variant='h4'>Chargement des articles...</Typography>
-                </Stack>
+                <Box sx={{ padding: 3, flexGrow: 1, width: '100%' }}>
+                    <Typography variant="h4" sx={{ textAlign: 'center', width: '100%' }}>Chargement des articles...</Typography>
+                </Box>
             </Box>
         );
     }
 
     return (
-        <Box display={'flex'}>
+        <Box display="flex" sx={{ width: '100%' }}>
             <SidebarMenu />
             <Stack sx={{ mt: 5, width: '100%' }}>
                 <Stack direction='row' justifyContent={'space-around'}>
@@ -46,7 +47,8 @@ export default function Articles() {
                         Nouvel Article
                     </Button>
                 </Stack>
-                <Box mx={3} mt={8}>
+
+                <Box mx={15} mt={8}>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>

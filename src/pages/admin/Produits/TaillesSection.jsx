@@ -1,25 +1,25 @@
 import React from 'react';
 import { Autocomplete, Chip, TextField, Box, Typography } from '@mui/material';
 
-const PierresSection = ({ pierres, selectedPierres, setSelectedPierres, setPierres }) => {
+const TaillesSection = ({ tailles, selectedTailles, setSelectedTailles }) => {
 
-  return (
+
+    return (
     <Box>
-      <Typography variant="h6">Pierres disponibles</Typography>
+      <Typography variant="h6">Tailles disponibles</Typography>
         <Autocomplete
             multiple
-            options={pierres.filter(p => !selectedPierres.map(v => v.libPierre).includes(p.libPierre))}
-            getOptionLabel={(option) => option.libPierre}
-            value={selectedPierres}
-
-            onChange={(event, newValue) => setSelectedPierres(newValue)}
+            options={tailles.filter(p => !selectedTailles.map(v => v.libTaille).includes(p.libTaille))}
+            getOptionLabel={(option) => option.libTaille}
+            value={selectedTailles}
+            onChange={(event, newValue) => setSelectedTailles(newValue)}
             renderTags={(value, getTagProps) =>
                 value.map((option, index) => {
                     const { key, ...rest } = getTagProps({ index }); // Destructure to exclude `key`
                     return (
                         <Chip
-                            key={option.libPierre} // Explicitly set the key here
-                            label={option.libPierre}
+                            key={option.libTaille || index} // Explicitly set the key
+                            label={option.libTaille}
                             {...rest} // Spread other props, excluding `key`
                         />
                     );
@@ -31,9 +31,8 @@ const PierresSection = ({ pierres, selectedPierres, setSelectedPierres, setPierr
             sx={{ marginBottom: 2 }}
         />
 
-
     </Box>
   );
 };
 
-export default PierresSection;
+export default TaillesSection;
