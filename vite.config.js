@@ -10,7 +10,7 @@ export default defineConfig(({mode}) => {
 			server: {
 				proxy: {
 					'/api': {
-						target: env.VITE_URL,
+						target: "https://atelier-manon.bernouy.fr",
 						changeOrigin: true,
 					},
 				},
