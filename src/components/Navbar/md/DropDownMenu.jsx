@@ -1,10 +1,21 @@
 import { Button, Menu, MenuItem, Stack, useTheme } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { getCategories } from "../../../services/CategorieService";
 
 export default function DropDownMenu({ scrolled, selected }) {
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const exec = async () => {
+      const data = await getCategories();
+      if (data) setCategories(data);
+    };
+    exec();
+  }, [])
 
   const color = () => {
     if (selected) {
@@ -57,8 +68,9 @@ export default function DropDownMenu({ scrolled, selected }) {
           }
         }}
       >
-        <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/colliers">Colliers</MenuItem>
-        <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to="/jewelry/bracelets">Bracelets</MenuItem>
+        { categories.map((categorie) =>
+            <MenuItem onClick={handleClose} sx={{ color: scrolled ? 'text.white' : '' }} component={Link} to={"/jewelry/"+categorie.libCateg}>{categorie.libCateg}</MenuItem>
+          ) }
       </Menu>
     </Stack>
   );
