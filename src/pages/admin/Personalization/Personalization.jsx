@@ -160,7 +160,7 @@ export default function Personalization() {
       <SidebarMenu />
       <Stack sx={{ mt: 5, width: "70%" }}>
         <Typography variant="h4" mb={4} sx={{ textAlign: "center" }}>
-          Personnalisation des matériaux, des fils et des pierres
+          Personnalisation des variantes
         </Typography>
 
         <DataTable

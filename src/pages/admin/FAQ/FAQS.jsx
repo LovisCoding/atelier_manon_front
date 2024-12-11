@@ -40,7 +40,7 @@ const FoireAuxQuestions = () => {
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
           <Typography variant="h4" sx={{ textAlign: 'center', width: '100%' }}>Foire aux questions</Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '200px' }}>
-            <Button variant="contained" onClick={handleNewFaq} sx={{ fontWeight: 'bold' }}>Nouveau</Button>
+            <Button variant="contained" color="secondary" onClick={handleNewFaq} sx={{ fontWeight: 'bold' }}>Nouveau</Button>
           </Box>
         </Box>
 

@@ -2,7 +2,7 @@ import { Box, Button, Paper, Stack, Table, TableBody, TableCell, TableContainer,
 import { useState, useEffect } from "react";
 import SidebarMenu from "../SidebarMenu";
 import Link from "../../../components/Link";
-import { getArticles } from "/src/services/ArticleService"; // Assurez-vous d'importer la méthode
+import { getArticles } from "/src/services/ArticleService";
 
 export default function Articles() {
     const [articles, setArticles] = useState([]);
@@ -19,27 +19,35 @@ export default function Articles() {
         fetchArticles();
     }, []);
 
+    const truncateText = (text, maxLength) => {
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength) + "…";
+        }
+        return text;
+    };
+
     if (loading) {
         return (
-            <Box display={'flex'}>
+            <Box display="flex" sx={{ width: '100%' }}>
                 <SidebarMenu />
-                <Stack sx={{ mt: 5, width: '100%' }}>
-                    <Typography variant='h4'>Chargement des articles...</Typography>
-                </Stack>
+                <Box sx={{ padding: 3, flexGrow: 1, width: '100%' }}>
+                    <Typography variant="h4" sx={{ textAlign: 'center', width: '100%' }}>Chargement des articles...</Typography>
+                </Box>
             </Box>
         );
     }
 
     return (
-        <Box display={'flex'}>
+        <Box display="flex" sx={{ width: '100%' }}>
             <SidebarMenu />
-            <Stack sx={{ mt: 5, width: '100%' }}>
-                <Stack direction='row' justifyContent={'space-around'}>
-                    <Typography variant='h4'>Articles</Typography>
-                    <Button LinkComponent={Link} href={"/admin/blog/-1"} variant='contained' color='secondary'>
-                        Nouvel Article
-                    </Button>
-                </Stack>
+            <Box sx={{ padding: 3, flexGrow: 1, width: '100%' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
+                    <Typography variant="h4" sx={{ textAlign: 'center', width: '100%' }}>Articles</Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '200px' }}>
+                        <Button component={Link} href="/admin/blog/-1" variant="contained" color="secondary" sx={{ fontWeight: 'bold' }}>Nouvel Article</Button>
+                    </Box>
+                </Box>
+
                 <Box mx={15} mt={8}>
                     <TableContainer component={Paper}>
                         <Table>
@@ -60,7 +68,7 @@ export default function Articles() {
                                         href={`/admin/blog/${article.idArticle}`}
                                     >
                                         <TableCell>{article.titreArticle}</TableCell>
-                                        <TableCell>{article.contenu}</TableCell>
+                                        <TableCell>{truncateText(article.contenu, 100)}</TableCell>
                                         <TableCell>{article.dateArticle}</TableCell>
                                     </TableRow>
                                 ))}
@@ -68,7 +76,7 @@ export default function Articles() {
                         </Table>
                     </TableContainer>
                 </Box>
-            </Stack>
+            </Box>
         </Box>
     );
 }

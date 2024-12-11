@@ -17,6 +17,14 @@ export const getAllProducts = async () => {
     return null;
 }
 
+export const getAllProductsSales = async () => {
+    const data = await axios
+        .get('/api/admin/produit/produits-vente')
+
+    if (data.data) return data.data
+    return null;
+}
+
 export const getProducts = async (params) => {
     const { search, category, priceInf, priceSup, nbDisplay, page } = params;
     
@@ -119,8 +127,6 @@ export const deleteProduct = async (idProd) => {
 		console.error("Une erreur est survenue : "+err)
 	}
 };
-
-
 
 export const updateProduct = async (product) => {
 	try {

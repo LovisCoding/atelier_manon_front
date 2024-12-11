@@ -84,7 +84,6 @@ const Produit = () => {
             setSelectedCategory(productData.idCateg);
             setTempsRea(productData.tempsRea);
             const tmpImages = []
-            console.log(getProductImage(productData.tabPhoto[0], 100,100))
             productData?.tabPhoto.forEach(image => {
              tmpImages.push({file:getProductImage(image, 100,100), libImage: image})
 
