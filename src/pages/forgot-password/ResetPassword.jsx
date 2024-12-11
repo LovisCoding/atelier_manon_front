@@ -67,7 +67,6 @@ function ForgotPassword() {
                 setIsErrorDisplayed(true);
                 return;
             }
-            console.log(data);
             setIsFinished(true);
         }
         exec();

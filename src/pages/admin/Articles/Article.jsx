@@ -41,9 +41,6 @@ export default function Article() {
     }, [id]);
 
     const handleSave = async () => {
-        console.log("title:",title);
-        console.log("description:",description);
-        console.log("date:",date);
         if (!title) setNewArticleError("Veuillez renseigner un titre");
         if (!description) return setNewArticleError("Veuillez renseigner une description");
         if (!date) return setNewArticleError("Veuillez renseigner une date de publication");

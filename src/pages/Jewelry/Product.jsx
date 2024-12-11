@@ -26,7 +26,6 @@ export default function Product() {
 				tmpImages = [...tmpImages, getProductImage(image) ];
 			});
 			setImages(tmpImages);
-			console.log("imgs:",tmpImages)
 		}
 		exec();
 	}, []);

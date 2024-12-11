@@ -67,6 +67,9 @@ export default function NavbarMd() {
                 <Link variant="navbar" sx={getLinkStyles("/contact")} href="/contact">
                   Contact
                 </Link>
+                <Link variant="navbar" sx={getLinkStyles("/blog")} href="/blog">
+                  Blog
+                </Link>
                 {isLogged && <Link variant="navbar" href="/cart" >
                   <IconButton>
                     <IoMdCart color={scrolled ? theme.palette.text.white : theme.palette.text.primary} sx={getLinkStyles("/cart")} />

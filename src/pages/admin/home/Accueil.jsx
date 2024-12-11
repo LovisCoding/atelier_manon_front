@@ -25,10 +25,10 @@ export default function Accueil() {
       message: event
     })
       .then((res) => {
-        // console.log(res)
+        console.log(res)
       })
       .catch((err) => {
-        // console.log(err)
+        console.error(err)
       })
   }
 

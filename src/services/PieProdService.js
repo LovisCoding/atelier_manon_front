@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const getPieProd = async (idProd) => {
-    console.log(idProd)
     const data = await axios.get('/api/pieprod/get-pierres-produit', {
        params: {idProd}
     })

@@ -108,7 +108,6 @@ export const addProductToPanier = async (product) => {
                 gravure : product.gravure || "",
                 variante : variant
             }, { headers: { 'Content-Type':'application/json' } });
-        console.log("Response :",data.data)
         return data;
     } catch (err) {
         console.error("Une erreur est survenue : "+err)
@@ -122,7 +121,6 @@ export const deleteProduct = async (idProd) => {
 			.delete('/api/admin/produit/delete-produit' , {
 				data: { idProd }
 			});
-		console.log("Response :",data.data)
 	} catch (err) {
 		console.error("Une erreur est survenue : "+err)
 	}

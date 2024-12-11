@@ -11,7 +11,6 @@ export const getArticleById = async (id) => {
     try {
         const response = await axios.get(`/api/article/get-article/?idArticle=${id}`);
         if (response.data) {
-			console.log(response.data);
             return response.data; 
         }
         return null;

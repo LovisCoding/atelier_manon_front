@@ -46,7 +46,6 @@ function OrderDetailsContent() {
       .then((data) => {
         if (data != null) {
           setProducts(data)
-          console.log(data);
         }
         else setError("Une erreur est survenue lors du chargement du détail de la commande")
       })
