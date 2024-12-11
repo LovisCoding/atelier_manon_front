@@ -22,7 +22,7 @@ export default function Product() {
 			if (!data) return;
 			setProduct({...data, idCli:2});
 			data.tabPhoto.forEach(image => {
-				setImages([...images, getProductImage(image) ]);
+				setImages([...images, getProductImage(image, null, id) ]);
 			});
 		}
 		exec();

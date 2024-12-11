@@ -82,7 +82,7 @@ export default function CodePromo() {
 		getAllProducts().then((data) => {
 			const tmpData = [...data]
 			tmpData.forEach((row) => {
-				row.image = getProductImage(row.photo);
+				row.image = getProductImage(row.photo, null, row.idProd);
 			})
 			
 			setRows(data);

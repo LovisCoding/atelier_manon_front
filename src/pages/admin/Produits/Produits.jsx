@@ -25,7 +25,7 @@ export default function Produits() {
                 name: row.libProd,
                 prixU: row.prix,
                 total: row.prixEstime,
-                image: getProductImage(row.photo, 100)
+                image: getProductImage(row.photo, 100, row.idProd)
             }));
             setRows(tmpData);
         });
