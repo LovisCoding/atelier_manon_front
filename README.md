@@ -16,7 +16,7 @@ Enfin, une page de contact et des liens vers ses réseaux sociaux faciliteront l
 
 ---
 
-## :sparkles: **Fonctionnalités clés**  
+## ✨ **Fonctionnalités clés**  
 
 - **Présentation des bijoux** : Découvrez les créations uniques de Manon avec leurs options de personnalisation.  
 - **Commande en ligne** : Passez commande simplement en créant un compte.  
@@ -26,7 +26,9 @@ Enfin, une page de contact et des liens vers ses réseaux sociaux faciliteront l
 
 ---
 
-## :tools: **Installation**  
+## 🛠️ **Installation**  
+
+> **Note** : Ce dépôt correspond à la partie **front-end** du projet. Assurez-vous que la partie **back-end** est démarrée au préalable en suivant le guide disponible ici : [atelier_manon_back](https://github.com/LovisCoding/atelier_manon_back).
 
 ### 1. **Cloner le dépôt**  
 Récupérez le projet en local avec la commande suivante :  
@@ -56,3 +58,4 @@ npm run dev
 Ouvrez votre navigateur et accédez au site via l'adresse :  
 ```bash
 http://localhost:5173
+```
