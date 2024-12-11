@@ -17,7 +17,7 @@ export default function Categories () {
     }, []);
 
     return (
-      <Box display="flex" justifyContent="center" width="100%" >
+      <Box display="flex" justifyContent="center" width="100%" sx={{ marginTop: 5 }}>
         <Stack sx={{mb:5}}>
           <Typography variant="h4" mb={4} sx={{ textAlign: "center" }}>
             Personnalisation des categories
