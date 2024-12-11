@@ -48,7 +48,7 @@ export default function Articles() {
                     </Button>
                 </Stack>
 
-                <Box mx={15} mt={8}>
+                <Box mx={5} mt={5}>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>

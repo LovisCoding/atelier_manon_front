@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Button, TextField, MenuItem, Select, FormControl, InputLabel, Stack } from "@mui/material";
+import { Box, Typography, Button, TextField, MenuItem, Select, FormControl, InputLabel, Stack, Snackbar, Alert } from "@mui/material";
 import SidebarMenu from "../SidebarMenu";
 import { getCategories } from "/src/services/CategorieService";
 import { addImage, addImageCateg } from "/src/services/HomeService";
@@ -19,6 +19,8 @@ export default function Accueil() {
   const [produits, setProduits] = useState([]);
 
   const [event, setEvent] = useState("");
+
+  const [eventBar, setEventBar] = useState("");
 
   const changeEvent = () => {
     axios.post("/api/personnalisation/update-evenement", {
@@ -118,6 +120,14 @@ export default function Accueil() {
           borderRadius: 2,
         }}
       >
+        <Snackbar
+          open={eventBar === ""}
+          autoHideDuration={3000}
+          onClose={setEventBar("")}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert onClose={setEventBar("")} severity={eventBar.contains("succès") ? "success" : "error"} sx={{ width: "100%" }}>{eventBar}</Alert>
+        </Snackbar>
         <Stack spacing={4} sx={{ width: "100%", maxWidth: 600, mb: "2rem" }}>
           <Typography variant="h4" align="center">
             Gestion des Pages
