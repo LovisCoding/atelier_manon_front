@@ -80,7 +80,7 @@ function Command() {
 {/* delai */}
                             {address &&
                             <Box>
-                                <Typography >Votre commande sera livrée à <span style={{fontWeight:'600'}} >{address}</span> dans un délai estimé de {5} jours (ouvrés).</Typography>
+                                <Typography >Votre commande sera livrée à <span style={{fontWeight:'600'}} >{address}</span> dans un délai estimé de {data.tempsLivraisonEstime} jours (ouvrés).</Typography>
                             </Box>}
 
                             {data.comm && data.comm !== "" &&

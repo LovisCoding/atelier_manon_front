@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import JewelryCollection from './JewelryCollection';
-import { getProducts } from '../../services/ProductService';
+import { getProductImage, getProducts } from '../../services/ProductService';
 import { getCategories } from '/src/services/CategorieService';
 import { useParams, useNavigate } from 'react-router-dom';
 import { CircularProgress, Stack } from '@mui/material';
@@ -56,7 +56,7 @@ const Jewelry = () => {
       if (products) {
         const formattedData = products.produits.map((product) => ({
           id: product.idProd,
-          image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}?width=350`,
+          image: getProductImage(product.tabPhoto[0], 350, product.idProd),
           title: product.libProd,
           price: Number.parseFloat(product.prix),
           idCateg: product.idCateg
