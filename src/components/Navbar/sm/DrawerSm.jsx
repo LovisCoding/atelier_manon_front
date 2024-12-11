@@ -4,10 +4,21 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../../utils/AuthContext";
+import { getCategories } from "../../../services/CategorieService";
+import { useEffect } from "react";
 
 export default function DrawerSm({ open, setOpen }) {
 	const [openDdl, setOpenDdl] = useState(false);
+	const [categories, setCategories] = useState([]);
 	const tab = ['/', '/jewelry', '/about', '/faq', '/blog', '/contact', '/login', '/profil']
+
+	useEffect(() => {
+		const exec = async () => {
+			const data = await getCategories();
+			if (data) setCategories(data)
+		}
+		exec();
+	}, [])
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -17,7 +28,8 @@ export default function DrawerSm({ open, setOpen }) {
 	  setOpenDdl(!openDdl);
 	};
 	const setColorByLink = (index) => {
-		if (location.pathname === tab[index] || location.pathname.includes(index) ) {
+		const url = location.pathname.replace("%20", " ");
+		if (url === tab[index] || url.includes(index) ) {
 			return 'text.secondary'
 		}
 		return 'rgba(255,255,255,1)'
@@ -89,16 +101,13 @@ export default function DrawerSm({ open, setOpen }) {
 				  {/* Contenu déroulant pour "Bijoux" */}
 				  {text === "Bijoux" && (
 					<Collapse in={openDdl} timeout="auto" unmountOnExit>
-					  <List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 10, py:0 }} onClick={() => navigate("/jewelry/necklaces")} >
-						  <ListItemText primaryTypographyProps={{fontWeight: '300', color: setColorByLink('/jewelry/necklaces' )}}  primary="Colliers" />
-						</ListItemButton>
-					  </List>
-					  <List component="div" disablePadding>
-						<ListItemButton sx={{ pl: 10, py:0 }} onClick={() => navigate("/jewelry/bracelets")}>
-						  <ListItemText primaryTypographyProps={{fontWeight: '300', color: setColorByLink('/jewelry/bracelets')}} primary="Bracelets" />
-						</ListItemButton>
-					  </List>
+						{ categories.map((categorie) =>
+							<List component="div" disablePadding>
+								<ListItemButton sx={{ pl: 10, py:0 }} onClick={() => navigate("/jewelry/"+categorie.libCateg)} >
+									<ListItemText primaryTypographyProps={{fontWeight: '300', color: setColorByLink('/jewelry/'+categorie.libCateg )}}  primary={categorie.libCateg} />
+								</ListItemButton>
+							</List>
+						) }
 					</Collapse>
 				  )}
 				</Box>
