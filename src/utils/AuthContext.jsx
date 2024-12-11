@@ -11,7 +11,7 @@ export default function AuthContextProvider({ children }) {
 
   const getProfil = () => {
     setFirstFetch(false);
-    axios.get("/api/client/account/get-compte")
+    axios.get("https://atelier-manon.bernouy.fr/api/client/account/get-compte")
       .then((res) => {
         if ( res.status == 200 ){
           let data = res.data;
