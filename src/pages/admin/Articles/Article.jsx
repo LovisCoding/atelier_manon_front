@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import Quill from "../../../components/Quill";
 
 export default function Article() {
     const { id } = useParams();
@@ -110,17 +111,7 @@ export default function Article() {
                     onChange={(e) => setTitle(e.target.value)}
                 />
 
-                <Box>
-                    <Typography variant="h6" gutterBottom>
-                        Description de l'article
-                    </Typography>
-                    <ReactQuill
-                        theme="snow"
-                        value={description}
-                        onChange={setDescription}
-                        placeholder="Écrivez la description ici..."
-                    />
-                </Box>
+                <Quill title={" Description de l'article"} message={description} setMessage={setDescription} />
 
                 <TextField
                     label="Date de publication"
