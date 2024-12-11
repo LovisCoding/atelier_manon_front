@@ -16,7 +16,6 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const navigate = useNavigate();
-  const theme = useTheme();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -99,13 +98,13 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
             Prix: {priceRange[0]} € - {priceRange[1]} €
           </Typography>
           <Slider 
-            value={priceRange} 
-            onChange={(e, newValue) => setPriceRange(newValue)} 
-            valueLabelDisplay="auto" 
+            value={priceRange}
+            onChange={(e, newValue) => setPriceRange(newValue)}
+            valueLabelDisplay="auto"
             valueLabelFormat={(value) => `${value} €`} 
-            min={0} 
-            max={100} 
-            step={5} 
+            min={0}
+            max={100}
+            step={5}
             sx={{ width: '80%' }}
             color='customYellow'
           />
@@ -122,7 +121,7 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
                   component="img"
                   image={item.image}
                   alt={item.title}
-                  sx={{ objectFit: 'cover' }}
+                  sx={{ objectFit: 'cover', maxHeight:'20rem' }}
                 />
                 <CardContent>
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
