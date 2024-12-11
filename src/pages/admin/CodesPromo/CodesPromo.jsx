@@ -28,12 +28,12 @@ export default function CodesPromo() {
 		<Box display={'flex'}>
 			<SidebarMenu />
 			<Stack  sx={{ mt: 5, width: '100%' }} >
-				<Stack direction='row' justifyContent={'space-around'}>
+				<Stack sx={{ marginTop: "1rem"}} direction='row' justifyContent={'space-around'}>
 					<Typography variant='h4'>Codes Promotion</Typography>
 					<Button  LinkComponent={Link} href={"/admin/codesPromo/-1"} variant='contained' color='secondary'>Nouveau</Button>
 				</Stack>
-				<Box mx={15} mt={8}>
-				<TableContainer component={Paper}>
+				<Box margin={4}>
+				<TableContainer sx={{ margin: "0 auto", maxWidth: "30rem" }} component={Paper}>
 					<Table>
 						<TableHead>
 							<TableRow>

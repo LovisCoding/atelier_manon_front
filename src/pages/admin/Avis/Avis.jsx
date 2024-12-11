@@ -60,10 +60,10 @@ export default function Avis() {
         <Box display={"flex"}>
             <SidebarMenu />
             <Stack sx={{ mt: 5, width: "100%" }}>
-                <Stack direction="row" justifyContent={"space-around"}>
+                <Stack mb={5} direction="row" justifyContent={"space-around"}>
                     <Typography variant="h4">Liste des Avis</Typography>
                 </Stack>
-                <Box mx={15} mt={8}>
+                <Box mx={5}>
                     {loading ? (
                         <Stack direction="row" justifyContent="center">
                             <CircularProgress />
