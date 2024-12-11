@@ -64,8 +64,6 @@ const Produit = () => {
 
 
 
-  console.log(imagesAUpload);
-
   // Load data
   useEffect(() => {
     setLoading(true); // Start loading
