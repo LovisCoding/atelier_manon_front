@@ -155,9 +155,7 @@ function Actions({ setOrderDetails, orderDetails }) {
     <Stack spacing={3}>
         { orderDetails.etat === "pas commencée" &&  <Button onClick={() => changeState("en cours")} fullWidth variant="yellowButton">Commencer la commande</Button> }
         { orderDetails.etat === "en cours" &&  <Button onClick={() => changeState("terminée")} fullWidth variant="yellowButton">Terminer la commande</Button> }
-      <Button onClick={() => changeState("annulée")} fullWidth variant="outlined" color="error">
-        Annuler la commande
-      </Button>
+        { orderDetails.etat !== "annulée" &&  <Button onClick={() => changeState("annulée")} fullWidth variant="yellowButton">Annuler la commande</Button> }
     </Stack>
   );
 }
