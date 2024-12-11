@@ -135,8 +135,9 @@ const Produit = () => {
     const tmpMessage = [];
     if (product.libProd === '') tmpMessage.push('Libellé');
     if (product.descriptionProd === '') tmpMessage.push('Description');
-    if (product.prix  <1) tmpMessage.push('Prix');
+    if (product.prix  <1 || product.prix >1000) tmpMessage.push('Prix entre 1 et 1000e');
     if (product.idCateg === '') tmpMessage.push('Catégorie');
+    if (product.tempsRea < 1 || product.tempsRea > 100) tmpMessage.push('Temps réalisation entre 0 et 100 jours')
 
     if (tmpMessage.length > 0) {
       const s = tmpMessage.length > 1 ? 's' : '';

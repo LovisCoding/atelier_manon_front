@@ -60,6 +60,8 @@ const ProductDetailsForm = ({
                 type="number"
                 InputProps={{
                     endAdornment: <InputAdornment position="end">jour(s)</InputAdornment>,
+                    min: 0,
+                    max: 100
                 }}
                 required
                 sx={{ marginBottom: 2 }}

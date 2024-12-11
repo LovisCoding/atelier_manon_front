@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Refactor admin product components and enhance UI handling&#10;&#10;Updated `ProductDetailsForm`, `ImagesSection`, and `Produit` components with improvements in form labeling, file upload handling, and user interface layout. Refactored image-related logic and renamed variables for better clarity. Added a customizable loading spinner and optimized layout spacing for enhanced user experience.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/ProductDetailsForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/Produits/Produit.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

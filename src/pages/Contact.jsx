@@ -140,7 +140,7 @@ function Contact() {
                             <Button
                                 variant="yellowButton"
                                 onClick={e => handleContact()}
-                                sx={{ width: 'fit-content', alignSelf: 'end' }}
+                                sx={{ width: 'fit-content', alignSelf: 'end', fontWeight: 'bold' }}
                             >Envoyer</Button>
 
                         </Box>
@@ -164,7 +164,6 @@ function Contact() {
                     </Box>}
             </Box>
 
-            {/* Snackbar pour afficher les messages */}
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={3000}
@@ -257,7 +256,7 @@ const NewsletterInput = ({ newsletterHandler }) => {
                     }}
                     onClick={handler}
                 >
-                    Envoyer
+                    ENVOYER
                 </Button>
             </Box>
 
