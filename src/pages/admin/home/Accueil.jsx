@@ -21,7 +21,7 @@ export default function Accueil() {
   const [event, setEvent] = useState("");
 
   const changeEvent = () => {
-    axios.post("/api/personnalisation/update-evenement", {
+    axios.post("/api/admin/personnalisation/update-evenement", {
       message: event
     })
       .then((res) => {

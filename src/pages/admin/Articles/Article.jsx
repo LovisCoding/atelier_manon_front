@@ -38,7 +38,7 @@ export default function Article() {
         } else {
             setLoading(false);
         }
-    }, [id]);
+    }, []);
 
     const handleSave = async () => {
         if (!title) setNewArticleError("Veuillez renseigner un titre");
@@ -116,10 +116,9 @@ export default function Article() {
                     </Typography>
                     <ReactQuill
                         theme="snow"
-                        value={description+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id hendrerit leo, vitae pulvinar sapien. Aliquam lacus dolor, interdum non lacinia ac, efficitur id odio. Maecenas nisl elit, faucibus accumsan tellus ac, auctor convallis leo. Morbi tincidunt vel felis sed vestibulum. Quisque eu arcu vitae eros pulvinar ultrices. Praesent consectetur commodo auctor. Morbi vestibulum ex in quam accumsan, ac egestas libero blandit. Praesent a dignissim felis, sed imperdiet nisi. Maecenas consectetur elit enim, eu porttitor lorem placerat sed. Maecenas et dolor a lacus mollis dictum. Fusce tristique, odio vel fringilla egestas, metus tortor efficitur mi, quis fermentum nunc lectus non tortor. Curabitur eu efficitur nulla. Quisque ac ipsum pharetra, pharetra magna id, dignissim tortor."}
+                        value={description}
                         onChange={setDescription}
                         placeholder="Écrivez la description ici..."
-                        style={{overflow:'auto', maxHeight:'30rem'}}
                     />
                 </Box>
 
