@@ -50,7 +50,6 @@ const Jewelry = () => {
       };
 
       const products = await getProducts(params);
-      console.log(products);
 
       if (products) {
         const formattedData = products.produits.map((product) => ({

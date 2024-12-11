@@ -17,8 +17,8 @@ export default function Categories () {
     }, []);
 
     return (
-      <Box display="flex" justifyContent="center" width="100%">
-        <Stack sx={{ }}>
+      <Box display="flex" justifyContent="center" width="100%" >
+        <Stack sx={{mb:5}}>
           <Typography variant="h4" mb={4} sx={{ textAlign: "center" }}>
             Personnalisation des categories
           </Typography>
@@ -53,8 +53,7 @@ const DataTable = ({ data, setData, title, keyField, valueField, descriptionFiel
         };
 
         try {
-          const addedItem = addFunction ? await addFunction(newItem) : newItem;
-
+          const addedItem = addFunction ? await addFunction(newItem) : newItem; 
           if (addedItem) {
             setData((prevData) => [...prevData, newItem]);
             setSuccessMessage(`${title} ajouté avec succès !`);
