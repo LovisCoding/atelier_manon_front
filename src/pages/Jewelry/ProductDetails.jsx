@@ -142,7 +142,7 @@ export default function ProductDetails({product, validateCallback}) {
 				</Select>}
 
 			{sizes && sizes.length >= 1 &&
-				<Select fullWidtht defaultValue="" error={isSizeError} displayEmpty onChange={(e)=>product.taille = e.target.value} >
+				<Select fullWidth defaultValue="" error={isSizeError} displayEmpty onChange={(e)=>product.taille = e.target.value} >
 					<MenuItem value="" disabled>Selectionner une taille</MenuItem>
 					{sizes.map((size) =>
 						<MenuItem value={size} >{size}</MenuItem>
@@ -150,7 +150,7 @@ export default function ProductDetails({product, validateCallback}) {
 				</Select>}
 
 			{pendants && pendants.length >= 1 &&
-				<Select fullWidtht defaultValue="" error={isPendantError} displayEmpty onChange={(e)=>product.pendentif = e.target.value} >
+				<Select fullWidth defaultValue="" error={isPendantError} displayEmpty onChange={(e)=>product.pendentif = e.target.value} >
 					<MenuItem value="" disabled>Selectionner un pendentif</MenuItem>
 					{pendants.map((pendant) =>
 						<MenuItem value={pendant} >{pendant}</MenuItem>

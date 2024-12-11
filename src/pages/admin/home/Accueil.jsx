@@ -20,17 +20,24 @@ export default function Accueil() {
 
   const [event, setEvent] = useState("");
 
-  const [eventBar, setEventBar] = useState("");
+  const [eventBarMessage, setEventBarMessage] = useState("");
+  const [isEventBarDisplayed, setIsEventBarDisplayed] = useState(false);
+
 
   const changeEvent = () => {
     axios.post("/api/admin/personnalisation/update-evenement", {
+      type:"evenement",
       message: event
     })
       .then((res) => {
-        console.log(res)
+        console.log(res);
+        setEventBarMessage("Evénement mis à jour avec succès !");
+        setIsEventBarDisplayed(true);
       })
       .catch((err) => {
         console.error(err)
+        setEventBarMessage("Erreur lors de la mise à jour de l'événement.");
+        setIsEventBarDisplayed(true);
       })
   }
 
@@ -66,26 +73,34 @@ export default function Accueil() {
 
         if (type === "categorie" && idCategorie) {
           await addImageCateg(idCategorie, idCategorie, base64Images[0]);
-          alert("Image envoyée pour la catégorie avec succès !");
+          setEventBarMessage("Image de la categorie envoyée avec succès !");
+          setIsEventBarDisplayed(true);
         } else if (type !== "categorie") {
           await addImage(base64Images[0], type);
-          alert("Image envoyée avec succès !");
+          setEventBarMessage("Image envoyée avec succès !");
+          setIsEventBarDisplayed(true);
         } else {
-          alert("Aucune catégorie sélectionnée.");
+          setEventBarMessage("Veuillez sélectionner une catégorie.");
+          setIsEventBarDisplayed(true);
         }
       } catch (error) {
         console.error("Erreur lors de l'envoi de l'image :", error);
-        alert("Une erreur est survenue lors de l'envoi de l'image.");
+        setEventBarMessage("Une erreur est survenue lors de l'envoi de l'image.");
+        setIsEventBarDisplayed(true);
       }
     }
   };
 
   const handleSaveRedirectProduct = async () => {
     const data = await updateEvenement("produitEvenement", Number(idProduit));
-    if (data)
-      alert("success");
-    else
-      alert("error");
+    if (data) {
+      setEventBarMessage("Redirection produit mise à jour avec succès !")
+      setIsEventBarDisplayed(true);
+    }
+    else {
+      setEventBarMessage("Erreur lors de la mise à jour de la redirection produit.");
+      setIsEventBarDisplayed(true);
+    }
   }
 
   const handleCategorieChange = (event) => {
@@ -106,7 +121,7 @@ export default function Accueil() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", height:"100vh" }}>
       <SidebarMenu />
 
       <Box
@@ -121,12 +136,12 @@ export default function Accueil() {
         }}
       >
         <Snackbar
-          open={eventBar === ""}
+          open={isEventBarDisplayed}
           autoHideDuration={3000}
-          onClose={setEventBar("")}
+          onClose={()=>setIsEventBarDisplayed(false)}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          <Alert onClose={setEventBar("")} severity={eventBar.contains("succès") ? "success" : "error"} sx={{ width: "100%" }}>{eventBar}</Alert>
+          <Alert onClose={()=>setIsEventBarDisplayed(false)} severity={eventBarMessage.includes("succès") ? "success" : "error"} sx={{ width: "100%" }}>{eventBarMessage}</Alert>
         </Snackbar>
         <Stack spacing={4} sx={{ width: "100%", maxWidth: 600, mb: "2rem" }}>
           <Typography variant="h4" align="center">
