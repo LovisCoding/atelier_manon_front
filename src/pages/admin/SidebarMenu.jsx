@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { List, ListItem, ListItemText, Drawer, Typography, Box, useTheme, useMediaQuery, IconButton, Button } from '@mui/material';
-import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog, FaPaintBrush, FaRegComment } from 'react-icons/fa';
+import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog, FaPaintBrush, FaRegComment, FaCommentDollar } from 'react-icons/fa';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from '../../components/Link';
 import { useNavigate } from 'react-router';
 import { IoMdStats } from "react-icons/io";
+import { GoLaw } from "react-icons/go";
+import { FaFileInvoiceDollar } from "react-icons/fa6";
 
 const SidebarMenu = ({ children }) => {
   const theme = useTheme();
@@ -83,6 +85,8 @@ const SidebarMenu = ({ children }) => {
             { text: 'FAQ', href: '/admin/faq', icon: <FaQuestionCircle />, view: 'faq' },
             { text: 'Blog', href: '/admin/blog', icon: <FaBlog /> },
             { text: 'Avis', href: '/admin/avis', icon: <FaRegComment /> },
+            { text: 'CGV', href: '/admin/cgv', icon: <FaFileInvoiceDollar /> },
+            { text: 'Mentions Légales', href: '/admin/mentionsLegales', icon: <GoLaw /> },
           ].map((item) => (
             <ListItem
               button

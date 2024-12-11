@@ -108,7 +108,7 @@ export default function Stats() {
 	};
 
 	const customProductData = {
-		labels: ["Produits personnalisés", "Produits standards"],
+		labels: ["Produits avec gravure", "Produits standards"],
 		datasets: [
 			{
 				data: [percentageCustomProducts, 100 - percentageCustomProducts],
