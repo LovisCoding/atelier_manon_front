@@ -75,7 +75,7 @@ export default function Avis() {
                                     <TableRow>
                                         <TableCell>Contenu de l'avis</TableCell>
                                         <TableCell>Note</TableCell>
-                                        <TableCell>Affiché</TableCell>
+                                        <TableCell>Afficher</TableCell>
                                         <TableCell></TableCell>
                                     </TableRow>
                                 </TableHead>
