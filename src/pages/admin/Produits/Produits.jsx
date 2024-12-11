@@ -10,13 +10,7 @@ import Categories from "./Categories";
 export default function Produits() {
     const navigate = useNavigate();
 
-    const [rows, setRows] = useState([
-        { id: 1, name: 'Cupcake', calories: 305, image: 'https://placehold.co/50x50', prixU: 10, total: 50 },
-        { id: 2, name: 'Donut', calories: 452, image: 'https://placehold.co/50x50', prixU: 15, total: 75 },
-        { id: 3, name: 'Eclair', calories: 262, image: 'https://placehold.co/50x50', prixU: 20, total: 100 },
-        { id: 4, name: 'Frozen yoghurt', calories: 159, image: 'https://placehold.co/50x50', prixU: 25, total: 125 },
-        { id: 5, name: 'Gingerbread', calories: 356, image: 'https://placehold.co/50x50', prixU: 30, total: 150 },
-    ]);
+    const [rows, setRows] = useState([]);
 
     useEffect(() => {
         getAllProductsSales().then((data) => {
@@ -25,7 +19,7 @@ export default function Produits() {
                 name: row.libProd,
                 prixU: row.prix,
                 total: row.prixEstime,
-                image: getProductImage(row.photo, 100)
+                image: getProductImage(row.photo, 100, row.idProd)
             }));
             setRows(tmpData);
         });

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { List, ListItem, ListItemText, Drawer, Typography, Box, useTheme, useMediaQuery, IconButton, Button } from '@mui/material';
-import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog, FaPaintBrush, FaRegComment } from 'react-icons/fa';
+import { FaBox, FaShoppingCart, FaQuestionCircle, FaHome, FaNewspaper, FaPercent, FaCalendarAlt, FaBlog, FaPaintBrush, FaRegComment, FaCommentDollar } from 'react-icons/fa';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from '../../components/Link';
-import { Navigate, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
+import { IoMdStats } from "react-icons/io";
+import { GoLaw } from "react-icons/go";
+import { FaFileInvoiceDollar } from "react-icons/fa6";
 
 const SidebarMenu = ({ children }) => {
   const theme = useTheme();
@@ -72,16 +75,18 @@ const SidebarMenu = ({ children }) => {
         </Box>
         <List sx={{height:'100%', display:'flex', flexDirection:'column', gap:1 }} >
           {[
-            { text: 'Statistiques', href: '/admin/stats'},
-            { text: 'Produits', href: '/admin/products', icon: <FaBox /> },
-            { text: 'Commandes', href: '/admin/orders', icon: <FaShoppingCart /> },
-            { text: 'FAQ', href: '/admin/faq', icon: <FaQuestionCircle />, view: 'faq' },
+            { text: 'Statistiques', href: '/admin/stats', icon: <IoMdStats /> },
             { text: 'Accueil', href: '/admin/accueil', icon: <FaHome /> },
-            { text: 'Newsletters', href: '/admin/newsletter', icon: <FaNewspaper /> },
-            { text: 'Réductions', href: '/admin/codesPromo', icon: <FaPercent /> },
-            { text: 'Blog', href: '/admin/blog', icon: <FaBlog /> },
+            { text: 'Commandes', href: '/admin/orders', icon: <FaShoppingCart /> },
+            { text: 'Produits', href: '/admin/products', icon: <FaBox /> },
             { text: 'Personnalisation', href: '/admin/personalization', icon: <FaPaintBrush /> },
+            { text: 'Réductions', href: '/admin/codesPromo', icon: <FaPercent /> },
+            { text: 'Newsletters', href: '/admin/newsletter', icon: <FaNewspaper /> },
+            { text: 'FAQ', href: '/admin/faq', icon: <FaQuestionCircle />, view: 'faq' },
+            { text: 'Blog', href: '/admin/blog', icon: <FaBlog /> },
             { text: 'Avis', href: '/admin/avis', icon: <FaRegComment /> },
+            { text: 'CGV', href: '/admin/cgv', icon: <FaFileInvoiceDollar /> },
+            { text: 'Mentions Légales', href: '/admin/mentionsLegales', icon: <GoLaw /> },
           ].map((item) => (
             <ListItem
               button

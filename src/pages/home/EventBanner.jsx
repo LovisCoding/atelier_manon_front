@@ -12,7 +12,7 @@ export default function EventBanner() {
 
 	useEffect(() => {
 		const exec = async () => {
-			const response = await getEvenement();
+			const response = await getEvenement("evenement");
 			setMessage(response);
 		}
 		exec();

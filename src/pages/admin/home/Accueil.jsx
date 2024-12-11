@@ -1,29 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Button, TextField, MenuItem, Select, FormControl, InputLabel, Stack } from "@mui/material";
+import { Box, Typography, Button, TextField, MenuItem, Select, FormControl, InputLabel, Stack, Snackbar, Alert } from "@mui/material";
 import SidebarMenu from "../SidebarMenu";
 import { getCategories } from "/src/services/CategorieService";
 import { addImage, addImageCateg } from "/src/services/HomeService";
 import { convertFilesToBase64 } from "/src/utils/Base64";
 import axios from "axios";
-import { getEvenement, getImageURL } from "../../../services/HomeService";
+import { getEvenement, getImageURL, updateEvenement } from "../../../services/HomeService";
+import { getAllProducts } from "../../../services/ProductService";
 
 export default function Accueil() {
 
   const [categorie, setCategorie] = useState("");
   const [idCategorie, setIdCategorie] = useState(null);
   const [categories, setCategories] = useState([]);
+
+  const [produit, setProduit] = useState("");
+  const [idProduit, setIdProduit] = useState(null);
+  const [produits, setProduits] = useState([]);
+
   const [event, setEvent] = useState("");
 
+  const [eventBar, setEventBar] = useState("");
+
   const changeEvent = () => {
-    axios.post("/api/personnalisation/update-evenement", {
+    axios.post("/api/admin/personnalisation/update-evenement", {
       message: event
     })
-    .then((res) => {
-      // console.log(res)
-    })
-    .catch((err) => {
-      // console.log(err)
-    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }
 
   useEffect(() => {
@@ -35,7 +43,16 @@ export default function Accueil() {
     };
 
     fetchCategories();
-    getEvenement()
+
+    const fetchProduits = async () => {
+      const data = await getAllProducts();
+      if (data) {
+        setProduits(data);
+      }
+    };
+    fetchProduits();
+
+    getEvenement("evenement")
       .then((data) => {
         setEvent(data);
       })
@@ -63,6 +80,14 @@ export default function Accueil() {
     }
   };
 
+  const handleSaveRedirectProduct = async () => {
+    const data = await updateEvenement("produitEvenement", Number(idProduit));
+    if (data)
+      alert("success");
+    else
+      alert("error");
+  }
+
   const handleCategorieChange = (event) => {
     setCategorie(event.target.value);
     const selectedCategory = categories.find(
@@ -72,8 +97,16 @@ export default function Accueil() {
     setIdCategorie(selectedCategory ? selectedCategory.idCateg : null);
   };
 
+  const handleProduitChange = (event) => {
+    setProduit(event.target.value);
+    const selectedProduit = produits.find(
+      (prod) => prod.libProd == event.target.value
+    );
+    setIdProduit(selectedProduit ? selectedProduit.idProd : null);
+  };
+
   return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
+    <Box sx={{ display: "flex" }}>
       <SidebarMenu />
 
       <Box
@@ -87,13 +120,21 @@ export default function Accueil() {
           borderRadius: 2,
         }}
       >
-        <Stack spacing={4} sx={{ width: "100%", maxWidth: 600 }}>
+        <Snackbar
+          open={eventBar === ""}
+          autoHideDuration={3000}
+          onClose={setEventBar("")}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert onClose={setEventBar("")} severity={eventBar.contains("succès") ? "success" : "error"} sx={{ width: "100%" }}>{eventBar}</Alert>
+        </Snackbar>
+        <Stack spacing={4} sx={{ width: "100%", maxWidth: 600, mb: "2rem" }}>
           <Typography variant="h4" align="center">
             Gestion des Pages
           </Typography>
 
           <Box display="flex" width="100%" gap={1} >
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width:'100%' }}>
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: '100%' }}>
               <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
                 Page d'accueil
               </Typography>
@@ -105,11 +146,11 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{borderRadius: "15px", backgroundImage: `url(${getImageURL('home')})`, backgroundSize:'cover', width:200, height:'auto', backgroundPosition:'center'}} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('home')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box display="flex" width="100%" gap={1} >
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width:'100%' }} >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: '100%' }} >
               <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
                 Page de Bijoux
               </Typography>
@@ -121,7 +162,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{borderRadius: "15px", backgroundImage: `url(${getImageURL('bijoux')})`, backgroundSize:'cover', width:200, height:'auto', backgroundPosition:'center'}} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('bijoux')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box>
@@ -145,7 +186,7 @@ export default function Accueil() {
           </Box>
 
           <Box display="flex" width="100%" gap={1} >
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width:'100%' }} >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: '100%' }} >
               <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
                 Fichier Catégorie
               </Typography>
@@ -157,32 +198,65 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{borderRadius: "15px", backgroundImage: `url(${getImageURL(idCategorie)})`, backgroundSize:'cover', width:200, height:'auto', backgroundPosition:'center'}} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL(idCategorie)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
             <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
               Évènement (bannière en haut de la page)
             </Typography>
-            <TextField
-              type="text"
-              onChange={(e) => {
-                setEvent(e.target.value);
-              }}
-              value={event}
-              sx={{ marginBottom: 2 }}
-              fullWidth
-              variant="outlined"
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ fontWeight: "bold" }}
-              onClick={() => changeEvent()}>
-              Changer l'évènement
-            </Button>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1, width:"100%"}}>
+              <TextField
+                type="text"
+                onChange={(e) => {
+                  setEvent(e.target.value);
+                }}
+                value={event}
+                fullWidth
+                variant="outlined"
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ fontWeight: "bold" }}
+                onClick={() => changeEvent()}>
+                Changer l'évènement
+              </Button>
+            </Box>
+
           </Box>
 
+          <Box>
+            <Typography variant="h6" sx={{ marginBottom: 1, textAlign: "center", color: "black" }}>
+              Redirection du produit de la page d'accueil
+            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <FormControl fullWidth>
+                <InputLabel sx={{ color: "black" }}>Choisir un produit</InputLabel>
+                <Select
+                  value={produit}
+                  onChange={handleProduitChange}
+                  label="Choisir un produit"
+                >
+                  {produits.map((prod) => (
+                    <MenuItem key={prod.idProd} value={prod.libProd}>
+                      {prod.libProd}
+                    </MenuItem>
+                  ))}
+                </Select>
+
+              </FormControl>
+
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ fontWeight: "bold" }}
+                onClick={() => handleSaveRedirectProduct()}>
+                Changer le produit
+              </Button>
+            </Box>
+
+          </Box>
 
         </Stack>
       </Box>

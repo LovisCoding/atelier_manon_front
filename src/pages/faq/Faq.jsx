@@ -11,7 +11,6 @@ function FAQ() {
       const data = await getQuestions();
       if (!data) return;
       setItems(data);
-      console.log("data:",data)
     };
     exec();
   }, []);

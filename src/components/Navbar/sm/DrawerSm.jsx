@@ -7,7 +7,7 @@ import { useAuth } from "../../../utils/AuthContext";
 
 export default function DrawerSm({ open, setOpen }) {
 	const [openDdl, setOpenDdl] = useState(false);
-	const tab = ['/', '/jewelry', '/about', '/faq', '/contact', '/login', '/profil']
+	const tab = ['/', '/jewelry', '/about', '/faq', '/blog', '/contact', '/login', '/profil']
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -48,7 +48,7 @@ export default function DrawerSm({ open, setOpen }) {
 			  </IconButton>
 			</ListItem>
 			{/* Liste des items */}
-			{["Accueil", "Bijoux", "A propos", "FAQ", "Contact"].map(
+			{["Accueil", "Bijoux", "A propos", "FAQ", "Blog", "Contact"].map(
 			  (text, index) => (
 				<Box key={text}>
 				  <ListItem sx={{paddingY: 0}}>

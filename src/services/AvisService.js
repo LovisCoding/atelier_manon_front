@@ -17,7 +17,7 @@ export const getAvisBySession = async () => {
     })
     .catch(() => {
         return null;
-    })    
+    })
 }
 
 export const getAvisToDisplay = async () => {
@@ -28,7 +28,7 @@ export const getAvisToDisplay = async () => {
     })
     .catch(() => {
         return null;
-    })    
+    })
 }
 
 export const addAvis = async (content, note) => {
@@ -40,7 +40,7 @@ export const addAvis = async (content, note) => {
         console.log(res);
     })
     .catch((err) => {
-        console.log(err);
+        console.error(err);
     })
 }
 

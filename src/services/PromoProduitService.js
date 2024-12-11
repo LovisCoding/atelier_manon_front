@@ -18,11 +18,9 @@ export const addProduitToPromo = async (idProd, code) => {
 }
 
 export const DeleteProduitFromPromo = async (idProd, code) => {
-	console.log(idProd, code);
-	
 	const data = await axios.delete('/api/admin/promoproduit/delete-promoproduit', {
-        data: { idProd, code }
-    });
+		data: { idProd, code }
+	});
 	if (data.data) return data.data
 	return null;
 }

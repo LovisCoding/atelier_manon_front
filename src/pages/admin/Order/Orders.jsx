@@ -63,7 +63,7 @@ export default function Orders() {
                     }}
                   >
                     <TableCell>{row.idCommande}</TableCell>
-                    <TableCell>{row.adresse}</TableCell>
+                    <TableCell>{row.adresse.replace(/[{}"]/g, '').replaceAll(',', ' ')}</TableCell>
                     <TableCell>{row.prixTotalReduc} €</TableCell>
                     <TableCell>{row.etat}</TableCell>
                     <TableCell> { formatDate(row.dateCommande) }</TableCell>

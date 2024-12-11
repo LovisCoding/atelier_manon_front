@@ -3,6 +3,8 @@ import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { sendNewsletter } from "/src/services/NewsletterService";
 
+import Quill from "../../../components/Quill";
+
 export default function Newsletter() {
 
     const [subject, setSubject] = useState('');
@@ -68,10 +70,10 @@ export default function Newsletter() {
                             fullWidth
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
-                            onInput={()=>setIsError(false)}
+                            onInput={() => setIsError(false)}
                         />
 
-                        <TextField
+                        {/* <TextField
                             label="Description du mail"
                             variant="outlined"
                             fullWidth
@@ -80,7 +82,9 @@ export default function Newsletter() {
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             onInput={()=>setIsError(false)}
-                        />
+                        /> */}
+
+                        <Quill title={"Description du mail"} message={description} setMessage={setDescription} />
 
                         {isError &&
                             <Typography

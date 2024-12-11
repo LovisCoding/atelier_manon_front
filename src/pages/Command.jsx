@@ -30,7 +30,6 @@ function Command() {
     useEffect(() => {
         const exec = async () => {
             const data = await getCommandProducts(id);
-            console.log("data:",data)
             if (!data.data) return
             setProducts(data.data);
         };
@@ -187,7 +186,7 @@ const CartItem = ({ product }) => {
         <TableRow key={product.idPod}>
             <TableCell >
                 <Box display="flex" alignItems="center" gap={2} padding="0" >
-                    <ImgMui alt="" src={getProductImage(product.photo)} sx={{ height: '70px', width: 'auto', borderRadius: '5px' }} />
+                    <ImgMui alt="" src={getProductImage(product.photo, null, product.idProd)} sx={{ height: '70px', width: 'auto', borderRadius: '5px' }} />
                     <Box fullWidth >
                         <Box fullWidth >
                             <Typography fontSize={18} >{product.produit.libProd}</Typography>

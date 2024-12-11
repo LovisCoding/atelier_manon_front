@@ -50,7 +50,7 @@ function Connection() {
 
     const fieldStyle = {
         "& .MuiOutlinedInput-root": {
-            color: theme.palette.customYellow.main, // Couleur par défaut
+            color: theme.palette.text.main, // Couleur par défaut
             "&.Mui-focused fieldset": {
                 borderColor: theme.palette.customYellow.main,
             },

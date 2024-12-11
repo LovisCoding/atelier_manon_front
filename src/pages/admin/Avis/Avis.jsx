@@ -2,7 +2,7 @@ import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHe
 import { useEffect, useState } from "react";
 import SidebarMenu from "../SidebarMenu";
 import { getAllAvis, updateAvis, deleteAvis } from "../../../services/AvisService";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { MdDelete } from "react-icons/md";
 
 export default function Avis() {
     const [avisList, setAvisList] = useState([]);
@@ -87,6 +87,7 @@ export default function Avis() {
                                             <TableCell>
                                                 <Checkbox
                                                     checked={avis.estAffiche}
+                                                    color="customYellow"
                                                     onChange={() =>
                                                         handleCheckboxChange(
                                                             avis.idAvis,
@@ -100,7 +101,7 @@ export default function Avis() {
                                                     color="error"
                                                     onClick={() => handleDelete(avis.idAvis)}
                                                 >
-                                                    <DeleteIcon />
+                                                    <MdDelete />
                                                 </IconButton>
                                             </TableCell>
                                         </TableRow>

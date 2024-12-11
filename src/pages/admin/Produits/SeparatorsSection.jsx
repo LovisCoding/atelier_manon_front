@@ -2,7 +2,6 @@ import React from 'react';
 import { Autocomplete, Chip, TextField, Box, Typography } from '@mui/material';
 
 const SeparatorsSection = ({ separateurs, selectedSeparators, setSelectedSeparateurs }) => {
-    console.log(selectedSeparators)
     return (
     <Box>
       <Typography variant="h6">Séparateurs disponibles</Typography>

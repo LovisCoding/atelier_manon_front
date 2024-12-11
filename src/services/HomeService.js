@@ -8,17 +8,26 @@ export const addImage = async (image, type) => {
 }
 
 export const addImageCateg = async (idCateg, libImage, image) => {
-	const data = await axios.post('/api/categorie/update-image', {
+	const data = await axios.post('/api/admin/categorie/update-image', {
 		idCateg,
 		libImage,
 		image
-	})
+	})	
 }
 
-export const getEvenement = async () => {
-	const data = await axios.get('/api/personnalisation/get-evenement');
+export const getEvenement = async (type) => {
+	const data = await axios.get('/api/personnalisation/get-evenement', {
+		params: {type}
+	 })
 	if (data.status == 200) return data.data;
 	return "";
+}
+
+export const updateEvenement = async (type, message) => {
+	const data = await axios.post('/api/admin/personnalisation/update-evenement', {
+		type, message
+	 })
+	return data.status == 200 || data.status == 201;
 }
 
 export const getImageURL = (type) => {

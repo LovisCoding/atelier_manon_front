@@ -14,7 +14,7 @@ export const getCartProducts = async () => {
         });
         return data.data;
     } catch (err) {
-        console.log("Une erreur est survenue:",err);
+        // console.log("Une erreur est survenue:",err);
         return null;
     }
 };
@@ -28,7 +28,6 @@ export const addProductPanier = async (product) => {
                 gravure : product.gravure,
                 variante : product.variante
             }, { headers: { 'Content-Type':'application/json' } });
-        console.log("Response :",data.data)
     } catch (err) {
         console.error("Une erreur est survenue : "+err);
         return null;
@@ -44,7 +43,6 @@ export const reduceProductPanier = async (product) => {
                 gravure : product.gravure,
                 variante : product.variante
             }, { headers: { 'Content-Type':'application/json' } });
-        console.log("Response :",data.data)
     } catch (err) {
         console.error("Une erreur est survenue : "+err);
         return null;
@@ -63,7 +61,6 @@ export const deleteProductPanier = async (product) => {
                     variante: product.variante
                 }
             });
-      console.log("Response :", response.data);
     } catch (err) {
       console.error("Une erreur est survenue : ", err);
     }

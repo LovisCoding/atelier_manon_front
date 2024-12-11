@@ -6,7 +6,6 @@ export const addNewsLetter = async (email) => {
             .post('/api/client/account/add-newsletter' , {
                 mail : email
             }, { headers: { 'Content-Type':'application/json' } });
-        console.log("Response :",data.data)
 		return data.data
     } catch (err) {
         console.error("Une erreur est survenue : "+err);
@@ -23,7 +22,6 @@ export const sendContactMail = async (objet, nom, mail, content) => {
 				mail: mail,
 				content: content
             }, { headers: { 'Content-Type':'application/json' } });
-        console.log("Response :",data.data);
 		return data.data;
     } catch (err) {
         console.error("Une erreur est survenue : "+err);

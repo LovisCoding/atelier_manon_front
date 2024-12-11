@@ -3,6 +3,7 @@ import JewelryCollection from './JewelryCollection';
 import { getProducts } from '../../services/ProductService';
 import { getCategories } from '/src/services/CategorieService';
 import { useParams, useNavigate } from 'react-router-dom';
+import { CircularProgress, Stack } from '@mui/material';
 
 const Jewelry = () => {
   const { category } = useParams();
@@ -10,6 +11,7 @@ const Jewelry = () => {
   const [backgroundImage, setBackgroundImage] = useState('/src/assets/img/bijoux.webp');
   const [collectionTitle, setCollectionTitle] = useState('Retrouvez ici tous les bijoux disponibles !');
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,11 +58,12 @@ const Jewelry = () => {
           id: product.idProd,
           image: `${import.meta.env.VITE_API_URL}img/${product.tabPhoto[0]}?width=350`,
           title: product.libProd,
-          price: `${product.prix}€`,
+          price: Number.parseFloat(product.prix),
           idCateg: product.idCateg
         }));
 
         setJewelryData(formattedData);
+        setLoading(false);
       }
 
       setCollectionTitle(title);
@@ -74,6 +77,13 @@ const Jewelry = () => {
     navigate(`/jewelry/${newCategory}`);
   };
 
+	if (loading) {
+		return (
+			<Stack direction="row" justifyContent="center" sx={{ mt: 10 }}>
+				<CircularProgress />
+			</Stack>
+		);
+	}
   return (
     <JewelryCollection
       collectionData={jewelryData}

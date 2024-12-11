@@ -41,7 +41,7 @@ const BestSellerItem = ({ product }) => {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    setImage(getProductImage(product.photo));
+    setImage(getProductImage(product.photo, null, product.idProd));
   }, []);
 
   const goToProduct = () => {

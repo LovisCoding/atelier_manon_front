@@ -17,6 +17,18 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
   const itemsPerPage = 6;
   const navigate = useNavigate();
   const theme = useTheme();
+  const [maxPrice, setMaxPrice] = useState(0);
+
+  const maxPriceProduct = () => {
+    if (!collectionData || collectionData.length === 0) {
+      return null;
+    }
+    const max = collectionData.reduce((maxPrice, product) => {
+      return product.price > maxPrice ? product.price : maxPrice;
+    }, 0);
+
+    return max;
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -24,6 +36,14 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
       setCategories(fetchedCategories || []);
     };
     fetchCategories();
+
+  }, []);
+
+  useEffect(() => {
+    if (!collectionData) return;
+    const max = maxPriceProduct();
+    setMaxPrice(max);
+    setPriceRange([0, max]);
   }, []);
 
   useEffect(() => {
@@ -67,11 +87,11 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
           {collectionTitle}
         </Typography>
 
-        <Box sx={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
-          <Button variant="yellowButton" sx={{ marginRight: '1rem', fontWeight: 'bold' }} onClick={handleClick} endIcon={<FilterListIcon />}>
+        <Box sx={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: 3 }} >
+          <Button variant="yellowButton" sx={{ fontWeight: 'bold' }} fullWidth onClick={handleClick} endIcon={<FilterListIcon />}>
             Filtres
           </Button>
-          <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #EEB828', borderRadius: 1, padding: '0.25rem 0.5rem' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #EEB828', borderRadius: 1 }}>
             <SearchIcon sx={{ color: '#EEB828', marginRight: '0.5rem' }} />
             <TextField
               placeholder="Recherche"
@@ -80,6 +100,22 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
               onChange={(e) => setSearchTerm(e.target.value)}
               InputProps={{ disableUnderline: true }}
               sx={{ width: 200 }}
+            />
+          </Box>
+          <Box sx={{ marginBottom: '1rem', textAlign: 'center', minWidth:'10rem' }}>
+            <Typography variant="body2" sx={{ marginBottom: '0.5rem' }}>
+              Prix: {priceRange[0]} € - {priceRange[1]} €
+            </Typography>
+            <Slider
+              value={priceRange}
+              onChange={(e, newValue) => setPriceRange(newValue)}
+              valueLabelDisplay="auto"
+              valueLabelFormat={(value) => `${value} €`}
+              min={0}
+              max={maxPriceProduct()}
+              step={1}
+              sx={{ width: '80%' }}
+              color='customYellow'
             />
           </Box>
         </Box>
@@ -94,22 +130,6 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
           </List>
         </Popover>
 
-        <Box sx={{ width: '20%', marginBottom: '1rem', textAlign: 'center' }}>
-          <Typography variant="body2" sx={{ marginBottom: '0.5rem' }}>
-            Prix: {priceRange[0]} € - {priceRange[1]} €
-          </Typography>
-          <Slider 
-            value={priceRange} 
-            onChange={(e, newValue) => setPriceRange(newValue)} 
-            valueLabelDisplay="auto" 
-            valueLabelFormat={(value) => `${value} €`} 
-            min={0} 
-            max={100} 
-            step={5} 
-            sx={{ width: '80%' }}
-            color='customYellow'
-          />
-        </Box>
 
         <Grid2 container spacing={2} justifyContent="center">
           {currentItems.map((item) => (
@@ -122,14 +142,14 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
                   component="img"
                   image={item.image}
                   alt={item.title}
-                  sx={{ objectFit: 'cover' }}
+                  sx={{ objectFit: 'cover', maxHeight:'20rem' }}
                 />
                 <CardContent>
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                     {item.title}
                   </Typography>
                   <Typography variant="body2" sx={{ color: '#333', fontWeight: 'bold' }}>
-                    {item.price}
+                    {item.price.toFixed(2)}€                  
                   </Typography>
                 </CardContent>
               </Card>
@@ -138,8 +158,8 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
         </Grid2>
 
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem' }}>
-          <IconButton 
-            onClick={() => handlePageChange(currentPage - 1)} 
+          <IconButton
+            onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
             <ArrowBackIcon />
@@ -147,8 +167,8 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
           <Typography variant="body2" sx={{ margin: '0 1rem' }}>
             Page {currentPage} sur {Math.ceil(filteredCollectionData.length / itemsPerPage)}
           </Typography>
-          <IconButton 
-            onClick={() => handlePageChange(currentPage + 1)} 
+          <IconButton
+            onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === Math.ceil(filteredCollectionData.length / itemsPerPage)}
           >
             <ArrowForwardIcon />

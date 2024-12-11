@@ -21,6 +21,7 @@ export default function ProductImages({ images }) {
           component="img"
           src={stateImages[0]}
           alt="Image"
+          maxHeight={500}
           sx={{
             objectFit: "contain",
             objectPosition: "top",

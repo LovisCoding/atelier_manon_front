@@ -3,7 +3,6 @@ import { Autocomplete, Chip, TextField, Box, Typography } from '@mui/material';
 
 const PendentifsSection = ({ pendentifs, selectedPendentifs, setSelectedPendentifs }) => {
 
-    console.log(pendentifs, selectedPendentifs)
     return (
         <Box>
             <Typography variant="h6">Pendentifs disponibles</Typography>

@@ -11,7 +11,6 @@ export const getArticleById = async (id) => {
     try {
         const response = await axios.get(`/api/article/get-article/?idArticle=${id}`);
         if (response.data) {
-			console.log(response.data);
             return response.data; 
         }
         return null;
@@ -21,20 +20,10 @@ export const getArticleById = async (id) => {
     }
 };
 
-export const createArticle = async ({ idArticle, titreArticle, descriptionProd, contenu }) => {
+export const createArticle = async (article) => {
     try {
-        const article = {
-            idArticle,
-            titreArticle,
-            descriptionProd,
-            contenu
-        };
-
         const response = await axios.post('/api/admin/article/add-update-article', article);
-
-        if (response.status === 200) {
-            return true;
-        }
+        if (response.status === 201) return true;
         return false;
     } catch (error) {
         console.error('Erreur lors de la création de l\'article :', error);

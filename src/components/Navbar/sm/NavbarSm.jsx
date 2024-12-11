@@ -9,6 +9,7 @@ import Link from "../../Link";
 import { MdAccountCircle } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../../utils/AuthContext";
+import { IoMdCart } from "react-icons/io";
 
 export default function NavbarSm() {
   const theme = useTheme();
@@ -65,6 +66,11 @@ export default function NavbarSm() {
 
           {/* Account Icon */}
           <Box>
+          {isLogged && <Link variant="navbar" href="/cart" >
+                  <IconButton>
+                    <IoMdCart color={scrolled ? theme.palette.text.white : theme.palette.text.primary} size={30} />
+                  </IconButton>
+                </Link>}
               <IconButton onClick={(e) => { navigate(isLogged ? "/profil" : "/login");}}>
                 <MdAccountCircle color={scrolled ? theme.palette.text.white : theme.palette.text.primary} size={30} />
               </IconButton>

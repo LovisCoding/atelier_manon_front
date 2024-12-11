@@ -57,7 +57,7 @@ export const getMaterials = async (id) => {
 }
 
 export const getRocks = async (id) => {
-    const data = await axios.get('/api/matprod/get-pierres-produit', { params: {idProd:id} })
+    const data = await axios.get('/api/pieprod/get-pierres-produit', { params: {idProd:id} })
     if (!data.data) return null;
     return data.data;
 }
@@ -90,8 +90,8 @@ export const getBestSellers = async () => {
     }
 };
 
-export const getProductImage = (imgName, width, height) => {
-    return import.meta.env.VITE_API_URL+'img/'+imgName+ (width ? '?width='+width : '');
+export const getProductImage = (imgName, width, idProd) => {
+    return import.meta.env.VITE_API_URL+'img/'+imgName+(idProd ? '?idProd='+idProd : '')  + (width ? '&width='+width : '')  ;
 }
 
 
@@ -108,7 +108,6 @@ export const addProductToPanier = async (product) => {
                 gravure : product.gravure || "",
                 variante : variant
             }, { headers: { 'Content-Type':'application/json' } });
-        console.log("Response :",data.data)
         return data;
     } catch (err) {
         console.error("Une erreur est survenue : "+err)
@@ -122,7 +121,6 @@ export const deleteProduct = async (idProd) => {
 			.delete('/api/admin/produit/delete-produit' , {
 				data: { idProd }
 			});
-		console.log("Response :",data.data)
 	} catch (err) {
 		console.error("Une erreur est survenue : "+err)
 	}
@@ -131,7 +129,7 @@ export const deleteProduct = async (idProd) => {
 export const updateProduct = async (product) => {
 	try {
 		const data = await axios
-			.post('/api/produit/update-produit' , {
+			.post('/api/admin/produit/update-produit' , {
 				...product
 			}, { headers: { 'Content-Type':'application/json' } });
 		return data.data
@@ -142,7 +140,7 @@ export const updateProduct = async (product) => {
 export const addImage= async (idProd, image, libImage) => {
     try {
 
-        const data = await axios.post('/api/produit/add-image', {
+        const data = await axios.post('/api/admin/produit/add-image', {
             idProd,
             image,
             libImage
@@ -159,7 +157,7 @@ export const reorderImages= async (idProd, tabPhoto) => {
     })
 }
 export const deleteImage= async (idProd, libImage) => {
-    const data = await axios.post('/api/produit/delete-image', {
+    const data = await axios.post('/api/admin/produit/delete-image', {
         idProd,
         libImage
     })
