@@ -4,7 +4,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 //TODO bug quand je crée et supprime une image avant de l'enregistrer
-const ImagesSection = ({ images = [], setImages , imagesAUpload, setImagesAUpload, setImageADelete}) => {
+const ImagesSection = ({ images = [], setImages , imagesAUpload, setImagesAUpload, setImageADelete, setDisplaySn, setMessage}) => {
 const [selectedImg, setSelectedImg] = React.useState(null);
 
   const handleDeleteImage = (index) => {
@@ -23,6 +23,15 @@ const [selectedImg, setSelectedImg] = React.useState(null);
         const files = e.target.files;
 
         if (!files || files.length === 0) return;
+        for (const file of files) {
+          const validImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg']; // Ajoute d'autres types si nécessaire
+          if (!validImageTypes.includes(file.type)) {
+              
+              setMessage('Format du fichier incorrect !')
+              setDisplaySn(true)
+              return; // Sort de la fonction si un fichier n'est pas une image
+          }
+      }
 
         try {
             // Convertir les fichiers en base64
@@ -83,7 +92,7 @@ const [selectedImg, setSelectedImg] = React.useState(null);
               <Typography variant="h6">Images</Typography>
               <Button component="label">
                   <AddCircleOutlineIcon />
-                  <input type="file" multiple hidden accept=".jpg,.jpeg,.webp" onChange={(e) => handleUpload(e)} />
+                  <input type="file" multiple hidden accept=".jpg,.jpeg,.webp, .png" onChange={(e) => handleUpload(e)} />
               </Button>
               <Stack direction={'row'} spacing={1}>
                   <IconButton disabled={images.length < 2} onClick={() => reorderImages('left')} ><ChevronLeft/></IconButton>
