@@ -72,6 +72,7 @@ const SidebarMenu = ({ children }) => {
         </Box>
         <List sx={{height:'100%', display:'flex', flexDirection:'column', gap:1 }} >
           {[
+            { text: 'Statistiques', href: '/admin/stats'},
             { text: 'Produits', href: '/admin/products', icon: <FaBox /> },
             { text: 'Commandes', href: '/admin/orders', icon: <FaShoppingCart /> },
             { text: 'FAQ', href: '/admin/faq', icon: <FaQuestionCircle />, view: 'faq' },
@@ -127,7 +128,7 @@ const SidebarMenu = ({ children }) => {
           <ListItem sx={{justifySelf:'end', marginTop:'auto'}} >
             <Button
               variant='outlined'
-              sx={{margin:'0 auto'}}
+              sx={{margin:'0 auto', fontWeight:'bold'}}
               onClick={()=>navigate('/')}
             >Revenir au site web</Button>
           </ListItem>

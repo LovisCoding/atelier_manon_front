@@ -145,6 +145,7 @@ const Produit = () => {
   // Update product
   // Update product
   const handleUpdate = async () => {
+    setLoading(true)
     const product = {
       idProd: Number(id),
       libProd: valueLib,
@@ -159,13 +160,15 @@ const Produit = () => {
     const tmpMessage = [];
     if (product.libProd === '') tmpMessage.push('Libellé');
     if (product.descriptionProd === '') tmpMessage.push('Description');
-    if (product.prix  <1) tmpMessage.push('Prix');
+    if (product.prix  <1 || product.prix >1000) tmpMessage.push('Prix entre 1 et 1000e');
     if (product.idCateg === '') tmpMessage.push('Catégorie');
+    if (product.tempsRea < 1 || product.tempsRea > 100) tmpMessage.push('Temps réalisation entre 0 et 100 jours')
 
     if (tmpMessage.length > 0) {
       const s = tmpMessage.length > 1 ? 's' : '';
       setMessage(`Veuillez remplir le${s} champ${s} suivant${s} : ${tmpMessage.join(', ')}`);
       setSnOpenValue(true);
+      setLoading(false);
       return;
     }
 
@@ -175,6 +178,7 @@ const Produit = () => {
       if (productData?.status === 400) {
         setMessage(productData.response.data);
         setSnOpenValue(true);
+        setLoading(false);
         return;
       }
       if (id === "-1") {
@@ -216,9 +220,9 @@ const Produit = () => {
       ]);
 
       console.log('All associated data updated successfully');
-      /*navigate('/admin/products');*/
+      navigate('/admin/products');
     } catch (error) {
-
+      setLoading(false)
       console.error('Error updating product or associated data:', error);
     }
   };

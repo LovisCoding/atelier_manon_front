@@ -3,11 +3,14 @@ import SidebarMenu from "../SidebarMenu";
 import { useEffect, useState } from "react";
 import { getOrdersForAdmin } from "../../../services/CommandService";
 import { formatDate } from "../../../utils/Date";
+import { useNavigate } from "react-router";
 
 export default function Orders() {
 
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
 
   const handleClickRow = (to) => {
@@ -38,8 +41,8 @@ export default function Orders() {
           <Typography variant="h4" textAlign="center">
             Liste des commandes
           </Typography>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableContainer component={Paper}> 
+            <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
