@@ -1,6 +1,5 @@
 import {defineConfig, loadEnv} from 'vite';
 import react from '@vitejs/plugin-react';
-import mkcert from'vite-plugin-mkcert'
 
 
 // https://vite.dev/config/
@@ -8,12 +7,12 @@ export default defineConfig(({mode}) => {
 	const env = loadEnv(mode, process.cwd());
 	return (
 		{
-			plugins: [react(), mkcert()],
+			plugins: [react()],
 			server: {
-				host: 'front.atelier-manon.bernouy.fr',
+				host: 'atelier-manon.bernouy.fr',
 				proxy: {
 					'/api': {
-						target: "https://atelier-manon.bernouy.fr",
+						target: "https://api.atelier-manon.bernouy.fr",
 						changeOrigin: true,
 					},
 				},
