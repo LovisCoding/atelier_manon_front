@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import api from "../utils/api";
 
 export default function ConfirmAccount() {
 
