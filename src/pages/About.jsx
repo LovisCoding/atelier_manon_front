@@ -24,7 +24,7 @@ function About() {
 			} }}>
 				<Presentation />
 				<MonSavoirFaire />
-				<Value />
+				{/* <Value /> */}
 				<Typography sx={{ marginBottom: '1rem', color: colors.grey[800] }} variant='h3' align='center'>Où me retrouver ?</Typography>
 				<ImageSlider />
 			</Box>
@@ -64,8 +64,8 @@ function Presentation() {
 			<Typography align='center' variant="h1" sx={{ marginBottom: '3rem' }}>
 				À propos
 			</Typography>
-			<TextPresentation imageHeight={'17rem'} sx={{ marginBottom: '2rem' }} title="Ma présentation" description={txt1} />
-			<TextPresentation reverse description={txt2} />
+			<TextPresentation image={"/manon_about_1.jpg"} imageHeight={'17rem'} sx={{ marginBottom: '2rem' }} title="Ma présentation" description={txt1} />
+			<TextPresentation image={"/manon_about_5.jpg"} reverse description={txt2} />
 		</Box>
 	)
 }
@@ -77,9 +77,9 @@ function MonSavoirFaire() {
 				Mon savoir-faire
 			</Typography>
 			<Grid2 marginBottom={'4rem'} container spacing={4}>
-				<Card title={"Une passion depuis petite"} />
-				<Card title={"Une création fait main"} />
-				<Card title={"Des produits Made In Europe"} />
+				<Card image={"/manon_about_2.webp"} title={"Une passion depuis petite"} />
+				<Card image={"/manon_about_3.webp"} title={"Une création fait main"} />
+				<Card image={"/manon_about_4.webp"} title={"Des produits Made In Europe"} />
 			</Grid2>
 		</Box>
 
@@ -88,16 +88,21 @@ function MonSavoirFaire() {
 
 function Card({ image, title }) {
 	return (
-		<Grid2 size={{
-			xs: 12,
-			sm: 6,
-			md: 4
-		}} item>
+		<Grid2
+			size={{
+				xs: 12,
+				sm: 6,
+				md: 4,
+			}}
+			item
+		>
 			<Box
-
 				sx={{
 					width: '100%',
 					height: '300px',
+					backgroundImage: `url(${image})`,
+					backgroundSize: 'cover',
+					backgroundPosition: 'center',
 					backgroundColor: '#f4f4f4',
 					border: '1px dashed #ccc',
 				}}
@@ -106,5 +111,5 @@ function Card({ image, title }) {
 				{title}
 			</Typography>
 		</Grid2>
-	)
+	);
 }

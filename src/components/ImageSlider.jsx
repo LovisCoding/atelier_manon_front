@@ -8,9 +8,9 @@ import 'swiper/css/navigation';
 
 function ImageSlider({ images }) {
   const defaultImages = [
-    'https://via.placeholder.com/800x400',
-    'https://via.placeholder.com/800x400',
-    'https://via.placeholder.com/800x400',
+    '/manon_about_7.jpg',
+    '/manon_about_10.jpg',
+    '/manon_about_11.jpg',
   ];
 
   images = images || defaultImages;
