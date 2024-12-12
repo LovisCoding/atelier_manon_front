@@ -1,16 +1,16 @@
 
-import axios from 'axios';
+import api from "../utils/api";
 
 
 export const getProduct = async (id) => {
-    const data = await axios
+    const data = await api
         .get('/api/produit/get-produit', { params: {idProd:id} })
     if (!data.data) return null;
     return data.data;
 }
 
 export const getAllProducts = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/produit/get-all-produits')
 
     if (data.data) return data.data
@@ -18,7 +18,7 @@ export const getAllProducts = async () => {
 }
 
 export const getAllProductsSales = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/admin/produit/produits-vente')
 
     if (data.data) return data.data
@@ -37,7 +37,7 @@ export const getProducts = async (params) => {
       page,
     });
   
-    const data = await axios
+    const data = await api
       .get(`/api/produit/get-produits?${queryParams.toString()}`);
   
     if (data.data) return data.data;
@@ -45,36 +45,36 @@ export const getProducts = async (params) => {
 };
 
 export const getWires = async (id) => {
-    const data = await axios.get('/api/filprod/get-fils-produit', { params: {idProd:id} })
+    const data = await api.get('/api/filprod/get-fils-produit', { params: {idProd:id} })
     if (!data.data) return null;
     return data.data;
 }
 
 export const getMaterials = async (id) => {
-    const data = await axios.get('/api/matprod/get-materiaux-produit', { params: {idProd:id} })
+    const data = await api.get('/api/matprod/get-materiaux-produit', { params: {idProd:id} })
     if (!data.data) return null;
     return data.data;
 }
 
 export const getRocks = async (id) => {
-    const data = await axios.get('/api/pieprod/get-pierres-produit', { params: {idProd:id} })
+    const data = await api.get('/api/pieprod/get-pierres-produit', { params: {idProd:id} })
     if (!data.data) return null;
     return data.data;
 }
 
 export const getSizes = async (id) => {
-    const data = await axios.get('/api/taiprod/get-tailles-produit', { params: {idProd:id} })
+    const data = await api.get('/api/taiprod/get-tailles-produit', { params: {idProd:id} })
     if (!data.data) return null;
     return data.data;
 }
 
 export const getPendants = async (id) => {
-    const data = await axios.get('/api/penprod/get-pendentifs-produit', { params: {idProd:id} })
+    const data = await api.get('/api/penprod/get-pendentifs-produit', { params: {idProd:id} })
     if (!data.data) return null;
     return data.data;
 }
 
-const apiClient = axios.create({
+const apiClient = api.create({
     baseURL: import.meta.env.VITE_API_URL,
 });
 
@@ -101,7 +101,7 @@ export const addProductToPanier = async (product) => {
     variant += product.fil ? product.fil : "";
 
     try {
-        const data = await axios
+        const data = await api
             .post('/api/client/panier/add-product-panier' , {
                 idProd : product.idProd,
                 idCli : product.idCli,
@@ -117,7 +117,7 @@ export const addProductToPanier = async (product) => {
 
 export const deleteProduct = async (idProd) => {
     try {
-		const data = await axios
+		const data = await api
 			.delete('/api/admin/produit/delete-produit' , {
 				data: { idProd }
 			});
@@ -128,7 +128,7 @@ export const deleteProduct = async (idProd) => {
 
 export const updateProduct = async (product) => {
 	try {
-		const data = await axios
+		const data = await api
 			.post('/api/admin/produit/update-produit' , {
 				...product
 			}, { headers: { 'Content-Type':'application/json' } });
@@ -140,7 +140,7 @@ export const updateProduct = async (product) => {
 export const addImage= async (idProd, image, libImage) => {
     try {
 
-        const data = await axios.post('/api/admin/produit/add-image', {
+        const data = await api.post('/api/admin/produit/add-image', {
             idProd,
             image,
             libImage
@@ -151,13 +151,13 @@ export const addImage= async (idProd, image, libImage) => {
     }
 }
 export const reorderImages= async (idProd, tabPhoto) => {
-    const data = await axios.post('/api/admin/produit/update-images-order', {
+    const data = await api.post('/api/admin/produit/update-images-order', {
         idProd,
         tabPhoto
     })
 }
 export const deleteImage= async (idProd, libImage) => {
-    const data = await axios.post('/api/admin/produit/delete-image', {
+    const data = await api.post('/api/admin/produit/delete-image', {
         idProd,
         libImage
     })

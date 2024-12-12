@@ -1,7 +1,8 @@
-import axios from "axios"
+import api from "../utils/api";
+
 
 export const getOrderAdminPage = async () => {
-	let res = await axios.get("", {
+	let res = await api.get("", {
 
 	});
 	if (res.status != 200) return null;
@@ -10,14 +11,14 @@ export const getOrderAdminPage = async () => {
 
 
 export const getOrdersProfil = async () => {
-	let res = await axios.get("/api/client/commande/get-commandes-client");
+	let res = await api.get("/api/client/commande/get-commandes-client");
 	if (res.status != 200) return [];
 	return res.data;
 }
 
 
 export const updateState = async (orderId, state) => {
-	return axios.post('/api/admin/commande/update-etat-commande', {
+	return api.post('/api/admin/commande/update-etat-commande', {
 		idCommande: orderId,
 		etat: state
 	})

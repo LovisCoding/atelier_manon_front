@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
@@ -11,7 +11,7 @@ export default function ConfirmAccount() {
 	const [subMsg, setSubMsg] = useState("");
 
 	useEffect(() => {
-		axios.post("/api/account/confirmAccount", {
+		api.post("/api/account/confirmAccount", {
 			"token": token
 		})
 		.then((res) => {

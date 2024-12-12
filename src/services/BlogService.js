@@ -1,7 +1,7 @@
-import axios from "axios"
+import api from "../utils/api";
 
 export const getArticle = async (idArticle) => {
-	return axios.get("/api/article/get-article", { params: {
+	return api.get("/api/article/get-article", { params: {
 		idArticle: idArticle
 	}})
 	.then((res) => {
@@ -14,7 +14,7 @@ export const getArticle = async (idArticle) => {
 }
 
 export const getArticles = async () => {
-	return axios.get("/api/article/get-articles")
+	return api.get("/api/article/get-articles")
 		.then((res) => {
 			if (res.status == 200) return res.data;
 			return null;

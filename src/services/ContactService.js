@@ -1,8 +1,9 @@
-import axios from "axios";
+import api from "../utils/api";
+;
 
 export const addNewsLetter = async (email) => {
     try {
-        const data = await axios
+        const data = await api
             .post('/api/client/account/add-newsletter' , {
                 mail : email
             }, { headers: { 'Content-Type':'application/json' } });
@@ -15,7 +16,7 @@ export const addNewsLetter = async (email) => {
 
 export const sendContactMail = async (objet, nom, mail, content) => {
     try {
-        const data = await axios
+        const data = await api
             .post('/api/account/send-mail' , {
                 objet : objet,
 				nom: nom,

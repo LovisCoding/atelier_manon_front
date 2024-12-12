@@ -1,9 +1,9 @@
+import api from "../utils/api";
 
-import axios from "axios"
 
 export const getCommand = async (idCommand) => {
     try {
-        const data = await axios
+        const data = await api
             .get('/api/client/commande/get-commande', {params:{idCommande:idCommand}});
         return data.data;
     } catch (err) {
@@ -14,7 +14,7 @@ export const getCommand = async (idCommand) => {
 
 export const getOrderAdminDetail = async (orderId) => {
     try {
-        const data = await axios.get('/api/client/commande/get-commande', {
+        const data = await api.get('/api/client/commande/get-commande', {
           params: { idCommande: orderId },
         });
         return data.data;
@@ -25,7 +25,7 @@ export const getOrderAdminDetail = async (orderId) => {
 
 export const addCommande = async (idCli, commentary, isGift, giftCommentary, codesPromo) => {
     try {
-        const data = await axios
+        const data = await api
             .post('/api/client/commande/add-commande' , {
                 idCli : idCli,
                 comm : commentary,
@@ -41,13 +41,13 @@ export const addCommande = async (idCli, commentary, isGift, giftCommentary, cod
 };
 
 export const getOrdersForAdmin = async () => {
-    const data = await axios.get('/api/admin/commande/get-commandes');
+    const data = await api.get('/api/admin/commande/get-commandes');
     if (!data.data) return null;
     return data.data
 }
 
 export const getCommandProducts = async (idCommand) => {
-    const data = await axios
+    const data = await api
         .get('/api/client/commandeproduit/get-produits-commande', {params:{idCommande:idCommand}}).catch((error) => { return null });
     if (!data.data) return null;
     return data;
@@ -55,7 +55,7 @@ export const getCommandProducts = async (idCommand) => {
 
 export const getProduitsCommande = async (idCommand) => {
     try {
-        const data = await axios.get("/api/client/commandeproduit/get-produits-commande", { params: { idCommande: idCommand } } );
+        const data = await api.get("/api/client/commandeproduit/get-produits-commande", { params: { idCommande: idCommand } } );
         return data.data;
       } catch (error) {
         return null;
@@ -65,7 +65,7 @@ export const getProduitsCommande = async (idCommand) => {
 
 export const addSingleProductCommande = async (idProd, variante, gravure) => {
     try {
-        const data = await axios.post("/api/client/commande/add-single-product-commande", {
+        const data = await api.post("/api/client/commande/add-single-product-commande", {
             idProd,
             variante: variante || "",
             gravure: gravure || ""

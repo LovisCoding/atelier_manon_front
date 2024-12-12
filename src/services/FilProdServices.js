@@ -1,7 +1,7 @@
-import axios from 'axios';
+import api from "../utils/api";
 
 export const getFilsById = async (idProd) => {
-    const data = await axios
+    const data = await api
         .get('/api/filprod/get-fils-produit', {
             params: {
                 idProd
@@ -11,7 +11,7 @@ export const getFilsById = async (idProd) => {
     return data.data;
 }
 export const updateFilsProd = async (idProd, tabFils) => {
-    const data = await axios
+    const data = await api
         .post('/api/admin/filprod/update-fils-produit', {
             idProd,
             tabFils

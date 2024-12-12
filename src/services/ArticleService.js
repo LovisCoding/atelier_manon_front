@@ -1,7 +1,8 @@
-import axios from 'axios';
+import api from "../utils/api";
+
 
 export const getArticles = async () => {
-	const data = await axios
+	const data = await api
 		.get('/api/article/get-articles')
 	if (!data.data) return null;
 	return data.data;
@@ -9,7 +10,7 @@ export const getArticles = async () => {
 
 export const getArticleById = async (id) => {
     try {
-        const response = await axios.get(`/api/article/get-article/?idArticle=${id}`);
+        const response = await api.get(`/api/article/get-article/?idArticle=${id}`);
         if (response.data) {
             return response.data; 
         }
@@ -22,7 +23,7 @@ export const getArticleById = async (id) => {
 
 export const createArticle = async (article) => {
     try {
-        const response = await axios.post('/api/admin/article/add-update-article', article);
+        const response = await api.post('/api/admin/article/add-update-article', article);
         if (response.status === 201) return true;
         return false;
     } catch (error) {

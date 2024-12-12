@@ -1,9 +1,10 @@
-import axios from 'axios';
+import api from "../utils/api";
+
 
 
 
 export const getPendentifsProduit = async (idProd) => {
-    const data = await axios
+    const data = await api
         .get('/api/penprod/get-pendentifs-produit', {
             params: {
                 idProd
@@ -14,7 +15,7 @@ export const getPendentifsProduit = async (idProd) => {
 
 export const deletePenProd = async (idProd, idPenProd) => {
     try {
-        const { data } = await axios.delete('/api/admin/penprod/delete-penprod', {
+        const { data } = await api.delete('/api/admin/penprod/delete-penprod', {
             data: {
                 idProd,
                 idPenProd,
@@ -29,7 +30,7 @@ export const deletePenProd = async (idProd, idPenProd) => {
 
 export const updatePenProd = async (idProd, tabPendentifs) => {
     try {
-        const { data } = await axios.post('/api/admin/penprod/update-pendentifs-produit', {
+        const { data } = await api.post('/api/admin/penprod/update-pendentifs-produit', {
             idProd,
             tabPendentifs
         });

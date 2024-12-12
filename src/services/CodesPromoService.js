@@ -1,21 +1,21 @@
 
-import axios from 'axios';
+import api from "../utils/api";
 
 
 export const getAllCodesPromo = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/codepromo/get-codespromo')
     if (data.data) return data.data
     return null;
 }
 export const getAllCodesPromoWithUse = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/codepromo/get-codespromo-use')
     if (data.data) return data.data
     return null;
 }
 export const getOneCodePromo = async (code) => {
-	const data = await axios
+	const data = await api
 		.get('/api/codepromo/get-codespromo-id/', {
 		params: {
 			code
@@ -26,7 +26,7 @@ export const getOneCodePromo = async (code) => {
 }
 
 export const CreatePromo = async (obj) => {
-    return axios.post('/api/codepromo/add-codepromo', {
+    return api.post('/api/codepromo/add-codepromo', {
         ...obj
     })
     .then((res) => {
@@ -39,7 +39,7 @@ export const CreatePromo = async (obj) => {
 }
 
 export const DeleteCodePromo = async (code) => {
-    const data = await axios
+    const data = await api
         .delete('/api/codepromo/delete-codepromo', {
             data: {
                 code

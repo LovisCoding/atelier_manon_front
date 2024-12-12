@@ -4,7 +4,7 @@ import SidebarMenu from "../SidebarMenu";
 import { getCategories } from "/src/services/CategorieService";
 import { addImage, addImageCateg } from "/src/services/HomeService";
 import { convertFilesToBase64 } from "/src/utils/Base64";
-import axios from "axios";
+
 import { getEvenement, getImageURL, updateEvenement } from "../../../services/HomeService";
 import { getAllProducts } from "../../../services/ProductService";
 
@@ -25,7 +25,7 @@ export default function Accueil() {
 
 
   const changeEvent = () => {
-    axios.post("/api/admin/personnalisation/update-evenement", {
+    api.post("/api/admin/personnalisation/update-evenement", {
       type:"evenement",
       message: event
     })

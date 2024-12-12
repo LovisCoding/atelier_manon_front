@@ -1,16 +1,16 @@
 
-import axios from 'axios';
+import api from "../utils/api";
 
 
 export const getAllAvis = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/avis/get-all-avis')
     if (!data.data) return null
     return data.data;
 }
 
 export const getAvisBySession = async () => {
-    return axios.get('/api/avis/getAvisBySession')
+    return api.get('/api/avis/getAvisBySession')
     .then((res) => {
         if (res.status == 200) return res.data;
         return null
@@ -21,7 +21,7 @@ export const getAvisBySession = async () => {
 }
 
 export const getAvisToDisplay = async () => {
-    return axios.get('/api/avis/get-avis-display')
+    return api.get('/api/avis/get-avis-display')
     .then((res) => {
         if (res.status == 200) return res.data;
         return null
@@ -32,7 +32,7 @@ export const getAvisToDisplay = async () => {
 }
 
 export const addAvis = async (content, note) => {
-    axios.post("/api/client/avis/add-avis", {
+    api.post("/api/client/avis/add-avis", {
         contenu: content,
         note: note
     })
@@ -45,14 +45,14 @@ export const addAvis = async (content, note) => {
 }
 
 export const updateAvis = async (id, estAffiche) => {
-    axios.post("/api/admin/avis/update-avis-display", {
+    api.post("/api/admin/avis/update-avis-display", {
         idAvis: id,
         estAffiche: estAffiche
     })
 }
 
 export const deleteAvis = async (id) => {
-    const data =  await axios.delete("/api/admin/avis/delete-avis", {
+    const data =  await api.delete("/api/admin/avis/delete-avis", {
         data:{idAvis: Number(id)}
     });
 

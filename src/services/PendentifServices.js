@@ -1,8 +1,9 @@
-import axios from "axios";
+import api from "../utils/api";
+
 
 export const getPendentifs = async () => {
 
-   const data = await axios.get('/api/pendentif/get-pendentifs')
+   const data = await api.get('/api/pendentif/get-pendentifs')
 
     return data.data
 }
