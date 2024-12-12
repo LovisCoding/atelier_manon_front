@@ -15,7 +15,7 @@ const Jewelry = () => {
   const navigate = useNavigate();
 
   const containsCategory = (categories, category) => {
-    const contains = false;
+    let contains = false;
     categories.forEach(element => {
       if (element.libCateg.toLowerCase() === category.toLowerCase()) contains = true;
     });
@@ -93,6 +93,31 @@ const Jewelry = () => {
     navigate(`/jewelry/${newCategory}`);
   };
 
+  const handleSortChange = (sort) => {
+    if (sort === 'Aucun') return;
+
+    if (sort === 'alphabétique') {
+      const sortedData = [...jewelryData].sort((a, b) => a.title.localeCompare(b.title));
+      setJewelryData(sortedData);
+      return;
+    }
+    if (sort === 'anti-alphabétique') {
+        const sortedData = [...jewelryData].sort((a, b) => b.title.localeCompare(a.title));
+        setJewelryData(sortedData);
+        return;
+    }
+    if (sort === 'prix croissant') {
+        const sortedData = [...jewelryData].sort((a, b) => a.price - b.price);
+        setJewelryData(sortedData);
+        return;
+    }
+    if (sort === 'prix décroissant') {
+        const sortedData = [...jewelryData].sort((a, b) => b.price - a.price);
+        setJewelryData(sortedData);
+        return;
+    }
+  }
+
 	if (loading) {
 		return (
 			<Stack direction="row" justifyContent="center" sx={{ mt: 10 }}>
@@ -107,6 +132,7 @@ const Jewelry = () => {
       collectionName={category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Bijoux'}
       collectionTitle={collectionTitle}
       onCategoryChange={handleCategoryChange}
+      onSortChange={handleSortChange}
     />
   );
 };
