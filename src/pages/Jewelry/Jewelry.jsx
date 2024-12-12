@@ -14,10 +14,21 @@ const Jewelry = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const containsCategory = (categories, category) => {
+    let contains = false;
+    categories.forEach(element => {
+      if (element.libCateg.toLowerCase() === category.toLowerCase()) contains = true;
+    });
+    return contains;
+  }
+
   useEffect(() => {
     const fetchCategories = async () => {
       const categoriesData = await getCategories();
-      setCategories(categoriesData);
+      if (!categoriesData) return;
+      const contains = containsCategory(categoriesData,category);
+      if (contains) setCategories(categoriesData);
+      else navigate("/jewelry")
     };
 
     fetchCategories();
@@ -28,6 +39,11 @@ const Jewelry = () => {
       let categoryId = '';
       let title = 'Retrouvez ici tous les bijoux disponibles !';
       let bgImage = 'bijoux';
+
+      const exec = async () => {
+        const data = await getCategories();
+      }
+      exec();
 
       if (category) {
         const matchedCategory = categories.find(cat => cat.libCateg.toLowerCase() === category.toLowerCase());
@@ -77,6 +93,31 @@ const Jewelry = () => {
     navigate(`/jewelry/${newCategory}`);
   };
 
+  const handleSortChange = (sort) => {
+    if (sort === 'Aucun') return;
+
+    if (sort === 'alphabétique') {
+      const sortedData = [...jewelryData].sort((a, b) => a.title.localeCompare(b.title));
+      setJewelryData(sortedData);
+      return;
+    }
+    if (sort === 'anti-alphabétique') {
+        const sortedData = [...jewelryData].sort((a, b) => b.title.localeCompare(a.title));
+        setJewelryData(sortedData);
+        return;
+    }
+    if (sort === 'prix croissant') {
+        const sortedData = [...jewelryData].sort((a, b) => a.price - b.price);
+        setJewelryData(sortedData);
+        return;
+    }
+    if (sort === 'prix décroissant') {
+        const sortedData = [...jewelryData].sort((a, b) => b.price - a.price);
+        setJewelryData(sortedData);
+        return;
+    }
+  }
+
 	if (loading) {
 		return (
 			<Stack direction="row" justifyContent="center" sx={{ mt: 10 }}>
@@ -91,6 +132,7 @@ const Jewelry = () => {
       collectionName={category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Bijoux'}
       collectionTitle={collectionTitle}
       onCategoryChange={handleCategoryChange}
+      onSortChange={handleSortChange}
     />
   );
 };

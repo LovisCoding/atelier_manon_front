@@ -122,7 +122,7 @@ export default function Accueil() {
   };
 
   return (
-    <Box sx={{ display: "flex", height:'100vh' }}>
+    <Box sx={{ display: "flex" }}>
       <SidebarMenu />
 
       <Box
@@ -133,14 +133,16 @@ export default function Accueil() {
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "#f4f6f8",
-          borderRadius: 2
+          borderRadius: 2,
+          overflow:'auto',
+          height:'100%'
         }}
       >
         <Snackbar
           open={isEventBarDisplayed}
           autoHideDuration={3000}
           onClose={()=>setIsEventBarDisplayed(false)}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <Alert onClose={()=>setIsEventBarDisplayed(false)} severity={eventBarMessage.includes("succès") ? "success" : "error"} sx={{ width: "100%" }}>{eventBarMessage}</Alert>
         </Snackbar>
@@ -162,7 +164,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('logo')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('logo', 200)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box display="flex" width="100%" gap={1} >
@@ -178,7 +180,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('home')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('home', 200)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box display="flex" width="100%" gap={1} >
@@ -194,7 +196,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('bijoux')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('bijoux', 200)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box>
@@ -230,7 +232,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL(idCategorie)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL(idCategorie, 200)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -287,7 +289,6 @@ export default function Accueil() {
                 Changer le produit
               </Button>
             </Box>
-
           </Box>
 
         </Stack>

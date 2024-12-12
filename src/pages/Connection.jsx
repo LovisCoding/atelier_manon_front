@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Typography, Container, useTheme, Snackbar, Alert } from "@mui/material";
+import { TextField, Button, Box, Typography, Container, useTheme, Snackbar, Alert, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useAuth } from "../utils/AuthContext";
+import VisibilityOn from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function Connection() {
 
@@ -11,6 +13,7 @@ function Connection() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
 
@@ -51,16 +54,19 @@ function Connection() {
     const fieldStyle = {
         "& .MuiOutlinedInput-root": {
             color: theme.palette.text.main, // Couleur par défaut
-            "&.Mui-focused fieldset": {
-                borderColor: theme.palette.customYellow.main,
-            },
+            
         },
         "& .MuiInputLabel-root.Mui-focused": {
             color: theme.palette.customYellow.main, // Couleur quand focus
         }
     }
 
-    const handleClose = () => setIsErrorDisplayed(false)
+    const placeholderStyle = {
+        "& input::placeholder": {
+            color: "blue",
+            fontWeight: "bold",
+        }
+    }
 
     return (
 
@@ -75,10 +81,10 @@ function Connection() {
                 <Snackbar
                     open={isErrorDisplayed}
                     autoHideDuration={3000}
-                    onClose={handleClose}
-                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                    onClose={()=>setIsErrorDisplayed(false)}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 >
-                    <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+                    <Alert onClose={()=>setIsErrorDisplayed(false)} severity="error" sx={{ width: "100%" }}>
                         {errorMessage}
                     </Alert>
                 </Snackbar>
@@ -104,19 +110,30 @@ function Connection() {
                         onChange={e => setEmail(e.target.value)}
                         sx={fieldStyle}
                     />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Mot de passe"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        sx={fieldStyle}
-                    />
+                    <FormControl margin="normal" fullWidth variant="outlined" >
+                        <InputLabel color="black" htmlFor="password">Mot de passe *</InputLabel>
+                        <OutlinedInput
+                            required
+                            id="password"
+                            label="Mot de passe"
+                            autoComplete="current-password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            sx={placeholderStyle}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={e => setShowPassword(!showPassword)}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOn /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
                     <Typography onClick={e => changeRoute('/forgot-password')} sx={{ justifySelf: 'end', fontSize: '12px', textDecoration: 'underline', cursor: 'pointer' }} >Mot de passe oublié ?</Typography>
                     <Button
                         type="submit"

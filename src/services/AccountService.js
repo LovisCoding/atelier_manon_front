@@ -18,9 +18,10 @@ export const updateUserDetailsApi = async (firstname, lastname) => {
         const data = await api
             .post('/api/client/account/update-nom-prenom' , {
                 nom : firstname,
-                prenom : lastname
+                prenom : lastname,
+                adresse: address
             });
-		return data == 200 || data == 201;
+        return data.status == 200 || data.status == 201;
     } catch (err) {
         return false;
     }

@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import { CreatePromo, getOneCodePromo } from "../../../services/CodesPromoService";
+import {CreatePromo, DeleteCodePromo, getOneCodePromo} from "../../../services/CodesPromoService";
 import { getAllProducts, getProductImage } from "../../../services/ProductService";
 import { addProduitsToPromo, addProduitToPromo, DeleteProduitFromPromo, deleteProduitsFromPromo, getProduitsByPromo } from "../../../services/PromoProduitService";
 import Snackbar from "@mui/material/Snackbar";
@@ -118,6 +118,10 @@ export default function CodePromo() {
 		
 		
 	}
+	const handleDelete = () => {
+		DeleteCodePromo(id).then(() => navigate('/admin/codesPromo'))
+
+	}
 
 	return (
 		<Box display="flex" justifyContent={'center'} >
@@ -200,7 +204,8 @@ export default function CodePromo() {
 				</TableContainer> : ''
 				}
 				
-				{id == -1 ? <Button variant='yellowButton' onClick={handleCreate} >Enregistrer</Button> : ''}
+				{id == -1 ? <Button variant='yellowButton' onClick={handleCreate} >Enregistrer</Button> :
+					<Button color={'error'} onClick={handleDelete} >Supprimer</Button>}
 			</Stack>
 			<Snackbar open={snOpenValue} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={() => setSnOpenValue(false)} message={message} />
 		</Box>
