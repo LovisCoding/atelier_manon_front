@@ -13,7 +13,7 @@ export const disableMyAccount = async () => {
 	return true;
 }
 
-export const updateUserDetailsApi = async (firstname, lastname) => {
+export const updateUserDetailsApi = async (firstname, lastname, address) => {
 	try {
         const data = await api
             .post('/api/client/account/update-nom-prenom' , {
