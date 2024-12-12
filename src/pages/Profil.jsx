@@ -194,6 +194,7 @@ export default function Profil() {
 	}, []);
 
 	useEffect(() => {
+		console.log(userDetails);
 		if (!userDetails.adresseFormat) return;
 		const address = (userDetails.adresseFormat).split(",");
 		if (address.length === 4) {
