@@ -11,7 +11,10 @@ import {
 	Modal,
 	FormControlLabel,
 	Checkbox,
+	IconButton,
 } from "@mui/material";
+import { CiCircleMinus } from "react-icons/ci";
+import { CiCirclePlus } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import {
@@ -108,6 +111,7 @@ export default function Profil() {
 	const [open, setOpen] = useState(false);
 	const [userDetails, setUserDetails] = useState({});
 	const [orders, setOrders] = useState([]);
+	const [isOrdersOpen, setIsOrdersOpen] = useState(false);
 	const [avis, setAvis] = useState({ contenu: "", note: 1 });
 	const [hasAvis, setHasAvis] = useState(true);
 	const { details, logout } = useAuth();
@@ -238,8 +242,13 @@ export default function Profil() {
 				</FormControl>
 
 				{/* Commandes */}
-				<Typography variant="h2">Vos commandes</Typography>
-				<Stack spacing={2}>
+				<Box display="flex" justifyContent="space-between" >
+					<Typography variant="h2">Vos commandes</Typography>
+					<IconButton onClick={()=>setIsOrdersOpen(!isOrdersOpen)} >
+						{ isOrdersOpen ? <CiCircleMinus size={30} /> : <CiCirclePlus size={30} /> }
+					</IconButton>
+				</Box>
+				{isOrdersOpen && <Stack spacing={2}>
 					{orders.length === 0 ? (
 						<Typography>Aucune commande disponible</Typography>
 					) : (
@@ -258,7 +267,7 @@ export default function Profil() {
 							</Stack>
 						))
 					)}
-				</Stack>
+				</Stack>}
 
 				<Button onClick={() => setOpen(true)} variant="contained">
 					Poser une question

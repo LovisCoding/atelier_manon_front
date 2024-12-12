@@ -46,6 +46,18 @@ function Register() {
             return;
         }
 
+        if (!firstname || !lastname) {
+            setErrorMessage("Veuillez renseigner votre nom et prénom.");
+            setIsErrorDisplayed(true);
+            return;
+        }
+
+        if (!addressStreet || !addressCity || !addressPostalCode) {
+            setErrorMessage("Veuillez renseigner une adresse.");
+            setIsErrorDisplayed(true);
+            return;
+        }
+
         setIsLoading(true);
         register(firstname, lastname, email, password, [addressNumber, addressStreet, addressCity, addressPostalCode])
             .then((res) => {
