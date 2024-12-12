@@ -14,10 +14,21 @@ const Jewelry = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const containsCategory = (categories, category) => {
+    const contains = false;
+    categories.forEach(element => {
+      if (element.libCateg.toLowerCase() === category.toLowerCase()) contains = true;
+    });
+    return contains;
+  }
+
   useEffect(() => {
     const fetchCategories = async () => {
       const categoriesData = await getCategories();
-      setCategories(categoriesData);
+      if (!categoriesData) return;
+      const contains = containsCategory(categoriesData,category);
+      if (contains) setCategories(categoriesData);
+      else navigate("/jewelry")
     };
 
     fetchCategories();
@@ -28,6 +39,11 @@ const Jewelry = () => {
       let categoryId = '';
       let title = 'Retrouvez ici tous les bijoux disponibles !';
       let bgImage = 'bijoux';
+
+      const exec = async () => {
+        const data = await getCategories();
+      }
+      exec();
 
       if (category) {
         const matchedCategory = categories.find(cat => cat.libCateg.toLowerCase() === category.toLowerCase());
