@@ -2,7 +2,7 @@ import api from "../utils/api";
 
 
 export const getProfilCurrentSession = async () => {
-	let res = await api.get("https://atelier-manon.bernouy.fr/api/client/account/get-compte");
+	let res = await api.get("/api/client/account/get-compte");
 	if ( res.status != 200 ) return null;
 	return res.data;
 }
