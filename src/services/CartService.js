@@ -1,5 +1,5 @@
+import api from "../utils/api";
 
-import api from "api";
 
 export const getCartProducts = async () => {
     try {
