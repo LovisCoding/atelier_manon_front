@@ -132,7 +132,9 @@ export default function Accueil() {
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "#f4f6f8",
-          borderRadius: 2
+          borderRadius: 2,
+          overflow:'auto',
+          height:'100%'
         }}
       >
         <Snackbar
