@@ -183,7 +183,7 @@ function ProductsDetail({ products }) {
               height: "4rem",
               width: "4rem",
               objectFit: "cover"
-            }} component={"img"} src={`/api/img/${product.photo}`}>
+            }} component={"img"} src={getProductImage(row.photo, 100, product.photo)}>
             </Box>
 
             <Stack spacing={1}>
