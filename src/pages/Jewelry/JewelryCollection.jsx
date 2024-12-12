@@ -149,7 +149,7 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
                     {item.title}
                   </Typography>
                   <Typography variant="body2" sx={{ color: '#333', fontWeight: 'bold' }}>
-                    {item.price.toFixed(2)}€                  
+                    {item.price.toFixed(2)}€
                   </Typography>
                 </CardContent>
               </Card>

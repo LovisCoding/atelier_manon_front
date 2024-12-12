@@ -67,13 +67,14 @@ export const deleteProductPanier = async (product) => {
 
 };
 
-export const addCommande = async (commentary, isGift, giftCommentary) => {
+export const addCommande = async (commentary, isGift, giftCommentary, codesPromo) => {
     try {
         const data = await api
             .post('/api/client/commande/add-commande' , {
                 comm : commentary ,
                 estCadeau : isGift,
-                carte : giftCommentary
+                carte : giftCommentary,
+                codesPromo
             }, { headers: { 'Content-Type':'application/json' } });
         return data.data;
     } catch (err) {

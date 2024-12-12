@@ -26,6 +26,7 @@ import {
   MdRemove as Remove,
   MdClose as Close,
 } from "react-icons/md";
+import { BsInfoCircle } from "react-icons/bs";
 
 import { useTheme } from "@mui/material/styles";
 
@@ -92,7 +93,7 @@ function Cart() {
 
 
   const handleConfirmCommand = async () => {
-    const commandId = await addCommande(commentary, isGift, giftCommentary);
+    const commandId = await addCommande(commentary, isGift, giftCommentary, promoCodes);
     if (!commandId) return; // TODO: handle error
     navigate('/command/'+commandId);
   }
@@ -207,7 +208,10 @@ function Cart() {
                 value={commentary}
                 onChange={(e) => setCommentary(e.target.value)}
               />
-
+              <Box display="flex" alignItems="center" gap={1} >
+                <BsInfoCircle />
+                <Typography variant="body2" >Les codes promo sont effectifs après vérification, après validation de la commande.</Typography>
+              </Box>
               <PromoCodeSection
                 promoCodes={promoCodes}
                 setPromoCodes={setPromoCodes}

@@ -121,7 +121,7 @@ export default function Accueil() {
   };
 
   return (
-    <Box sx={{ display: "flex", height:"100vh" }}>
+    <Box sx={{ display: "flex", height:'100vh' }}>
       <SidebarMenu />
 
       <Box
@@ -132,7 +132,7 @@ export default function Accueil() {
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "#f4f6f8",
-          borderRadius: 2,
+          borderRadius: 2
         }}
       >
         <Snackbar
@@ -147,6 +147,22 @@ export default function Accueil() {
           <Typography variant="h4" align="center">
             Gestion des Pages
           </Typography>
+
+          <Box display="flex" width="100%" gap={1} >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: '100%' }}>
+              <Typography variant="h6" sx={{ marginBottom: 1, color: "black" }}>
+                Logo
+              </Typography>
+              <TextField
+                type="file"
+                onChange={(e) => handleFileChange(e, "logo")}
+                sx={{ marginBottom: 2 }}
+                fullWidth
+                variant="outlined"
+              />
+            </Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('logo')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+          </Box>
 
           <Box display="flex" width="100%" gap={1} >
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: '100%' }}>

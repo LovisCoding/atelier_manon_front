@@ -13,6 +13,7 @@ export const getOrderAdminPage = async () => {
 export const getOrdersProfil = async () => {
 	let res = await api.get("/api/client/commande/get-commandes-client");
 	if (res.status != 200) return [];
+	console.log("data:",res.data);
 	return res.data;
 }
 

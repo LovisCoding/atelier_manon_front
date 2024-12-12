@@ -250,7 +250,7 @@ const Produit = () => {
                       tempsRea={tempsRea}
                       setTempsRea={setTempsRea}
                   />
-                  <ImagesSection images={images} setImages={setImages} id={id} setImagesAUpload={setImagesAUpload} imagesAUpload={imagesAUpload} imageADelete={imageADelete} setImageADelete={setImageADelete} />
+                  <ImagesSection images={images} setImages={setImages} id={id} setImagesAUpload={setImagesAUpload} imagesAUpload={imagesAUpload} imageADelete={imageADelete} setImageADelete={setImageADelete} setDisplaySn={setSnOpenValue} setMessage={setMessage}/>
                   {/*mettre dans un grid2*/}
                   <PierresSection pierres={pierres} selectedPierres={selectedPierres} setSelectedPierres={setSelectedPierres} setPierres={setPierres}/>
                   <SeparatorsSection separateurs={separators} selectedSeparators={selectedSeparators} setSelectedSeparateurs={setSelectedSeparators} />

@@ -62,7 +62,7 @@ export default function Orders() {
                       "&:hover": { backgroundColor: "#f5f5f5" },
                     }}
                   >
-                    <TableCell>{row.idCommande}</TableCell>
+                    <TableCell>#{row.idCommande}</TableCell>
                     <TableCell>{row.adresse.replace(/[{}"]/g, '').replaceAll(',', ' ')}</TableCell>
                     <TableCell>{row.prixTotalReduc} €</TableCell>
                     <TableCell>{row.etat}</TableCell>
