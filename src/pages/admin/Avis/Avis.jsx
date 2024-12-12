@@ -65,7 +65,7 @@ export default function Avis() {
                     open={isErrorDisplayed}
                     autoHideDuration={3000}
                     onClose={()=>setIsErrorDisplayed(false)}
-                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 >
                     <Alert onClose={()=>setIsErrorDisplayed(false)} severity={errorMessage.includes("succès") ? "success" : "error"} sx={{ width: "100%" }}>
                         {errorMessage}

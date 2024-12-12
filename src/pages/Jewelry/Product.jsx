@@ -50,7 +50,7 @@ export default function Product() {
 				open={isErrorDisplayed}
 				autoHideDuration={3000}
 				onClose={handleClose}
-				anchorOrigin={{ vertical: "top", horizontal: "center" }}
+				anchorOrigin={{ vertical: "top", horizontal: "right" }}
 			>
 				<Alert onClose={handleClose} severity={errorMessage.includes("erreur") ? "error" : "success"} sx={{ width: "100%" }}>
 					{errorMessage}
