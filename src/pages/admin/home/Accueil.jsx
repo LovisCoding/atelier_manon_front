@@ -163,7 +163,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('logo')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('logo', 200)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box display="flex" width="100%" gap={1} >
@@ -179,7 +179,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('home')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('home', 200)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box display="flex" width="100%" gap={1} >
@@ -195,7 +195,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('bijoux')})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL('bijoux', 200)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box>
@@ -231,7 +231,7 @@ export default function Accueil() {
                 variant="outlined"
               />
             </Box>
-            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL(idCategorie)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
+            <Box sx={{ borderRadius: "15px", backgroundImage: `url(${getImageURL(idCategorie, 200)})`, backgroundSize: 'cover', width: 200, height: 'auto', backgroundPosition: 'center' }} ></Box>
           </Box>
 
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -288,7 +288,6 @@ export default function Accueil() {
                 Changer le produit
               </Button>
             </Box>
-
           </Box>
 
         </Stack>

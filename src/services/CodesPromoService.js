@@ -39,11 +39,16 @@ export const CreatePromo = async (obj) => {
 }
 
 export const DeleteCodePromo = async (code) => {
-    const data = await axios
-        .delete('/api/codepromo/delete-codepromo', {
-            data: {
-                code
-            }
-        })
+    try {
+        const data = await axios
+            .delete('/api/codepromo/delete-codepromo', {
+                data: {
+                    code
+                }
+            });
+        return data;
+    } catch (err) {
+        return err
+    }
 }
 
