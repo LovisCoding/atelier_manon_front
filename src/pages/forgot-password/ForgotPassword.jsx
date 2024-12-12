@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Typography, Container, useTheme, Alert, Snackbar } from "@mui/material";
+import { TextField, Button, Box, Typography, Container, useTheme, Alert, Snackbar, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router";
 import { forgotPassword } from "../../services/ConnectionService";
 
@@ -10,6 +10,7 @@ function ForgotPassword() {
     const [email, setEmail] = useState("");
     const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
     const [errorMessage, setErrorMessage] = useState("Erreur survenue");
+    const [isLoading, setIsLoading] = useState(false);
 
     const theme = useTheme();
 
@@ -21,17 +22,22 @@ function ForgotPassword() {
             return;
         }
         const exec = async () => {
+            setIsLoading(true);
             const data = await forgotPassword(email);
             if (!data) return;
             if (data.status === 404) {
                 setErrorMessage("L'adresse renseignée n'est associée à aucun compte.");
                 setIsErrorDisplayed(true);
+                setIsLoading(false);
                 return;
             }
-            if (data && data.status !== 500) changeRoute('/email-sent');
             if (data.status === 500) {
                 setErrorMessage("Une erreur est survenue. Veuillez réessayer.");
                 setIsErrorDisplayed(true);
+                return;
+            } else if (data && data.status !== 500) {
+                changeRoute('/email-sent');
+                setIsLoading(false);
                 return;
             }
         }
@@ -58,8 +64,9 @@ function ForgotPassword() {
 
     return (
 
-        <Container maxWidth="xs" >
-            <Box
+        <Container maxWidth="100%" sx={{display:'flex', justifyContent:'center'}} >
+            {!isLoading && <Box
+                maxWidth="xs"
                 sx={{
                     mt: 10,
                     display: "flex",
@@ -113,7 +120,8 @@ function ForgotPassword() {
                     <Typography onClick={e => changeRoute('/login')} sx={{ justifySelf: 'center', fontSize: '12px', textDecoration: 'underline', cursor: 'pointer' }} >
                         Annuler</Typography>
                 </Box>
-            </Box>
+            </Box>}
+            {isLoading && <CircularProgress size={60} thickness={5} color="" sx={{mt:5}} />}
         </Container>
 
     );

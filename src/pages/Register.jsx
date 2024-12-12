@@ -33,9 +33,19 @@ function Register() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
+            setErrorMessage("Les mots de passes doivent correspondre.");
             setIsSamePassword(false);
+            setIsErrorDisplayed(true);
             return;
-        } else setIsSamePassword(true)
+        }
+        if (password.length >= 8) setIsSamePassword(true);
+        else {
+            setErrorMessage("Votre mot de passe doit faire au moins 8 caractères de long.");
+            setIsSamePassword(false);
+            setIsErrorDisplayed(true);
+            return;
+        }
+
         setIsLoading(true);
         register(firstname, lastname, email, password, [addressNumber, addressStreet, addressCity, addressPostalCode])
             .then((res) => {
@@ -51,22 +61,21 @@ function Register() {
         }
     }
 
-    const handleClose = () => setIsErrorDisplayed(false)
-
     return (
 
-        <Container maxWidth="sm" >
+        <Container maxWidth="100%" sx={{display:"flex", justifyContent:'center'}} >
             <Snackbar
                 open={isErrorDisplayed}
                 autoHideDuration={3000}
-                onClose={handleClose}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                onClose={()=>setIsErrorDisplayed(false)}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
-                <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+                <Alert onClose={()=>setIsErrorDisplayed(false)} severity="error" sx={{ width: "100%" }}>
                     {errorMessage}
                 </Alert>
             </Snackbar>
             { !isLoading && <Box
+            maxWidth="sm"
                 sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -234,7 +243,7 @@ function Register() {
                     </Box>
                 </Box>
             </Box>}
-            {isLoading && <CircularProgress size={60} thickness={5} color="" />}
+            {isLoading && <CircularProgress size={60} thickness={5} color="" sx={{mt:5}} />}
         </Container>
 
     );

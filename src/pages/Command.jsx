@@ -16,6 +16,7 @@ function Command() {
     useEffect (() => {
         const exec = async () => {
             const data = await getCommand(id);
+            if (data.status === 403) navigate("/")
             if (data.status === 404) navigate('/cart');
             if (!data) return;
             setData(data);
