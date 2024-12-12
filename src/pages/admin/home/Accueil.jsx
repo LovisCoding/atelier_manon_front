@@ -7,6 +7,7 @@ import { convertFilesToBase64 } from "/src/utils/Base64";
 
 import { getEvenement, getImageURL, updateEvenement } from "../../../services/HomeService";
 import { getAllProducts } from "../../../services/ProductService";
+import api from "../../../utils/api";
 
 export default function Accueil() {
 
