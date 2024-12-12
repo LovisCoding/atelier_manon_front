@@ -9,7 +9,6 @@ export default defineConfig(({mode}) => {
 		{
 			plugins: [react()],
 			server: {
-				host: 'atelier-manon.bernouy.fr',
 				proxy: {
 					'/api': {
 						target: "https://api.atelier-manon.bernouy.fr",
