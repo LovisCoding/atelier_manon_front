@@ -121,7 +121,7 @@ export default function Accueil() {
   };
 
   return (
-    <Box sx={{ display: "flex", height:'100vh' }}>
+    <Box sx={{ display: "flex" }}>
       <SidebarMenu />
 
       <Box
