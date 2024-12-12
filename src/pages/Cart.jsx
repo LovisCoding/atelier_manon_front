@@ -210,7 +210,7 @@ function Cart() {
               />
               <Box display="flex" alignItems="center" gap={1} >
                 <BsInfoCircle />
-                <Typography variant="body2" >Les codes promo sont effectifs après vérification, après validation de la commande.</Typography>
+                <Typography variant="body2" >Les codes promo sont effectifs après vérification, une fois la commande validée.</Typography>
               </Box>
               <PromoCodeSection
                 promoCodes={promoCodes}

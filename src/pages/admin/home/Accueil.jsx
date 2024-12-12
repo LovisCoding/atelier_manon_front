@@ -141,7 +141,7 @@ export default function Accueil() {
           open={isEventBarDisplayed}
           autoHideDuration={3000}
           onClose={()=>setIsEventBarDisplayed(false)}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <Alert onClose={()=>setIsEventBarDisplayed(false)} severity={eventBarMessage.includes("succès") ? "success" : "error"} sx={{ width: "100%" }}>{eventBarMessage}</Alert>
         </Snackbar>

@@ -94,7 +94,7 @@ export default function Article() {
                     open={newArticleError !== ""}
                     autoHideDuration={3000}
                     onClose={() => setNewArticleError("")}
-                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 >
                     <Alert onClose={() => setNewArticleError("")} severity="error" sx={{ width: "fit-content" }}>
                         {newArticleError}

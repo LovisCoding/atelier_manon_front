@@ -98,12 +98,12 @@ function ArticleLine({ article }) {
         <Typography variant="body2" color="text.primary" sx={{ marginTop: 1 }}>
           <div 
             style={{
-              overflowWrap: "break-word",
-              whiteSpace: "normal"
+              overflow:'hidden',
+              height:'10.3rem'
             }}
             dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(truncateText(article.contenu, 3)),
-          }} />        
+          }} />
         </Typography>
       </Box>
       <Typography variant="caption" color="text.primary" sx={{ textAlign: "right", marginTop: 2, fontStyle: "italic" }}>

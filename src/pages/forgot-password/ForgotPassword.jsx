@@ -78,7 +78,7 @@ function ForgotPassword() {
                     open={isErrorDisplayed}
                     autoHideDuration={3000}
                     onClose={handleClose}
-                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 >
                     <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
                         {errorMessage}

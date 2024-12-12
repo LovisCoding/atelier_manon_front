@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography, Card, CardMedia, CardContent, Popover, List, ListItem, ListItemText, Slider, TextField, IconButton, Grid2, useTheme } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { FaSortAmountDown } from "react-icons/fa";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { getCategories, getImageURL } from '/src/services/CategorieService';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
-const JewelryCollection = ({ collectionData, category, collectionName, collectionTitle, onCategoryChange }) => {
+const JewelryCollection = ({ collectionData, category, collectionName, collectionTitle, onCategoryChange, onSortChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorSort, setAnchorSort] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('Tout voir');
   const [categories, setCategories] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 100]);
@@ -57,6 +59,14 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
     setSelectedCategory(category);
     onCategoryChange(category.toLowerCase() === 'tout voir' ? '' : category.toLowerCase());
     handleClose();
+  };
+
+  const handleClickSort = (event) => setAnchorSort(event.currentTarget);
+  const handleCloseSort = () => setAnchorSort(null);
+
+  const handleSortSelect = (sort) => {
+    onSortChange(sort.toLowerCase());
+    handleCloseSort();
   };
 
   const handlePageChange = (newPage) => {
@@ -118,6 +128,9 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
               color='customYellow'
             />
           </Box>
+          <Button variant="yellowButton" sx={{ fontWeight: 'bold' }} fullWidth onClick={handleClickSort} endIcon={<FaSortAmountDown />}>
+            Tris
+          </Button>
         </Box>
 
         <Popover open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} transformOrigin={{ vertical: 'top', horizontal: 'center' }}>
@@ -127,6 +140,18 @@ const JewelryCollection = ({ collectionData, category, collectionName, collectio
                 <ListItemText primary={category} />
               </ListItem>
             ))}
+          </List>
+        </Popover>
+
+        <Popover open={Boolean(anchorSort)} anchorEl={anchorSort} onClose={handleCloseSort} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} transformOrigin={{ vertical: 'top', horizontal: 'center' }}>
+          <List>
+            {['Aucun', 'Alphabétique', 'Anti-alphabétique', 'Prix croissant', 'Prix décroissant' ].map((sort) =>{
+            return (
+              <ListItem button key={sort} onClick={() => handleSortSelect(sort)}>
+                <ListItemText primary={sort} />
+              </ListItem>
+            )}
+            )}
           </List>
         </Popover>
 
