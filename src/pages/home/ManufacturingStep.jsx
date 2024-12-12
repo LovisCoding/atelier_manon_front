@@ -9,15 +9,16 @@ const ManufacturingStep = () => {
           item xs={12} sm={6} 
           sx={{ display: 'flex', justifyContent: 'center' }}
         >
-          <img
-            src="./src/assets/img/step.webp"
-            alt="Étape de la fabrication"
-            style={{ 
-              width: '100%', 
-              maxWidth: '500px',
-              height: 'auto',
-            }}
-          />
+        <Box
+          component="img"
+          src="/assets/img/step.webp"
+          alt="Étape de la fabrication"
+          sx={{
+            width: '100%',
+            maxWidth: '500px',
+            height: 'auto',
+          }}
+        />
         </Grid2>
 
         <Grid2 
