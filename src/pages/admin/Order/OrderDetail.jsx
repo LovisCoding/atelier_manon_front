@@ -13,6 +13,7 @@ import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiGift } from "react-icons/fi";
 import { updateState } from "../../../services/OrderService";
 import { formatDate } from "../../../utils/Date";
+import { getProductImage } from "../../../services/ProductService";
 
 export default function OrderDetails() {
 
