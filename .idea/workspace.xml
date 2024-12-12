@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6ff9d02-4a03-49b6-9ed2-aade21e9c9f6" name="Changes" comment="Refactor image handling in `Produits.jsx`.&#10;&#10;Updated `getProductImage` to include a size parameter for better control over image resolution. Adjusted related logic to support this change, enhancing consistency and maintainability.">
-      <change afterPath="$PROJECT_DIR$/src/theme/styles.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/CodesPromo/CodePromo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/CodesPromo/CodePromo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/home/Accueil.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/home/Accueil.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/CodesPromoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/CodesPromoService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/HomeService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/HomeService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
