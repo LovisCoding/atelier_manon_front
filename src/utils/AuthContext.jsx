@@ -11,7 +11,6 @@ export default function AuthContextProvider({ children }) {
   const [firstFetch, setFirstFetch] = useState(false);
 
   const getProfil = () => {
-    console.log('caca11')
     setFirstFetch(false);
     api.get("/api/client/account/get-compte")
       .then((res) => {
