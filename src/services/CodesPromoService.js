@@ -10,7 +10,7 @@ export const getAllCodesPromo = async () => {
 }
 export const getAllCodesPromoWithUse = async () => {
     const data = await api
-        .get('/api/codepromo/get-codespromo-use')
+        .get('/api/admin/codepromo/get-codespromo-use')
     if (data.data) return data.data
     return null;
 }
