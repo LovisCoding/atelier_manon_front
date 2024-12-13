@@ -53,7 +53,7 @@ export const updateAvis = async (id, estAffiche) => {
 
 export const deleteAvis = async (id) => {
     try {
-        const data =  await axios.delete("/api/admin/avis/delete-avis", {
+        const data =  await api.delete("/api/admin/avis/delete-avis", {
             data:{idAvis: Number(id)}
         });
         return data.status == 200 || data.status == 201;
