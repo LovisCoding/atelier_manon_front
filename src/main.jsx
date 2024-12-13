@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from '../routes/AppRoutes';
 import AuthContextProvider from './utils/AuthContext.jsx';
 import StylesMUI from "./theme/styles.jsx";
+import api from "./utils/api.js";
 
 
 const rootElement = document.getElementById('root');

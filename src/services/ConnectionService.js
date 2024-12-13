@@ -1,9 +1,9 @@
+import api from "../utils/api";
 
-import axios from "axios";
 
 export const forgotPassword = async (email) => {
     try {
-        const data = await axios.post('/api/account/forgot-password', {
+        const data = await api.post('/api/account/forgot-password', {
             email
         })
         return data.data
@@ -15,7 +15,7 @@ export const forgotPassword = async (email) => {
 
 export const validateToken = async (token) => {
     try {
-        const data = await axios.post('/api/account/reset-password', {
+        const data = await api.post('/api/account/reset-password', {
             token
         })
         return data.data;
@@ -27,7 +27,7 @@ export const validateToken = async (token) => {
 
 export const resetPassword = async (token, password, confirmPassword) => {
     try {
-        const data = await axios.post('/api/account/update-password', {
+        const data = await api.post('/api/account/update-password', {
             token,
             password,
             confirm_password: confirmPassword

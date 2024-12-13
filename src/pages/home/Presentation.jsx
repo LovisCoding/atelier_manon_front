@@ -64,7 +64,7 @@ const Presentation = ({ scrollToSection }) => {
           paddingLeft: '70px',
         }}
       >
-        <Box sx={{ display: 'flex', gap: '20px' }}>
+        <Box sx={{ display: 'flex', gap: '20px', flexDirection: { xs: 'column', sm: 'row' } }}>
         <Link href="/jewelry" underline="none">
             <Button variant="home" size="large">
               En savoir plus

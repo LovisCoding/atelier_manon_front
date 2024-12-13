@@ -1,6 +1,7 @@
 import { Box,CircularProgress } from "@mui/material";
-import axios from "axios";
+import api from "./api";
 import { createContext, useContext, useEffect, useState } from "react";
+
 
 const AuthContext = createContext();
 
@@ -11,7 +12,7 @@ export default function AuthContextProvider({ children }) {
 
   const getProfil = () => {
     setFirstFetch(false);
-    axios.get("/api/client/account/get-compte")
+    api.get("/api/client/account/get-compte")
       .then((res) => {
         if ( res.status == 200 ){
           let data = res.data;
@@ -21,13 +22,14 @@ export default function AuthContextProvider({ children }) {
             email: data.email,
             isAdmin: data.estAdmin
           })
-        } else if (res.status == 403) {return;}
+        } else if (res.status == 403) {; return;}
         setFirstFetch(true);
+
       }).catch(err=>setFirstFetch(true));
   };
 
   const register = async (firstname, lastname, email, password, adresse) => {
-    let res = await axios.post("/api/account/register", { 
+    let res = await api.post("/api/account/register", {
       "prenomCli": firstname,
       "nomCli": lastname,
       "email": email,
@@ -39,7 +41,7 @@ export default function AuthContextProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      let res = await axios.post("/api/account/login", {
+      let res = await api.post("/api/account/login", {
         email,
         mdp: password
       });
@@ -52,7 +54,7 @@ export default function AuthContextProvider({ children }) {
   };
 
   const logout = () => {
-    axios.post("/api/client/account/logout");
+    api.post("/api/client/account/logout");
     setDetails(null);
   };
 

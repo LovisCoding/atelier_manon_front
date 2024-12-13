@@ -85,11 +85,11 @@ export default function Stats() {
 
 	// Préparation des données pour les graphiques
 	const categoryProportionData = {
-		labels: Object.keys(categoryProportion) || {},
+		labels: categoryProportion ? Object.keys(categoryProportion) : [],
 		datasets: [
 			{
 				label: "Proportion des ventes par catégorie",
-				data: Object.values(categoryProportion) || {},
+				data: categoryProportion ? Object.values(categoryProportion) : [],
 				backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"],
 				hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"]
 			}
@@ -132,11 +132,11 @@ export default function Stats() {
 
 
 	const revenueSalesMonthData = {
-		labels: Object.keys(revenueSalesMonth) || {},
+		labels: revenueSalesMonth ? Object.keys(revenueSalesMonth ) : [],
 		datasets: [
 			{
 				label: "Revenu Mensuel (€)",
-				data: Object.values(revenueSalesMonth) || {},
+				data: revenueSalesMonth ? Object.values(revenueSalesMonth) : [],
 				backgroundColor: "#36A2EB",
 				hoverBackgroundColor: "#1E90FF",
 				borderColor: "#1E90FF",

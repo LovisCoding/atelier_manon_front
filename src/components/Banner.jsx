@@ -4,19 +4,19 @@ import { Box, Container, Grid2, Typography } from '@mui/material';
 const Banner = () => {
   const items = [
     {
-      image: './src/assets/img/livraison.webp',
+      image: '/assets/img/livraison.webp',
       text: 'Livraison Gratuite',
     },
     {
-      image: './src/assets/img/fabrication.webp',
+      image: '/assets/img/fabrication.webp',
       text: 'Fabriqué en France',
     },
     {
-      image: './src/assets/img/materiaux.webp',
+      image: '/assets/img/materiaux.webp',
       text: 'Matériaux naturels',
     },
     {
-      image: './src/assets/img/main.webp',
+      image: '/assets/img/main.webp',
       text: 'Fabriqué à la main',
     },
   ];

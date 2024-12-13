@@ -13,6 +13,7 @@ import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiGift } from "react-icons/fi";
 import { updateState } from "../../../services/OrderService";
 import { formatDate } from "../../../utils/Date";
+import { getProductImage } from "../../../services/ProductService";
 
 export default function OrderDetails() {
 
@@ -183,7 +184,7 @@ function ProductsDetail({ products }) {
               height: "4rem",
               width: "4rem",
               objectFit: "cover"
-            }} component={"img"} src={`/api/img/${product.photo}`}>
+            }} component={"img"} src={getProductImage(product.photo, 100, product.idProd)}>
             </Box>
 
             <Stack spacing={1}>

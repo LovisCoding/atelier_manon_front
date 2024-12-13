@@ -1,9 +1,9 @@
+import api from "../utils/api";
 
-import axios from "axios";
 
 export const getCartProducts = async () => {
     try {
-        const data = await axios
+        const data = await api
         .get('/api/client/panier/get-panier-client');
         if (!data.data || data.status === 403) return null;
         data.data.forEach(prod => {
@@ -21,7 +21,7 @@ export const getCartProducts = async () => {
 
 export const addProductPanier = async (product) => {
     try {
-        const data = await axios
+        const data = await api
             .post('/api/client/panier/add-product-panier' , {
                 idProd : product.idProd,
                 idCli : product.idCli,
@@ -36,7 +36,7 @@ export const addProductPanier = async (product) => {
 
 export const reduceProductPanier = async (product) => {
     try {
-        const data = await axios
+        const data = await api
             .post('/api/client/panier/reduce-product-panier' , {
                 idProd : product.idProd,
                 idCli : product.idCli,
@@ -51,7 +51,7 @@ export const reduceProductPanier = async (product) => {
 
 export const deleteProductPanier = async (product) => {
     try {
-      const response = await axios
+      const response = await api
             .delete('/api/client/panier/delete-product-panier', {
                 headers: { 'Content-Type': 'application/json' },
                 data: {
@@ -69,7 +69,7 @@ export const deleteProductPanier = async (product) => {
 
 export const addCommande = async (commentary, isGift, giftCommentary, codesPromo) => {
     try {
-        const data = await axios
+        const data = await api
             .post('/api/client/commande/add-commande' , {
                 comm : commentary ,
                 estCadeau : isGift,

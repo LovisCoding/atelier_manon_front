@@ -1,14 +1,15 @@
-import axios from 'axios';
+
+import api from "../utils/api";
 
 export const getQuestions = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/question/get-questions')
     if (data.data) return data.data
     return null;
 }
 
 export const getQuestionsAdmin = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/admin/question/get-questions')
     if (data.data) return data.data
     return null;
@@ -17,7 +18,7 @@ export const getQuestionsAdmin = async () => {
 
 export const getQuestionsById = async (id) => {
     try {
-      const response = await axios.get(`/api/question/get-question?idQuestion=${id}`);
+      const response = await api.get(`/api/question/get-question?idQuestion=${id}`);
       if (response.data) return response.data;
       return null;
     } catch (error) {
@@ -28,7 +29,7 @@ export const getQuestionsById = async (id) => {
 
 export const updateQuestion = async (question) => {
     try {
-        const response = await axios.post(
+        const response = await api.post(
             '/api/client/question/add-update-question',
             {
                 idQuestion: question.idQuestion,
@@ -46,7 +47,7 @@ export const updateQuestion = async (question) => {
 };
 
 export const addQuestion = async (question) => {
-    return axios.post("/api/client/question/add-update-question", {
+    return api.post("/api/client/question/add-update-question", {
         reponse: "",
         contenu: question,
         idQuestion: -1
@@ -62,7 +63,7 @@ export const addQuestion = async (question) => {
 
 export const deleteQuestion = async (id) => {
     try {
-        const response = await axios.delete(`/api/admin/question/delete-question`, {
+        const response = await api.delete(`/api/admin/question/delete-question`, {
             data: { idQuestion: id },
             headers: { 'Content-Type': 'application/json' }
         });

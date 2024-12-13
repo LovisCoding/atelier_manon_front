@@ -1,36 +1,36 @@
-import axios from 'axios';
+import api from "../utils/api";
 
 // Services
 export const getAllMateriau = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/materiau/get-materiaux');
     if (data.data) return data.data;
     return null;
 };
 
 export const getAllFils = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/fil/get-fils');
     if (data.data) return data.data;
     return null;
 };
 
 export const getAllPierres = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/pierre/get-pierres');
     if (data.data) return data.data;
     return null;
 };
 
 export const getAllTailles = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/taille/get-tailles');
     if (data.data) return data.data;
     return null;
 };
 
 export const getAllPendentifs = async () => {
-    const data = await axios
+    const data = await api
         .get('/api/pendentif/get-pendentifs');
     if (data.data) return data.data;
     return null;
@@ -38,7 +38,7 @@ export const getAllPendentifs = async () => {
 
 export const addMatProd = async (data) => {
     try {
-        const response = await axios.post(
+        const response = await api.post(
             '/api/admin/materiau/add-materiau',
             data,
             { headers: { 'Content-Type': 'application/json' } }
@@ -53,7 +53,7 @@ export const addMatProd = async (data) => {
 
 export const addFilProd = async (data) => {
 	try {
-		const response = await axios.post(
+		const response = await api.post(
 			'/api/admin/fil/add-fil',
 			data,
 			{ headers: { 'Content-Type': 'application/json' } }
@@ -68,7 +68,7 @@ export const addFilProd = async (data) => {
 
 export const addTailleProd = async (data) => {
 	try {
-		const response = await axios.post(
+		const response = await api.post(
 			'/api/admin/taille/add-taille',
 			data,
 			{ headers: { 'Content-Type': 'application/json' } }
@@ -84,7 +84,7 @@ export const addTailleProd = async (data) => {
 
 export const addPendentifProd = async (data) => {
 	try {
-		const response = await axios.post(
+		const response = await api.post(
 			'/api/admin/pendentif/add-pendentif',
 			data,
 			{ headers: { 'Content-Type': 'application/json' } }
@@ -99,7 +99,7 @@ export const addPendentifProd = async (data) => {
 
 export const addPierreProd = async (data) => {
 	try {
-		const response = await axios.post(
+		const response = await api.post(
 			'/api/admin/pierre/add-pierre',
 			data,
 			{ headers: { 'Content-Type': 'application/json' } }
@@ -114,7 +114,7 @@ export const addPierreProd = async (data) => {
 
 export const deleteMatProd = async (id) => {
     try {
-        const response = await axios.request({
+        const response = await api.request({
             url: `/api/admin/materiau/delete-materiau`,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
@@ -130,7 +130,7 @@ export const deleteMatProd = async (id) => {
 
 export const deleteFilProd = async (id) => {
     try {
-        const response = await axios.request({
+        const response = await api.request({
             url: `/api/admin/fil/delete-fil`,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
@@ -146,7 +146,7 @@ export const deleteFilProd = async (id) => {
 
 export const deletePierreProd = async (id) => {
     try {
-        const response = await axios.request({
+        const response = await api.request({
             url: `/api/admin/pierre/delete-pierre`,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
@@ -162,7 +162,7 @@ export const deletePierreProd = async (id) => {
 
 export const deleteTailleProd = async (id) => {
     try {
-        const response = await axios.request({
+        const response = await api.request({
             url: `/api/admin/taille/delete-taille`,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
@@ -178,11 +178,11 @@ export const deleteTailleProd = async (id) => {
 
 export const deletePendentifProd = async (id) => {
     try {
-        const response = await axios.request({
+        const response = await api.request({
             url: `/api/admin/pendentif/delete-pendentif`,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
-            data: { libTaille: id }
+            data: { libPendentif: id }
         });
         if (response.data) return response.data;
         return null;
