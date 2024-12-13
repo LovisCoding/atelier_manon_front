@@ -134,7 +134,7 @@ export const deleteFilProd = async (id) => {
             url: `/api/admin/fil/delete-fil`,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
-            data: { libFil: id }
+            data: { libPendentif: id }
         });
         if (response.data) return response.data;
         return null;
