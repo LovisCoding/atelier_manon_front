@@ -80,7 +80,7 @@ const apiClient = api.create({
 
 export const getBestSellers = async () => {
     try {
-        const { data } = await apiClient.get('/produit/get-bestsellers', {
+        const { data } = await api.get('/produit/get-bestsellers', {
             params: { quantiteToDisplay: 3 },
         });
         return data || null;
